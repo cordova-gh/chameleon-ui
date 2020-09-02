@@ -15,6 +15,7 @@
     "heroku-postbuild": "npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.14.0",
     "axios": "^0.20.0",
     "bootstrap": "^4.5.2",
     "express": "^4.17.1",

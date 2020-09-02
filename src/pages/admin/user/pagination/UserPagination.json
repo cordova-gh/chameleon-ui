@@ -1,0 +1,28 @@
+[
+    {
+        "label": "Email",
+        "field": "email",
+        "bindField": "email",
+        "type": "text"
+    },
+    {
+        "label": "Nome",
+        "field": "nome",
+        "bindField": "anagrafica.personaFisica.nome"
+    },
+    {
+        "label": "Cognome",
+        "field": "cognome",
+        "bindField": "anagrafica.personaFisica.cognome"
+    },
+    {
+        "label": "Codice Fiscale",
+        "field": "codiceFiscale",
+        "bindField": "anagrafica.personaFisica.codiceFiscale"
+    },
+    {
+        "label": "Stato Utenza",
+        "field": "stUtenza",
+        "bindField": "stUtenza"
+    }
+]

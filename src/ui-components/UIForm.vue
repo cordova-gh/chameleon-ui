@@ -115,7 +115,7 @@ export default {
       }
     },
     getEntity(id) {
-      this.httpCall.get(id).then(data => this.setEntity(data));
+      this.httpCall.getById(id).then(data => this.setEntity(data));
     },
     createEntityForm() {
       const obj = {};

@@ -1,15 +1,23 @@
 <template>
   <div>
-    <h1>{{ msg }}</h1>
+    <title-page :titolo="msg"></title-page>
+    <user-pagination></user-pagination>
   </div>
 </template>
 <script>
+import UserPagination from './pagination/UserPagination.vue';
+import TitlePage from './../../shared/TitlePage';
+
 export default {
   name: 'UserForm',
   data() {
     return {
       msg: 'Welcome in Users ',
     };
+  },
+  components: {
+    'user-pagination': UserPagination,
+    'title-page': TitlePage,
   },
 };
 </script>
