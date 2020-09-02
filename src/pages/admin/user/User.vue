@@ -1,6 +1,7 @@
 <template>
   <div>
     <title-page :titolo="msg"></title-page>
+    <router-link to="/user/new"> New  </router-link>
     <user-pagination></user-pagination>
   </div>
 </template>

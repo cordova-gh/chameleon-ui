@@ -25,6 +25,11 @@ export default new Router({
       component: User,
     },
     {
+      path: '/user/new',
+      name: 'User',
+      component: UserForm,
+    },
+    {
       path: '/company',
       name: 'Company',
       component: Company,
