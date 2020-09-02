@@ -1,0 +1,68 @@
+{
+    "cols": 2,
+    "rows": [
+      [
+        {
+          "label": "Email",
+          "field": "email",
+          "bindField": "email",
+          "type": "text"
+        }
+      ],
+      [
+        {
+          "label": "Password",
+          "field": "password",
+          "bindField": "password",
+          "type": "password"
+        }
+      ],
+      [
+        {
+          "label": "Nome",
+          "field": "nome",
+          "bindField": "anagrafica.personaFisica.nome",
+          "type": "text"
+        },
+        {
+          "label": "Cognome",
+          "field": "cognome",
+          "bindField": "anagrafica.personaFisica.cognome",
+          "type": "text"
+        }
+      ],
+      [
+        {
+          "label": "Codice Fiscale",
+          "field": "codiceFiscale",
+          "bindField": "anagrafica.personaFisica.codiceFiscale",
+          "type": "text"
+        }
+      ],
+      [
+        {
+          "label": "Profilo",
+          "field": "profiloId",
+          "bindField": "profiloId",
+          "type": "autocomplete",
+          "configType": {
+            "isDominio": false,
+            "urlApi": "/api/profilo",
+            "fieldId": "_id",
+            "showCodice": true
+          }
+        },
+        {
+          "label": "Stato Utenza",
+          "field": "stUtenza",
+          "bindField": "stUtenza",
+          "type": "select",
+          "configType": {
+            "isDominio": true,
+            "dominio": "st_utenza",
+            "showDescrizione": true
+          }
+        }
+      ]
+    ]
+  }

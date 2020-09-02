@@ -1,7 +1,9 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from '@/pages/Home';
+// eslint-disable-next-line no-unused-vars
 import User from '@/pages/admin/user/User';
+import UserForm from '@/pages/admin/user/form/UserForm';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Company from '@/pages/admin/company/Company';
@@ -20,7 +22,7 @@ export default new Router({
     {
       path: '/user',
       name: 'User',
-      component: User,
+      component: UserForm,
     },
     {
       path: '/company',
