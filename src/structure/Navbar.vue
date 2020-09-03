@@ -71,7 +71,7 @@
              Amministrazione
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <router-link to="/user" class="dropdown-item" >Utenti</router-link>
+              <router-link to="/admin/user/list" class="dropdown-item" >Utenti</router-link>
               <router-link to="/profile" class="dropdown-item" href="#">Profili</router-link>
               <router-link to="/company" class="dropdown-item">Aziende</router-link>
               <a class="dropdown-item" href="#">Shop</a>

@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import TitlePage from './../../shared/TitlePage';
+import TitlePage from './../../shared/components/TitlePage';
 
 export default {
   name: 'Anagrafica',

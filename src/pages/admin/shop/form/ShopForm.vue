@@ -10,17 +10,16 @@
   </div>
 </template>
 <script>
-import { API_USERS } from './../../../../services/constant-services';
+import { API_SHOP } from './../../../../services/constant-services';
 import UIForm from './../../../../ui-components/UIForm';
 import TitlePage from './../../../shared/components/TitlePage';
-import ConfigForm from './UserForm.json';
+import ConfigForm from './ShopForm.json';
 
 export default {
   name: 'UserForm',
   data() {
     return {
-      modePage: 'L',
-      urlApi: API_USERS,
+      urlApi: API_SHOP,
       currentId: '',
       configForm: ConfigForm,
       titoloPagina: 'Users',

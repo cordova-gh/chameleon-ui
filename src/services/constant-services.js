@@ -4,3 +4,4 @@ export const API_USERS = '/api/users';
 export const API_AZIENDE = '/api/azienda';
 export const API_PROFILI = '/api/profilo';
 export const API_FILE = '/api/file';
+export const API_SHOP = '/api/shop';

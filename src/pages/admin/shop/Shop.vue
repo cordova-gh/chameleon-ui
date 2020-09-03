@@ -1,19 +1,19 @@
 <template>
   <div>
     <title-page :titolo="msg"></title-page>
-    <router-link to="new"> New  </router-link>
-    <router-view></router-view>
+    <router-link to="/user/new"> New  </router-link>
+    <user-pagination></user-pagination>
   </div>
 </template>
 <script>
-import UserPagination from './pagination/UserPagination.vue';
+import UserPagination from './pagination/ShopPagination.vue';
 import TitlePage from './../../shared/components/TitlePage';
 
 export default {
-  name: 'User',
+  name: 'UserForm',
   data() {
     return {
-      msg: 'Welcome in Users ',
+      msg: 'Punti vendita',
     };
   },
   components: {

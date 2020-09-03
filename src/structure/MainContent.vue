@@ -5,7 +5,7 @@
   </div>
 </template>
 <script>
-import Spinner from './../pages/shared/Spinner';
+import Spinner from './../pages/shared/components/Spinner';
 
 export default {
   name: 'MainContent',

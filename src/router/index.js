@@ -4,6 +4,8 @@ import Home from '@/pages/Home';
 import User from '@/pages/admin/user/User';
 // eslint-disable-next-line no-unused-vars
 import UserForm from '@/pages/admin/user/form/UserForm';
+import UserPagination from '@/pages/admin/user/pagination/UserPagination';
+import Admin from '@/pages/admin/Admin';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Company from '@/pages/admin/company/Company';
@@ -23,9 +25,25 @@ export default new Router({
       component: Home,
     },
     {
-      path: '/user',
-      name: 'User',
-      component: User,
+      path: '/admin',
+      name: 'admin',
+      component: Admin,
+      children: [
+        {
+          path: 'user',
+          component: User,
+          children: [
+            {
+              path: 'new',
+              component: UserForm,
+            },
+            {
+              path: 'list',
+              component: UserPagination,
+            },
+          ],
+        },
+      ],
     },
     {
       path: '/user/new',
