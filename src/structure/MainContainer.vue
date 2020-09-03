@@ -2,12 +2,14 @@
   <div class="hello">
     <navbar></navbar>
     <main-content></main-content>
+
   </div>
 </template>
 
 <script>
 import Navbar from './Navbar';
 import MainContent from './MainContent';
+
 
 export default {
   name: 'Main',

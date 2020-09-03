@@ -3,6 +3,7 @@
 import Vue from 'vue';
 import App from './App';
 import router from './router';
+import store from './store';
 // eslint-disable-next-line import/first
 import '@fortawesome/fontawesome-free/css/all.css';
 // eslint-disable-next-line import/extensions
@@ -16,4 +17,5 @@ new Vue({
   router,
   components: { App },
   template: '<App/>',
+  store,
 });

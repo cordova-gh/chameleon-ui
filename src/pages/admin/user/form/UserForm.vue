@@ -6,7 +6,6 @@
       :config="configForm"
       :urlApi="urlApi"
       :currentId="currentId"
-      @onSaveEntity="reload"
     ></ui-form>
   </div>
 </template>

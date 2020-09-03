@@ -174,16 +174,16 @@ export default {
         }
       }
     },
-    watch: {
-      reload: {
-        immediate: true,
-        deep: true,
-        handler() {
-          this.onCreated();
-          this.$emit('endLoadForm');
-        },
-      },
-    },
+    // watch: {
+    //   reload: {
+    //     immediate: true,
+    //     deep: true,
+    //     handler() {
+    //       this.onCreated();
+    //       this.$emit('endLoadForm');
+    //     },
+    //   },
+    // },
   },
 };
 </script>

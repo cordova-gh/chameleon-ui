@@ -1,4 +1,6 @@
+/* eslint-disable class-methods-use-this */
 import axios from 'axios';
+import store from '../store';
 
 export default class HttpCall {
   baseUrl = 'https://chameleon-be.herokuapp.com';
@@ -7,20 +9,30 @@ export default class HttpCall {
   }
 
   get(params) {
+    // this.$store.commit('showSpinnerState');
+    store.commit('showSpinner');
     return axios
       .get(`${this.baseUrl + this.RESOURCE_NAME + params}`)
-      .then(response => response.data)
+      .then((response) => {
+        store.commit('hiddenSpinner');
+        return response.data;
+      })
       .catch(error => `An error occured..${error}`);
   }
 
   getById(id) {
+    store.commit('showSpinner');
     return axios
       .get(`${this.baseUrl + this.RESOURCE_NAME}/${id}`)
-      .then(response => response.data)
+      .then((response) => {
+        store.commit('hiddenSpinner');
+        return response.data;
+      })
       .catch(error => `An error occured..${error}`);
   }
 
   create(data) {
+    store.commit('showSpinner');
     return axios
       .post(`${this.baseUrl + this.RESOURCE_NAME}`, data, {
         headers: {
@@ -28,11 +40,15 @@ export default class HttpCall {
           'Content-type': 'application/json',
         },
       })
-      .then(response => response.data)
+      .then((response) => {
+        store.commit('hiddenSpinner');
+        return response.data;
+      })
       .catch(error => `An error occured..${error}`);
   }
 
   update(id, data) {
+    store.commit('showSpinner');
     return axios
       .put(`${this.baseUrl + this.RESOURCE_NAME}/${id}`, data, {
         headers: {
@@ -40,11 +56,15 @@ export default class HttpCall {
           'Content-type': 'application/json',
         },
       })
-      .then(response => response.data)
+      .then((response) => {
+        store.commit('hiddenSpinner');
+        return response.data;
+      })
       .catch(error => `An error occured..${error}`);
   }
 
   delete(id) {
+    store.commit('showSpinner');
     return axios
       .delete(`${this.baseUrl + this.RESOURCE_NAME}/${id}`, {
         headers: {
@@ -52,7 +72,10 @@ export default class HttpCall {
           'Content-type': 'application/json',
         },
       })
-      .then(response => response.data)
+      .then((response) => {
+        store.commit('hiddenSpinner');
+        return response.data;
+      })
       .catch(error => `An error occured..${error}`);
   }
 
