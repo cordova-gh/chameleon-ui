@@ -1,6 +1,7 @@
 <template>
     <div>
        <title-page titolo="Dominio"></title-page>
+       <router-view></router-view>
     </div>
 </template>
 

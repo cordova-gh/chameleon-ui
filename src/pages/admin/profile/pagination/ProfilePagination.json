@@ -1,0 +1,13 @@
+[
+    {
+        "label": "Codice",
+        "field": "codice",
+        "bindField": "codice",
+        "type": "text"
+    },
+    {
+        "label": "Descrizione",
+        "field": "descrizione",
+        "bindField": "descrizione"
+    }
+]

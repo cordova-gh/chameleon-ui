@@ -1,6 +1,6 @@
 <template>
   <div>
-      CONFIG
+    <router-view></router-view>
   </div>
 </template>
 <script>

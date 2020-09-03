@@ -8,17 +8,29 @@ import UserPagination from '@/pages/admin/user/pagination/UserPagination';
 import Admin from '@/pages/admin/Admin';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Company from '@/pages/admin/company/Company';
-import AnagraficaClienteFornitore from '@/pages/company/anagrafica-cliente-fornitore/AnagraficaClienteFornitore';
-import Prodotto from '@/pages/company/prodotto/Prodotto';
-import CategoriaProdotto from '@/pages/config/categoria-prodotto/CategoriaProdotto';
-import Dominio from '@/pages/config/dominio/Dominio';
 import Profile from '@/pages/admin/profile/Profile';
 import ProfileForm from '@/pages/admin/profile/form/ProfileForm';
 import ProfilePagination from '@/pages/admin/profile/pagination/ProfilePagination';
 import Shop from '@/pages/admin/shop/Shop';
 import ShopForm from '@/pages/admin/shop/form/ShopForm';
 import ShopPagination from '@/pages/admin/shop/pagination/ShopPagination';
+import AnagraficaClienteFornitore from '@/pages/company/anagrafica-cliente-fornitore/AnagraficaClienteFornitore';
+import AnagraficaClienteFornitoreForm from '@/pages/company/anagrafica-cliente-fornitore/form/AnagraficaClienteFornitoreForm';
+import AnagraficaClienteFornitorePagination from '@/pages/company/anagrafica-cliente-fornitore/pagination/AnagraficaClienteFornitorePagination';
+import Company from '@/pages/admin/company/Company';
+import CompanyMenu from '@/pages/company/Company';
+import CompanyForm from '@/pages/admin/company/form/CompanyForm';
+import CompanyPagination from '@/pages/admin/company/pagination/CompanyPagination';
+import Prodotto from '@/pages/company/prodotto/Prodotto';
+import ProdottoForm from '@/pages/company/prodotto/form/ProdottoForm';
+import ProdottoPagination from '@/pages/company/prodotto/pagination/ProdottoPagination';
+import Config from '@/pages/config/Config';
+import CategoriaProdotto from '@/pages/config/categoria-prodotto/CategoriaProdotto';
+import CategoriaProdottoForm from '@/pages/config/categoria-prodotto/form/CategoriaProdottoForm';
+import CategoriaProdottoPagination from '@/pages/config/categoria-prodotto/pagination/CategoriaProdottoPagination';
+import Dominio from '@/pages/config/dominio/Dominio';
+import DominioForm from '@/pages/config/dominio/form/DominioForm';
+import DominioPagination from '@/pages/config/dominio/pagination/DominioPagination';
 
 
 Vue.use(Router);
@@ -77,42 +89,92 @@ export default new Router({
             },
           ],
         },
+        {
+          path: 'company',
+          component: Company,
+          children: [
+            {
+              path: 'new',
+              component: CompanyForm,
+            },
+            {
+              path: 'list',
+              component: CompanyPagination,
+            },
+          ],
+        },
       ],
     },
     {
-      path: '/user/new',
-      name: 'User',
-      component: UserForm,
-    },
-    {
       path: '/company',
-      name: 'Company',
-      component: Company,
+      name: 'company',
+      component: CompanyMenu,
+      children: [
+        {
+          path: 'anagrafica-cliente-fornitore',
+          component: AnagraficaClienteFornitore,
+          children: [
+            {
+              path: 'new',
+              component: AnagraficaClienteFornitoreForm,
+            },
+            {
+              path: 'list',
+              component: AnagraficaClienteFornitorePagination,
+            },
+          ],
+        },
+        {
+          path: 'prodotto',
+          component: Prodotto,
+          children: [
+            {
+              path: 'new',
+              component: ProdottoForm,
+            },
+            {
+              path: 'list',
+              component: ProdottoPagination,
+            },
+          ],
+        },
+
+      ],
     },
     {
-      path: '/profile',
-      name: 'Profile',
-      component: Profile,
-    },
-    {
-      path: '/anagrafica-cliente-fornitore',
-      name: 'Anagrafica Cliente Fornitore',
-      component: AnagraficaClienteFornitore,
-    },
-    {
-      path: '/prodotto',
-      name: 'Prodotto',
-      component: Prodotto,
-    },
-    {
-      path: '/categoria-prodotto',
-      name: 'Categoria Prodotto',
-      component: CategoriaProdotto,
-    },
-    {
-      path: '/dominio',
-      name: 'Dominio',
-      component: Dominio,
+      path: '/config',
+      name: 'config',
+      component: Config,
+      children: [
+        {
+          path: 'categoria-prodotto',
+          component: CategoriaProdotto,
+          children: [
+            {
+              path: 'new',
+              component: CategoriaProdottoForm,
+            },
+            {
+              path: 'list',
+              component: CategoriaProdottoPagination,
+            },
+          ],
+        },
+        {
+          path: 'dominio',
+          component: Dominio,
+          children: [
+            {
+              path: 'new',
+              component: DominioForm,
+            },
+            {
+              path: 'list',
+              component: DominioPagination,
+            },
+          ],
+        },
+      ],
     },
   ],
 });

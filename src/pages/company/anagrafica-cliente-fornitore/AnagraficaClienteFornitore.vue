@@ -1,6 +1,7 @@
 <template>
   <div>
     <title-page titolo="Cliente fornitore/clienti"></title-page>
+    <router-view></router-view>
   </div>
 </template>
 <script>

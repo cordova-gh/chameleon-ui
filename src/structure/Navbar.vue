@@ -33,10 +33,10 @@
              Azienda
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <router-link to="/anagrafica-cliente-fornitore" class="dropdown-item" >
+              <router-link to="/company/anagrafica-cliente-fornitore/list" class="dropdown-item" >
                 Anagrafica fornitori/clienti
               </router-link>
-              <router-link to="/prodotto" class="dropdown-item">Prodotti</router-link>
+              <router-link to="/company/prodotto/list" class="dropdown-item">prodotto</router-link>
             </div>
           </li>
 
@@ -52,8 +52,8 @@
              Configurazione
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <router-link to="/dominio" class="dropdown-item" > Dominio </router-link>
-              <router-link to="/categoria-prodotto" class="dropdown-item" >
+              <router-link to="/config/dominio/list" class="dropdown-item" > Dominio </router-link>
+              <router-link to="/config/categoria-prodotto/list" class="dropdown-item" >
               Categorie Prodotti
               </router-link>
             </div>
@@ -73,7 +73,7 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <router-link to="/admin/user/list" class="dropdown-item" >Utenti</router-link>
               <router-link to="/admin/profile/list" class="dropdown-item">Profili</router-link>
-              <router-link to="/admin/company" class="dropdown-item">Aziende</router-link>
+              <router-link to="/admin/company/list" class="dropdown-item">Aziende</router-link>
               <router-link to="/admin/shop/list" class="dropdown-item" >Shop</router-link>
             </div>
           </li>

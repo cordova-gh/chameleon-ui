@@ -1,6 +1,7 @@
 <template>
   <div>
     <title-page titolo="Prodotto"></title-page>
+    <router-view></router-view>
   </div>
 </template>
 
