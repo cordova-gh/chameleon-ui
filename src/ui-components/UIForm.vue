@@ -1,37 +1,57 @@
-<template >
+<template>
   <div class="container-fluid mt--6">
     <div class="card mb-4">
-      <div v-if="title!==''" class="card-header">
-        <h3 class="mb-0">{{title}}</h3>
+      <div v-if="title !== ''" class="card-header">
+        <h3 class="mb-0">{{ title }}</h3>
       </div>
       <div class="card-body">
         <form @submit.prevent="saveEntity">
-          <div v-for="(rowElement, indexRow) in config.rows" :key="indexRow" class="row">
+          <div
+            v-for="(sectionElement, indexSection) in config.sections"
+            :key="indexSection"
+            class=""
+          >
+            <p> {{sectionElement.label}}</p>
             <div
-              v-for="(colElement, indexCol) in rowElement"
-              :key="indexCol"
-              class="col form-group"
+              v-for="(rowElement, indexRow) in sectionElement.rows"
+              :key="indexRow"
+              class="row"
             >
-              <template v-if="colElement.type==='text'">
-              <input-text v-model="entity[colElement.field]" :label="colElement.label"></input-text>
-              </template>
-              <template v-else-if="colElement.type==='password'">
-                <input-password v-model="entity[colElement.field]" :label="colElement.label">
-                </input-password>
-              </template>
-              <template v-else-if="colElement.type==='autocomplete'">
-                <input-autocomplete
-                  v-model="entity[colElement.field]"
-                  :config="colElement.configType"
-                ></input-autocomplete>
-              </template>
-              <template v-else-if="colElement.type==='select'">
-                <input-select v-model="entity[colElement.field]" :config="colElement.configType">
-                </input-select>
-              </template>
+              <div
+                v-for="(colElement, indexCol) in rowElement"
+                :key="indexCol"
+                class="col form-group"
+              >
+                <template v-if="colElement.type === 'text'">
+                  <input-text
+                    v-model="entity[colElement.field]"
+                    :label="colElement.label"
+                  ></input-text>
+                </template>
+                <template v-else-if="colElement.type === 'password'">
+                  <input-password
+                    v-model="entity[colElement.field]"
+                    :label="colElement.label"
+                  >
+                  </input-password>
+                </template>
+                <template v-else-if="colElement.type === 'autocomplete'">
+                  <input-autocomplete
+                    v-model="entity[colElement.field]"
+                    :config="colElement.configType"
+                  ></input-autocomplete>
+                </template>
+                <template v-else-if="colElement.type === 'select'">
+                  <input-select
+                    v-model="entity[colElement.field]"
+                    :config="colElement.configType"
+                  >
+                  </input-select>
+                </template>
+              </div>
             </div>
           </div>
-          <template v-if="modePage==='I'">
+          <template v-if="modePage === 'I'">
             <button class="btn btn-primary btn-block">Salva</button>
           </template>
           <template v-else>
@@ -119,57 +139,76 @@ export default {
     },
     createEntityForm() {
       const obj = {};
-      for (let index = 0; index < this.config.rows.length; index += 1) {
-        const rowElement = this.config.rows[index];
-        for (let colIndex = 0; colIndex < rowElement.length; colIndex += 1) {
-          const configElement = rowElement[colIndex];
-          obj[configElement.field] = '';
+      for (let j = 0; j < this.config.sections.length; j += 1) {
+        const sectionElement = this.config.sections[j];
+        // eslint-disable-next-line no-console
+        console.log('sectionElementcreateentityform', sectionElement);
+        for (let index = 0; index < sectionElement.rows.length; index += 1) {
+          const rowElement = sectionElement.rows[index];
+          for (let colIndex = 0; colIndex < rowElement.length; colIndex += 1) {
+            const configElement = rowElement[colIndex];
+            obj[configElement.field] = '';
+          }
         }
       }
       return obj;
     },
     createEntity() {
       const obj = {};
-      for (let index = 0; index < this.config.rows.length; index += 1) {
-        const rowElement = this.config.rows[index];
-        for (let colIndex = 0; colIndex < rowElement.length; colIndex += 1) {
-          const configElement = rowElement[colIndex];
-          if (configElement.bindField.indexOf('.') > 0) {
-            const annidateFields = configElement.bindField.split('.');
-            let objTemp = obj;
-            for (let k = 0; k < annidateFields.length; k += 1) {
-              const annidateField = annidateFields[k];
-              if (k + 1 < annidateFields.length) {
-                if (!objTemp[annidateField]) { Vue.set(objTemp, annidateField, {}); }
-                objTemp = objTemp[annidateField];
-              } else {
-                Vue.set(
-                  objTemp,
-                  annidateField,
-                  this.entity[configElement.field],
-                );
+      for (let j = 0; j < this.config.sections.length; j += 1) {
+        const sectionElement = this.config.sections[j];
+        // eslint-disable-next-line no-console
+        console.log('sectionElementcreate', sectionElement);
+        for (let index = 0; index < sectionElement.rows.length; index += 1) {
+          const rowElement = sectionElement.rows[index];
+          for (let colIndex = 0; colIndex < rowElement.length; colIndex += 1) {
+            const configElement = rowElement[colIndex];
+            if (configElement.bindField.indexOf('.') > 0) {
+              const annidateFields = configElement.bindField.split('.');
+              let objTemp = obj;
+              for (let k = 0; k < annidateFields.length; k += 1) {
+                const annidateField = annidateFields[k];
+                if (k + 1 < annidateFields.length) {
+                  if (!objTemp[annidateField]) {
+                    Vue.set(objTemp, annidateField, {});
+                  }
+                  objTemp = objTemp[annidateField];
+                } else {
+                  Vue.set(
+                    objTemp,
+                    annidateField,
+                    this.entity[configElement.field],
+                  );
+                }
               }
+            } else {
+              obj[configElement.bindField] = this.entity[configElement.field];
             }
-          } else {
-            obj[configElement.bindField] = this.entity[configElement.field];
           }
         }
       }
       return obj;
     },
     setEntity(data) {
-      for (let index = 0; index < this.config.rows.length; index += 1) {
-        const rowElement = this.config.rows[index];
-        for (let colIndex = 0; colIndex < rowElement.length; colIndex += 1) {
-          const configElement = rowElement[colIndex];
-          if (configElement.bindField.indexOf('.') > 0) {
-            const annidateValue = Utility.getAnnidateValue(
-              configElement.bindField.split('.'),
-              data,
-            );
-            if (annidateValue !== null) { this.entity[configElement.field] = annidateValue; }
-          } else {
-            this.entity[configElement.field] = data[configElement.bindField];
+      for (let j = 0; j < this.config.sections.length; j += 1) {
+        const sectionElement = this.config.sections[j];
+        // eslint-disable-next-line no-console
+        console.log('sectionElement', sectionElement);
+        for (let index = 0; index < sectionElement.rows.length; index += 1) {
+          const rowElement = sectionElement.rows[index];
+          for (let colIndex = 0; colIndex < rowElement.length; colIndex += 1) {
+            const configElement = rowElement[colIndex];
+            if (configElement.bindField.indexOf('.') > 0) {
+              const annidateValue = Utility.getAnnidateValue(
+                configElement.bindField.split('.'),
+                data,
+              );
+              if (annidateValue !== null) {
+                this.entity[configElement.field] = annidateValue;
+              }
+            } else {
+              this.entity[configElement.field] = data[configElement.bindField];
+            }
           }
         }
       }

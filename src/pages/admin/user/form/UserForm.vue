@@ -1,6 +1,5 @@
 <template>
   <div>
-    <title-page :titolo="titoloPagina"></title-page>
     <ui-form
       title="Dati Personali"
       :config="configForm"

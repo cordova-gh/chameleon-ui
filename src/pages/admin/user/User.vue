@@ -1,6 +1,6 @@
 <template>
   <div>
-    <title-page :titolo="msg"></title-page>
+    <title-page :titolo="titolo"></title-page>
     <router-link to="new"> New  </router-link>
     <router-view></router-view>
   </div>
@@ -13,7 +13,7 @@ export default {
   name: 'User',
   data() {
     return {
-      msg: 'Welcome in Users ',
+      titolo: 'Utenti ',
     };
   },
   components: {

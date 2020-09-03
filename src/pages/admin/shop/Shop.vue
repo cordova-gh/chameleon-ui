@@ -1,8 +1,8 @@
 <template>
   <div>
     <title-page :titolo="msg"></title-page>
-    <router-link to="/user/new"> New  </router-link>
-    <user-pagination></user-pagination>
+    <router-link to="new"> New  </router-link>
+    <router-view></router-view>
   </div>
 </template>
 <script>

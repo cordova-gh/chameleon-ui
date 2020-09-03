@@ -1,76 +1,26 @@
 {
-    "cols": 2,
-    "rows": [
-      [
-        {
-          "label": "Codice",
-          "field": "codice",
-          "bindField": "codice",
-          "type": "text"
-        }
-      ],
-      [
-        {
-          "label": "Descrizione",
-          "field": "descrizione",
-          "bindField": "descrizione",
-          "type": "text"
-        }
-      ],
-      [
-        {
-          "label": "Telefono",
-          "field": "telefono",
-          "bindField": "telefono",
-          "type": "text"
-        },
-        {
-          "label": "Cellulare",
-          "field": "cellulare",
-          "bindField": "cellulare",
-          "type": "text"
-        }
-      ],
-      [
-        {
-          "label": "Cellulare2",
-          "field": "cellulare2",
-          "bindField": "cellulare2",
-          "type": "text"
-        }
-      ],
-      [
-        {
-          "label": "Indirizzo",
-          "field": "indirizzo",
-          "bindField": "indirizzo",
-          "type": "indirizzo"
-        }
-      ],
-      [
-        {
-          "label": "Profilo",
-          "field": "profiloId",
-          "bindField": "profiloId",
-          "type": "autocomplete",
-          "configType": {
-            "isDominio": false,
-            "urlApi": "/api/profilo",
-            "fieldId": "_id",
-            "showCodice": true
+  "sections":[
+    {
+      "label": "Dati Personali",
+      "rows":[
+        [
+          {
+            "field": "codice",
+            "label": "Codice",
+            "bindField": "codice",
+            "type": "text"
           }
-        },
-        {
-          "label": "Stato Utenza",
-          "field": "stUtenza",
-          "bindField": "stUtenza",
-          "type": "select",
-          "configType": {
-            "isDominio": true,
-            "dominio": "st_utenza",
-            "showDescrizione": true
+        ],
+        [
+          {
+
+            "field": "descrizione",
+            "label": "Descrizione",
+            "bindField": "descrizione",
+            "type": "text"
           }
-        }
+        ]
       ]
-    ]
-  }
+    }
+  ]
+}
