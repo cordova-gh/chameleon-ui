@@ -52,8 +52,10 @@
              Configurazione
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Domini</a>
-              <a class="dropdown-item" href="#">Categorie Prodotti</a>
+              <router-link to="/dominio" class="dropdown-item" > Dominio </router-link>
+              <router-link to="/categoria-prodotto" class="dropdown-item" >
+              Categorie Prodotti
+              </router-link>
             </div>
           </li>
 
@@ -70,7 +72,7 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <router-link to="/user" class="dropdown-item" >Utenti</router-link>
-              <a class="dropdown-item" href="#">Profili</a>
+              <router-link to="/profile" class="dropdown-item" href="#">Profili</router-link>
               <router-link to="/company" class="dropdown-item">Aziende</router-link>
               <a class="dropdown-item" href="#">Shop</a>
             </div>

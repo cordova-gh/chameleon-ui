@@ -1,5 +1,16 @@
 <template>
   <div>
-    anagrafica cliente fornitore
+    <title-page titolo="Cliente fornitore/clienti"></title-page>
   </div>
 </template>
+<script>
+import TitlePage from './../../shared/TitlePage';
+
+export default {
+  name: 'Anagrafica',
+  components: {
+    // eslint-disable-next-line no-undef
+    'title-page': TitlePage,
+  },
+};
+</script>

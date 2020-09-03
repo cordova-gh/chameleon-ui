@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid py-3 bg-light">
-    <div class="container-fluid py-3">
+    <div class="display-3">
       <div class="row">
         <div class="col-6 text-left">
           <h1>{{titolo}}</h1>

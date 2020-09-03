@@ -1,6 +1,6 @@
 <template>
   <div>
-    <title-page titolo= "ciao sono company">shorcut</title-page>
+    <title-page titolo= "Company"></title-page>
   </div>
 </template>
 
