@@ -1,6 +1,7 @@
 <template>
     <div>
         <title-page titolo = "Profile"></title-page>
+        <router-view></router-view>
     </div>
 </template>
 

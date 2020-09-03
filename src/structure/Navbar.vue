@@ -72,9 +72,9 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <router-link to="/admin/user/list" class="dropdown-item" >Utenti</router-link>
-              <router-link to="/profile" class="dropdown-item" href="#">Profili</router-link>
-              <router-link to="/company" class="dropdown-item">Aziende</router-link>
-              <a class="dropdown-item" href="#">Shop</a>
+              <router-link to="/admin/profile/list" class="dropdown-item">Profili</router-link>
+              <router-link to="/admin/company" class="dropdown-item">Aziende</router-link>
+              <router-link to="/admin/shop/list" class="dropdown-item" >Shop</router-link>
             </div>
           </li>
 

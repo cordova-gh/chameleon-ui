@@ -14,6 +14,12 @@ import Prodotto from '@/pages/company/prodotto/Prodotto';
 import CategoriaProdotto from '@/pages/config/categoria-prodotto/CategoriaProdotto';
 import Dominio from '@/pages/config/dominio/Dominio';
 import Profile from '@/pages/admin/profile/Profile';
+import ProfileForm from '@/pages/admin/profile/form/ProfileForm';
+import ProfilePagination from '@/pages/admin/profile/pagination/ProfilePagination';
+import Shop from '@/pages/admin/shop/Shop';
+import ShopForm from '@/pages/admin/shop/form/ShopForm';
+import ShopPagination from '@/pages/admin/shop/pagination/ShopPagination';
+
 
 Vue.use(Router);
 
@@ -40,6 +46,34 @@ export default new Router({
             {
               path: 'list',
               component: UserPagination,
+            },
+          ],
+        },
+        {
+          path: 'profile',
+          component: Profile,
+          children: [
+            {
+              path: 'new',
+              component: ProfileForm,
+            },
+            {
+              path: 'list',
+              component: ProfilePagination,
+            },
+          ],
+        },
+        {
+          path: 'shop',
+          component: Shop,
+          children: [
+            {
+              path: 'new',
+              component: ShopForm,
+            },
+            {
+              path: 'list',
+              component: ShopPagination,
             },
           ],
         },
