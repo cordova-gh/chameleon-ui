@@ -141,8 +141,6 @@ export default {
       const obj = {};
       for (let j = 0; j < this.config.sections.length; j += 1) {
         const sectionElement = this.config.sections[j];
-        // eslint-disable-next-line no-console
-        console.log('sectionElementcreateentityform', sectionElement);
         for (let index = 0; index < sectionElement.rows.length; index += 1) {
           const rowElement = sectionElement.rows[index];
           for (let colIndex = 0; colIndex < rowElement.length; colIndex += 1) {
@@ -157,8 +155,6 @@ export default {
       const obj = {};
       for (let j = 0; j < this.config.sections.length; j += 1) {
         const sectionElement = this.config.sections[j];
-        // eslint-disable-next-line no-console
-        console.log('sectionElementcreate', sectionElement);
         for (let index = 0; index < sectionElement.rows.length; index += 1) {
           const rowElement = sectionElement.rows[index];
           for (let colIndex = 0; colIndex < rowElement.length; colIndex += 1) {
@@ -192,8 +188,6 @@ export default {
     setEntity(data) {
       for (let j = 0; j < this.config.sections.length; j += 1) {
         const sectionElement = this.config.sections[j];
-        // eslint-disable-next-line no-console
-        console.log('sectionElement', sectionElement);
         for (let index = 0; index < sectionElement.rows.length; index += 1) {
           const rowElement = sectionElement.rows[index];
           for (let colIndex = 0; colIndex < rowElement.length; colIndex += 1) {

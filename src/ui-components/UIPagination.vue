@@ -21,6 +21,7 @@
               {{ entity[column.field] }}
             </td>
             <td>
+              <router-link :to="'edit/'+entity._id">Edit</router-link>
               <i class="fas fa-edit" @click="modifyEntity(entity._id)"></i>
             </td>
           </tr>
@@ -71,8 +72,6 @@ export default {
       this.currentPage = page;
       const params = `?page=${this.currentPage}`;
       this.httpCall.get(params).then((data) => {
-        // eslint-disable-next-line no-console
-        console.log(data);
         this.entities = Utility.createArrayByConfig(data.entities, this.config);
         this.pages = data.pages;
       });

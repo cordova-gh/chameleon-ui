@@ -84,6 +84,10 @@ export default new Router({
               component: ShopForm,
             },
             {
+              path: 'edit/:id',
+              component: ShopForm,
+            },
+            {
               path: 'list',
               component: ShopPagination,
             },

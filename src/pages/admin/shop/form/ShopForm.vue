@@ -25,6 +25,10 @@ export default {
       titoloPagina: 'Users',
     };
   },
+  created() {
+    // eslint-disable-next-line no-console
+    this.currentId = this.$route.params.id;
+  },
   components: {
     'ui-form': UIForm,
     'title-page': TitlePage,
