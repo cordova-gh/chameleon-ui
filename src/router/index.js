@@ -56,6 +56,10 @@ export default new Router({
               component: UserForm,
             },
             {
+              path: 'edit/:id',
+              component: ShopForm,
+            },
+            {
               path: 'list',
               component: UserPagination,
             },

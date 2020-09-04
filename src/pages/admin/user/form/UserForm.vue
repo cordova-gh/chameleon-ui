@@ -25,6 +25,9 @@ export default {
       titoloPagina: 'Users',
     };
   },
+  created() {
+    this.currentId = this.$route.params.id;
+  },
   components: {
     'ui-form': UIForm,
     'title-page': TitlePage,
