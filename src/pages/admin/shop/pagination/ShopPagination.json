@@ -6,24 +6,39 @@
         "type": "text"
     },
     {
-        "label": "Nome",
-        "field": "nome",
-        "bindField": "anagrafica.personaFisica.nome"
+        "label": "Descrizione",
+        "field": "descrizione",
+        "bindField": "descrizione"
     },
     {
-        "label": "Cognome",
+        "label": "Comune",
+        "field": "indirizzo",
+        "bindField": "indirizzo.comune"
+    },
+    {
+        "label": "via",
         "field": "cognome",
-        "bindField": "anagrafica.personaFisica.cognome"
+        "bindField": "indirizzo.via"
     },
     {
-        "label": "Codice Fiscale",
-        "field": "codiceFiscale",
-        "bindField": "anagrafica.personaFisica.codiceFiscale"
+        "label": "Cap",
+        "field": "indirizzo",
+        "bindField": "indirizzo.cap"
     },
     {
-        "label": "Stato Utenza",
-        "field": "stUtenza",
-        "bindField": "stUtenza"
+        "label": "telefono",
+        "field": "telefono",
+        "bindField": "telefono.comune"
+    },
+    {
+        "label": "Cellulare",
+        "field": "cellulare",
+        "bindField": "cellulare"
+    },
+    {
+        "label": "Email",
+        "field": "email",
+        "bindField": "email"
     }
 ]
 
