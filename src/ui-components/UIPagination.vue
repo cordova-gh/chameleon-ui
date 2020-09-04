@@ -21,8 +21,7 @@
               {{ entity[column.field] }}
             </td>
             <td>
-              <router-link :to="'edit/'+entity._id">Edit</router-link>
-              <i class="fas fa-edit" @click="modifyEntity(entity._id)"></i>
+              <router-link :to="'edit/'+entity._id"><i class="fas fa-edit"></i></router-link>
             </td>
           </tr>
         </tbody>
