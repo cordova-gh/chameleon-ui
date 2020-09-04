@@ -29,19 +29,19 @@
             {
               "field": "stato",
               "label": "Stato",
-              "bindfield": "indirizzo.stato",
+              "bindField": "indirizzo.stato",
               "type": "text"
             },
             {
               "field": "provincia",
               "label": "Provincia",
-              "bindfield": "indirizzo.provincia",
+              "bindField": "indirizzo.provincia",
               "type": "text"
             },
             {
               "field": "comune",
               "label": "Comune",
-              "bindfield": "indirizzo.comune",
+              "bindField": "indirizzo.comune",
               "type": "text"
             }
         ],
@@ -49,19 +49,19 @@
           {
             "field": "via",
             "label": "Via",
-            "bindfield": "indirizzo.via",
+            "bindField": "indirizzo.via",
             "type": "text"
           },
           {
             "field": "numero",
             "label": "Numero",
-            "bindfield": "indirizzo.numero",
+            "bindField": "indirizzo.numero",
             "type": "text"
           },
           {
             "field": "cap",
             "label": "Cap",
-            "bindfield": "indirizzo.cap",
+            "bindField": "indirizzo.cap",
             "type": "text"
           }
         ]
@@ -74,7 +74,7 @@
           {
             "label": "Telefono",
             "field": "telefono",
-            "bindfield": "telefono",
+            "bindField": "telefono",
             "type": "text"
           }
         ],
@@ -82,13 +82,13 @@
           {
             "label": "Cellulare",
             "field": "cellulare",
-            "bindfield": "cellulare",
+            "bindField": "cellulare",
             "type": "text"
           },
           {
             "label": "Cellulare 2",
             "field": "cellulare",
-            "bindfield": "cellulare2",
+            "bindField": "cellulare2",
             "type": "text"
           }
         ],
@@ -96,7 +96,7 @@
           {
             "label": "Email",
             "field": "email",
-            "bindfield": "email",
+            "bindField": "email",
             "type": "text"
           }
         ]

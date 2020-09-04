@@ -5,7 +5,7 @@
         title="Dati Personali"
         :config="configForm"
         :urlApi="urlApi"
-        :currentID="currentId"
+        :currentId="currentId"
         ></ui-form>
     </div>
 </template>
@@ -24,6 +24,9 @@ export default {
       configForm: ConfigForm,
       titoloPagina: 'Users',
     };
+  },
+  created() {
+    this.currentId = this.$route.params.id;
   },
   components: {
     'ui-form': UIForm,

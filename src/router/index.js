@@ -25,9 +25,9 @@ import Prodotto from '@/pages/company/prodotto/Prodotto';
 import ProdottoForm from '@/pages/company/prodotto/form/ProdottoForm';
 import ProdottoPagination from '@/pages/company/prodotto/pagination/ProdottoPagination';
 import Config from '@/pages/config/Config';
-import CategoriaProdotto from '@/pages/config/categoria-prodotto/CategoriaProdotto';
-import CategoriaProdottoForm from '@/pages/config/categoria-prodotto/form/CategoriaProdottoForm';
-import CategoriaProdottoPagination from '@/pages/config/categoria-prodotto/pagination/CategoriaProdottoPagination';
+import CategoriaProdotto from '@/pages/company/categoria-prodotto/CategoriaProdotto';
+import CategoriaProdottoForm from '@/pages/company/categoria-prodotto/form/CategoriaProdottoForm';
+import CategoriaProdottoPagination from '@/pages/company/categoria-prodotto/pagination/CategoriaProdottoPagination';
 import Dominio from '@/pages/config/dominio/Dominio';
 import DominioForm from '@/pages/config/dominio/form/DominioForm';
 import DominioPagination from '@/pages/config/dominio/pagination/DominioPagination';
@@ -57,7 +57,7 @@ export default new Router({
             },
             {
               path: 'edit/:id',
-              component: ShopForm,
+              component: UserForm,
             },
             {
               path: 'list',
@@ -71,6 +71,10 @@ export default new Router({
           children: [
             {
               path: 'new',
+              component: ProfileForm,
+            },
+            {
+              path: 'edit/:id',
               component: ProfileForm,
             },
             {
@@ -106,6 +110,10 @@ export default new Router({
               component: CompanyForm,
             },
             {
+              path: 'edit/:id',
+              component: CompanyForm,
+            },
+            {
               path: 'list',
               component: CompanyPagination,
             },
@@ -124,6 +132,10 @@ export default new Router({
           children: [
             {
               path: 'new',
+              component: AnagraficaClienteFornitoreForm,
+            },
+            {
+              path: 'edit/:id',
               component: AnagraficaClienteFornitoreForm,
             },
             {
@@ -146,14 +158,6 @@ export default new Router({
             },
           ],
         },
-
-      ],
-    },
-    {
-      path: '/config',
-      name: 'config',
-      component: Config,
-      children: [
         {
           path: 'categoria-prodotto',
           component: CategoriaProdotto,
@@ -168,6 +172,14 @@ export default new Router({
             },
           ],
         },
+
+      ],
+    },
+    {
+      path: '/config',
+      name: 'config',
+      component: Config,
+      children: [
         {
           path: 'dominio',
           component: Dominio,

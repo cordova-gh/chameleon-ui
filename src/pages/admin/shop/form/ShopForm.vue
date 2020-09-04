@@ -26,7 +26,6 @@ export default {
     };
   },
   created() {
-    // eslint-disable-next-line no-console
     this.currentId = this.$route.params.id;
   },
   components: {

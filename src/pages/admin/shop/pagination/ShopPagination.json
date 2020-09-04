@@ -16,19 +16,19 @@
         "bindField": "indirizzo.comune"
     },
     {
-        "label": "via",
+        "label": "Via",
         "field": "cognome",
         "bindField": "indirizzo.via"
     },
     {
-        "label": "Cap",
-        "field": "indirizzo",
-        "bindField": "indirizzo.cap"
+        "label": "Numero",
+        "field": "numero",
+        "bindField": "indirizzo.numero"
     },
     {
-        "label": "telefono",
+        "label": "Telefono",
         "field": "telefono",
-        "bindField": "telefono.comune"
+        "bindField": "telefono"
     },
     {
         "label": "Cellulare",

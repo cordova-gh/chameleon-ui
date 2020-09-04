@@ -36,7 +36,10 @@
               <router-link to="/company/anagrafica-cliente-fornitore/list" class="dropdown-item" >
                 Anagrafica fornitori/clienti
               </router-link>
-              <router-link to="/company/prodotto/list" class="dropdown-item">prodotto</router-link>
+              <router-link to="/company/prodotto/list" class="dropdown-item">Prodotto</router-link>
+              <router-link to="/company/categoria-prodotto/list" class="dropdown-item" >
+              Categorie Prodotti
+              </router-link>
             </div>
           </li>
 
@@ -53,9 +56,6 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <router-link to="/config/dominio/list" class="dropdown-item" > Dominio </router-link>
-              <router-link to="/config/categoria-prodotto/list" class="dropdown-item" >
-              Categorie Prodotti
-              </router-link>
             </div>
           </li>
 

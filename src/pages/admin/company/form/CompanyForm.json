@@ -1,0 +1,25 @@
+{
+    "sections":[
+        {
+            "label": "Dati Personali",
+            "rows": [
+                [
+                    {
+                        "field": "codice",
+                        "label": "codice",
+                        "bindField": "codice",
+                        "type": "text"
+                    }
+                ],
+                [
+                    {
+                        "field": "descrizione",
+                        "label": "Descrizione",
+                        "bindField": "descrizione",
+                        "type": "text"
+                    }
+                ]
+            ]
+        }
+    ]
+}
