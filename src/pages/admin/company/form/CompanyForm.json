@@ -1,7 +1,7 @@
 {
     "sections":[
         {
-            "label": "Dati Personali",
+            "label": "Dati Generali",
             "rows": [
                 [
                     {
@@ -13,13 +13,198 @@
                 ],
                 [
                     {
-                        "field": "descrizione",
-                        "label": "Descrizione",
-                        "bindField": "descrizione",
+                        "field": "ragioneSociale",
+                        "label": "Ragione Sociale",
+                        "bindField": "anagrafica.entitaGiuridica.ragioneSociale",
                         "type": "text"
-                    }
+                    },
+                  {
+                    "field": "descrAttivita",
+                    "label": "Descrizione Attivita",
+                    "bindField": "anagrafica.entitaGiuridica.descrAttivita",
+                    "type": "text"
+                  }
+                ],
+                [
+                  {
+                    "field": "codiceFiscale",
+                    "label": "Codice Fiscale",
+                    "bindField": "anagrafica.codiceFiscale",
+                    "type": "text"
+                  },
+                  {
+                    "field": "partitaIva",
+                    "label": "Partita Iva",
+                    "bindField": "anagrafica.partitaIva",
+                    "type": "text"
+                  },
+                  {
+                    "field": ".partitaIvaEstera",
+                    "label": "Partita Iva Estera",
+                    "bindField": "anagrafica.partitaIvaEstera",
+                    "type": "text"
+                  }
+                ],
+                [
+                  {
+                    "field": "telefono",
+                    "label": "Telefono",
+                    "bindField": "anagrafica.telefono",
+                    "type": "text"
+                  },
+                  {
+                    "field": "cellulare",
+                    "label": "Cellulare",
+                    "bindField": "anagrafica.cellulare",
+                    "type": "text"
+                  }
+                ],
+                [
+                  {
+                      "field": "naturaGiurica",
+                      "label": "Natura Giuridica",
+                      "bindField": "anagrafica.entitaGiuridica.naturaGiur",
+                      "type": "text"
+                  }
                 ]
+          ]
+      },
+        {
+          "label": "Sede Legale",
+          "rows": [
+            [
+              {
+                "field": "stato",
+                "label": "Stato",
+                "bindField": "anagrafica.entitaGiuridica.indirizzoSedeLegale.stato",
+                "type": "text"
+              },
+              {
+                "field": "provincia",
+                "label": "Provincia",
+                "bindField": "anagrafica.entitaGiuridica.indirizzoSedeLegale.provincia",
+                "type": "text"
+              },
+              {
+                "field": "domicilio",
+                "label": "Domicilio",
+                "bindField": "anagrafica.entitaGiuridica.indirizzoSedeLegale.domicilio",
+                "type": "text"
+              }
+            ],
+            [
+              {
+                "field": "via",
+                "label": "Via",
+                "bindField": "anagrafica.entitaGiuridica.indirizzoSedeLegale.via",
+                "type": "text"
+              },
+              {
+                "field": "numero",
+                "label": "Numero",
+                "bindField": "anagrafica.entitaGiuridica.indirizzoSedeLegale.numero",
+                "type": "text"
+              },
+              {
+                "field": "cap",
+                "label": "Cap",
+                "bindField": "anagrafica.entitaGiuridica.indirizzoSedeLegale.cap",
+                "type": "text"
+              }
             ]
+          ]
+        },
+        {
+          "label": "Sede Costituzione",
+          "rows": [
+            [
+            {
+              "field": "stato",
+              "label": "Stato",
+              "bindField": "anagrafica.entitaGiuridica.indirizzoSedeCostituzione.stato",
+              "type": "text"
+            },
+            {
+              "field": "provincia",
+              "label": "Provincia",
+              "bindField": "anagrafica.entitaGiuridica.indirizzoSedeCostituzione.provincia",
+              "type": "text"
+            },
+            {
+              "field": "domicilio",
+              "label": "Domicilio",
+              "bindField": "anagrafica.entitaGiuridica.indirizzoSedeCostituzione.domicilio",
+              "type": "text"
+            }
+          ],
+          [
+            {
+              "field": "via",
+              "label": "Via",
+              "bindField": "anagrafica.entitaGiuridica.indirizzoSedeCostituzione.via",
+              "type": "text"
+            },
+            {
+              "field": "numero",
+              "label": "Numero",
+              "bindField": "anagrafica.entitaGiuridica.indirizzoSedeCostituzione.numero",
+              "type": "text"
+            },
+            {
+              "field": "cap",
+              "label": "Cap",
+              "bindField": "anagrafica.entitaGiuridica.indirizzoSedeCostituzione.cap",
+              "type": "text"
+            }
+          ]
+        ]
+        },
+        {
+          "label": "Altri Dati",
+          "rows": [
+            [
+              {
+                "field": "dataCostituzione",
+                "label": "data Costituzione",
+                "bindField": "anagrafica.entitaGiuridica.dataCostituzione",
+                "type": "text"
+              },
+              {
+                "field": "capitaleSociale",
+                "label": "capitale Sociale",
+                "bindField": "anagrafica.entitaGiuridica.capitaleSociale",
+                "type": "text"
+              }
+            ],
+            [
+              {
+                "field": "nrIscrCciaa",
+                "label": "N° Iscr.Cciaa",
+                "bindField": "anagrafica.entitaGiuridica.nrIscrCciaa",
+                "type": "text"
+              },
+              {
+                "field": "dataIscrCciaa",
+                "label": "Data Iscr.Cciaa",
+                "bindField": "anagrafica.entitaGiuridica.dataIscrCciaa",
+                "type": "text"
+              },
+              {
+                "field": "provIscrCciaa",
+                "label": "Prov. Iscr.Cciaa",
+                "bindField": "anagrafica.entitaGiuridica.provIscrCciaa",
+                "type": "text"
+              }
+            ],
+            [
+              {
+                "label": "Azienda ID",
+                "field": "aziendaleId",
+                "bindField": "aziendaleId",
+                "type": "text"
+              }
+            ]
+          ]
         }
     ]
 }

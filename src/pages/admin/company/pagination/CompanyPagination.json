@@ -1,0 +1,32 @@
+[
+  {
+    "label": "Codice",
+    "field": "codice",
+    "bindField": "codice"
+},
+{
+    "label": "Descrizione",
+    "field": "descrAttivita",
+    "bindField": "anagrafica.entitaGiuridica.descrAttivita"
+},
+{
+  "field": "codiceFiscale",
+  "label": "Codice Fiscale",
+  "bindField": "anagrafica.codiceFiscale"
+},
+{
+  "field": "partitaIva",
+  "label": "Partita Iva",
+  "bindField": "anagrafica.partitaIva"
+},
+{
+  "field": "telefono",
+  "label": "Telefono",
+  "bindField": "anagrafica.telefono"
+},
+{
+  "field": "cellulare",
+  "label": "Cellulare",
+  "bindField": "anagrafica.cellulare"
+}
+]
