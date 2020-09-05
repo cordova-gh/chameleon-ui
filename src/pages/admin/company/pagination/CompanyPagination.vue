@@ -14,7 +14,7 @@ export default {
   name: 'UserPagination',
   data() {
     return {
-      urlAPi: API_COMPANY,
+      urlApi: API_COMPANY,
       configPagination: ConfigPagination,
     };
   },

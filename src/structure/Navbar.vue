@@ -34,7 +34,7 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <router-link to="/company/anagrafica-cliente-fornitore/list" class="dropdown-item" >
-                Anagrafica fornitori/clienti
+                Fornitori/Clienti
               </router-link>
               <router-link to="/company/prodotto/list" class="dropdown-item">Prodotto</router-link>
               <router-link to="/company/categoria-prodotto/list" class="dropdown-item" >
@@ -73,7 +73,7 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <router-link to="/admin/user/list" class="dropdown-item" >Utenti</router-link>
               <router-link to="/admin/profile/list" class="dropdown-item">Profili</router-link>
-              <router-link to="/admin/company/list" class="dropdown-item">Aziende</router-link>
+              <router-link to="/admin/company/list" class="dropdown-item">Company</router-link>
               <router-link to="/admin/shop/list" class="dropdown-item" >Shop</router-link>
             </div>
           </li>

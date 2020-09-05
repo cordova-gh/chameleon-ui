@@ -6,3 +6,4 @@ export const API_PROFILE = '/api/profiles';
 export const API_FILE = '/api/files';
 export const API_SHOP = '/api/shops';
 export const API_ANAGRAFICA = '/api/anagraficas';
+export const API_FORNITORE_CLIENTE = '/api/anagrafica-fornitore-clientes';

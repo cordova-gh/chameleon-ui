@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <title-page :titolo="titolopagina"></title-page>
+  <div class="container">
     <ui-form
     title="Dati Personali"
     :config="configForm"
@@ -21,7 +20,6 @@ export default {
       urlApi: API_COMPANY,
       currentId: '',
       configForm: ConfigForm,
-      titolopagina: 'Users',
     };
   },
   created() {

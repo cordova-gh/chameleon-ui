@@ -1,15 +1,14 @@
 <template>
-  <div>
-    <title-page :titolo="titolopagina"></title-page>
+  <div class="container">
     <ui-form
     title="Dati Generali"
     :config="configForm"
     :urlApi="urlApi"
-    :currentId="correntId"></ui-form>
+    :currentId="currentId"></ui-form>
   </div>
 </template>
 <script>
-import { API_ANAGRAFICA } from '../../../../services/constant-services';
+import { API_FORNITORE_CLIENTE } from '../../../../services/constant-services';
 import UIForm from '../../../../ui-components/UIForm';
 import TitlePage from '../../../shared/components/TitlePage';
 import ConfigForm from './AnagraficaClienteFornitoreForm.json';
@@ -18,10 +17,9 @@ export default {
   name: 'UserForm',
   data() {
     return {
-      urlApi: API_ANAGRAFICA,
+      urlApi: API_FORNITORE_CLIENTE,
       currentId: '',
       configForm: ConfigForm,
-      titolopagina: 'Compilation',
     };
   },
   created() {

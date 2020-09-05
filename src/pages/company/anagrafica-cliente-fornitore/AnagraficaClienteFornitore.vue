@@ -9,10 +9,10 @@
 import TitlePage from './../../shared/components/TitlePage';
 
 export default {
-  name: 'Anagrafica',
+  name: 'AnagraficaFornitoreCliente',
   data() {
     return {
-      titolo: 'Anagrafica fornitore/cliente',
+      titolo: 'Fornitori/Clienti',
     };
   },
   components: {
