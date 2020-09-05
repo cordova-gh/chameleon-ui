@@ -10,7 +10,7 @@
     </div>
 </template>
 <script>
-import { API_PROFILI } from '../../../../services/constant-services';
+import { API_PROFILE } from '../../../../services/constant-services';
 import UIForm from './../../../../ui-components/UIForm';
 import TitlePage from './../../../shared/components/TitlePage';
 import ConfigForm from './ProfileForm.json';
@@ -19,7 +19,7 @@ export default {
   name: 'ProfileForm',
   data() {
     return {
-      urlApi: API_PROFILI,
+      urlApi: API_PROFILE,
       currentId: '',
       configForm: ConfigForm,
       titoloPagina: 'Users',

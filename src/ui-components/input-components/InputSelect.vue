@@ -8,7 +8,7 @@
   </div>
 </template>
 <script>
-import { API_DOMINI } from '../../services/constant-services';
+import { API_DOMINIO } from '../../services/constant-services';
 
 export default {
   props: {
@@ -56,7 +56,7 @@ export default {
     find() {
       let api = this.config.urlApi;
       if (this.config.isDominio) {
-        api = `${API_DOMINI}/${this.config.dominio}`;
+        api = `${API_DOMINIO}/${this.config.dominio}`;
       }
       fetch(api, {})
         .then(res => res.json())

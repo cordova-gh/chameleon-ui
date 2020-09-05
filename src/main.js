@@ -6,8 +6,10 @@ import router from './router';
 import store from './store';
 // eslint-disable-next-line import/first
 import '@fortawesome/fontawesome-free/css/all.css';
+
 // eslint-disable-next-line import/extensions
 // import '@fortawesome/fontawesome-free/js/all.js';
+
 
 Vue.config.productionTip = false;
 

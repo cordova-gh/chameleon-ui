@@ -23,7 +23,7 @@
   </div>
 </template>
 <script>
-import { API_DOMINI } from '../../services/constant-services';
+import { API_DOMINIO } from '../../services/constant-services';
 import HttpCall from '../../services/HttpCall';
 
 export default {
@@ -85,7 +85,7 @@ export default {
     find() {
       let api = this.config.urlApi;
       if (this.config.isDominio) {
-        api = `${API_DOMINI}/${this.config.dominio}`;
+        api = `${API_DOMINIO}/${this.config.dominio}`;
       }
       if (this.valueShown !== '') {
         if (!this.config.isDominio) api += '/findByCodice';
@@ -125,7 +125,7 @@ export default {
     findById() {
       let api = this.config.urlApi;
       if (this.config.isDominio) {
-        api = `${API_DOMINI}/${this.config.dominio}`;
+        api = `${API_DOMINIO}/${this.config.dominio}`;
       }
 
       const httpCall = new HttpCall(api);

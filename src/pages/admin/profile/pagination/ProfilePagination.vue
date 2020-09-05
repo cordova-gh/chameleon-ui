@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { API_PROFILI } from './../../../../services/constant-services';
+import { API_PROFILE } from './../../../../services/constant-services';
 import UIPagination from './../../../../ui-components/UIPagination';
 import ConfigPagination from './ProfilePagination.json';
 
@@ -16,7 +16,7 @@ export default {
   name: 'ProfilePagination',
   data() {
     return {
-      urlApi: API_PROFILI,
+      urlApi: API_PROFILE,
       profilePagination: ConfigPagination,
     };
   },

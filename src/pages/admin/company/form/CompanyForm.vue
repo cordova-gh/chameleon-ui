@@ -9,7 +9,7 @@
   </div>
 </template>
 <script>
-import { API_AZIENDE } from '../../../../services/constant-services';
+import { API_COMPANY } from '../../../../services/constant-services';
 import UIForm from '../../../../ui-components/UIForm';
 import TitlePage from '../../../shared/components/TitlePage';
 import ConfigForm from './CompanyForm.json';
@@ -18,7 +18,7 @@ export default {
   name: 'UserForm',
   data() {
     return {
-      urlApi: API_AZIENDE,
+      urlApi: API_COMPANY,
       currentId: '',
       configForm: ConfigForm,
       titolopagina: 'Users',

@@ -1,7 +1,7 @@
-export const API_DOMINI = '/api/domini';
+export const API_DOMINIO = '/api/dominos';
 export const API_TASKS = '/api/tasks';
 export const API_USERS = '/api/users';
-export const API_AZIENDE = '/api/azienda';
-export const API_PROFILI = '/api/profilo';
-export const API_FILE = '/api/file';
-export const API_SHOP = '/api/shop';
+export const API_COMPANY = '/api/companies';
+export const API_PROFILE = '/api/profiles';
+export const API_FILE = '/api/files';
+export const API_SHOP = '/api/shops';
