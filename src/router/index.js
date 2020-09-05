@@ -153,6 +153,10 @@ export default new Router({
               component: ProdottoForm,
             },
             {
+              path: 'edit/:id',
+              component: AnagraficaClienteFornitoreForm,
+            },
+            {
               path: 'list',
               component: ProdottoPagination,
             },
@@ -165,6 +169,10 @@ export default new Router({
             {
               path: 'new',
               component: CategoriaProdottoForm,
+            },
+            {
+              path: 'edit/:id',
+              component: AnagraficaClienteFornitoreForm,
             },
             {
               path: 'list',

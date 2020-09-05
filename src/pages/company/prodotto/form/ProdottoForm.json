@@ -1,0 +1,66 @@
+{
+  "sections":[
+    {
+      "label": "Dati Genereli",
+      "rows": [
+        [
+          {
+            "field": "codice",
+            "label": "Codice",
+            "bindField": "Codice",
+            "type": "text"
+          }
+        ],
+        [
+          {
+            "field": "descrizione",
+            "label": "Descrizione",
+            "bindField": "descrizione",
+            "type": "text"
+          },
+          {
+            "field": "descrizioneBrev",
+            "label": "Descrizione Breve",
+            "bindField": "descrizioneBrev",
+            "type": "text"
+          }
+        ]
+      ]
+    },
+    {
+      "label": "Caratteristiche Prodotto",
+      "rows": [
+        [
+          {
+            "field": "tipologiaProdotto",
+            "label": "Tipologia Prodotto",
+            "bindField": "tipologiaProdotto",
+            "type": "text"
+          }
+        ],
+        [
+          {
+            "field": "imgProdotto",
+            "label": "Immagine",
+            "bindField": "imgProdotto",
+            "type": "text"
+          }
+        ],
+        [
+          {
+            "field": "categoriaProdotto",
+            "label": "Categoria",
+            "bindField": "categoriaProdotto",
+            "type": "text"
+          },
+          {
+            "field": "marcaProdotto",
+            "label": "Marca",
+            "bindField": "marcaProdotto",
+            "type": "text"
+          }
+        ]
+      ]
+    }
+  ]
+}

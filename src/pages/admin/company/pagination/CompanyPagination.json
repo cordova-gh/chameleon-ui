@@ -10,23 +10,23 @@
     "bindField": "anagrafica.entitaGiuridica.descrAttivita"
 },
 {
-  "field": "codiceFiscale",
-  "label": "Codice Fiscale",
-  "bindField": "anagrafica.codiceFiscale"
+  "field": "viaSedeLegale",
+  "label": "Via",
+  "bindField": "anagrafica.entitaGiuridica.indirizzoSedeLegale.via"
 },
 {
-  "field": "partitaIva",
-  "label": "Partita Iva",
-  "bindField": "anagrafica.partitaIva"
+  "field": "numeroSedeLegale",
+  "label": "N°",
+  "bindField": "anagrafica.entitaGiuridica.indirizzoSedeLegale.numero"
 },
 {
-  "field": "telefono",
-  "label": "Telefono",
-  "bindField": "anagrafica.telefono"
+  "field": "comuneSedeLegale",
+  "label": "Comune",
+  "bindField": "anagrafica.entitaGiuridica.indirizzoSedeLegale.comune"
 },
 {
-  "field": "cellulare",
-  "label": "Cellulare",
-  "bindField": "anagrafica.cellulare"
+  "field": "nomeReferente",
+  "label": "Referente",
+  "bindField": "nomeReferente"
 }
 ]

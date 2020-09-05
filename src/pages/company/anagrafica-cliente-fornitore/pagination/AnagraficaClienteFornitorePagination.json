@@ -10,23 +10,18 @@
     "bindField": "entitaGiuridica.descrAttivita"
 },
 {
-  "field": "codiceFiscale",
-  "label": "Codice Fiscale",
-  "bindField": "codiceFiscale"
+  "field": "cliente",
+  "label": "Cliente",
+  "bindField": "cliente"
 },
 {
-  "field": "partitaIva",
-  "label": "Partita Iva",
-  "bindField": "partitaIva"
+  "field": "fornitore",
+  "label": "Fornitore",
+  "bindField": "fornitore"
 },
 {
-  "field": "telefono",
-  "label": "Telefono",
-  "bindField": "telefono"
-},
-{
-  "field": "cellulare",
-  "label": "Cellulare",
-  "bindField": "cellulare"
+  "field": "nomeReferente",
+  "label": "Referente",
+  "bindField": "nomeReferente"
 }
 ]
