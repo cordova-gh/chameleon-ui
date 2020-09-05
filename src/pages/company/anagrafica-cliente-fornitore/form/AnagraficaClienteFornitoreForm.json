@@ -6,7 +6,7 @@
         [
           {
             "field": "codice",
-            "label": "codice",
+            "label": "Codice",
             "bindField": "codice",
             "type": "text"
           }
@@ -74,19 +74,19 @@
       "rows": [
         [
           {
-            "field": "stato",
+            "field": "statoSedeLegale",
             "label": "Stato",
             "bindField": "entitaGiuridica.indirizzoSedeLegale.stato",
             "type": "text"
           },
           {
-            "field": "provincia",
+            "field": "provinciaSedeLegale",
             "label": "Provincia",
             "bindField": "entitaGiuridica.indirizzoSedeLegale.provincia",
             "type": "text"
           },
           {
-            "field": "comune",
+            "field": "comuneSedeLegale",
             "label": "Comune",
             "bindField": "entitaGiuridica.indirizzoSedeLegale.comune",
             "type": "text"
@@ -94,19 +94,19 @@
         ],
         [
           {
-            "field": "via",
+            "field": "viaSedeLegale",
             "label": "Via",
             "bindField": "entitaGiuridica.indirizzoSedeLegale.via",
             "type": "text"
           },
           {
-            "field": "numero",
+            "field": "numeroSedeLegale",
             "label": "Numero",
             "bindField": "entitaGiuridica.indirizzoSedeLegale.numero",
             "type": "text"
           },
           {
-            "field": "cap",
+            "field": "capSedeLegale",
             "label": "Cap",
             "bindField": "entitaGiuridica.indirizzoSedeLegale.cap",
             "type": "text"
@@ -119,19 +119,19 @@
       "rows": [
         [
         {
-          "field": "stato",
+          "field": "statoSedeCostituzione",
           "label": "Stato",
           "bindField": "entitaGiuridica.indirizzoSedeCostituzione.stato",
           "type": "text"
         },
         {
-          "field": "provincia",
+          "field": "provinciaSedeCostituzione",
           "label": "Provincia",
           "bindField": "entitaGiuridica.indirizzoSedeCostituzione.provincia",
           "type": "text"
         },
         {
-          "field": "comune",
+          "field": "comuneSedeCostituzione",
           "label": "Comune",
           "bindField": "entitaGiuridica.indirizzoSedeCostituzione.comune",
           "type": "text"
@@ -139,19 +139,19 @@
       ],
       [
         {
-          "field": "via",
+          "field": "viaSedeCostituzione",
           "label": "Via",
           "bindField": "entitaGiuridica.indirizzoSedeCostituzione.via",
           "type": "text"
         },
         {
-          "field": "numero",
+          "field": "numeroSedeCostituzione",
           "label": "Numero",
           "bindField": "entitaGiuridica.indirizzoSedeCostituzione.numero",
           "type": "text"
         },
         {
-          "field": "cap",
+          "field": "capSedeCostituzione",
           "label": "Cap",
           "bindField": "entitaGiuridica.indirizzoSedeCostituzione.cap",
           "type": "text"
@@ -171,7 +171,7 @@
           },
           {
             "field": "capitaleSociale",
-            "label": "capitale Sociale",
+            "label": "Capitale Sociale",
             "bindField": "entitaGiuridica.capitaleSociale",
             "type": "text"
           }
