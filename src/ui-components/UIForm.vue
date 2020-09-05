@@ -11,7 +11,9 @@
             :key="indexSection"
             class=""
           >
-            <p> {{sectionElement.label}}</p>
+            <div class="title-form">
+              <p>{{ sectionElement.label }}</p>
+            </div>
             <div
               v-for="(rowElement, indexRow) in sectionElement.rows"
               :key="indexRow"
@@ -48,6 +50,10 @@
                   >
                   </input-select>
                 </template>
+                <template v-else-if="colElement.type === 'date'">
+                  <input-date  v-model="entity[colElement.field]">
+                  </input-date>
+                </template>
               </div>
             </div>
           </div>
@@ -69,6 +75,7 @@ import InputSelect from './input-components/InputSelect';
 import InputText from './input-components/InputText';
 import InputPassword from './input-components/InputPassword';
 import InputNumber from './input-components/InputNumber';
+import InputDate from './input-components/InputDate';
 import HttpCall from '../services/HttpCall';
 import { Utility } from '../utilities/utility';
 
@@ -101,6 +108,7 @@ export default {
     'input-text': InputText,
     'input-password': InputPassword,
     'input-number': InputNumber,
+    'input-date': InputDate,
   },
   data() {
     return {
@@ -220,3 +228,10 @@ export default {
   },
 };
 </script>
+<style>
+  .title-form{
+
+    border-left-width: 10px solid;
+    border-left-color:  #000;
+  }
+</style>

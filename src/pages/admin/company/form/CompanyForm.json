@@ -167,7 +167,7 @@
                 "field": "dataCostituzione",
                 "label": "data Costituzione",
                 "bindField": "anagrafica.entitaGiuridica.dataCostituzione",
-                "type": "text"
+                "type": "date"
               },
               {
                 "field": "capitaleSociale",
