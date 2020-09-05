@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <ui-form
       title="Dati Personali"
       :config="configForm"

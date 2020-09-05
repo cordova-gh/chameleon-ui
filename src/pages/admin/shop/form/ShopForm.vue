@@ -1,8 +1,7 @@
 <template>
-  <div>
-    <title-page :titolo="titoloPagina"></title-page>
+   <div class="container">
     <ui-form
-      title="Dati Personali"
+      title="Inserimento"
       :config="configForm"
       :urlApi="urlApi"
       :currentId="currentId"

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #1c1c1c">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(3 13 130)">
       <img src="../assets/logo-chameleon.png" width="25px" class="pr-2">
       <router-link to="/" class="navbar-brand" >Chameleon</router-link>
       <button

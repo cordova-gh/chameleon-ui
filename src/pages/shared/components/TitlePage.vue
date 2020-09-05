@@ -1,8 +1,8 @@
 <template>
-  <div class="container-fluid py-3 bg-light">
+  <div class="container-fluid py-3   bg-light">
     <div class="display-3">
       <div class="row">
-        <div class="col-6 text-left">
+        <div class="col-6 text-left px-5">
           <h1>{{titolo}}</h1>
         </div>
       </div>
