@@ -6,7 +6,7 @@
                 [
                     {
                         "field": "codice",
-                        "label": "codice",
+                        "label": "Codice",
                         "bindField": "codice",
                         "type": "text"
                     }
@@ -171,12 +171,18 @@
               },
               {
                 "field": "capitaleSociale",
-                "label": "capitale Sociale",
+                "label": "Capitale Sociale",
                 "bindField": "anagrafica.entitaGiuridica.capitaleSociale",
                 "type": "text"
               }
             ],
             [
+              {
+                "field": "dataIscrCciaa",
+                "label": "Data Iscr.Cciaa",
+                "bindField": "anagrafica.entitaGiuridica.dataIscrCciaa",
+                "type": "date"
+              },
               {
                 "field": "nrIscrCciaa",
                 "label": "N° Iscr.Cciaa",
@@ -184,23 +190,9 @@
                 "type": "text"
               },
               {
-                "field": "dataIscrCciaa",
-                "label": "Data Iscr.Cciaa",
-                "bindField": "anagrafica.entitaGiuridica.dataIscrCciaa",
-                "type": "text"
-              },
-              {
                 "field": "provIscrCciaa",
                 "label": "Prov. Iscr.Cciaa",
                 "bindField": "anagrafica.entitaGiuridica.provIscrCciaa",
-                "type": "text"
-              }
-            ],
-            [
-              {
-                "label": "Azienda ID",
-                "field": "aziendaleId",
-                "bindField": "aziendaleId",
                 "type": "text"
               }
             ]
