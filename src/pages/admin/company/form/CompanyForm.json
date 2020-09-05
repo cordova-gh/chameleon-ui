@@ -197,6 +197,41 @@
               }
             ]
           ]
+        },
+        {
+          "label": "riferimento",
+          "rows" : [
+            [
+              {
+                "label": "Nominativo Referente",
+                "field": "nomeReferente",
+                "bindField": "nomeReferente",
+                "type": "text"
+              }
+            ],
+            [
+              {
+                "label": "Telefono Referente",
+                "field": "telefonoReferente",
+                "bindField": "telefonoReferente",
+                "type": "text"
+              },
+              {
+                "label": "Cellulare Referente",
+                "field": "cellulareReferente",
+                "bindField": "cellulareReferente",
+                "type": "text"
+              }
+            ],
+            [
+              {
+                "label": "Email Referente",
+                "field": "emailReferente",
+                "bindField": "emailReferente",
+                "type": "text"
+              }
+            ]
+          ]
         }
     ]
 }
