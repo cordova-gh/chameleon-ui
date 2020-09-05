@@ -1,0 +1,210 @@
+{
+  "sections": [
+    {
+      "label": "Dati Generali",
+      "rows": [
+        [
+          {
+            "field": "codice",
+            "label": "codice",
+            "bindField": "codice",
+            "type": "text"
+          }
+        ],
+        [
+          {
+              "field": "ragioneSociale",
+              "label": "Ragione Sociale",
+              "bindField": "entitaGiuridica.ragioneSociale",
+              "type": "text"
+          },
+        {
+          "field": "descrAttivita",
+          "label": "Descrizione Attivita",
+          "bindField": "entitaGiuridica.descrAttivita",
+          "type": "text"
+        }
+      ],
+      [
+        {
+          "field": "codiceFiscale",
+          "label": "Codice Fiscale",
+          "bindField": "codiceFiscale",
+          "type": "text"
+        },
+        {
+          "field": "partitaIva",
+          "label": "Partita Iva",
+          "bindField": "partitaIva",
+          "type": "text"
+        },
+        {
+          "field": ".partitaIvaEstera",
+          "label": "Partita Iva Estera",
+          "bindField": "partitaIvaEstera",
+          "type": "text"
+        }
+      ],
+      [
+        {
+          "field": "telefono",
+          "label": "Telefono",
+          "bindField": "telefono",
+          "type": "text"
+        },
+        {
+          "field": "cellulare",
+          "label": "Cellulare",
+          "bindField": "cellulare",
+          "type": "text"
+        }
+      ],
+      [
+        {
+          "field": "naturaGiurica",
+          "label": "Natura Giuridica",
+          "bindField": "entitaGiuridica.naturaGiur",
+          "type": "text"
+      }
+      ]
+      ]
+    },
+    {
+      "label": "Sede Legale",
+      "rows": [
+        [
+          {
+            "field": "stato",
+            "label": "Stato",
+            "bindField": "entitaGiuridica.indirizzoSedeLegale.stato",
+            "type": "text"
+          },
+          {
+            "field": "provincia",
+            "label": "Provincia",
+            "bindField": "entitaGiuridica.indirizzoSedeLegale.provincia",
+            "type": "text"
+          },
+          {
+            "field": "comune",
+            "label": "Comune",
+            "bindField": "entitaGiuridica.indirizzoSedeLegale.comune",
+            "type": "text"
+          }
+        ],
+        [
+          {
+            "field": "via",
+            "label": "Via",
+            "bindField": "entitaGiuridica.indirizzoSedeLegale.via",
+            "type": "text"
+          },
+          {
+            "field": "numero",
+            "label": "Numero",
+            "bindField": "entitaGiuridica.indirizzoSedeLegale.numero",
+            "type": "text"
+          },
+          {
+            "field": "cap",
+            "label": "Cap",
+            "bindField": "entitaGiuridica.indirizzoSedeLegale.cap",
+            "type": "text"
+          }
+        ]
+      ]
+    },
+    {
+      "label": "Sede Costituzione",
+      "rows": [
+        [
+        {
+          "field": "stato",
+          "label": "Stato",
+          "bindField": "entitaGiuridica.indirizzoSedeCostituzione.stato",
+          "type": "text"
+        },
+        {
+          "field": "provincia",
+          "label": "Provincia",
+          "bindField": "entitaGiuridica.indirizzoSedeCostituzione.provincia",
+          "type": "text"
+        },
+        {
+          "field": "comune",
+          "label": "Comune",
+          "bindField": "entitaGiuridica.indirizzoSedeCostituzione.comune",
+          "type": "text"
+        }
+      ],
+      [
+        {
+          "field": "via",
+          "label": "Via",
+          "bindField": "entitaGiuridica.indirizzoSedeCostituzione.via",
+          "type": "text"
+        },
+        {
+          "field": "numero",
+          "label": "Numero",
+          "bindField": "entitaGiuridica.indirizzoSedeCostituzione.numero",
+          "type": "text"
+        },
+        {
+          "field": "cap",
+          "label": "Cap",
+          "bindField": "entitaGiuridica.indirizzoSedeCostituzione.cap",
+          "type": "text"
+        }
+      ]
+    ]
+    },
+    {
+      "label": "Altri Dati",
+      "rows": [
+        [
+          {
+            "field": "dataCostituzione",
+            "label": "data Costituzione",
+            "bindField": "entitaGiuridica.dataCostituzione",
+            "type": "date"
+          },
+          {
+            "field": "capitaleSociale",
+            "label": "capitale Sociale",
+            "bindField": "entitaGiuridica.capitaleSociale",
+            "type": "text"
+          }
+        ],
+        [
+          {
+            "field": "dataIscrCciaa",
+            "label": "Data Iscr.Cciaa",
+            "bindField": "entitaGiuridica.dataIscrCciaa",
+            "type": "date"
+          },
+          {
+            "field": "nrIscrCciaa",
+            "label": "N° Iscr.Cciaa",
+            "bindField": "entitaGiuridica.nrIscrCciaa",
+            "type": "text"
+          },
+          {
+            "field": "provIscrCciaa",
+            "label": "Prov. Iscr.Cciaa",
+            "bindField": "entitaGiuridica.provIscrCciaa",
+            "type": "text"
+          }
+        ],
+        [
+          {
+            "label": "Azienda ID",
+            "field": "aziendaleId",
+            "bindField": "aziendaleId",
+            "type": "text"
+          }
+        ]
+      ]
+    }
+  ]
+}

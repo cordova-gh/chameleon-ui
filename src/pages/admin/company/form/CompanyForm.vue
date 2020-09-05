@@ -5,7 +5,7 @@
     title="Dati Personali"
     :config="configForm"
     :urlApi="urlApi"
-    :currentId="correntId"></ui-form>
+    :currentId="currentId"></ui-form>
   </div>
 </template>
 <script>

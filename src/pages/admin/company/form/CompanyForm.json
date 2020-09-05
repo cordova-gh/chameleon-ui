@@ -74,39 +74,39 @@
           "rows": [
             [
               {
-                "field": "stato",
+                "field": "statoSedeLegale",
                 "label": "Stato",
                 "bindField": "anagrafica.entitaGiuridica.indirizzoSedeLegale.stato",
                 "type": "text"
               },
               {
-                "field": "provincia",
+                "field": "provinciaSedeLegale",
                 "label": "Provincia",
                 "bindField": "anagrafica.entitaGiuridica.indirizzoSedeLegale.provincia",
                 "type": "text"
               },
               {
-                "field": "domicilio",
-                "label": "Domicilio",
-                "bindField": "anagrafica.entitaGiuridica.indirizzoSedeLegale.domicilio",
+                "field": "comuneSedeLegale",
+                "label": "Comune",
+                "bindField": "anagrafica.entitaGiuridica.indirizzoSedeLegale.comune",
                 "type": "text"
               }
             ],
             [
               {
-                "field": "via",
+                "field": "viaSedeLegale",
                 "label": "Via",
                 "bindField": "anagrafica.entitaGiuridica.indirizzoSedeLegale.via",
                 "type": "text"
               },
               {
-                "field": "numero",
+                "field": "numeroSedeLegale",
                 "label": "Numero",
                 "bindField": "anagrafica.entitaGiuridica.indirizzoSedeLegale.numero",
                 "type": "text"
               },
               {
-                "field": "cap",
+                "field": "capSedeLegale",
                 "label": "Cap",
                 "bindField": "anagrafica.entitaGiuridica.indirizzoSedeLegale.cap",
                 "type": "text"
@@ -119,39 +119,39 @@
           "rows": [
             [
             {
-              "field": "stato",
+              "field": "statoSedeCostituzione",
               "label": "Stato",
               "bindField": "anagrafica.entitaGiuridica.indirizzoSedeCostituzione.stato",
               "type": "text"
             },
             {
-              "field": "provincia",
+              "field": "provinciaSedeCostituzione",
               "label": "Provincia",
               "bindField": "anagrafica.entitaGiuridica.indirizzoSedeCostituzione.provincia",
               "type": "text"
             },
             {
-              "field": "domicilio",
-              "label": "Domicilio",
-              "bindField": "anagrafica.entitaGiuridica.indirizzoSedeCostituzione.domicilio",
+              "field": "comuneSedeCostituzione",
+              "label": "Comune",
+              "bindField": "anagrafica.entitaGiuridica.indirizzoSedeCostituzione.comune",
               "type": "text"
             }
           ],
           [
             {
-              "field": "via",
+              "field": "viaSedeCostituzione",
               "label": "Via",
               "bindField": "anagrafica.entitaGiuridica.indirizzoSedeCostituzione.via",
               "type": "text"
             },
             {
-              "field": "numero",
+              "field": "numeroSedeCostituzione",
               "label": "Numero",
               "bindField": "anagrafica.entitaGiuridica.indirizzoSedeCostituzione.numero",
               "type": "text"
             },
             {
-              "field": "cap",
+              "field": "capSedeCostituzione",
               "label": "Cap",
               "bindField": "anagrafica.entitaGiuridica.indirizzoSedeCostituzione.cap",
               "type": "text"

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <title-page titolo = "Profile"></title-page>
+        <title-page :titolo = "titolo"></title-page>
                 <router-link to="new">New</router-link>
         <router-view></router-view>
     </div>
@@ -11,6 +11,11 @@ import TitlePage from './../../shared/components/TitlePage';
 
 export default {
   name: 'profile',
+  data() {
+    return {
+      titolo: 'Profile',
+    };
+  },
   components: {
     // eslint-disable-next-line no-undef
     'title-page': TitlePage,

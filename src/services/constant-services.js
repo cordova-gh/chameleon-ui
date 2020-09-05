@@ -5,3 +5,4 @@ export const API_COMPANY = '/api/companies';
 export const API_PROFILE = '/api/profiles';
 export const API_FILE = '/api/files';
 export const API_SHOP = '/api/shops';
+export const API_ANAGRAFICA = '/api/anagraficas';
