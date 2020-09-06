@@ -31,7 +31,9 @@ import CategoriaProdottoPagination from '@/pages/company/categoria-prodotto/pagi
 import Dominio from '@/pages/config/dominio/Dominio';
 import DominioForm from '@/pages/config/dominio/form/DominioForm';
 import DominioPagination from '@/pages/config/dominio/pagination/DominioPagination';
-
+import Country from '@/pages/config/country/Country';
+import CountryForm from '@/pages/config/country/form/CountryForm';
+import CountryPagination from '@/pages/config/country/pagination/CountryPagination';
 
 Vue.use(Router);
 
@@ -154,7 +156,7 @@ export default new Router({
             },
             {
               path: 'edit/:id',
-              component: AnagraficaClienteFornitoreForm,
+              component: ProdottoForm,
             },
             {
               path: 'list',
@@ -172,7 +174,7 @@ export default new Router({
             },
             {
               path: 'edit/:id',
-              component: AnagraficaClienteFornitoreForm,
+              component: CategoriaProdottoForm,
             },
             {
               path: 'list',
@@ -197,8 +199,30 @@ export default new Router({
               component: DominioForm,
             },
             {
+              path: 'edit/:id',
+              component: DominioForm,
+            },
+            {
               path: 'list',
               component: DominioPagination,
+            },
+          ],
+        },
+        {
+          path: 'country',
+          component: Country,
+          children: [
+            {
+              path: 'new',
+              component: CountryForm,
+            },
+            {
+              path: 'edit/:id',
+              component: CountryForm,
+            },
+            {
+              path: 'list',
+              component: CountryPagination,
             },
           ],
         },

@@ -1,0 +1,83 @@
+{
+  "numCols": 3,
+  "sections":[
+    {
+      "label": "Province",
+      "row": [
+        [
+          {
+            "field": "codice",
+            "label": "Codice",
+            "bindField": "province.codice",
+            "type": "text"
+          },
+          {
+            "field": "descrizione",
+            "label": "Descrizione",
+            "bindField": "province.descrizione",
+            "type": "text"
+          },
+          {
+            "field": "provinceStato",
+            "label": "Stato",
+            "bindField": "province.stato",
+            "type": "text"
+          }
+        ]
+      ]
+    },
+    {
+      "label": "Comune",
+      "rows": [
+        [
+          {
+            "field": "comuneDescrizione",
+            "label": "Descrizione",
+            "bindField": "comune.descrizione",
+            "type": "text"
+          },
+          {
+            "field": "comuneProvincia",
+            "label": "Provincia",
+            "bindField": "comune.provincia",
+            "type": "text"
+          },
+          {
+            "field": "comuneStato",
+            "label": "Stato",
+            "bindField": "comune.stato",
+            "type": "text"
+          }
+        ],
+        [
+          {
+            "field": "cod_catastale",
+            "label": "Catasto",
+            "bindField": "comune.cod_catastale",
+            "type": "text"
+          },
+          {
+            "field": "dta_inizio_validita",
+            "label": "Inizio Validità",
+            "bindField": "comune.dta_inizio_validita",
+            "type": "date"
+          },
+          {
+            "field": "dta_fine_validita",
+            "label": "Fine Validità",
+            "bindField": "comune.dta_fine_validita",
+            "type": "date"
+          }
+        ],
+        [
+          {
+            "field": "note",
+            "label": "Note",
+            "bindField": "comune.note",
+            "type": "text"
+          }
+        ]
+      ]
+    }
+  ]
+}
