@@ -6,6 +6,8 @@
       </div>
       <div class="card-body">
         <form @submit.prevent="saveEntity">
+
+
           <div
             v-for="(sectionElement, indexSection) in config.sections"
             :key="indexSection"
@@ -22,7 +24,7 @@
               <div
                 v-for="(colElement, indexCol) in rowElement"
                 :key="indexCol"
-                class="col form-group"
+                :class="'col-'+getNumCols(rowElement.numCols,sectionElement.numCols )+' form-group'"
               >
                 <template v-if="colElement.type === 'text'">
                   <input-text
@@ -214,6 +216,13 @@ export default {
           }
         }
       }
+    },
+    getNumCols(numColsRow, numColsSection) {
+      let numCols = 3;
+      if (this.config.numCols) { numCols = this.config.numCols; }
+      if (numColsSection) { numCols = numColsSection; }
+      if (numColsRow) { numCols = numColsRow; }
+      return 12 / numCols;
     },
     // watch: {
     //   reload: {

@@ -3,7 +3,8 @@ import axios from 'axios';
 import store from '../store';
 
 export default class HttpCall {
-  baseUrl = 'https://chameleon-be.herokuapp.com';
+  // baseUrl = 'https://chameleon-be.herokuapp.com';
+  baseUrl = 'http://localhost:5000';
   constructor(apiUrl) {
     this.RESOURCE_NAME = apiUrl;
   }
