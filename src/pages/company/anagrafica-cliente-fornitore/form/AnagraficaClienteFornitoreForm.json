@@ -1,4 +1,5 @@
 {
+  "numCols": 3,
   "sections": [
     {
       "label": "Dati Generali",
@@ -221,35 +222,31 @@
       ]
     },
     {
-      "label": "Riferimento",
+      "label": "Contatto Riferimento",
       "rows" : [
         [
           {
             "label": "Nominativo Referente",
             "field": "nomeReferente",
-            "bindField": "nomeReferente",
+            "bindField": "contattoRiferimento.nome",
             "type": "text"
-          }
-        ],
-        [
+          },
           {
             "label": "Telefono Referente",
             "field": "telefonoReferente",
-            "bindField": "telefonoReferente",
+            "bindField": "contattoRiferimento.telefono",
             "type": "text"
           },
           {
             "label": "Cellulare Referente",
             "field": "cellulareReferente",
-            "bindField": "cellulareReferente",
+            "bindField": "contattoRiferimento.cellulare",
             "type": "text"
-          }
-        ],
-        [
+          },
           {
             "label": "Email Referente",
             "field": "emailReferente",
-            "bindField": "emailReferente",
+            "bindField": "contattoRiferimento.email",
             "type": "text"
           }
         ]
