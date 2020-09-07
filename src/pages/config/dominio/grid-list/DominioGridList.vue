@@ -19,7 +19,6 @@ export default {
   data() {
     return {
       urlApi: API_DOMINIO,
-      currentId: '',
       configGridList: ConfigGridList,
     };
   },

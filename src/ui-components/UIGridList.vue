@@ -107,22 +107,19 @@ export default {
     getEntities(page) {
       this.currentPage = page;
       const params = `?page=${this.currentPage}`;
-      fetch(this.urlApi + params)
-        .then(res => res.json())
-        .then((data) => {
-          // eslint-disable-next-line no-console
-          console.log('entities');
-          this.entities = data.entities;
-          this.entities.push(this.createEntity());
-          this.pages = data.pages;
-        });
+      this.httpCall.get(params).then((data) => {
+        // eslint-disable-next-line no-console
+        console.log(data, this.config);
+        this.entities = data.entities;
+        this.entities.push(this.createEntity());
+        this.pages = data.pages;
+      });
     },
     createEntity() {
       const obj = {};
-      for (let index = 0; index < this.config.length; index = +1) {
-        const configElement = this.config[index];
-        obj[configElement.field] = '';
-      }
+      this.config.forEach((config) => {
+        obj[config.field] = '';
+      });
       return obj;
     },
     deleteEntity(id) {
