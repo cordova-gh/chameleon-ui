@@ -54,13 +54,12 @@ export default {
       this.file = this.$refs.file.files[0];
       const reader = new FileReader();
       reader.onload = (event) => {
-        const rowsFile = event.target.result.split(/\r?\n/);
+        let rowsFile = Array.from(event.target.result.split(/\r?\n/));
         // testata e una riga
         if (rowsFile.length > 1) {
           this.header = rowsFile[0].split(';');
-          for (let index = 1; index < rowsFile.length; index = +1) {
-            this.rows[index - 1] = rowsFile[index].split(';');
-          }
+          rowsFile = rowsFile.splice(1);
+          this.rows = rowsFile.map(element => element.split(';'));
           this.showTable = true;
           // eslint-disable-next-line no-console
           console.log('rows', this.rows);
