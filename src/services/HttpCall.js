@@ -3,8 +3,8 @@ import axios from 'axios';
 import store from '../store';
 
 export default class HttpCall {
-  baseUrl = 'https://chameleon-be.herokuapp.com';
-  // baseUrl = 'http://localhost:5000';
+  // baseUrl = 'https://chameleon-be.herokuapp.com';
+  baseUrl = 'http://localhost:5000';
   constructor(apiUrl) {
     this.RESOURCE_NAME = apiUrl;
   }
@@ -80,13 +80,15 @@ export default class HttpCall {
       .catch(error => `An error occured..${error}`);
   }
 
-  // sendFile(data, apiUrl) {
-  //   return axios.post(`${RESOURCE_NAME}/${apiUrl}`,
-  //     data, {
-  //       headers: {
-  //         'Content-Type': 'multipart/form-data',
-  //       },
-  //     },
-  //   );
-  // }
+  sendFile(apiUrl, data) {
+    // eslint-disable-next-line no-console
+    console.log('CIAOAOAO');
+    return axios.post(`${this.baseUrl + this.RESOURCE_NAME + apiUrl}`,
+      data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      },
+    );
+  }
 }
