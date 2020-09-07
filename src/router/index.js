@@ -34,6 +34,7 @@ import DominioGridList from '@/pages/config/dominio/grid-list/DominioGridList';
 import Country from '@/pages/config/country/Country';
 import CountryForm from '@/pages/config/country/form/CountryForm';
 import CountryPagination from '@/pages/config/country/pagination/CountryPagination';
+import ImportCsvToDocument from '@/pages/config/import-csv-to-document/ImportCsvToDocument';
 
 Vue.use(Router);
 
@@ -225,6 +226,10 @@ export default new Router({
               component: CountryPagination,
             },
           ],
+        },
+        {
+          path: 'import-csv-to-document',
+          component: ImportCsvToDocument,
         },
       ],
     },

@@ -57,6 +57,9 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <router-link to="/config/dominio/list" class="dropdown-item"> Dominio </router-link>
               <router-link to="/config/country/list" class="dropdown-item">Country</router-link>
+              <router-link to="/config/import-csv-to-document" class="dropdown-item">
+                Import CSV
+              </router-link>
             </div>
           </li>
 
