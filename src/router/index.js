@@ -30,7 +30,7 @@ import CategoriaProdottoForm from '@/pages/company/categoria-prodotto/form/Categ
 import CategoriaProdottoPagination from '@/pages/company/categoria-prodotto/pagination/CategoriaProdottoPagination';
 import Dominio from '@/pages/config/dominio/Dominio';
 import DominioForm from '@/pages/config/dominio/form/DominioForm';
-import DominioPagination from '@/pages/config/dominio/pagination/DominioPagination';
+import DominioGridList from '@/pages/config/dominio/grid-list/DominioGridList';
 import Country from '@/pages/config/country/Country';
 import CountryForm from '@/pages/config/country/form/CountryForm';
 import CountryPagination from '@/pages/config/country/pagination/CountryPagination';
@@ -204,7 +204,7 @@ export default new Router({
             },
             {
               path: 'list',
-              component: DominioPagination,
+              component: DominioGridList,
             },
           ],
         },

@@ -1,4 +1,4 @@
-export const API_DOMINIO = '/api/dominos';
+export const API_DOMINIO = '/api/dominios';
 export const API_TASKS = '/api/tasks';
 export const API_USERS = '/api/users';
 export const API_COMPANY = '/api/companies';
