@@ -1,0 +1,27 @@
+        [
+          {
+            "field": "codIsoStato",
+            "label": "Codice",
+            "type": "text"
+          },
+          {
+            "field": "descrizione",
+            "label": "Descrizione",
+            "type": "text"
+          },
+          {
+            "field": "cittadinanza",
+            "label": "Cittadinanza",
+            "type": "text"
+          },
+          {
+            "field": "dtaInizioValidita",
+            "label": "Inizio Validità",
+            "type": "text"
+          },
+          {
+            "field": "dtaFineValidita",
+            "label": "Fine Validità",
+            "type": "text"
+          }
+        ]

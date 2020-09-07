@@ -12,6 +12,7 @@
 import { API_COUNTRY } from './../../../../services/constant-services';
 import UIForm from './../../../../ui-components/UIForm';
 import TitlePage from './../../../shared/components/TitlePage';
+// eslint-disable-next-line import/no-unresolved
 import ConfigForm from './CountryForm.json';
 
 export default {

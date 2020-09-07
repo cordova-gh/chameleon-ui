@@ -10,7 +10,7 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Profile from '@/pages/admin/profile/Profile';
 import ProfileForm from '@/pages/admin/profile/form/ProfileForm';
-import ProfilePagination from '@/pages/admin/profile/pagination/ProfilePagination';
+import ProfileGridList from '@/pages/admin/profile/grid-list/ProfileGridList';
 import Shop from '@/pages/admin/shop/Shop';
 import ShopForm from '@/pages/admin/shop/form/ShopForm';
 import ShopPagination from '@/pages/admin/shop/pagination/ShopPagination';
@@ -33,7 +33,7 @@ import DominioForm from '@/pages/config/dominio/form/DominioForm';
 import DominioGridList from '@/pages/config/dominio/grid-list/DominioGridList';
 import Country from '@/pages/config/country/Country';
 import CountryForm from '@/pages/config/country/form/CountryForm';
-import CountryPagination from '@/pages/config/country/pagination/CountryPagination';
+import CountryGridList from '@/pages/config/country/pagination/CountryGridList';
 import ImportCsvToDocument from '@/pages/config/import-csv-to-document/ImportCsvToDocument';
 
 Vue.use(Router);
@@ -82,7 +82,7 @@ export default new Router({
             },
             {
               path: 'list',
-              component: ProfilePagination,
+              component: ProfileGridList,
             },
           ],
         },
@@ -223,7 +223,7 @@ export default new Router({
             },
             {
               path: 'list',
-              component: CountryPagination,
+              component: CountryGridList,
             },
           ],
         },

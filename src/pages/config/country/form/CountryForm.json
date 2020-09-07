@@ -6,70 +6,42 @@
       "row": [
         [
           {
-            "field": "codice",
+            "field": "cod_iso_stato",
             "label": "Codice",
-            "bindField": "province.codice",
+            "bindField": "cod_iso_stato",
             "type": "text"
           },
           {
             "field": "descrizione",
             "label": "Descrizione",
-            "bindField": "province.descrizione",
+            "bindField": "descrizione",
             "type": "text"
           },
           {
-            "field": "provinceStato",
-            "label": "Stato",
-            "bindField": "province.stato",
+            "field": "cittadinanza",
+            "label": "Cittadinanza",
+            "bindField": "cittadinanza",
             "type": "text"
           }
         ]
       ]
     },
     {
-      "label": "Comune",
+      "label": "Validità",
       "rows": [
         [
           {
-            "field": "comuneDescrizione",
-            "label": "Descrizione",
-            "bindField": "comune.descrizione",
-            "type": "text"
-          },
-          {
-            "field": "comuneProvincia",
-            "label": "Provincia",
-            "bindField": "comune.provincia",
-            "type": "text"
-          },
-          {
-            "field": "comuneStato",
-            "label": "Stato",
-            "bindField": "comune.stato",
-            "type": "text"
-          }
-        ],
-        [
-          {
-            "field": "cod_catastale",
-            "label": "Catasto",
-            "bindField": "comune.cod_catastale",
-            "type": "text"
-          },
-          {
             "field": "dta_inizio_validita",
             "label": "Inizio Validità",
-            "bindField": "comune.dta_inizio_validita",
+            "bindField": "dta_inizio_validita",
             "type": "date"
           },
           {
             "field": "dta_fine_validita",
             "label": "Fine Validità",
-            "bindField": "comune.dta_fine_validita",
+            "bindField": "dta_fine_validita",
             "type": "date"
-          }
-        ],
-        [
+          },
           {
             "field": "note",
             "label": "Note",
