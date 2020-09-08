@@ -2,12 +2,14 @@
   {
       "label": "Dominio",
       "field": "dominio",
-      "type": "text"
+      "type": "text",
+      "isFilter": true
   },
   {
       "label": "Codice",
       "field": "codice",
-      "type": "text"
+      "type": "text",
+      "isFilter": true
   },
   {
       "label": "Descrizione",

@@ -6,8 +6,6 @@
       </div>
       <div class="card-body">
         <form @submit.prevent="saveEntity">
-
-
           <div
             v-for="(sectionElement, indexSection) in config.sections"
             :key="indexSection"
@@ -24,7 +22,11 @@
               <div
                 v-for="(colElement, indexCol) in rowElement"
                 :key="indexCol"
-                :class="'col-'+getNumCols(rowElement.numCols,sectionElement.numCols )+' form-group'"
+                :class="
+                  'col-' +
+                    getNumCols(rowElement.numCols, sectionElement.numCols) +
+                    ' form-group'
+                "
               >
                 <template v-if="colElement.type === 'text'">
                   <input-text
@@ -53,18 +55,23 @@
                   </input-select>
                 </template>
                 <template v-else-if="colElement.type === 'date'">
-                  <input-date  v-model="entity[colElement.field]">
-                  </input-date>
+                  <input-date v-model="entity[colElement.field]"> </input-date>
                 </template>
               </div>
             </div>
           </div>
-          <template v-if="modePage === 'I'">
-            <button class="btn btn-primary btn-block">Salva</button>
-          </template>
-          <template v-else>
-            <button class="btn btn-primary btn-block">Modifica</button>
-          </template>
+          <div v-if="isForm">
+            <template v-if="modePage === 'I'">
+              <button class="btn btn-primary btn-block">Salva</button>
+            </template>
+            <template v-else>
+              <button class="btn btn-primary btn-block">Modifica</button>
+            </template>
+          </div>
+          <div v-else-if="isFilter">
+            <button class="btn btn-primary btn-block" @click="onFind">Cerca</button>
+            <button class="btn btn-primary btn-block" @click="onReset">Pulisci</button>
+          </div>
         </form>
       </div>
     </div>
@@ -100,6 +107,14 @@ export default {
       required: true,
     },
     reload: {
+      type: Boolean,
+      default: false,
+    },
+    isForm: {
+      type: Boolean,
+      default: true,
+    },
+    isFilter: {
       type: Boolean,
       default: false,
     },
@@ -146,6 +161,13 @@ export default {
     },
     getEntity(id) {
       this.httpCall.getById(id).then(data => this.setEntity(data));
+    },
+    onFind() {
+      this.$emit('filter', this.entity);
+    },
+    onReset() {
+      this.entity = this.createEntityForm();
+      this.onFind();
     },
     createEntityForm() {
       const obj = {};
@@ -219,9 +241,15 @@ export default {
     },
     getNumCols(numColsRow, numColsSection) {
       let numCols = 3;
-      if (this.config.numCols) { numCols = this.config.numCols; }
-      if (numColsSection) { numCols = numColsSection; }
-      if (numColsRow) { numCols = numColsRow; }
+      if (this.config.numCols) {
+        numCols = this.config.numCols;
+      }
+      if (numColsSection) {
+        numCols = numColsSection;
+      }
+      if (numColsRow) {
+        numCols = numColsRow;
+      }
       return 12 / numCols;
     },
     // watch: {
@@ -238,9 +266,8 @@ export default {
 };
 </script>
 <style>
-  .title-form{
-
-    border-left-width: 10px solid;
-    border-left-color:  #000;
-  }
+.title-form {
+  border-left-width: 10px solid;
+  border-left-color: #000;
+}
 </style>
