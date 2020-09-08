@@ -147,19 +147,19 @@ export default new Router({
         },
         {
           path: 'prodotto',
-          dynamic: Prodotto,
+          component: Prodotto,
           children: [
             {
               path: 'new',
-              dynamic: ProdottoForm,
+              component: ProdottoForm,
             },
             {
               path: 'edit/:id',
-              dynamic: ProdottoForm,
+              component: ProdottoForm,
             },
             {
               path: 'list',
-              dynamic: ProdottoGridList,
+              component: ProdottoGridList,
             },
           ],
         },
