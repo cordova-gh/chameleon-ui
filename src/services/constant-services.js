@@ -9,3 +9,4 @@ export const API_ANAGRAFICA = '/api/anagraficas';
 export const API_FORNITORE_CLIENTE = '/api/anagrafica-fornitore-clientes';
 export const API_PRODOTTO = '/api/prodottos';
 export const API_COUNTRY = '/api/countries';
+export const API_UNITA_MISURA = '/api/unita-misuras';

@@ -222,31 +222,31 @@
       ]
     },
     {
-      "label": "Contatto Riferimento",
+      "label": "Contatto Referente",
       "rows" : [
         [
           {
-            "label": "Nominativo Referente",
+            "label": "Nome",
             "field": "nomeReferente",
-            "bindField": "contattoRiferimento.nome",
+            "bindField": "contattoReferente.nome",
             "type": "text"
           },
           {
-            "label": "Telefono Referente",
+            "label": "Telefono",
             "field": "telefonoReferente",
-            "bindField": "contattoRiferimento.telefono",
+            "bindField": "contattoReferente.telefono",
             "type": "text"
           },
           {
-            "label": "Cellulare Referente",
+            "label": "Cellulare",
             "field": "cellulareReferente",
-            "bindField": "contattoRiferimento.cellulare",
+            "bindField": "referente.cellulare",
             "type": "text"
           },
           {
-            "label": "Email Referente",
+            "label": "Email",
             "field": "emailReferente",
-            "bindField": "contattoRiferimento.email",
+            "bindField": "contattoReferente.email",
             "type": "text"
           }
         ]

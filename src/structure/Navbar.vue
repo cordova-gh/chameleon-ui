@@ -40,6 +40,9 @@
               <router-link to="/company/categoria-prodotto/list" class="dropdown-item" >
               Categorie Prodotti
               </router-link>
+              <router-link to="/company/unita-misura/list" class="dropdown-item">
+              Unità di Misura
+              </router-link>
             </div>
           </li>
 

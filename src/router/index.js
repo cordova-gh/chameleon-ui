@@ -1,38 +1,10 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from '@/pages/Home';
-import User from '@/pages/admin/user/User';
 // eslint-disable-next-line no-unused-vars
-import UserForm from '@/pages/admin/user/form/UserForm';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Profile from '@/pages/admin/profile/Profile';
-import ProfileForm from '@/pages/admin/profile/form/ProfileForm';
-import ProfileGridList from '@/pages/admin/profile/grid-list/ProfileGridList';
-import Shop from '@/pages/admin/shop/Shop';
-import ShopForm from '@/pages/admin/shop/form/ShopForm';
-import ShopPagination from '@/pages/admin/shop/pagination/ShopPagination';
-import AnagraficaClienteFornitore from '@/pages/company/anagrafica-cliente-fornitore/AnagraficaClienteFornitore';
-import AnagraficaClienteFornitoreForm from '@/pages/company/anagrafica-cliente-fornitore/form/AnagraficaClienteFornitoreForm';
-import AnagraficaClienteFornitorePagination from '@/pages/company/anagrafica-cliente-fornitore/pagination/AnagraficaClienteFornitorePagination';
-import Company from '@/pages/admin/company/Company';
-import CompanyMenu from '@/pages/company/Company';
-import CompanyForm from '@/pages/admin/company/form/CompanyForm';
-import CompanyPagination from '@/pages/admin/company/pagination/CompanyPagination';
-import Prodotto from '@/pages/company/prodotto/Prodotto';
-import ProdottoForm from '@/pages/company/prodotto/form/ProdottoForm';
-import ProdottoGridList from '@/pages/company/prodotto/grid-list/ProdottoGridList';
-import Config from '@/pages/config/Config';
-import CategoriaProdotto from '@/pages/company/categoria-prodotto/CategoriaProdotto';
-import CategoriaProdottoForm from '@/pages/company/categoria-prodotto/form/CategoriaProdottoForm';
-import CategoriaProdottoPagination from '@/pages/company/categoria-prodotto/pagination/CategoriaProdottoPagination';
-import Dominio from '@/pages/config/dominio/Dominio';
-import DominioForm from '@/pages/config/dominio/form/DominioForm';
-import DominioGridList from '@/pages/config/dominio/grid-list/DominioGridList';
-import Country from '@/pages/config/country/Country';
-import CountryForm from '@/pages/config/country/form/CountryForm';
-import CountryGridList from '@/pages/config/country/grid-list/CountryGridList';
-import ImportCsvToDocument from '@/pages/config/import-csv-to-document/ImportCsvToDocument';
+import Login from '@/pages/auth/login/Login';
 
 Vue.use(Router);
 
@@ -44,21 +16,26 @@ export default new Router({
       component: Home,
     },
     {
+      path: '/login',
+      name: 'Login',
+      component: Login,
+    },
+    {
       path: '/admin',
       name: 'admin',
       component: () => import('./../pages/admin/Admin'),
       children: [
         {
           path: 'user',
-          component: User,
+          component: () => import('./../pages/admin/user/User'),
           children: [
             {
               path: 'new',
-              component: UserForm,
+              component: () => import('./../pages/admin/user/form/UserForm'),
             },
             {
               path: 'edit/:id',
-              component: UserForm,
+              component: () => import('./../pages/admin/user/form/UserForm'),
             },
             {
               path: 'list',
@@ -68,55 +45,55 @@ export default new Router({
         },
         {
           path: 'profile',
-          component: Profile,
+          component: () => import('./../pages/admin/profile/Profile'),
           children: [
             {
               path: 'new',
-              component: ProfileForm,
+              component: () => import('./../pages/admin/profile/form/ProfileForm'),
             },
             {
               path: 'edit/:id',
-              component: ProfileForm,
+              component: () => import('./../pages/admin/profile/form/ProfileForm'),
             },
             {
               path: 'list',
-              component: ProfileGridList,
+              component: () => import('./../pages/admin/profile/grid-list/ProfileGridList'),
             },
           ],
         },
         {
           path: 'shop',
-          component: Shop,
+          component: () => import('./../pages/admin/shop/Shop'),
           children: [
             {
               path: 'new',
-              component: ShopForm,
+              component: () => import('./../pages/admin/shop/form/ShopForm'),
             },
             {
               path: 'edit/:id',
-              component: ShopForm,
+              component: () => import('./../pages/admin/shop/form/ShopForm'),
             },
             {
               path: 'list',
-              component: ShopPagination,
+              component: () => import('./../pages/admin/shop/pagination/ShopPagination'),
             },
           ],
         },
         {
           path: 'company',
-          component: Company,
+          component: () => import('./../pages/admin/company/Company'),
           children: [
             {
               path: 'new',
-              component: CompanyForm,
+              component: () => import('./../pages/admin/company/form/CompanyForm'),
             },
             {
               path: 'edit/:id',
-              component: CompanyForm,
+              component: () => import('./../pages/admin/company/form/CompanyForm'),
             },
             {
               path: 'list',
-              component: CompanyPagination,
+              component: () => import('./../pages/admin/company/pagination/CompanyPagination'),
             },
           ],
         },
@@ -125,59 +102,77 @@ export default new Router({
     {
       path: '/company',
       name: 'company',
-      component: CompanyMenu,
+      component: () => import('./../pages/company/Company'),
       children: [
         {
           path: 'anagrafica-cliente-fornitore',
-          component: AnagraficaClienteFornitore,
+          component: () => import('./../pages/company/anagrafica-cliente-fornitore/AnagraficaClienteFornitore'),
           children: [
             {
               path: 'new',
-              component: AnagraficaClienteFornitoreForm,
+              component: () => import('./../pages/company/anagrafica-cliente-fornitore/form/AnagraficaClienteFornitoreForm'),
             },
             {
               path: 'edit/:id',
-              component: AnagraficaClienteFornitoreForm,
+              component: () => import('./../pages/company/anagrafica-cliente-fornitore/form/AnagraficaClienteFornitoreForm'),
             },
             {
               path: 'list',
-              component: AnagraficaClienteFornitorePagination,
+              component: () => import('./../pages/company/anagrafica-cliente-fornitore/pagination/AnagraficaClienteFornitorePagination'),
             },
           ],
         },
         {
           path: 'prodotto',
-          component: Prodotto,
+          component: () => import('./../pages/company/prodotto/Prodotto'),
           children: [
             {
               path: 'new',
-              component: ProdottoForm,
+              component: () => import('./../pages/company/prodotto/form/ProdottoForm'),
             },
             {
               path: 'edit/:id',
-              component: ProdottoForm,
+              component: () => import('./../pages/company/prodotto/form/ProdottoForm'),
             },
             {
               path: 'list',
-              component: ProdottoGridList,
+              component: () => import('./../pages/company/prodotto/grid-list/ProdottoGridList'),
             },
           ],
         },
         {
           path: 'categoria-prodotto',
-          component: CategoriaProdotto,
+          component: () => import('./../pages/company/categoria-prodotto/CategoriaProdotto'),
           children: [
             {
               path: 'new',
-              component: CategoriaProdottoForm,
+              component: () => import('./../pages/company/categoria-prodotto/form/CategoriaProdottoForm'),
             },
             {
               path: 'edit/:id',
-              component: CategoriaProdottoForm,
+              component: () => import('./../pages/company/categoria-prodotto/form/CategoriaProdottoForm'),
             },
             {
               path: 'list',
-              component: CategoriaProdottoPagination,
+              component: () => import('./../pages/company/categoria-prodotto/pagination/CategoriaProdottoPagination'),
+            },
+          ],
+        },
+        {
+          path: 'unita-misura',
+          component: () => import('./../pages/company/unita-misura/UnitaMisura'),
+          children: [
+            {
+              path: 'new',
+              component: () => import('./../pages/company/unita-misura/form/UnitaMisuraForm'),
+            },
+            {
+              path: 'edit/:id',
+              component: () => import('./../pages/company/unita-misura/form/UnitaMisuraForm'),
+            },
+            {
+              path: 'list',
+              component: () => import('./../pages/company/unita-misura/grid-list/UnitaMisuraGridList'),
             },
           ],
         },
@@ -187,47 +182,47 @@ export default new Router({
     {
       path: '/config',
       name: 'config',
-      component: Config,
+      component: () => import('./../pages/config/Config'),
       children: [
         {
           path: 'dominio',
-          component: Dominio,
+          component: () => import('./../pages/config/dominio/Dominio'),
           children: [
             {
               path: 'new',
-              component: DominioForm,
+              component: () => import('./../pages/config/dominio/form/DominioForm'),
             },
             {
               path: 'edit/:id',
-              component: DominioForm,
+              component: () => import('./../pages/config/dominio/form/DominioForm'),
             },
             {
               path: 'list',
-              component: DominioGridList,
+              component: () => import('./../pages/config/dominio/grid-list/DominioGridList'),
             },
           ],
         },
         {
           path: 'country',
-          component: Country,
+          component: () => import('./../pages/config/country/Country'),
           children: [
             {
               path: 'new',
-              component: CountryForm,
+              component: () => import('./../pages/config/country/form/CountryForm'),
             },
             {
               path: 'edit/:id',
-              component: CountryForm,
+              component: () => import('./../pages/config/country/form/CountryForm'),
             },
             {
               path: 'list',
-              component: CountryGridList,
+              component: () => import('./../pages/config/country/grid-list/CountryGridList'),
             },
           ],
         },
         {
           path: 'import-csv-to-document',
-          component: ImportCsvToDocument,
+          component: () => import('./../pages/config/import-csv-to-document/ImportCsvToDocument'),
         },
       ],
     },

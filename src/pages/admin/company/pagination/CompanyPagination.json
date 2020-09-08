@@ -27,6 +27,6 @@
 {
   "field": "nomeReferente",
   "label": "Referente",
-  "bindField": "nomeReferente"
+  "bindField": "contattoReferente.nome"
 }
 ]
