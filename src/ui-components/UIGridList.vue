@@ -17,12 +17,7 @@
       >
       </ui-form>
     </div>
-    <div class="card">
-      <div class="card-header border-0">
-        <h3 class="text-uppercase ls-1 text-primary py-3 mb-0">{{ title }}</h3>
-      </div>
-      <div class="card-body">
-        <div id="left">
+    <div class="container">
           <div class="table-responsive">
             <table class="table align-items-center">
               <thead class="thead-light">
@@ -103,8 +98,6 @@
               </ul>
             </nav>
           </div>
-        </div>
-      </div>
     </div>
   </div>
 </template>
