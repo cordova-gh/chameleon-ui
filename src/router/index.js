@@ -176,7 +176,24 @@ export default new Router({
             },
           ],
         },
-
+        {
+          path: 'marca',
+          component: () => import('./../pages/company/marca/Marca'),
+          children: [
+            {
+              path: 'new',
+              component: () => import('./../pages/company/marca/form/MarcaForm'),
+            },
+            {
+              path: 'edit/:id',
+              component: () => import('./../pages/company/marca/form/MarcaForm'),
+            },
+            {
+              path: 'list',
+              component: () => import('./../pages/company/marca/grid-list/MarcaGridList'),
+            },
+          ],
+        },
       ],
     },
     {
