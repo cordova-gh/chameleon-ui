@@ -23,7 +23,7 @@ import CompanyForm from '@/pages/admin/company/form/CompanyForm';
 import CompanyPagination from '@/pages/admin/company/pagination/CompanyPagination';
 import Prodotto from '@/pages/company/prodotto/Prodotto';
 import ProdottoForm from '@/pages/company/prodotto/form/ProdottoForm';
-import ProdottoPagination from '@/pages/company/prodotto/pagination/ProdottoPagination';
+import ProdottoGridList from '@/pages/company/prodotto/grid-list/ProdottoGridList';
 import Config from '@/pages/config/Config';
 import CategoriaProdotto from '@/pages/company/categoria-prodotto/CategoriaProdotto';
 import CategoriaProdottoForm from '@/pages/company/categoria-prodotto/form/CategoriaProdottoForm';
@@ -33,7 +33,7 @@ import DominioForm from '@/pages/config/dominio/form/DominioForm';
 import DominioGridList from '@/pages/config/dominio/grid-list/DominioGridList';
 import Country from '@/pages/config/country/Country';
 import CountryForm from '@/pages/config/country/form/CountryForm';
-import CountryGridList from '@/pages/config/country/pagination/CountryGridList';
+import CountryGridList from '@/pages/config/country/grid-list/CountryGridList';
 import ImportCsvToDocument from '@/pages/config/import-csv-to-document/ImportCsvToDocument';
 
 Vue.use(Router);
@@ -149,19 +149,19 @@ export default new Router({
         },
         {
           path: 'prodotto',
-          component: Prodotto,
+          dynamic: Prodotto,
           children: [
             {
               path: 'new',
-              component: ProdottoForm,
+              dynamic: ProdottoForm,
             },
             {
               path: 'edit/:id',
-              component: ProdottoForm,
+              dynamic: ProdottoForm,
             },
             {
               path: 'list',
-              component: ProdottoPagination,
+              dynamic: ProdottoGridList,
             },
           ],
         },

@@ -1,0 +1,42 @@
+[
+  {
+    "field": "codice",
+    "label": "Codice",
+    "type": "text"
+  },
+  {
+    "field": "descrizione",
+    "label": "Descrizione",
+    "type": "text"
+  },
+  {
+    "field": "tipologiaProdotto",
+    "label": "Tipologia",
+    "type": "text"
+  },
+  {
+    "field": "categoriaProdotto",
+    "label": "Categoria",
+    "type": "text"
+  },
+  {
+    "field": "sottoCategoriaProdotto",
+    "label": "Sotto Categoria",
+    "type": "text"
+  },
+  {
+    "field": "provenienza",
+    "label": "Provenienza",
+    "type": "text"
+  },
+  {
+    "field": "marcaProdotto",
+    "label": "Marca",
+    "type": "text"
+  },
+  {
+    "field": "fornitore",
+    "label": "Fornitore",
+    "type": "text"
+  }
+]
