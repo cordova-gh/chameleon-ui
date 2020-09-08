@@ -61,16 +61,32 @@
             </div>
           </div>
           <div v-if="isForm">
-            <template v-if="modePage === 'I'">
-              <button class="btn btn-primary btn-block">Salva</button>
-            </template>
-            <template v-else>
-              <button class="btn btn-primary btn-block">Modifica</button>
-            </template>
+            <div class="row justify-content-end">
+              <template v-if="modePage === 'I'">
+                <div class="col-3 ">
+                  <button class="btn btn-primary btn-block">Salva</button>
+                </div>
+              </template>
+              <template v-else>
+                <div class="col-3">
+                  <button class="btn btn-primary btn-block">Modifica</button>
+                </div>
+              </template>
+            </div>
           </div>
           <div v-else-if="isFilter">
-            <button class="btn btn-primary btn-block" @click="onFind">Cerca</button>
-            <button class="btn btn-primary btn-block" @click="onReset">Pulisci</button>
+            <div class="row justify-content-end">
+              <div class="col-2">
+                <button class="btn btn-secondary btn-block" @click="onReset">
+                  Pulisci
+                </button>
+              </div>
+              <div class="col-2">
+                <button class="btn btn-primary btn-block" @click="onFind">
+                  Cerca
+                </button>
+              </div>
+            </div>
           </div>
         </form>
       </div>
