@@ -2,12 +2,14 @@
           {
             "field": "codIsoStato",
             "label": "Codice",
-            "type": "text"
+            "type": "text",
+            "isFilter": true
           },
           {
             "field": "descrizione",
             "label": "Descrizione",
             "type": "text"
+            ,"isFilter": true
           },
           {
             "field": "cittadinanza",

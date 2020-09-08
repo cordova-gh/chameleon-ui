@@ -4,8 +4,6 @@ import Home from '@/pages/Home';
 import User from '@/pages/admin/user/User';
 // eslint-disable-next-line no-unused-vars
 import UserForm from '@/pages/admin/user/form/UserForm';
-import UserPagination from '@/pages/admin/user/pagination/UserPagination';
-import Admin from '@/pages/admin/Admin';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Profile from '@/pages/admin/profile/Profile';
@@ -48,7 +46,7 @@ export default new Router({
     {
       path: '/admin',
       name: 'admin',
-      component: Admin,
+      component: () => import('./../pages/admin/Admin'),
       children: [
         {
           path: 'user',
@@ -64,7 +62,7 @@ export default new Router({
             },
             {
               path: 'list',
-              component: UserPagination,
+              component: () => import('./../pages/admin/user/pagination/UserPagination'),
             },
           ],
         },

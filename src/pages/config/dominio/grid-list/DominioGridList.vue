@@ -5,6 +5,7 @@
         <ui-grid-list
           :config="configGridList"
           :urlApi="urlApi"
+
         ></ui-grid-list>
       </div>
     </div>
@@ -20,6 +21,9 @@ export default {
     return {
       urlApi: API_DOMINIO,
       configGridList: ConfigGridList,
+      configGridListFilter: [],
+      configFormFilter: null,
+      currentId: null,
     };
   },
   components: {
