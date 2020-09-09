@@ -2,41 +2,31 @@
   {
     "field": "codice",
     "label": "Codice",
+    "bindField": "codice",
     "type": "text"
   },
   {
     "field": "descrizione",
     "label": "Descrizione",
-    "type": "text"
-  },
-  {
-    "field": "tipologiaProdotto",
-    "label": "Tipologia",
-    "type": "text"
-  },
-  {
-    "field": "categoriaProdotto",
-    "label": "Categoria",
+    "bindField": "descrizione",
     "type": "text"
   },
   {
     "field": "sottoCategoriaProdotto",
     "label": "Sotto Categoria",
+    "bindField": "Prodotto.sottoCategoria",
     "type": "text"
   },
   {
-    "field": "provenienza",
+    "field": "provenienzaProdotto",
     "label": "Provenienza",
+    "bindField": "prodotto.provenienza",
     "type": "text"
   },
   {
     "field": "marcaProdotto",
     "label": "Marca",
-    "type": "text"
-  },
-  {
-    "field": "fornitore",
-    "label": "Fornitore",
+    "bindField": "prodotto.marca",
     "type": "text"
   }
 ]

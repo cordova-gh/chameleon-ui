@@ -1,4 +1,5 @@
 {
+  "numCols":2,
   "sections":[
     {
       "label": "Dati Genereli",
@@ -34,7 +35,7 @@
           {
             "field": "tipologiaProdotto",
             "label": "Tipologia Prodotto",
-            "bindField": "tipologiaProdotto",
+            "bindField": "prodotto.tipologia",
             "type": "text"
           }
         ],
@@ -42,7 +43,7 @@
           {
             "field": "imgProdotto",
             "label": "Immagine",
-            "bindField": "imgProdotto",
+            "bindField": "prodotto.img",
             "type": "text"
           }
         ],
@@ -50,13 +51,33 @@
           {
             "field": "categoriaProdotto",
             "label": "Categoria",
-            "bindField": "categoriaProdotto",
+            "bindField": "prodotto.categoria",
+            "type": "text"
+          },
+          {
+            "field": "sottoCategoriaProdotto",
+            "label": "Sotto Categoria Prodotto",
+            "bindField": "prodotto.sottoCategoria",
+            "type": "text"
+          },
+          {
+            "field": "provenienzaProdotto",
+            "label": "Provenienza",
+            "bindField": "prodotto.provenienza",
             "type": "text"
           },
           {
             "field": "marcaProdotto",
             "label": "Marca",
-            "bindField": "marcaProdotto",
+            "bindField": "prodotto.marca",
+            "type": "text"
+          }
+        ],
+        [
+          {
+            "field": "unitaMisura",
+            "label": "Unita di Misura",
+            "bindField": "unitaMisura",
             "type": "text"
           }
         ]

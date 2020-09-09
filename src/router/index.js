@@ -136,7 +136,7 @@ export default new Router({
             },
             {
               path: 'list',
-              component: () => import('./../pages/company/prodotto/grid-list/ProdottoGridList'),
+              component: () => import('./../pages/company/prodotto/pagination/ProdottoPagination'),
             },
           ],
         },
@@ -191,6 +191,24 @@ export default new Router({
             {
               path: 'list',
               component: () => import('./../pages/company/marca/grid-list/MarcaGridList'),
+            },
+          ],
+        },
+        {
+          path: 'inventario',
+          component: () => import('./../pages/company/inventario/Inventario'),
+          children: [
+            {
+              path: 'new',
+              component: () => import('./../pages/company/inventario/form/InventarioForm'),
+            },
+            {
+              path: 'edit/:id',
+              component: () => import('./../pages/company/inventario/form/InventarioForm'),
+            },
+            {
+              path: 'list',
+              component: () => import('./../pages/company/inventario/pagination/InventarioPagination'),
             },
           ],
         },

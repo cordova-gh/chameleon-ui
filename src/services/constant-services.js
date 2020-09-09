@@ -11,3 +11,4 @@ export const API_PRODOTTO = '/api/prodottos';
 export const API_COUNTRY = '/api/countries';
 export const API_UNITA_MISURA = '/api/unita-misuras';
 export const API_MARCA = '/api/marcas';
+export const API_INVENTARIO = '/api/inventarios';
