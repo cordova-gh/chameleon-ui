@@ -45,12 +45,12 @@
         [
           {
             "label": "Profilo",
-            "field": "profiloId",
-            "bindField": "profiloId",
+            "field": "profile",
+            "bindField": "profile",
             "type": "autocomplete",
             "configType": {
               "isDominio": false,
-              "urlApi": "/api/profilo",
+              "urlApi": "/api/profiles",
               "fieldId": "_id",
               "showCodice": true
             }
@@ -64,6 +64,20 @@
               "isDominio": true,
               "dominio": "st_utenza",
               "showDescrizione": true
+            }
+          }
+        ],
+        [
+          {
+            "label": "Azienda ",
+            "field": "azienda",
+            "bindField": "azienda",
+            "type": "autocomplete",
+            "configType": {
+              "isDominio": false,
+              "urlApi": "/api/companies",
+              "fieldId": "_id",
+              "showCodice": true
             }
           }
         ]

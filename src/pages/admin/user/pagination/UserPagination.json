@@ -21,8 +21,18 @@
         "bindField": "anagrafica.personaFisica.codiceFiscale"
     },
     {
+      "label": "Profilo",
+      "field": "profilo",
+      "bindField": "profile.codice"
+    },
+    {
         "label": "Stato Utenza",
         "field": "stUtenza",
         "bindField": "stUtenza"
-    }
+    },
+    {
+      "label": "Azienda",
+      "field": "azienda",
+      "bindField": "azienda.codice"
+  }
 ]

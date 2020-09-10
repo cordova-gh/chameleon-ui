@@ -73,9 +73,7 @@ export default {
     if (this.config.fieldDescrizione) { this.fieldCodice = this.config.fieldDescrizione; }
     if (this.config.showCodice) this.showCodice = this.config.showCodice;
     if (this.config.showDescrizione) { this.showDescrizione = this.config.showDescrizione; }
-    setTimeout(() => {
-      if (this.modelValue !== '') this.findById();
-    }, 50);
+    if (this.modelValue && this.modelValue !== '') this.findById();
   },
   methods: {
     findDebounce() {
@@ -93,8 +91,10 @@ export default {
       }
 
       this.isLoading = true;
-      fetch(api, {})
-        .then(res => res.json())
+      // eslint-disable-next-line no-console
+      console.log('caisuino');
+      const httpCall = new HttpCall(api);
+      httpCall.get()
         .then((data) => {
           this.isLoading = false;
           this.isOpen = true;
@@ -130,7 +130,7 @@ export default {
 
       const httpCall = new HttpCall(api);
       httpCall
-        .get(this.modelValue)
+        .get(`/${this.modelValue}`)
         .then((res) => { this.valueShown = res[this.fieldCodice]; });
     },
     enter() {

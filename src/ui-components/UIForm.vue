@@ -41,7 +41,7 @@
                   >
                   </input-password>
                 </template>
-                <template v-else-if="colElement.type === 'autocomplete'">
+                <template v-else-if="colElement.type === 'autocomplete' && loadEntity">
                   <input-autocomplete
                     v-model="entity[colElement.field]"
                     :config="colElement.configType"
@@ -54,8 +54,14 @@
                   >
                   </input-select>
                 </template>
-                <template v-else-if="colElement.type === 'date'">
+                <template v-else-if="colElement.type === 'date' ">
                   <input-date v-model="entity[colElement.field]"> </input-date>
+                </template>
+                <template v-else-if="colElement.type === 'money'">
+                  <input-money v-model="entity[colElement.field]"> </input-money>
+                </template>
+                <template v-else-if="colElement.type === 'number'">
+                  <input-number v-model="entity[colElement.field]"> </input-number>
                 </template>
               </div>
             </div>
@@ -101,6 +107,7 @@ import InputText from './input-components/InputText';
 import InputPassword from './input-components/InputPassword';
 import InputNumber from './input-components/InputNumber';
 import InputDate from './input-components/InputDate';
+import InputMoney from './input-components/InputMoney';
 import HttpCall from '../services/HttpCall';
 import { Utility } from '../utilities/utility';
 
@@ -142,12 +149,14 @@ export default {
     'input-password': InputPassword,
     'input-number': InputNumber,
     'input-date': InputDate,
+    'input-money': InputMoney,
   },
   data() {
     return {
       entity: this.createEntityForm(),
       modePage: '',
       httpCall: new HttpCall(this.urlApi),
+      loadEntity: false,
     };
   },
   created() {
@@ -159,6 +168,7 @@ export default {
         this.getEntity(this.currentId);
         this.modePage = 'U';
       } else {
+        this.loadEntity = true;
         this.modePage = 'I';
       }
     },
@@ -176,7 +186,10 @@ export default {
       }
     },
     getEntity(id) {
-      this.httpCall.getById(id).then(data => this.setEntity(data));
+      this.httpCall.getById(id).then((data) => {
+        this.setEntity(data);
+        this.loadEntity = true;
+      });
     },
     onFind() {
       this.$emit('filter', this.entity);

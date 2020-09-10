@@ -3,13 +3,13 @@ import axios from 'axios';
 import store from '../store';
 
 export default class HttpCall {
-  baseUrl = 'https://chameleon-be.herokuapp.com';
-  // baseUrl = 'http://localhost:5000';
+  // baseUrl = 'https://chameleon-be.herokuapp.com';
+  baseUrl = 'http://localhost:5000';
   constructor(apiUrl) {
     this.RESOURCE_NAME = apiUrl;
   }
 
-  get(params) {
+  get(params = '') {
     // this.$store.commit('showSpinnerState');
     store.commit('showSpinner');
     return axios

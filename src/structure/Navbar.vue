@@ -43,7 +43,7 @@
               <router-link to="/company/unita-misura/list" class="dropdown-item">
               Unità di Misura
               </router-link>
-              <router-link to="/company/marca/list" class="dropdown-item">Marca</router-link>
+              <router-link to="/company/marca/list" class="dropdown-item">Marche</router-link>
               <router-link to="/company/inventario/list" class="dropdown-item">
               Inventario
               </router-link>

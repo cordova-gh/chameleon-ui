@@ -3,13 +3,15 @@
     "field": "codice",
     "label": "Codice",
     "bindField": "codice",
-    "type": "text"
+    "type": "text",
+    "isFilter": true
   },
   {
     "field": "descrizione",
     "label": "Descrizione",
     "bindField": "descrizione",
-    "type": "text"
+    "type": "text",
+    "isFilter": true
   },
   {
     "field": "sottoCategoriaProdotto",

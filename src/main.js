@@ -6,13 +6,19 @@ import router from './router';
 import store from './store';
 // eslint-disable-next-line import/first
 import '@fortawesome/fontawesome-free/css/all.css';
+// eslint-disable-next-line import/first
+import VueCurrencyInput from 'vue-currency-input';
 
+const pluginOptions = {
+  /* see config reference */
+  globalOptions: { currency: 'EUR' },
+};
 // eslint-disable-next-line import/extensions
 // import '@fortawesome/fontawesome-free/js/all.js';
 
 
 Vue.config.productionTip = false;
-
+Vue.use(VueCurrencyInput, pluginOptions);
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

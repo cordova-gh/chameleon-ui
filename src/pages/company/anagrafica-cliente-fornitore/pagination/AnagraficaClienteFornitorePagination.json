@@ -2,26 +2,31 @@
   {
     "label": "Codice",
     "field": "codice",
-    "bindField": "codice"
+    "bindField": "codice",
+    "type": "text"
 },
 {
     "label": "Descrizione",
     "field": "descrAttivita",
-    "bindField": "entitaGiuridica.descrAttivita"
+    "bindField": "entitaGiuridica.descrAttivita",
+    "type": "text"
 },
 {
   "field": "cliente",
   "label": "Cliente",
-  "bindField": "cliente"
+  "bindField": "isCliente",
+  "type": "checkbox"
 },
 {
   "field": "fornitore",
   "label": "Fornitore",
-  "bindField": "fornitore"
+  "bindField": "isFornitore",
+  "type": "checkbox"
 },
 {
   "field": "nomeReferente",
   "label": "Referente",
-  "bindField": "contattoReferente.nome"
+  "bindField": "contattoReferente.nome",
+  "type": "text"
 }
 ]
