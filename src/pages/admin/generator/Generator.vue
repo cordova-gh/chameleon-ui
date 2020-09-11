@@ -1,26 +1,38 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <input
-          type="file"
-          accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
-          , application/vnd.ms-excel"
-        />
-        </div>
-        <div class="row">
-            Form <input type="radio" id="huey" name="drone" value="form"
-         checked>
-                     Grid List<input type="radio" id="huey" name="drone" value="grid-list"
-         checked>
-                    Pagination <input type="radio" id="huey" name="drone" value="pagination"
-         checked>
-        <input type="button" value="form" @click="gComponent">
-        </div>
-        <div class="row">
-    <textarea id="w3review" name="w3review" rows="30" cols="100" v-model="codeString">
-</textarea>
-</div>
+  <div class="container">
+    <div class="row">
+      Form
+      <input type="radio" id="huey" name="drone" value="form"  /> Grid
+      List<input
+        type="radio"
+        id="huey"
+        name="drone"
+        value="grid-list"
+        checked
+      />
+      Pagination
+      <input type="radio" id="huey" name="drone" value="pagination"  />
     </div>
+    <div class="row">
+      <input
+        type="file"
+          lang="en"
+            accept=".json"
+           ref="file"
+        @change="gComponent"
+      />
+    </div>
+
+    <div class="row">
+      <textarea
+        id="w3review"
+        name="w3review"
+        rows="30"
+        cols="100"
+        v-model="codeString"
+      ></textarea>
+    </div>
+  </div>
 </template>
 <script>
 export default {
@@ -34,84 +46,36 @@ export default {
       styleWord: 'style',
       braceWord: '${',
       backTickWord: '`',
+      config: '',
+      file: Blob,
     };
   },
   methods: {
     gComponent() {
+      // eslint-disable-next-line no-console
+      console.log('sonoosnsos qui');
+      this.file = this.$refs.file.files[0];
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        this.config = JSON.parse(event.target.result);
+        // eslint-disable-next-line no-console
+        console.log('configurazione', this.config);
+        this.codeString = this.templateForm() + this.scriptForm() + this.styleForm();
+      };
+      reader.readAsText(this.file);
       // eslint-disable-next-line quotes
-      this.codeString = this.templateForm() + this.scriptForm() + this.styleForm();
+      /*  */
     },
     templateForm() {
       // eslint-disable-next-line no-unused-expressions
-      return `<${this.templateWord}>
-            <div class="container-fluid mt--6">
-            <div class="card mb-4">
-            <div v-if="title !== ''" class="card-header">
-                <h3 class="mb-0">{{ title }}</h3>
-            </div>
-            <div class="card-body">
-                <form @submit.prevent="saveEntity">
-                <div
-                    v-for="(sectionElement, indexSection) in config.sections"
-                    :key="indexSection"
-                    class=""
-                >
-                    <div class="title-form">
-                    <p>{{ sectionElement.label }}</p>
-                    </div>
-                    <div
-                    v-for="(rowElement, indexRow) in sectionElement.rows"
-                    :key="indexRow"
-                    class="row"
-                    >
-                    <div
-                        v-for="(colElement, indexCol) in rowElement"
-                        :key="indexCol"
-                        :class="
-                        'col-' +
-                            getNumCols(rowElement.numCols, sectionElement.numCols) +
-                            ' form-group'
-                        "
-                    >
-                        <template v-if="colElement.type === 'text'">
-                        <input-text
-                            v-model="entity[colElement.field]"
-                            :label="colElement.label"
-                        ></input-text>
-                        </template>
-                        <template v-else-if="colElement.type === 'password'">
-                        <input-password
-                            v-model="entity[colElement.field]"
-                            :label="colElement.label"
-                        >
-                        </input-password>
-                        </template>
-                        <template v-else-if="colElement.type === 'autocomplete' && loadEntity">
-                        <input-autocomplete
-                            v-model="entity[colElement.field]"
-                            :config="colElement.configType"
-                        ></input-autocomplete>
-                        </template>
-                        <template v-else-if="colElement.type === 'select'">
-                        <input-select
-                            v-model="entity[colElement.field]"
-                            :config="colElement.configType"
-                        >
-                        </input-select>
-                        </template>
-                        <template v-else-if="colElement.type === 'date' ">
-                        <input-date v-model="entity[colElement.field]"> </input-date>
-                        </template>
-                        <template v-else-if="colElement.type === 'money'">
-                        <input-money v-model="entity[colElement.field]"> </input-money>
-                        </template>
-                        <template v-else-if="colElement.type === 'number'">
-                        <input-number v-model="entity[colElement.field]"> </input-number>
-                        </template>
-                    </div>
-                    </div>
-                </div>
-                <div v-if="isForm">
+      const titleIf = this.config.title
+        ? `<div class="card-header">
+              <h3 class="mb-0">${this.config.title}</h3>
+          </div> `
+        : '';
+
+      const isFormIf = this.config.isForm
+        ? `<div>
                     <div class="row justify-content-end">
                     <template v-if="modePage === 'I'">
                         <div class="col-3 ">
@@ -124,8 +88,10 @@ export default {
                         </div>
                     </template>
                     </div>
-                </div>
-                <div v-else-if="isFilter">
+                </div>`
+        : '';
+      const isFilterIf = this.config.isFilter
+        ? `<div>
                     <div class="row justify-content-end">
                     <div class="col-2">
                         <button class="btn btn-secondary btn-block" @click="onReset">
@@ -138,26 +104,99 @@ export default {
                         </button>
                     </div>
                     </div>
-                </div>
-                </form>
-            </div>
-            </div>
-            </div>
-            </${this.templateWord}>`;
+            </div>`
+        : '';
+      // eslint-disable-next-line quotes
+      const spazio = `            `;
+      // eslint-disable-next-line quotes
+      let inputs = `<div class="card-body">`;
+      this.config.sections.forEach((section) => {
+        // eslint-disable-next-line no-const-assign
+        inputs += `<div class="title-form">
+                      <p>${section.title}</p>
+                   </div>\n`;
+        section.rows.forEach((rows) => {
+          inputs += `${spazio}<div class="row">\n`;
+          rows.forEach((row) => {
+            const numCols = this.getNumColsForm(row.numCols, section.numCols);
+            inputs += `${spazio}  <div class="col-${numCols} form-group">\n`;
+            switch (row.type) {
+              case 'autocomplete': {
+                inputs += `${spazio}      <template v-if="loadEntity">
+                      <input-autocomplete v-model="entity[colElement.field]"
+                        :config="colElement.configType">
+                       </input-autocomplete>
+                    </template>\n`;
+                break;
+              }
+              case 'password': {
+                // eslint-disable-next-line quotes
+                inputs += `${spazio}    <input-password v-model="entity[colElement.field]" :label="colElement.label">
+                </input-password>`;
+                break;
+              }
+              case 'select': {
+                // eslint-disable-next-line quotes
+                inputs += `${spazio}    <input-select v-model="entity[colElement.field]"
+                                  :config="colElement.configType">
+                  </input-select>`;
+                break;
+              }
+              case 'date': {
+                // eslint-disable-next-line quotes
+                inputs += `${spazio}    <input-date v-model="entity[colElement.field]"> </input-date>`;
+                break;
+              }
+              case 'money': {
+                // eslint-disable-next-line quotes
+                inputs += `${spazio}    <input-money v-model="entity[colElement.field]"> </input-money>`;
+                break;
+              }
+              case 'number': {
+                // eslint-disable-next-line quotes
+                inputs += `${spazio}    <input-number v-model="entity[colElement.field]"> </input-number>`;
+                break;
+              }
+              default: {
+                // eslint-disable-next-line quotes
+                inputs += `${spazio}    <input-text v-model="entity[colElement.field]" :label="colElement.label">
+                </input-text>\n`;
+              }
+            }
+            // eslint-disable-next-line quotes
+            inputs += `${spazio}  </div>\n`;
+          });
+          // eslint-disable-next-line quotes
+          inputs += `${spazio}</div>\n`;
+        });
+      });
+      // eslint-disable-next-line quotes
+      inputs += `           </div>`;
+      return `<${this.templateWord}>
+  <div class="container-fluid mt--6">
+    <div class="card mb-4">${titleIf}
+      <div class="card-body">
+        <form @submit.prevent="saveEntity">
+          ${inputs}${isFormIf}${isFilterIf}
+        </form>
+      </div>
+    </div>
+  </div>
+</${this.templateWord}>\n`;
     },
     scriptForm() {
       // eslint-disable-next-line no-unused-expressions
       return `<${this.scriptWord}>
             import Vue from 'vue';
-            import InputAutocomplete from './input-components/InputAutocomplete';
-            import InputSelect from './input-components/InputSelect';
-            import InputText from './input-components/InputText';
-            import InputPassword from './input-components/InputPassword';
-            import InputNumber from './input-components/InputNumber';
-            import InputDate from './input-components/InputDate';
-            import InputMoney from './input-components/InputMoney';
-            import HttpCall from '../services/HttpCall';
-            import { Utility } from '../utilities/utility';
+            import InputAutocomplete from '@/ui-components/input-components/InputAutocomplete';
+            import InputSelect from '@/ui-components/input-components/InputSelect';
+            import InputText from '@/ui-components/input-components/InputText';
+            import InputPassword from '@/ui-components/input-components/InputAutocomplete';
+            import InputNumber from '@/ui-components/input-components/InputNumber';
+            import InputDate from '@/ui-components/input-components/InputDate';
+            import InputMoney from '@/ui-components/input-components/InputMoney';
+            import HttpCall from '@/services/HttpCall';
+            import { Utility } from '@/utilities/utility';
 
             export default {
             props: {
@@ -343,6 +382,19 @@ export default {
             };
             </${this.scriptWord}>`;
     },
+    getNumColsForm(numColsRow, numColsSection) {
+      let numCols = 3;
+      if (this.config.numCols) {
+        numCols = this.config.numCols;
+      }
+      if (numColsSection) {
+        numCols = numColsSection;
+      }
+      if (numColsRow) {
+        numCols = numColsRow;
+      }
+      return 12 / numCols;
+    },
     styleForm() {
       return `<${this.styleWord}>
             .title-form {
@@ -353,10 +405,13 @@ export default {
     },
     gPagination() {
       // eslint-disable-next-line max-len
-      this.codeString = this.templatePagination() + this.scriptPagination() + this.stylePagination();
+      this.codeString =
+        this.templatePagination() +
+        this.scriptPagination() +
+        this.stylePagination();
     },
     templatePagination() {
-    // eslint-disable-next-line quotes
+      // eslint-disable-next-line quotes
       return `
         <${this.templateWord}>
         <div>
@@ -438,7 +493,7 @@ export default {
         </${this.templateWord}>`;
     },
     scriptPagination() {
-    // eslint-disable-next-line quotes
+      // eslint-disable-next-line quotes
       return `
         <${this.scriptWord}>
         import HttpCall from '../services/HttpCall';
