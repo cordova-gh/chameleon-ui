@@ -1,42 +1,251 @@
 <template>
-  <div class="container">
-    <ui-form
-      title="Dati Personali"
-      :config="configForm"
-      :urlApi="urlApi"
-      :currentId="currentId"
-    ></ui-form>
+  <div class="container-fluid mt--6">
+    <div class="card mb-4"><div class="card-header">
+              <h3 class="mb-0">UTENTI</h3>
+          </div>
+      <div class="card-body">
+        <form @submit.prevent="saveEntity">
+          <div class="card-body"><div class="title-form">
+                      <p>Dati utente</p>
+                   </div>
+            <div class="row">
+              <div class="col-6 form-group">
+                <input-text v-model="entity['email']" label="Email">
+                </input-text>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6 form-group">
+                <input-password v-model="entity['password']" label="Password">
+                </input-password>              </div>
+            </div>
+            <div class="row">
+              <div class="col-6 form-group">
+                <input-text v-model="entity['nome']" label="Nome">
+                </input-text>
+              </div>
+              <div class="col-6 form-group">
+                <input-text v-model="entity['cognome']" label="Cognome">
+                </input-text>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6 form-group">
+                <input-text v-model="entity['codiceFiscale']" label="Codice Fiscale">
+                </input-text>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6 form-group">
+                  <template v-if="loadEntity">
+                      <input-autocomplete v-model="entity['profile']"
+                         v-bind:config="{'isDominio':false,'urlApi':'/api/profiles','fieldId':'_id','showCodice':true}">
+                       </input-autocomplete>
+                    </template>
+              </div>
+              <div class="col-6 form-group">
+                <input-select v-model="entity['stUtenza']"
+                                   v-bind:config="{'isDominio':true,'dominio':'st_utenza','showDescrizione':true}">
+                  </input-select>              </div>
+            </div>
+            <div class="row">
+              <div class="col-6 form-group">
+                  <template v-if="loadEntity">
+                      <input-autocomplete v-model="entity['azienda']"
+                         v-bind:config="{'isDominio':false,'urlApi':'/api/companies','fieldId':'_id','showCodice':true}">
+                       </input-autocomplete>
+                    </template>
+              </div>
+            </div>
+           </div><div>
+                    <div class="row justify-content-end">
+                    <template v-if="modePage === 'I'">
+                        <div class="col-3 ">
+                        <button class="btn btn-primary btn-block">Salva</button>
+                        </div>
+                    </template>
+                    <template v-else>
+                        <div class="col-3">
+                        <button class="btn btn-primary btn-block">Modifica</button>
+                        </div>
+                    </template>
+                    </div>
+                </div>
+        </form>
+      </div>
+    </div>
   </div>
 </template>
 <script>
-import { API_USERS } from './../../../../services/constant-services';
-import UIForm from './../../../../ui-components/UIForm';
-import TitlePage from './../../../shared/components/TitlePage';
-import ConfigForm from './UserForm.json';
+import Vue from 'vue';
+import InputAutocomplete from '@/ui-components/input-components/InputAutocomplete';
+import InputSelect from '@/ui-components/input-components/InputSelect';
+import InputText from '@/ui-components/input-components/InputText';
+import InputPassword from '@/ui-components/input-components/InputPassword';
+import InputNumber from '@/ui-components/input-components/InputNumber';
+import InputDate from '@/ui-components/input-components/InputDate';
+import InputMoney from '@/ui-components/input-components/InputMoney';
+import HttpCall from '@/services/HttpCall';
+import { Utility } from '@/utilities/utility';
+import { API_USERS } from '@/services/constant-services';
 
 export default {
-  name: 'UserForm',
+  props: {
+    currentId: {
+      type: String,
+      default: '',
+    },
+    title: {
+      type: String,
+      default: '',
+    },
+    reload: {
+      type: Boolean,
+      default: false,
+    },
+    isForm: {
+      type: Boolean,
+      default: true,
+    },
+    isFilter: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  components: {
+    'input-autocomplete': InputAutocomplete,
+    'input-select': InputSelect,
+    'input-text': InputText,
+    'input-password': InputPassword,
+    'input-number': InputNumber,
+    'input-date': InputDate,
+    'input-money': InputMoney,
+  },
   data() {
     return {
-      modePage: 'L',
-      urlApi: API_USERS,
-      currentId: '',
-      configForm: ConfigForm,
-      titoloPagina: 'Users',
+      entity: { email: '',
+        password: '',
+        nome: '',
+        cognome: '',
+        codiceFiscale: '',
+        profile: '',
+        stUtenza: '',
+        azienda: '',
+      },
+      annidateFields: { email: 'email',
+        password: 'password',
+        nome: 'anagrafica.personaFisica.nome',
+        cognome: 'anagrafica.personaFisica.cognome',
+        codiceFiscale: 'anagrafica.personaFisica.codiceFiscale',
+        profile: 'profile',
+        stUtenza: 'stUtenza',
+        azienda: 'azienda',
+      },
+      modePage: '',
+      httpCall: new HttpCall(API_USERS),
+      loadEntity: false,
+      configTypes:
+                { profile: {"isDominio":false,"urlApi":"/api/profiles","fieldId":"_id","showCodice":true}
+                , stUtenza: {"isDominio":true,"dominio":"st_utenza","showDescrizione":true}, azienda: {"isDominio":false,"urlApi":"/api/companies","fieldId":"_id","showCodice":true} }
+      ,
     };
   },
   created() {
-    this.currentId = this.$route.params.id;
+    this.onCreated();
   },
-  components: {
-    'ui-form': UIForm,
-    'title-page': TitlePage,
+  methods: {
+    onCreated() {
+      this.currentId = this.$route.params.id;
+      if (this.currentId !== '') {
+        this.getEntity(this.currentId);
+        this.modePage = 'U';
+      } else {
+        this.loadEntity = true;
+        this.modePage = 'I';
+      }
+    },
+    saveEntity() {
+      const entityToSend = this.createEntity();
+      if (this.modePage === 'U') {
+        this.httpCall.update(this.currentId, entityToSend).then(() => {
+          this.$emit('onSaveEntity');
+        });
+      } else {
+        this.httpCall.create(entityToSend).then(() => {
+          this.entity = this.createEntityForm();
+          this.$emit('onSaveEntity');
+        });
+      }
+    },
+    getEntity(id) {
+      this.httpCall.getById(id).then((data) => {
+        this.setEntity(data);
+        this.loadEntity = true;
+      });
+    },
+    onFind() {
+      this.$emit('filter', this.entity);
+    },
+    onReset() {
+      this.entity = this.createEntityForm();
+      this.onFind();
+    },
+    createEntityForm() {
+      const obj = {};
+      Object.keys(obj).forEach((key) => {
+        obj[key] = '';
+      });
+      return obj;
+    },
+    createEntity() {
+      const obj = {};
+      Object.keys(this.annidateFields).forEach((key) => {
+        const bindField = this.annidateFields[key];
+        if (bindField.indexOf('.') > 0) {
+          const annidateFields = bindField.split('.');
+          let objTemp = obj;
+          for (let k = 0; k < annidateFields.length; k += 1) {
+            const annidateField = annidateFields[k];
+            if (k + 1 < annidateFields.length) {
+              if (!objTemp[annidateField]) {
+                Vue.set(objTemp, annidateField, {});
+              }
+              objTemp = objTemp[annidateField];
+            } else {
+              Vue.set(
+                objTemp,
+                annidateField,
+                this.entity[key],
+              );
+            }
+          }
+        } else {
+          obj[bindField] = this.entity[key];
+        }
+      });
+      return obj;
+    },
+    setEntity(data) {
+      Object.keys(this.annidateFields).forEach((key) => {
+        const annidateField = this.annidateFields[key];
+        if (annidateField.indexOf('.') > 0) {
+          const annidateValue = Utility.getAnnidateValue(
+            annidateField.split('.'),
+            data,
+          );
+          if (annidateValue !== null) {
+            this.entity[key] = annidateValue;
+          }
+        } else {
+          this.entity[key] = data[annidateField];
+        }
+      });
+    },
   },
 };
-</script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1 {
-  font-weight: normal;
-}
-</style>
+</script><style>
+            .title-form {
+            border-left-width: 10px solid;
+            border-left-color: #000;
+            }
+            </style>

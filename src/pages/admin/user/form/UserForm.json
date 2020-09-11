@@ -1,5 +1,8 @@
 {
+  "urlApi": "API_USERS",
+  "title": "UTENTI",
   "numCols": 2,
+  "isForm": true,
   "sections":[
     {
       "label": "Dati utente",

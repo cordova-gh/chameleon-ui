@@ -51,6 +51,43 @@ export default {
     };
   },
   methods: {
+    getEntityForm() {
+      let objString = '{';
+      this.config.sections.forEach((section) => {
+        section.rows.forEach((cols) => {
+          cols.forEach((col) => {
+            objString += `${col.field}: '',\n`;
+          });
+        });
+      });
+      // eslint-disable-next-line prefer-template
+      return objString + '}';
+    },
+    getEntityWithFieldsAnnidate() {
+      let objString = '{';
+      this.config.sections.forEach((section) => {
+        section.rows.forEach((cols) => {
+          cols.forEach((col) => {
+            objString += `${col.field}: '${col.bindField}',\n`;
+          });
+        });
+      });
+      // eslint-disable-next-line prefer-template
+      return objString + '}';
+    },
+    getConfigTypes() {
+      const objString = {};
+      this.config.sections.forEach((section) => {
+        section.rows.forEach((cols) => {
+          cols.forEach((col) => {
+            if (col.configType) {
+              objString[col.field] = `${JSON.stringify(col.configType)}`;
+            }
+          });
+        });
+      });
+      return JSON.stringify(objString).replaceAll('\'', '').replaceAll('""', '\'');
+    },
     gComponent() {
       // eslint-disable-next-line no-console
       console.log('sonoosnsos qui');
@@ -113,53 +150,53 @@ export default {
       this.config.sections.forEach((section) => {
         // eslint-disable-next-line no-const-assign
         inputs += `<div class="title-form">
-                      <p>${section.title}</p>
+                      <p>${section.label}</p>
                    </div>\n`;
-        section.rows.forEach((rows) => {
+        section.rows.forEach((cols) => {
           inputs += `${spazio}<div class="row">\n`;
-          rows.forEach((row) => {
-            const numCols = this.getNumColsForm(row.numCols, section.numCols);
+          cols.forEach((col) => {
+            const numCols = this.getNumColsForm(col.numCols, section.numCols);
             inputs += `${spazio}  <div class="col-${numCols} form-group">\n`;
-            switch (row.type) {
+            switch (col.type) {
               case 'autocomplete': {
                 inputs += `${spazio}      <template v-if="loadEntity">
-                      <input-autocomplete v-model="entity[colElement.field]"
-                        :config="colElement.configType">
+                      <input-autocomplete v-model="entity['${col.field}']"
+                         v-bind:config="${JSON.stringify(col.configType).replaceAll('"', '\'')}">
                        </input-autocomplete>
                     </template>\n`;
                 break;
               }
               case 'password': {
                 // eslint-disable-next-line quotes
-                inputs += `${spazio}    <input-password v-model="entity[colElement.field]" :label="colElement.label">
+                inputs += `${spazio}    <input-password v-model="entity['${col.field}']" label="${col.label}">
                 </input-password>`;
                 break;
               }
               case 'select': {
                 // eslint-disable-next-line quotes
-                inputs += `${spazio}    <input-select v-model="entity[colElement.field]"
-                                  :config="colElement.configType">
+                inputs += `${spazio}    <input-select v-model="entity['${col.field}']"
+                                   v-bind:config="${JSON.stringify(col.configType).replaceAll('"', '\'')}">
                   </input-select>`;
                 break;
               }
               case 'date': {
                 // eslint-disable-next-line quotes
-                inputs += `${spazio}    <input-date v-model="entity[colElement.field]"> </input-date>`;
+                inputs += `${spazio}    <input-date v-model="entity['${col.field}]"> </input-date>`;
                 break;
               }
               case 'money': {
                 // eslint-disable-next-line quotes
-                inputs += `${spazio}    <input-money v-model="entity[colElement.field]"> </input-money>`;
+                inputs += `${spazio}    <input-money v-model="entity['${col.field}]"> </input-money>`;
                 break;
               }
               case 'number': {
                 // eslint-disable-next-line quotes
-                inputs += `${spazio}    <input-number v-model="entity[colElement.field]"> </input-number>`;
+                inputs += `${spazio}    <input-number v-model="entity['${col.field}']"> </input-number>`;
                 break;
               }
               default: {
                 // eslint-disable-next-line quotes
-                inputs += `${spazio}    <input-text v-model="entity[colElement.field]" :label="colElement.label">
+                inputs += `${spazio}    <input-text v-model="entity['${col.field}']" label="${col.label}">
                 </input-text>\n`;
               }
             }
@@ -191,19 +228,16 @@ export default {
             import InputAutocomplete from '@/ui-components/input-components/InputAutocomplete';
             import InputSelect from '@/ui-components/input-components/InputSelect';
             import InputText from '@/ui-components/input-components/InputText';
-            import InputPassword from '@/ui-components/input-components/InputAutocomplete';
+            import InputPassword from '@/ui-components/input-components/InputPassword';
             import InputNumber from '@/ui-components/input-components/InputNumber';
             import InputDate from '@/ui-components/input-components/InputDate';
             import InputMoney from '@/ui-components/input-components/InputMoney';
             import HttpCall from '@/services/HttpCall';
             import { Utility } from '@/utilities/utility';
+            import { ${this.config.urlApi} } from '@/services/constant-services';
 
             export default {
             props: {
-            urlApi: {
-            type: String,
-            required: true,
-            },
             currentId: {
             type: String,
             default: '',
@@ -211,10 +245,6 @@ export default {
             title: {
             type: String,
             default: '',
-            },
-            config: {
-            type: Object,
-            required: true,
             },
             reload: {
             type: Boolean,
@@ -240,10 +270,14 @@ export default {
             },
             data() {
             return {
-            entity: this.createEntityForm(),
+            entity: ${this.getEntityForm()},
+            annidateFields: ${this.getEntityWithFieldsAnnidate()},
             modePage: '',
-            httpCall: new HttpCall(this.urlApi),
+            httpCall: new HttpCall(${this.config.urlApi}),
             loadEntity: false,
+            configTypes:
+                ${this.getConfigTypes()}
+            ,
             };
             },
             created() {
@@ -251,6 +285,7 @@ export default {
             },
             methods: {
             onCreated() {
+            this.currentId = this.$route.params.id;
             if (this.currentId !== '') {
                 this.getEntity(this.currentId);
                 this.modePage = 'U';
@@ -287,97 +322,55 @@ export default {
             },
             createEntityForm() {
             const obj = {};
-            for (let j = 0; j < this.config.sections.length; j += 1) {
-                const sectionElement = this.config.sections[j];
-                for (let index = 0; index < sectionElement.rows.length; index += 1) {
-                const rowElement = sectionElement.rows[index];
-                for (let colIndex = 0; colIndex < rowElement.length; colIndex += 1) {
-                    const configElement = rowElement[colIndex];
-                    obj[configElement.field] = '';
-                }
-                }
-            }
+            Object.keys(obj).forEach((key) =>{
+              obj[key] = '';
+            })
             return obj;
             },
             createEntity() {
             const obj = {};
-            for (let j = 0; j < this.config.sections.length; j += 1) {
-                const sectionElement = this.config.sections[j];
-                for (let index = 0; index < sectionElement.rows.length; index += 1) {
-                const rowElement = sectionElement.rows[index];
-                for (let colIndex = 0; colIndex < rowElement.length; colIndex += 1) {
-                    const configElement = rowElement[colIndex];
-                    if (configElement.bindField.indexOf('.') > 0) {
-                    const annidateFields = configElement.bindField.split('.');
-                    let objTemp = obj;
-                    for (let k = 0; k < annidateFields.length; k += 1) {
-                        const annidateField = annidateFields[k];
-                        if (k + 1 < annidateFields.length) {
-                        if (!objTemp[annidateField]) {
-                            Vue.set(objTemp, annidateField, {});
-                        }
-                        objTemp = objTemp[annidateField];
-                        } else {
-                        Vue.set(
-                            objTemp,
-                            annidateField,
-                            this.entity[configElement.field],
-                        );
-                        }
-                    }
+              Object.keys(this.annidateFields).forEach((key) => {
+                const bindField = this.annidateFields[key];
+                if (bindField.indexOf('.') > 0) {
+                  const annidateFields = bindField.split('.');
+                  let objTemp = obj;
+                  for (let k = 0; k < annidateFields.length; k += 1) {
+                    const annidateField = annidateFields[k];
+                    if (k + 1 < annidateFields.length) {
+                      if (!objTemp[annidateField]) {
+                        Vue.set(objTemp, annidateField, {});
+                      }
+                      objTemp = objTemp[annidateField];
                     } else {
-                    obj[configElement.bindField] = this.entity[configElement.field];
+                      Vue.set(
+                        objTemp,
+                        annidateField,
+                        this.entity[key],
+                      );
                     }
+                  }
+                } else {
+                  obj[bindField] = this.entity[key];
                 }
-                }
-            }
+              });
             return obj;
             },
             setEntity(data) {
-            for (let j = 0; j < this.config.sections.length; j += 1) {
-                const sectionElement = this.config.sections[j];
-                for (let index = 0; index < sectionElement.rows.length; index += 1) {
-                const rowElement = sectionElement.rows[index];
-                for (let colIndex = 0; colIndex < rowElement.length; colIndex += 1) {
-                    const configElement = rowElement[colIndex];
-                    if (configElement.bindField.indexOf('.') > 0) {
+              Object.keys(this.annidateFields).forEach((key) => {
+                  const annidateField = this.annidateFields[key];
+                  if (annidateField.indexOf('.') > 0) {
                     const annidateValue = Utility.getAnnidateValue(
-                        configElement.bindField.split('.'),
-                        data,
+                      annidateField.split('.'),
+                      data,
                     );
                     if (annidateValue !== null) {
-                        this.entity[configElement.field] = annidateValue;
+                      this.entity[key] = annidateValue;
                     }
-                    } else {
-                    this.entity[configElement.field] = data[configElement.bindField];
-                    }
-                }
-                }
-            }
+                  } else {
+                    this.entity[key] = data[annidateField];
+                  }
+                });
             },
-            getNumCols(numColsRow, numColsSection) {
-            let numCols = 3;
-            if (this.config.numCols) {
-                numCols = this.config.numCols;
-            }
-            if (numColsSection) {
-                numCols = numColsSection;
-            }
-            if (numColsRow) {
-                numCols = numColsRow;
-            }
-            return 12 / numCols;
-            },
-            // watch: {
-            //   reload: {
-            //     immediate: true,
-            //     deep: true,
-            //     handler() {
-            //       this.onCreated();
-            //       this.$emit('endLoadForm');
-            //     },
-            //   },
-            // },
             },
             };
             </${this.scriptWord}>`;
