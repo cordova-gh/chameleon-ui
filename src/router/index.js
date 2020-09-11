@@ -5,6 +5,7 @@ import MainContainer from '@/structure/MainContainer';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from '@/pages/auth/login/Login';
+import Generatore from '@/pages/admin/generator/Generator';
 
 Vue.use(Router);
 
@@ -259,6 +260,16 @@ export default new Router({
               path: 'import-csv-to-document',
               component: () => import('./../pages/config/import-csv-to-document/ImportCsvToDocument'),
             },
+            {
+              path: 'province',
+              component: () => import('./../pages/config/province/Province'),
+              children: [
+                {
+                  path: 'list',
+                  component: () => import('./../pages/config/province/grid-list/ProvinceGridList'),
+                },
+              ],
+            },
           ],
         },
       ],
@@ -268,6 +279,10 @@ export default new Router({
       name: 'Login',
       component: Login,
     },
-
+    {
+      path: '/Generator',
+      name: 'Generator',
+      component: Generatore,
+    },
   ],
 });

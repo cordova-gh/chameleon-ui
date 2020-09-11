@@ -67,6 +67,7 @@
               <router-link to="/config/import-csv-to-document" class="dropdown-item">
                 Import CSV
               </router-link>
+              <router-link to="/config/province/list" class="dropdown-item">Province</router-link>
             </div>
           </li>
 

@@ -1,0 +1,17 @@
+[
+    {
+        "label": "Codice",
+        "field": "codice",
+        "type": "text"
+    },
+    {
+        "label": "Descrizione",
+        "field": "descrizione",
+        "type": "text"
+    },
+    {
+        "label": "Stato",
+        "field": "stato",
+        "type": "text"
+    }
+]
