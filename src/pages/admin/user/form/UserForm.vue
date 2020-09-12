@@ -87,7 +87,7 @@ import InputDate from '@/ui-components/input-components/InputDate';
 import InputMoney from '@/ui-components/input-components/InputMoney';
 import HttpCall from '@/services/HttpCall';
 import { Utility } from '@/utilities/utility';
-import { API_USERS } from '@/services/constant-services';
+import { API_USERS, API_DOMINIO } from '@/services/constant-services';
 
 export default {
   props: {
@@ -143,6 +143,8 @@ export default {
       configTypes:
                 { profile: { isDominio: false, urlApi: '/api/profiles', fieldId: '_id', showCodice: true }, stUtenza: { isDominio: true, dominio: 'st_utenza', showDescrizione: true }, azienda: { isDominio: false, urlApi: '/api/companies', fieldId: '_id', showCodice: true } },
       currentId: null,
+      dominiToLoad: { stUtenza: 'ST_UTENZA' },
+      domini: [],
     };
   },
   created() {
@@ -150,6 +152,7 @@ export default {
   },
   methods: {
     onCreated() {
+      this.getDominios();
       this.currentId = this.$route.params.id;
       if (this.currentId) {
         this.getEntity(this.currentId);
@@ -235,6 +238,17 @@ export default {
           this.entity[key] = data[annidateField];
         }
       });
+    },
+    getDominios() {
+      // eslint-disable-next-line no-console
+      console.log('cucuccucu');
+      const keysObjectDominiToLoad = Object.keys(this.dominiToLoad);
+      if (keysObjectDominiToLoad.length > 0) {
+        const dominiIncludes = Object.keys(this.dominiToLoad).map(key => this.dominiToLoad[key]);
+        const httpCallDomini = new HttpCall(API_DOMINIO);
+        // eslint-disable-next-line no-console
+        httpCallDomini.getCustom('/includes', `?domini=${dominiIncludes.join(',')}`).then(res => console.log(res));
+      }
     },
   },
 };

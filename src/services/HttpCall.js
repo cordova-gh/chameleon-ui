@@ -3,8 +3,8 @@ import axios from 'axios';
 import store from '../store';
 
 export default class HttpCall {
-  baseUrl = 'https://chameleon-be.herokuapp.com';
-  // baseUrl = 'http://localhost:5000';
+  // baseUrl = 'https://chameleon-be.herokuapp.com';
+  baseUrl = 'http://localhost:5000';
   constructor(apiUrl) {
     this.RESOURCE_NAME = apiUrl;
   }
@@ -20,7 +20,17 @@ export default class HttpCall {
       })
       .catch(error => `An error occured..${error}`);
   }
-
+  getCustom(path, params = '') {
+    // this.$store.commit('showSpinnerState');
+    store.commit('showSpinner');
+    return axios
+      .get(`${this.baseUrl + this.RESOURCE_NAME + path + params}`)
+      .then((response) => {
+        store.commit('hiddenSpinner');
+        return response.data;
+      })
+      .catch(error => `An error occured..${error}`);
+  }
   getById(id) {
     store.commit('showSpinner');
     return axios

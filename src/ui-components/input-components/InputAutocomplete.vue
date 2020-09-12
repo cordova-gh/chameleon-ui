@@ -115,7 +115,7 @@ export default {
             } else if (this.showCodice) {
               object.showText = element[this.fieldCodice];
             } else if (this.showDescrizione) {
-              object.showText = element[this.showDescrizione];
+              object.showText = element[this.fieldDescrizione];
             }
 
             this.items.push(object);
