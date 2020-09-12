@@ -1,17 +1,9 @@
 <template>
   <div class="container">
     <div class="row">
-      Form
-      <input type="radio" id="huey" name="drone" value="form"  /> Grid
-      List<input
-        type="radio"
-        id="huey"
-        name="drone"
-        value="grid-list"
-        checked
-      />
-      Pagination
-      <input type="radio" id="huey" name="drone" value="pagination"  />
+      <input type="radio" v-model="tipoComponente" name="drone" value="form"/>  Form
+      <input type="radio" v-model="tipoComponente" name="drone" value="grid-list"  />  GridList
+      <input type="radio" v-model="tipoComponente" name="drone" value="pagination"  />  Pagination
     </div>
     <div class="row">
       <input
@@ -48,46 +40,10 @@ export default {
       backTickWord: '`',
       config: '',
       file: Blob,
+      tipoComponente: '',
     };
   },
   methods: {
-    getEntityForm() {
-      let objString = '{';
-      this.config.sections.forEach((section) => {
-        section.rows.forEach((cols) => {
-          cols.forEach((col) => {
-            objString += `${col.field}: '',\n`;
-          });
-        });
-      });
-      // eslint-disable-next-line prefer-template
-      return objString + '}';
-    },
-    getEntityWithFieldsAnnidate() {
-      let objString = '{';
-      this.config.sections.forEach((section) => {
-        section.rows.forEach((cols) => {
-          cols.forEach((col) => {
-            objString += `${col.field}: '${col.bindField}',\n`;
-          });
-        });
-      });
-      // eslint-disable-next-line prefer-template
-      return objString + '}';
-    },
-    getConfigTypes() {
-      const objString = {};
-      this.config.sections.forEach((section) => {
-        section.rows.forEach((cols) => {
-          cols.forEach((col) => {
-            if (col.configType) {
-              objString[col.field] = col.configType;
-            }
-          });
-        });
-      });
-      return JSON.stringify(objString).replaceAll('\'', '').replaceAll('""', '\'');
-    },
     gComponent() {
       // eslint-disable-next-line no-console
       console.log('sonoosnsos qui');
@@ -96,12 +52,43 @@ export default {
       reader.onload = (event) => {
         this.config = JSON.parse(event.target.result);
         // eslint-disable-next-line no-console
-        console.log('configurazione', this.config);
-        this.codeString = this.templateForm() + this.scriptForm() + this.styleForm();
+        console.log('configurazione', this.tipoComponente);
+        switch (this.tipoComponente) {
+          case 'form': {
+            this.codeString = this.gForm();
+            break;
+          }
+          case 'pagination': {
+            // eslint-disable-next-line no-alert
+            this.codeString = this.gPagination();
+            break;
+          }
+          case 'grid-list': {
+            // eslint-disable-next-line no-alert
+            this.codeString = this.gGridList();
+            break;
+          }
+          default: {
+            // eslint-disable-next-line no-alert
+            alert('selezionare il tipo componente da generare');
+          }
+        }
       };
       reader.readAsText(this.file);
       // eslint-disable-next-line quotes
       /*  */
+    },
+    gForm() {
+      // eslint-disable-next-line max-len
+      return this.templateForm() + this.scriptForm() + this.styleForm();
+    },
+    gPagination() {
+      // eslint-disable-next-line max-len
+      return this.templatePagination() + this.scriptPagination() + this.stylePagination();
+    },
+    gGridList() {
+      // eslint-disable-next-line max-len
+      return this.templatePagination() + this.scriptPagination() + this.stylePagination();
     },
     templateForm() {
       // eslint-disable-next-line no-unused-expressions
@@ -372,6 +359,51 @@ export default {
             };
             </${this.scriptWord}>`;
     },
+    styleForm() {
+      return `<${this.styleWord}>
+            .title-form {
+            border-left-width: 10px solid;
+            border-left-color: #000;
+            }
+            </${this.styleWord}>`;
+    },
+    getEntityForm() {
+      let objString = '{';
+      this.config.sections.forEach((section) => {
+        section.rows.forEach((cols) => {
+          cols.forEach((col) => {
+            objString += `${col.field}: '',\n`;
+          });
+        });
+      });
+      // eslint-disable-next-line prefer-template
+      return objString + '}';
+    },
+    getEntityWithFieldsAnnidate() {
+      let objString = '{';
+      this.config.sections.forEach((section) => {
+        section.rows.forEach((cols) => {
+          cols.forEach((col) => {
+            objString += `${col.field}: '${col.bindField}',\n`;
+          });
+        });
+      });
+      // eslint-disable-next-line prefer-template
+      return objString + '}';
+    },
+    getConfigTypes() {
+      const objString = {};
+      this.config.sections.forEach((section) => {
+        section.rows.forEach((cols) => {
+          cols.forEach((col) => {
+            if (col.configType) {
+              objString[col.field] = col.configType;
+            }
+          });
+        });
+      });
+      return JSON.stringify(objString).replaceAll('\'', '').replaceAll('""', '\'');
+    },
     getNumColsForm(numColsRow, numColsSection) {
       let numCols = 3;
       if (this.config.numCols) {
@@ -384,21 +416,6 @@ export default {
         numCols = numColsRow;
       }
       return 12 / numCols;
-    },
-    styleForm() {
-      return `<${this.styleWord}>
-            .title-form {
-            border-left-width: 10px solid;
-            border-left-color: #000;
-            }
-            </${this.styleWord}>`;
-    },
-    gPagination() {
-      // eslint-disable-next-line max-len
-      this.codeString =
-        this.templatePagination() +
-        this.scriptPagination() +
-        this.stylePagination();
     },
     templatePagination() {
       // eslint-disable-next-line quotes
@@ -486,9 +503,9 @@ export default {
       // eslint-disable-next-line quotes
       return `
         <${this.scriptWord}>
-        import HttpCall from '../services/HttpCall';
-import { Utility } from '../utilities/utility';
-import InputCheckBox from './input-components/InputCheckBox';
+        import HttpCall from '@/services/HttpCall';
+import { Utility } from '@/utilities/utility';
+import InputCheckBox from '@/ui-components/input-components/InputCheckBox';
 import UIForm from './UIForm';
 
 export default {
