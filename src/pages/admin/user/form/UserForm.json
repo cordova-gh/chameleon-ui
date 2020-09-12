@@ -1,8 +1,8 @@
 {
-  "urlApi": "API_USERS",
+  "urlApi": "API_USER",
   "title": "UTENTI",
-  "numCols": 2,
   "isForm": true,
+  "numCols": 2,
   "sections":[
     {
       "label": "Dati utente",
@@ -34,14 +34,6 @@
             "label": "Cognome",
             "field": "cognome",
             "bindField": "anagrafica.personaFisica.cognome",
-            "type": "text"
-          }
-        ],
-        [
-          {
-            "label": "Codice Fiscale",
-            "field": "codiceFiscale",
-            "bindField": "anagrafica.personaFisica.codiceFiscale",
             "type": "text"
           }
         ],

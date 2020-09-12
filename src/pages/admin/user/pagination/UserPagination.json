@@ -16,11 +16,6 @@
         "bindField": "anagrafica.personaFisica.cognome"
     },
     {
-        "label": "Codice Fiscale",
-        "field": "codiceFiscale",
-        "bindField": "anagrafica.personaFisica.codiceFiscale"
-    },
-    {
       "label": "Profilo",
       "field": "profilo",
       "bindField": "profile.codice"

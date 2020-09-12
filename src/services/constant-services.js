@@ -1,6 +1,6 @@
 export const API_DOMINIO = '/api/dominios';
 export const API_TASKS = '/api/tasks';
-export const API_USERS = '/api/users';
+export const API_USER = '/api/users';
 export const API_COMPANY = '/api/companies';
 export const API_PROFILE = '/api/profiles';
 export const API_FILE = '/api/files';
@@ -13,3 +13,4 @@ export const API_UNITA_MISURA = '/api/unita-misuras';
 export const API_MARCA = '/api/marcas';
 export const API_INVENTARIO = '/api/inventarios';
 export const API_PROVINCE = '/api/provinces';
+export const API_COMUNE = '/api/comunes';

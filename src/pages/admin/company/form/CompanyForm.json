@@ -1,4 +1,7 @@
 {
+  "urlApi": "API_COMPANY",
+  "title": "Company",
+  "isForm": true,
     "numCols": 3,
     "sections":[
         {
@@ -78,7 +81,14 @@
                 "field": "statoSedeLegale",
                 "label": "Stato",
                 "bindField": "anagrafica.entitaGiuridica.indirizzoSedeLegale.stato",
-                "type": "text"
+                "type": "autocomplete",
+                "configType": {
+                  "isDominio": false,
+                  "urlApi": "/api/countries/all",
+                  "fieldId": "_id",
+                  "fieldCodice": "codIsoStato",
+                  "showDescrizione": true
+                }
               },
               {
                 "field": "provinciaSedeLegale",
@@ -123,7 +133,14 @@
               "field": "statoSedeCostituzione",
               "label": "Stato",
               "bindField": "anagrafica.entitaGiuridica.indirizzoSedeCostituzione.stato",
-              "type": "text"
+              "type": "autocomplete",
+              "configType": {
+                "isDominio": false,
+                  "urlApi": "/api/countries/all",
+                  "fieldId": "_id",
+                  "fieldCodice": "codIsoStato",
+                  "showDescrizione": true
+              }
             },
             {
               "field": "provinciaSedeCostituzione",

@@ -31,12 +31,6 @@
             </div>
             <div class="row">
               <div class="col-6 form-group">
-                <input-text v-model="entity['codiceFiscale']" label="Codice Fiscale">
-                </input-text>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-6 form-group">
                   <template v-if="loadEntity">
                       <input-autocomplete v-model="entity['profile']"
                          :config="configTypes['profile']">
@@ -87,7 +81,7 @@ import InputDate from '@/ui-components/input-components/InputDate';
 import InputMoney from '@/ui-components/input-components/InputMoney';
 import HttpCall from '@/services/HttpCall';
 import { Utility } from '@/utilities/utility';
-import { API_USERS, API_DOMINIO } from '@/services/constant-services';
+import { API_USER, API_DOMINIO } from '@/services/constant-services';
 
 export default {
   props: {
@@ -123,7 +117,6 @@ export default {
         password: '',
         nome: '',
         cognome: '',
-        codiceFiscale: '',
         profile: '',
         stUtenza: '',
         azienda: '',
@@ -132,13 +125,12 @@ export default {
         password: 'password',
         nome: 'anagrafica.personaFisica.nome',
         cognome: 'anagrafica.personaFisica.cognome',
-        codiceFiscale: 'anagrafica.personaFisica.codiceFiscale',
         profile: 'profile',
         stUtenza: 'stUtenza',
         azienda: 'azienda',
       },
       modePage: '',
-      httpCall: new HttpCall(API_USERS),
+      httpCall: new HttpCall(API_USER),
       loadEntity: false,
       configTypes:
                 { profile: { isDominio: false, urlApi: '/api/profiles', fieldId: '_id', showCodice: true }, azienda: { isDominio: false, urlApi: '/api/companies', fieldId: '_id', showCodice: true } },

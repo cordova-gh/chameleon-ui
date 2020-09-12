@@ -1,6 +1,6 @@
 <template>
     <div>
-       <title-page :titolo= "titolo"></title-page>
+       <title-page titolo="Comune"></title-page>
        <router-view></router-view>
     </div>
 </template>
@@ -9,12 +9,7 @@
 import TitlePage from './../../shared/components/TitlePage';
 
 export default {
-  name: 'provincia',
-  data() {
-    return {
-      titolo: 'Province',
-    };
-  },
+  name: 'dominio',
   components: {
     // eslint-disable-next-line no-undef
     'title-page': TitlePage,
