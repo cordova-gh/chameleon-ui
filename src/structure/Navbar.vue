@@ -17,8 +17,8 @@
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
           <li class="nav-item active">
-            <a class="nav-link" href="#"
-              >Home <span class="sr-only">(current)</span></a
+            <router-link class="nav-link" to="/"
+              >Home <span class="sr-only">(current)</span></router-link
             >
           </li>
           <li class="nav-item dropdown">
@@ -88,6 +88,21 @@
               <router-link to="/admin/profile/list" class="dropdown-item">Profili</router-link>
               <router-link to="/admin/company/list" class="dropdown-item">Company</router-link>
               <router-link to="/admin/shop/list" class="dropdown-item" >Shop</router-link>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdownMenuLink"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+             Generatore
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <router-link to="/Generator" class="dropdown-item">Generatore</router-link>
             </div>
           </li>
 

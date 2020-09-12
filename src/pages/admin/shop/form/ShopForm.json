@@ -120,10 +120,16 @@
             "type": "text"
           },
           {
-            "label": "Azienda ID",
-            "field": "aziendaleId",
-            "bindField": "aziendaleId",
-            "type": "text"
+            "label": "Azienda",
+            "field": "azienda",
+            "bindField": "azienda",
+            "type": "autocomplete",
+            "configType": {
+              "isDominio": false,
+              "urlApi": "/api/companies",
+              "fieldId": "_id",
+              "showCodice": true
+            }
           }
         ]
       ]
