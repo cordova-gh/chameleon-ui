@@ -181,6 +181,11 @@ export default {
                 inputs += `${spazio}    <input-number v-model="entity['${col.field}']"> </input-number>`;
                 break;
               }
+              case 'textarea': {
+                // eslint-disable-next-line quotes
+                inputs += `${spazio}    <input-textarea v-model="entity['${col.field}']"> </input-textarea>`;
+                break;
+              }
               default: {
                 // eslint-disable-next-line quotes
                 inputs += `${spazio}    <input-text v-model="entity['${col.field}']" label="${col.label}">
@@ -219,6 +224,7 @@ export default {
             import InputNumber from '@/ui-components/input-components/InputNumber';
             import InputDate from '@/ui-components/input-components/InputDate';
             import InputMoney from '@/ui-components/input-components/InputMoney';
+            import InputTextArea from '@/ui-components/input-components/InputTextArea';
             import HttpCall from '@/services/HttpCall';
             import { Utility } from '@/utilities/utility';
             import { ${this.config.urlApi}, API_DOMINIO  } from '@/services/constant-services';
@@ -250,6 +256,7 @@ export default {
             'input-number': InputNumber,
             'input-date': InputDate,
             'input-money': InputMoney,
+            'input-textarea': InputTextArea,
             },
             data() {
             return {

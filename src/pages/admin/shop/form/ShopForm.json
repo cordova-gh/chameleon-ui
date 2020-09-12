@@ -114,22 +114,24 @@
             "type": "text"
           },
           {
-            "label": "Note",
-            "field": "note",
-            "bindField": "note",
-            "type": "text"
-          },
-          {
             "label": "Azienda",
             "field": "azienda",
             "bindField": "azienda",
             "type": "autocomplete",
             "configType": {
               "isDominio": false,
-              "urlApi": "/api/companies",
+              "urlApi": "/api/companies/all",
               "fieldId": "_id",
               "showCodice": true
             }
+          }
+        ],
+        [
+          {
+            "label": "Note",
+            "field": "note",
+            "bindField": "note",
+            "type": "textarea"
           }
         ]
       ]
