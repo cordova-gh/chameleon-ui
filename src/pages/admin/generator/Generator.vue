@@ -81,7 +81,7 @@ export default {
         section.rows.forEach((cols) => {
           cols.forEach((col) => {
             if (col.configType) {
-              objString[col.field] = `${JSON.stringify(col.configType)}`;
+              objString[col.field] = col.configType;
             }
           });
         });
@@ -161,7 +161,7 @@ export default {
               case 'autocomplete': {
                 inputs += `${spazio}      <template v-if="loadEntity">
                       <input-autocomplete v-model="entity['${col.field}']"
-                         v-bind:config="${JSON.stringify(col.configType).replaceAll('"', '\'')}">
+                         :config="configTypes['${col.field}']">
                        </input-autocomplete>
                     </template>\n`;
                 break;
@@ -175,7 +175,7 @@ export default {
               case 'select': {
                 // eslint-disable-next-line quotes
                 inputs += `${spazio}    <input-select v-model="entity['${col.field}']"
-                                   v-bind:config="${JSON.stringify(col.configType).replaceAll('"', '\'')}">
+                                   :config="configTypes['${col.field}']">
                   </input-select>`;
                 break;
               }
@@ -238,10 +238,6 @@ export default {
 
             export default {
             props: {
-            currentId: {
-            type: String,
-            default: '',
-            },
             title: {
             type: String,
             default: '',
@@ -278,6 +274,7 @@ export default {
             configTypes:
                 ${this.getConfigTypes()}
             ,
+            currentId: null,
             };
             },
             created() {
@@ -286,7 +283,7 @@ export default {
             methods: {
             onCreated() {
             this.currentId = this.$route.params.id;
-            if (this.currentId !== '') {
+            if (this.currentId) {
                 this.getEntity(this.currentId);
                 this.modePage = 'U';
             } else {

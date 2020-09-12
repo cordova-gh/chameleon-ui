@@ -39,20 +39,20 @@
               <div class="col-6 form-group">
                   <template v-if="loadEntity">
                       <input-autocomplete v-model="entity['profile']"
-                         v-bind:config="{'isDominio':false,'urlApi':'/api/profiles','fieldId':'_id','showCodice':true}">
+                         :config="configTypes['profile']">
                        </input-autocomplete>
                     </template>
               </div>
               <div class="col-6 form-group">
                 <input-select v-model="entity['stUtenza']"
-                                   v-bind:config="{'isDominio':true,'dominio':'st_utenza','showDescrizione':true}">
+                                   :config="configTypes['stUtenza']">
                   </input-select>              </div>
             </div>
             <div class="row">
               <div class="col-6 form-group">
                   <template v-if="loadEntity">
                       <input-autocomplete v-model="entity['azienda']"
-                         v-bind:config="{'isDominio':false,'urlApi':'/api/companies','fieldId':'_id','showCodice':true}">
+                         :config="configTypes['azienda']">
                        </input-autocomplete>
                     </template>
               </div>
@@ -91,10 +91,6 @@ import { API_USERS } from '@/services/constant-services';
 
 export default {
   props: {
-    currentId: {
-      type: String,
-      default: '',
-    },
     title: {
       type: String,
       default: '',
@@ -145,9 +141,8 @@ export default {
       httpCall: new HttpCall(API_USERS),
       loadEntity: false,
       configTypes:
-                { profile: {"isDominio":false,"urlApi":"/api/profiles","fieldId":"_id","showCodice":true}
-                , stUtenza: {"isDominio":true,"dominio":"st_utenza","showDescrizione":true}, azienda: {"isDominio":false,"urlApi":"/api/companies","fieldId":"_id","showCodice":true} }
-      ,
+                { profile: { isDominio: false, urlApi: '/api/profiles', fieldId: '_id', showCodice: true }, stUtenza: { isDominio: true, dominio: 'st_utenza', showDescrizione: true }, azienda: { isDominio: false, urlApi: '/api/companies', fieldId: '_id', showCodice: true } },
+      currentId: null,
     };
   },
   created() {
@@ -156,7 +151,7 @@ export default {
   methods: {
     onCreated() {
       this.currentId = this.$route.params.id;
-      if (this.currentId !== '') {
+      if (this.currentId) {
         this.getEntity(this.currentId);
         this.modePage = 'U';
       } else {
