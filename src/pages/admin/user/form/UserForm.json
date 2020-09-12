@@ -65,7 +65,7 @@
             "type": "select",
             "configType": {
               "isDominio": true,
-              "dominio": "st_utenza",
+              "dominio": "ST_UTENZA",
               "showDescrizione": true
             }
           }

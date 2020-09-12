@@ -45,7 +45,7 @@
               </div>
               <div class="col-6 form-group">
                 <input-select v-model="entity['stUtenza']"
-                                   :config="configTypes['stUtenza']">
+                                  :items="this.domini['ST_UTENZA']">
                   </input-select>              </div>
             </div>
             <div class="row">
@@ -141,7 +141,7 @@ export default {
       httpCall: new HttpCall(API_USERS),
       loadEntity: false,
       configTypes:
-                { profile: { isDominio: false, urlApi: '/api/profiles', fieldId: '_id', showCodice: true }, stUtenza: { isDominio: true, dominio: 'st_utenza', showDescrizione: true }, azienda: { isDominio: false, urlApi: '/api/companies', fieldId: '_id', showCodice: true } },
+                { profile: { isDominio: false, urlApi: '/api/profiles', fieldId: '_id', showCodice: true }, azienda: { isDominio: false, urlApi: '/api/companies', fieldId: '_id', showCodice: true } },
       currentId: null,
       dominiToLoad: { stUtenza: 'ST_UTENZA' },
       domini: [],
@@ -241,13 +241,14 @@ export default {
     },
     getDominios() {
       // eslint-disable-next-line no-console
-      console.log('cucuccucu');
       const keysObjectDominiToLoad = Object.keys(this.dominiToLoad);
       if (keysObjectDominiToLoad.length > 0) {
         const dominiIncludes = Object.keys(this.dominiToLoad).map(key => this.dominiToLoad[key]);
         const httpCallDomini = new HttpCall(API_DOMINIO);
         // eslint-disable-next-line no-console
-        httpCallDomini.getCustom('/includes', `?domini=${dominiIncludes.join(',')}`).then(res => console.log(res));
+        httpCallDomini.getCustom('/includes', `?domini=${dominiIncludes.join(',')}`).then((res) => {
+          this.domini = res;
+        });
       }
     },
   },

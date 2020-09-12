@@ -1,14 +1,18 @@
 <template>
   <div>
     <select v-model="modelValue" :class="classCss">
-      <option v-for="item in items" :key="item.id">
-        {{ item.showText }}
+      <option v-for="item in items" :key="item.id" :value="item._id">
+        <template v-if="showCodice">
+          {{ item.codice }}
+        </template>
+        <template v-else-if="showDescrizione">
+          {{ item.descrizione }}
+        </template>
       </option>
     </select>
   </div>
 </template>
 <script>
-import { API_DOMINIO } from '../../services/constant-services';
 
 export default {
   props: {
@@ -23,6 +27,17 @@ export default {
       type: String,
       default: 'form-control form-control form-control-alternative',
     },
+    showCodice: {
+      type: Boolean,
+      default: false,
+    },
+    showDescrizione: {
+      type: Boolean,
+      default: true,
+    },
+    items: {
+      type: Array,
+    },
   },
   computed: {
     modelValue: {
@@ -36,12 +51,6 @@ export default {
   },
   data() {
     return {
-      items: [],
-      fieldId: 'codice',
-      fieldCodice: 'codice',
-      fieldDescrizione: 'descrizione',
-      showCodice: false,
-      showDescrizione: false,
     };
   },
   created() {
@@ -50,39 +59,8 @@ export default {
     if (this.config.fieldDescrizione) { this.fieldCodice = this.config.fieldDescrizione; }
     if (this.config.showCodice) this.showCodice = this.config.showCodice;
     if (this.config.showDescrizione) { this.showDescrizione = this.config.showDescrizione; }
-    this.find();
   },
   methods: {
-    find() {
-      let api = this.config.urlApi;
-      if (this.config.isDominio) {
-        api = `${API_DOMINIO}/${this.config.dominio}`;
-      }
-      fetch(api, {})
-        .then(res => res.json())
-        .then((data) => {
-          let arrayRet = [];
-          if (this.config.isDominio) arrayRet = data;
-          else arrayRet = data.entities;
-          arrayRet.forEach((element) => {
-            const object = {};
-            object.id = element[this.fieldId];
-            object.codice = element[this.fieldCodice];
-            object.descrizione = element[this.fieldDescrizione];
-            if (this.showCodice && this.showDescrizione) {
-              object.showText =
-                `${element[this.fieldCodice]
-                } = ${
-                  element[this.fieldDescrizione]}`;
-            } else if (this.showCodice) {
-              object.showText = element[this.fieldCodice];
-            } else if (this.showDescrizione) {
-              object.showText = element[this.fieldDescrizione];
-            }
-            this.items.push(object);
-          });
-        });
-    },
     enter() {
       this.textSearchTemp = this.textSearch;
       this.textSearch = '';

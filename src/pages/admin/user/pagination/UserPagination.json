@@ -28,7 +28,7 @@
     {
         "label": "Stato Utenza",
         "field": "stUtenza",
-        "bindField": "stUtenza"
+        "bindField": "stUtenza.descrizione"
     },
     {
       "label": "Azienda",

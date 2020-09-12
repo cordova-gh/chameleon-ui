@@ -162,7 +162,7 @@ export default {
               case 'select': {
                 // eslint-disable-next-line quotes
                 inputs += `${spazio}    <input-select v-model="entity['${col.field}']"
-                                   :config="configTypes['${col.field}']">
+                                  :items="this.domini['${col.configType.dominio}']">
                   </input-select>`;
                 break;
               }
@@ -221,7 +221,7 @@ export default {
             import InputMoney from '@/ui-components/input-components/InputMoney';
             import HttpCall from '@/services/HttpCall';
             import { Utility } from '@/utilities/utility';
-            import { ${this.config.urlApi} } from '@/services/constant-services';
+            import { ${this.config.urlApi}, API_DOMINIO  } from '@/services/constant-services';
 
             export default {
             props: {
@@ -259,9 +259,11 @@ export default {
             httpCall: new HttpCall(${this.config.urlApi}),
             loadEntity: false,
             configTypes:
-                ${this.getConfigTypes()}
+                ${this.getConfigTypesAutocomplete()}
             ,
             currentId: null,
+            dominiToLoad: ${this.dominiToLoad()},
+            domini: [],
             };
             },
             created() {
@@ -269,6 +271,7 @@ export default {
             },
             methods: {
             onCreated() {
+            this.getDominios();
             this.currentId = this.$route.params.id;
             if (this.currentId) {
                 this.getEntity(this.currentId);
@@ -355,6 +358,18 @@ export default {
                   }
                 });
             },
+            getDominios() {
+              // eslint-disable-next-line no-console
+              const keysObjectDominiToLoad = Object.keys(this.dominiToLoad);
+              if (keysObjectDominiToLoad.length > 0) {
+                const dominiIncludes = Object.keys(this.dominiToLoad).map(key => this.dominiToLoad[key]);
+                const httpCallDomini = new HttpCall(API_DOMINIO);
+                // eslint-disable-next-line no-console
+                  httpCallDomini.getCustom('/includes', ${this.backTickWord}?domini=${this.braceWord}dominiIncludes.join(',')}${this.backTickWord}).then((res) => {
+                  this.domini = res;
+                });
+              }
+            },
             },
             };
             </${this.scriptWord}>`;
@@ -391,13 +406,26 @@ export default {
       // eslint-disable-next-line prefer-template
       return objString + '}';
     },
-    getConfigTypes() {
+    getConfigTypesAutocomplete() {
       const objString = {};
       this.config.sections.forEach((section) => {
         section.rows.forEach((cols) => {
           cols.forEach((col) => {
-            if (col.configType) {
+            if (col.configType && col.type === 'autocomplete') {
               objString[col.field] = col.configType;
+            }
+          });
+        });
+      });
+      return JSON.stringify(objString).replaceAll('\'', '').replaceAll('""', '\'');
+    },
+    dominiToLoad() {
+      const objString = {};
+      this.config.sections.forEach((section) => {
+        section.rows.forEach((cols) => {
+          cols.forEach((col) => {
+            if (col.configType && col.type === 'select') {
+              objString[col.field] = col.configType.dominio;
             }
           });
         });
