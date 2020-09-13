@@ -2,13 +2,13 @@
   "numCols":2,
   "sections":[
     {
-      "label": "Dati Genereli",
+      "label": "Caratteristiche",
       "rows": [
         [
           {
             "field": "codice",
             "label": "Codice",
-            "bindField": "Codice",
+            "bindField": "codice",
             "type": "text"
           }
         ],

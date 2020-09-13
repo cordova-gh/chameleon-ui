@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <ui-form
-    title="Dati Personali"
+    title="Prodotto"
     :config="configForm"
     :urlApi="urlApi"
     :currentId="currentId"></ui-form>

@@ -11,7 +11,6 @@
       <ui-form
         :urlApi="urlApi"
         :config="configFormFilter"
-        :currentId="currentId"
         v-bind:isForm="false"
         v-bind:isFilter="true"
         @filter="filter"
@@ -94,10 +93,6 @@ export default {
     config: {
       type: Array,
     },
-    reload: {
-      type: Boolean,
-      default: false,
-    },
     showButtonPlus: {
       type: Boolean,
       default: true,
@@ -119,7 +114,7 @@ export default {
     'ui-form': UIForm,
   },
   created() {
-    this.getEntities(1);
+    this.getEntities(1, null);
     this.configGridListFilter = this.config.filter(config => config.isFilter);
     if (this.configGridListFilter.length > 0) {
       const sectionFilter = {};
@@ -140,9 +135,19 @@ export default {
     }
   },
   methods: {
-    getEntities(page) {
+    getEntities(page, filterObj) {
+      let filterArray = [];
+      let filterString = '';
+      if (filterObj) {
+        filterArray = Object.keys(filterObj)
+          .filter(keyFilter => filterObj[keyFilter])
+          .map(keyFilter => `${keyFilter}.contains=${filterObj[keyFilter]}`);
+        filterString = `&${filterArray.join('&')}`;
+      }
+
       this.currentPage = page;
-      const params = `?page=${this.currentPage}`;
+      // eslint-disable-next-line no-param-reassign
+      const params = `?page=${this.currentPage}${filterString}`;
       this.httpCall.get(params).then((data) => {
         this.entities = Utility.createArrayByConfig(data.entities, this.config);
         this.pages = data.pages;
@@ -161,21 +166,7 @@ export default {
       this.$emit('onCreate');
     },
     filter(filterObj) {
-      const filterArray = Object.keys(filterObj)
-        .filter(keyFilter => filterObj[keyFilter])
-        .map(keyFilter => `${keyFilter}=${filterObj[keyFilter]}`);
-      const params = filterArray.join('&');
-      this.getEntities(1, params);
-    },
-  },
-  watch: {
-    reload: {
-      immediate: true,
-      deep: true,
-      handler() {
-        this.getEntities(1);
-        this.$emit('endLoadPagination');
-      },
+      this.getEntities(1, filterObj);
     },
   },
 };

@@ -86,14 +86,12 @@
           <div v-else-if="isFilter">
             <div class="row justify-content-end">
               <div class="col-2">
-                <button class="btn btn-secondary btn-block" @click="onReset">
-                  Pulisci
-                </button>
+                <input type="button" class="btn btn-secondary btn-block"
+                @click="onReset" value="Pulisci">
               </div>
               <div class="col-2">
-                <button class="btn btn-primary btn-block" @click="onFind">
-                  Cerca
-                </button>
+                <input type="button" class="btn btn-primary btn-block"
+                @click="onFind" value="Cerca">
               </div>
             </div>
           </div>

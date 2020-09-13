@@ -20,7 +20,8 @@
             "label": "Password",
             "field": "password",
             "bindField": "password",
-            "type": "password"
+            "type": "password",
+            "invisibleUpdate": true
           }
         ],
         [

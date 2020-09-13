@@ -2,8 +2,8 @@
   "urlApi": "API_COMPANY",
   "title": "Company",
   "isForm": true,
-    "numCols": 3,
-    "sections":[
+  "numCols": 3,
+  "sections":[
         {
             "label": "Dati Generali",
             "rows": [
@@ -43,7 +43,7 @@
                     "type": "text"
                   },
                   {
-                    "field": ".partitaIvaEstera",
+                    "field": "partitaIvaEstera",
                     "label": "Partita Iva Estera",
                     "bindField": "anagrafica.partitaIvaEstera",
                     "type": "text"
@@ -223,25 +223,25 @@
               {
                 "label": "Nome",
                 "field": "nomeRiferimento",
-                "bindField": "contattoReferente.nome",
+                "bindField": "anagrafica.contattoReferente.nome",
                 "type": "text"
               },
               {
                 "label": "Telefono",
                 "field": "telefonoReferente",
-                "bindField": "contattoReferente.telefono",
+                "bindField": "anagrafica.contattoReferente.telefono",
                 "type": "text"
               },
               {
                 "label": "Cellulare",
                 "field": "cellulareRiferimento",
-                "bindField": "contattoReferente.cellulare",
+                "bindField": "anagrafica.contattoReferente.cellulare",
                 "type": "text"
               },
               {
                 "label": "Email",
                 "field": "emailReferente",
-                "bindField": "contattoReferente.email",
+                "bindField": "anagrafica.contattoReferente.email",
                 "type": "text"
               }
             ]

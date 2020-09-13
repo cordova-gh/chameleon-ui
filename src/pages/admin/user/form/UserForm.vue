@@ -1,74 +1,74 @@
 <template>
-  <div class="container-fluid mt--6">
-    <div class="card mb-4"><div class="card-header">
-              <h3 class="mb-0">UTENTI</h3>
-          </div>
-      <div class="card-body">
-        <form @submit.prevent="saveEntity">
-          <div class="card-body"><div class="title-form">
-                      <p>Dati utente</p>
-                   </div>
+<div class="container-fluid mt--6">
+  <div class="card mb-4"><div class="card-header">
+            <h3 class="mb-0">UTENTI</h3>
+        </div>
+    <div class="card-body">
+      <form @submit.prevent="saveEntity">
+        <div class="card-body"><div class="title-form">
+                    <p>Dati utente</p>
+                 </div>
             <div class="row">
               <div class="col-6 form-group">
                 <input-text v-model="entity['email']" label="Email">
-                </input-text>
+              </input-text>
               </div>
             </div>
             <div class="row">
-              <div class="col-6 form-group">
+              <div class="col-6 form-group" v-if="visibleFields['password']">
                 <input-password v-model="entity['password']" label="Password">
-                </input-password>              </div>
+              </input-password>              </div>
             </div>
             <div class="row">
               <div class="col-6 form-group">
                 <input-text v-model="entity['nome']" label="Nome">
-                </input-text>
+              </input-text>
               </div>
               <div class="col-6 form-group">
                 <input-text v-model="entity['cognome']" label="Cognome">
-                </input-text>
+              </input-text>
               </div>
             </div>
             <div class="row">
               <div class="col-6 form-group">
                   <template v-if="loadEntity">
-                      <input-autocomplete v-model="entity['profile']"
-                         :config="configTypes['profile']">
-                       </input-autocomplete>
-                    </template>
+                    <input-autocomplete v-model="entity['profile']"
+                       :config="configTypes['profile']">
+                     </input-autocomplete>
+                  </template>
               </div>
-              <div class="col-6 form-group">
+              <div class="col-6 form-group" v-if="modePage">
                 <input-select v-model="entity['stUtenza']"
-                                  :items="this.domini['ST_UTENZA']">
-                  </input-select>              </div>
+                                :items="this.domini['ST_UTENZA']">
+                </input-select>              </div>
             </div>
             <div class="row">
               <div class="col-6 form-group">
                   <template v-if="loadEntity">
-                      <input-autocomplete v-model="entity['azienda']"
-                         :config="configTypes['azienda']">
-                       </input-autocomplete>
-                    </template>
+                    <input-autocomplete v-model="entity['azienda']"
+                       :config="configTypes['azienda']">
+                     </input-autocomplete>
+                  </template>
               </div>
             </div>
            </div><div>
-                    <div class="row justify-content-end">
-                    <template v-if="modePage === 'I'">
-                        <div class="col-3 ">
-                        <button class="btn btn-primary btn-block">Salva</button>
-                        </div>
-                    </template>
-                    <template v-else>
-                        <div class="col-3">
-                        <button class="btn btn-primary btn-block">Modifica</button>
-                        </div>
-                    </template>
-                    </div>
-                </div>
-        </form>
-      </div>
+                  <div class="row justify-content-end">
+                  <template v-if="modePage === 'I'">
+                      <div class="col-3 ">
+                      <button class="btn btn-primary btn-block">Salva</button>
+                      </div>
+                  </template>
+                  <template v-else>
+                      <div class="col-3">
+                      <button class="btn btn-primary btn-block">Modifica</button>
+                      </div>
+                  </template>
+                  </div>
+              </div>
+      </form>
     </div>
   </div>
+</div>
 </template>
 <script>
 import Vue from 'vue';
@@ -79,6 +79,7 @@ import InputPassword from '@/ui-components/input-components/InputPassword';
 import InputNumber from '@/ui-components/input-components/InputNumber';
 import InputDate from '@/ui-components/input-components/InputDate';
 import InputMoney from '@/ui-components/input-components/InputMoney';
+import InputTextArea from '@/ui-components/input-components/InputTextArea';
 import HttpCall from '@/services/HttpCall';
 import { Utility } from '@/utilities/utility';
 import { API_USER, API_DOMINIO } from '@/services/constant-services';
@@ -110,6 +111,7 @@ export default {
     'input-number': InputNumber,
     'input-date': InputDate,
     'input-money': InputMoney,
+    'input-textarea': InputTextArea,
   },
   data() {
     return {
@@ -121,19 +123,27 @@ export default {
         stUtenza: '',
         azienda: '',
       },
-      annidateFields: { email: 'email',
-        password: 'password',
-        nome: 'anagrafica.personaFisica.nome',
-        cognome: 'anagrafica.personaFisica.cognome',
-        profile: 'profile',
-        stUtenza: 'stUtenza',
-        azienda: 'azienda',
+      propsFields: { email: { bind: 'email' },
+        password: { bind: 'password', invisibleUpdate: true },
+        nome: { bind: 'anagrafica.personaFisica.nome' },
+        cognome: { bind: 'anagrafica.personaFisica.cognome' },
+        profile: { bind: 'profile' },
+        stUtenza: { bind: 'stUtenza' },
+        azienda: { bind: 'azienda' },
+      },
+      visibleFields: { email: true,
+        password: true,
+        nome: true,
+        cognome: true,
+        profile: true,
+        stUtenza: true,
+        azienda: true,
       },
       modePage: '',
       httpCall: new HttpCall(API_USER),
       loadEntity: false,
       configTypes:
-                { profile: { isDominio: false, urlApi: '/api/profiles', fieldId: '_id', showCodice: true }, azienda: { isDominio: false, urlApi: '/api/companies', fieldId: '_id', showCodice: true } },
+              { profile: { isDominio: false, urlApi: '/api/profiles', fieldId: '_id', showCodice: true }, azienda: { isDominio: false, urlApi: '/api/companies', fieldId: '_id', showCodice: true } },
       currentId: null,
       dominiToLoad: { stUtenza: 'ST_UTENZA' },
       domini: [],
@@ -149,6 +159,13 @@ export default {
       if (this.currentId) {
         this.getEntity(this.currentId);
         this.modePage = 'U';
+        // eslint-disable-next-line no-console
+        console.log('test');
+        this.visibleFields.password = false;
+        // const fieldsInvisible = Array.from(this.propsFields).filter(propField => propField.invisibleUpdate);
+        // fieldsInvisible.forEach(() => {
+        //   this.visibleFields.password = false;
+        // });
       } else {
         this.loadEntity = true;
         this.modePage = 'I';
@@ -189,8 +206,8 @@ export default {
     },
     createEntity() {
       const obj = {};
-      Object.keys(this.annidateFields).forEach((key) => {
-        const bindField = this.annidateFields[key];
+      Object.keys(this.propsFields).forEach((key) => {
+        const bindField = this.propsFields[key].bind;
         if (bindField.indexOf('.') > 0) {
           const annidateFields = bindField.split('.');
           let objTemp = obj;
@@ -216,8 +233,8 @@ export default {
       return obj;
     },
     setEntity(data) {
-      Object.keys(this.annidateFields).forEach((key) => {
-        const annidateField = this.annidateFields[key];
+      Object.keys(this.propsFields).forEach((key) => {
+        const annidateField = this.propsFields[key].bind;
         if (annidateField.indexOf('.') > 0) {
           const annidateValue = Utility.getAnnidateValue(
             annidateField.split('.'),
@@ -232,12 +249,10 @@ export default {
       });
     },
     getDominios() {
-      // eslint-disable-next-line no-console
       const keysObjectDominiToLoad = Object.keys(this.dominiToLoad);
       if (keysObjectDominiToLoad.length > 0) {
         const dominiIncludes = Object.keys(this.dominiToLoad).map(key => this.dominiToLoad[key]);
         const httpCallDomini = new HttpCall(API_DOMINIO);
-        // eslint-disable-next-line no-console
         httpCallDomini.getCustom('/includes', `?domini=${dominiIncludes.join(',')}`).then((res) => {
           this.domini = res;
         });
@@ -246,8 +261,8 @@ export default {
   },
 };
 </script><style>
-            .title-form {
-            border-left-width: 10px solid;
-            border-left-color: #000;
-            }
-            </style>
+          .title-form {
+          border-left-width: 10px solid;
+          border-left-color: #000;
+          }
+          </style>
