@@ -37,6 +37,12 @@
             "label": "Tipologia Prodotto",
             "bindField": "prodotto.tipologia",
             "type": "text"
+          },
+          {
+            "field": "codiceBarra",
+            "label": "Codice",
+            "bindField": "prodotto.codiceBarra",
+            "type": "text"
           }
         ],
         [

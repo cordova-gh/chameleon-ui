@@ -63,6 +63,9 @@
                 <template v-else-if="colElement.type === 'number'">
                   <input-number v-model="entity[colElement.field]"> </input-number>
                 </template>
+                <template v-else-if="colElement.type === 'textarea'">
+                  <input-textarea v-model="entity[colElement.field]"> </input-textarea>
+                </template>
               </div>
             </div>
           </div>
@@ -101,13 +104,14 @@
 </template>
 <script>
 import Vue from 'vue';
-import InputAutocomplete from './input-components/InputAutocomplete';
-import InputSelect from './input-components/InputSelect';
-import InputText from './input-components/InputText';
-import InputPassword from './input-components/InputPassword';
-import InputNumber from './input-components/InputNumber';
-import InputDate from './input-components/InputDate';
-import InputMoney from './input-components/InputMoney';
+import InputText from '@/ui-components/input-components/InputText';
+import InputTextArea from '@/ui-components/input-components/InputTextArea';
+import InputAutocomplete from '@/ui-components/input-components/InputAutocomplete';
+import InputSelect from '@/ui-components/input-components/InputSelect';
+import InputPassword from '@/ui-components/input-components/InputPassword';
+import InputNumber from '@/ui-components/input-components/InputNumber';
+import InputDate from '@/ui-components/input-components/InputDate';
+import InputMoney from '@/ui-components/input-components/InputMoney';
 import HttpCall from '../services/HttpCall';
 import { Utility } from '../utilities/utility';
 
@@ -150,6 +154,7 @@ export default {
     'input-number': InputNumber,
     'input-date': InputDate,
     'input-money': InputMoney,
+    'input-textarea': InputTextArea,
   },
   data() {
     return {
