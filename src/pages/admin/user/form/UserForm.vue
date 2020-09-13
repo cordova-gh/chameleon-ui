@@ -162,7 +162,8 @@ export default {
         // eslint-disable-next-line no-console
         console.log('test');
         this.visibleFields.password = false;
-        // const fieldsInvisible = Array.from(this.propsFields).filter(propField => propField.invisibleUpdate);
+        // const fieldsInvisible = Array.from(this.propsFields).filter(
+        // propField => propField.invisibleUpdate);
         // fieldsInvisible.forEach(() => {
         //   this.visibleFields.password = false;
         // });
