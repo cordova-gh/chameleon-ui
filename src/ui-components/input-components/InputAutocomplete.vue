@@ -85,16 +85,19 @@ export default {
       if (this.config.isDominio) {
         api = `${API_DOMINIO}/${this.config.dominio}`;
       }
+      let params = '';
       if (this.valueShown !== '') {
-        if (!this.config.isDominio) api += '/findByCodice';
-        api = `${api}/${this.valueShown}`;
+        if (this.showCodice) {
+          params += `?codice.contains=${this.valueShown}`;
+        } else if (this.showDescrizione) {
+          params += `?descrizione.contains=${this.valueShown}`;
+        }
       }
 
       this.isLoading = true;
       // eslint-disable-next-line no-console
-      console.log('caisuino');
       const httpCall = new HttpCall(api);
-      httpCall.get()
+      httpCall.get(params)
         .then((data) => {
           this.isLoading = false;
           this.isOpen = true;

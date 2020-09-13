@@ -176,7 +176,7 @@ export default {
     filter(filterObj) {
       const filterArray = Object.keys(filterObj)
         .filter(keyFilter => filterObj[keyFilter])
-        .map(keyFilter => `${keyFilter}=${filterObj[keyFilter]}`);
+        .map(keyFilter => `${keyFilter}.contains=${filterObj[keyFilter]}`);
       const params = filterArray.join('&');
       this.getEntities(1, params);
     },
