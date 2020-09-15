@@ -1,51 +1,50 @@
 <template>
-<div class="container box-container">
-    <div class="card-body">
+<div class="container box-container my-2 py-3">
       <form @submit.prevent="saveEntity">
         <div class="card-body"><div class="title-form">
                     <p>Dati utente</p>
                  </div>
             <div class="row">
-              <div class="col-6 form-group" v-if="!invisibleFields['email']">
+              <div class="col-12 col-md-6 form-group" v-if="!invisibleFields['email']">
                 <input-text v-model="entity['email']" label="Email"
               :readonlyAttr="readonlyFields['email']">
               </input-text>
               </div>
             </div>
             <div class="row">
-              <div class="col-6 form-group" v-if="!invisibleFields['password']">
+              <div class="col-12 col-md-6 form-group" v-if="!invisibleFields['password']">
                 <input-password v-model="entity['password']" label="Password"
               :readonlyAttr="readonlyFields['password']">
               </input-password>              </div>
             </div>
             <div class="row">
-              <div class="col-6 form-group" v-if="!invisibleFields['nome']">
+              <div class="col-12 col-md-6 form-group" v-if="!invisibleFields['nome']">
                 <input-text v-model="entity['nome']" label="Nome"
               :readonlyAttr="readonlyFields['nome']">
               </input-text>
               </div>
-              <div class="col-6 form-group" v-if="!invisibleFields['cognome']">
+              <div class="col-12 col-md-6 form-group" v-if="!invisibleFields['cognome']">
                 <input-text v-model="entity['cognome']" label="Cognome"
               :readonlyAttr="readonlyFields['cognome']">
               </input-text>
               </div>
             </div>
             <div class="row">
-              <div class="col-6 form-group" v-if="!invisibleFields['profile']">
+              <div class="col-12 col-md-6 form-group" v-if="!invisibleFields['profile']">
                   <template v-if="loadEntity">
                     <input-autocomplete v-model="entity['profile']"
                        :config="configTypes['profile']" :readonlyAttr="readonlyFields['profile']">
                      </input-autocomplete>
                   </template>
               </div>
-              <div class="col-6 form-group" v-if="!invisibleFields['stUtenza']">
+              <div class="col-12 col-md-6 form-group" v-if="!invisibleFields['stUtenza']">
                 <input-select v-model="entity['stUtenza']"
                                 :items="this.domini['ST_UTENZA']"
                                 :readonlyAttr="readonlyFields['stUtenza']">
                 </input-select>              </div>
             </div>
             <div class="row">
-              <div class="col-6 form-group" v-if="!invisibleFields['azienda']">
+              <div class="col-12 col-md-6 form-group" v-if="!invisibleFields['azienda']">
                   <template v-if="loadEntity">
                     <input-autocomplete v-model="entity['azienda']"
                        :config="configTypes['azienda']" :readonlyAttr="readonlyFields['azienda']">
@@ -56,7 +55,7 @@
            </div><div>
                   <div class="row justify-content-end">
                   <template v-if="modePage === 'I'">
-                      <div class="col-6 col-md3 ">
+                      <div class="col-6 col-md-3 ">
                       <button class="btn btn-primary btn-block">Salva</button>
                       </div>
                   </template>
@@ -68,7 +67,6 @@
                   </div>
               </div>
       </form>
-    </div>
 </div>
 </template>
 <script>
@@ -267,5 +265,4 @@ export default {
           border-left-width: 10px solid;
           border-left-color: #000;
           }
-
           </style>

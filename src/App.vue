@@ -30,7 +30,7 @@ body{
 }
 
 html {
-    background-color: rgba(239, 242, 249, 0.58);
+
   font-family: "Sailec-Regular", system-ui, -apple-system, BlinkMacSystemFont
   , Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 0.85rem;

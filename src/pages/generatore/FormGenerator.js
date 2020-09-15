@@ -13,6 +13,7 @@ export default class FormGenerator {
   }
 
   templateForm() {
+    // eslint-disable-next-line no-unused-vars
     const titleIf = this.config.title
       ? `<div class="card-header">
             <h3 class="mb-0">${this.config.title}</h3>
@@ -23,7 +24,7 @@ export default class FormGenerator {
       ? `<div>
                   <div class="row justify-content-end">
                   <template v-if="modePage === 'I'">
-                      <div class="col-6 col-md3 ">
+                      <div class="col-6 col-md-3 ">
                       <button class="btn btn-primary btn-block">Salva</button>
                       </div>
                   </template>
@@ -62,7 +63,7 @@ export default class FormGenerator {
         inputs += `${spazio}<div class="row">\n`;
         cols.forEach((col) => {
           const numCols = this.getNumColsForm(col.numCols, section.numCols);
-          inputs += `${spazio}  <div class="col-${numCols} form-group" v-if="!invisibleFields['${col.field}']">\n`;
+          inputs += `${spazio}  <div class="col-12 col-md-${numCols} form-group" v-if="!invisibleFields['${col.field}']">\n`;
           switch (col.type) {
             case 'autocomplete': {
               inputs += `${spazio}      <template v-if="loadEntity">
@@ -128,14 +129,10 @@ export default class FormGenerator {
     // eslint-disable-next-line quotes
     inputs += `           </div>`;
     return `<${this.templateWord}>
-<div class="container-fluid mt--6">
-  <div class="card mb-4">${titleIf}
-    <div class="card-body">
+<div class="container box-container my-2 py-3">
       <form @submit.prevent="saveEntity">
         ${inputs}${isFormIf}${isFilterIf}
       </form>
-    </div>
-  </div>
 </div>
 </${this.templateWord}>\n`;
   }
