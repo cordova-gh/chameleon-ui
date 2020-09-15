@@ -5,7 +5,7 @@ import MainContainer from '@/structure/MainContainer';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from '@/pages/auth/login/Login';
-import Generatore from '@/pages/admin/generator/Generator';
+import Generatore from '@/pages/generatore/Generator';
 
 Vue.use(Router);
 

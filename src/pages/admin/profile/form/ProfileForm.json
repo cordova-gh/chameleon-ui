@@ -1,4 +1,7 @@
 {
+  "urlApi": "API_PROFILE",
+  "title": "PROFILE",
+  "isForm": true,
   "numCols": 1,
   "sections":[
     {

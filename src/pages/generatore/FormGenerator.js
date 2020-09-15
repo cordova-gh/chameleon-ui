@@ -23,12 +23,12 @@ export default class FormGenerator {
       ? `<div>
                   <div class="row justify-content-end">
                   <template v-if="modePage === 'I'">
-                      <div class="col-3 ">
+                      <div class="col-6 col-md3 ">
                       <button class="btn btn-primary btn-block">Salva</button>
                       </div>
                   </template>
                   <template v-else>
-                      <div class="col-3">
+                      <div class="col-6 col-md-3">
                       <button class="btn btn-primary btn-block">Modifica</button>
                       </div>
                   </template>

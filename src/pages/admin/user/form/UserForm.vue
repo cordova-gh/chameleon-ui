@@ -1,5 +1,5 @@
 <template>
-<div class="container-fluid mt--6">
+<div class="container">
   <div class="card mb-4"><div class="card-header">
             <h3 class="mb-0">UTENTI</h3>
         </div>
@@ -9,41 +9,41 @@
                     <p>Dati utente</p>
                  </div>
             <div class="row">
-              <div class="col-6 form-group">
+              <div class="col-12 col-md-6 form-group">
                 <input-text v-model="entity['email']" label="Email">
               </input-text>
               </div>
             </div>
             <div class="row">
-              <div class="col-6 form-group" v-if="visibleFields['password']">
+              <div class="col-12 col-md-6 form-group">
                 <input-password v-model="entity['password']" label="Password">
               </input-password>              </div>
             </div>
             <div class="row">
-              <div class="col-6 form-group">
+              <div class="col-12 col-md-6 form-group">
                 <input-text v-model="entity['nome']" label="Nome">
               </input-text>
               </div>
-              <div class="col-6 form-group">
+              <div class="col-12 col-md-6 form-group">
                 <input-text v-model="entity['cognome']" label="Cognome">
               </input-text>
               </div>
             </div>
             <div class="row">
-              <div class="col-6 form-group">
+              <div class="col-12 col-md-6 form-group">
                   <template v-if="loadEntity">
                     <input-autocomplete v-model="entity['profile']"
                        :config="configTypes['profile']">
                      </input-autocomplete>
                   </template>
               </div>
-              <div class="col-6 form-group" v-if="modePage">
+              <div class="col-12 col-md-6 form-group">
                 <input-select v-model="entity['stUtenza']"
                                 :items="this.domini['ST_UTENZA']">
                 </input-select>              </div>
             </div>
             <div class="row">
-              <div class="col-6 form-group">
+              <div class="col-12 col-md-6 form-group">
                   <template v-if="loadEntity">
                     <input-autocomplete v-model="entity['azienda']"
                        :config="configTypes['azienda']">
@@ -54,12 +54,12 @@
            </div><div>
                   <div class="row justify-content-end">
                   <template v-if="modePage === 'I'">
-                      <div class="col-3 ">
+                      <div class="col-6 col-md-3 ">
                       <button class="btn btn-primary btn-block">Salva</button>
                       </div>
                   </template>
                   <template v-else>
-                      <div class="col-3">
+                      <div class="col-6 col-md-3">
                       <button class="btn btn-primary btn-block">Modifica</button>
                       </div>
                   </template>
@@ -131,14 +131,6 @@ export default {
         stUtenza: { bind: 'stUtenza' },
         azienda: { bind: 'azienda' },
       },
-      visibleFields: { email: true,
-        password: true,
-        nome: true,
-        cognome: true,
-        profile: true,
-        stUtenza: true,
-        azienda: true,
-      },
       modePage: '',
       httpCall: new HttpCall(API_USER),
       loadEntity: false,
@@ -159,14 +151,6 @@ export default {
       if (this.currentId) {
         this.getEntity(this.currentId);
         this.modePage = 'U';
-        // eslint-disable-next-line no-console
-        console.log('test');
-        this.visibleFields.password = false;
-        // const fieldsInvisible = Array.from(this.propsFields).filter(
-        // propField => propField.invisibleUpdate);
-        // fieldsInvisible.forEach(() => {
-        //   this.visibleFields.password = false;
-        // });
       } else {
         this.loadEntity = true;
         this.modePage = 'I';
