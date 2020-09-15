@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{readonlyAttr}}
     <input
       type="text"
       :placeholder="label"

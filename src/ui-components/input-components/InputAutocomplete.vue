@@ -131,8 +131,6 @@ export default {
         });
     },
     findById() {
-      // eslint-disable-next-line no-console
-      console.log('ajahjdhsdj');
       let api = this.config.urlApi.replace('/all', '');
       if (this.config.isDominio) {
         api = `${API_DOMINIO}/${this.config.dominio}`;
