@@ -23,9 +23,14 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+
+}
+body{
+    background-color: rgba(239, 242, 249, 0.58);
 }
 
 html {
+    background-color: rgba(239, 242, 249, 0.58);
   font-family: "Sailec-Regular", system-ui, -apple-system, BlinkMacSystemFont
   , Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 0.85rem;
@@ -53,4 +58,13 @@ html {
         font-size: 1.4rem;
     }
 }
+
+.box-container{
+    background-color: #ffffff;
+    -webkit-box-shadow: 0 4px 20px 0 rgba(94, 135, 176, 0.16);
+    box-shadow: 0 4px 20px 0 rgba(94, 135, 176, 0.16);
+    height: auto;
+    width: 100%;
+    border-radius: 8px;
+  }
 </style>

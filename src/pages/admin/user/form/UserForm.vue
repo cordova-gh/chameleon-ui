@@ -1,8 +1,5 @@
 <template>
-<div class="container-fluid mt--6">
-  <div class="card mb-4"><div class="card-header">
-            <h3 class="mb-0">UTENTI</h3>
-        </div>
+<div class="container box-container">
     <div class="card-body">
       <form @submit.prevent="saveEntity">
         <div class="card-body"><div class="title-form">
@@ -72,7 +69,6 @@
               </div>
       </form>
     </div>
-  </div>
 </div>
 </template>
 <script>
@@ -271,4 +267,5 @@ export default {
           border-left-width: 10px solid;
           border-left-color: #000;
           }
+
           </style>

@@ -1,10 +1,5 @@
 <template>
-  <div class="container-fluid mt--6">
-    <div class="card mb-4">
-      <div v-if="title !== ''" class="card-header">
-        <h3 class="mb-0">{{ title }}</h3>
-      </div>
-      <div class="card-body">
+  <div class="container box-container my-2 py-2">
         <form @submit.prevent="saveEntity">
           <div
             v-for="(sectionElement, indexSection) in config.sections"
@@ -96,8 +91,6 @@
             </div>
           </div>
         </form>
-      </div>
-    </div>
   </div>
 </template>
 <script>

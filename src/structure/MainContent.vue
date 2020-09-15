@@ -16,8 +16,5 @@ export default {
 };
 </script>
 <style>
-.main-content{
-  background-color: rgba(239, 242, 249, 0.58);
-}
 
 </style>

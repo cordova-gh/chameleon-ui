@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container box-container my-2 py-5">
     <div
       v-if="
         configGridListFilter &&
@@ -18,7 +18,7 @@
       </ui-form>
     </div>
     <div class="container">
-      <div class="table table-hover">
+      <div class="table-responsive table-hover">
         <table class="table align-items-center">
           <thead class="thead-light">
             <th style="width: 5%"></th>

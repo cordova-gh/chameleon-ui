@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid py-3   bg-light">
+  <div class="container-fluid py-3   bg-white">
     <div class="display-3">
       <div class="row">
         <div class="col-6 text-left px-5">
