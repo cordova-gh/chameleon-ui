@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-content">
     <router-view />
     <spinner></spinner>
   </div>
@@ -15,3 +15,9 @@ export default {
   },
 };
 </script>
+<style>
+.main-content{
+  background-color: rgba(239, 242, 249, 0.58);
+}
+
+</style>

@@ -62,52 +62,59 @@ export default class FormGenerator {
         inputs += `${spazio}<div class="row">\n`;
         cols.forEach((col) => {
           const numCols = this.getNumColsForm(col.numCols, section.numCols);
-          inputs += `${spazio}  <div class="col-${numCols} form-group">\n`;
+          inputs += `${spazio}  <div class="col-${numCols} form-group" v-if="!invisibleFields['${col.field}']">\n`;
           switch (col.type) {
             case 'autocomplete': {
               inputs += `${spazio}      <template v-if="loadEntity">
                     <input-autocomplete v-model="entity['${col.field}']"
-                       :config="configTypes['${col.field}']">
+                       :config="configTypes['${col.field}']" :readonlyAttr="readonlyFields['${col.field}']">
                      </input-autocomplete>
                   </template>\n`;
               break;
             }
             case 'password': {
               // eslint-disable-next-line quotes
-              inputs += `${spazio}    <input-password v-model="entity['${col.field}']" label="${col.label}">
+              inputs += `${spazio}    <input-password v-model="entity['${col.field}']" label="${col.label}"
+              :readonlyAttr="readonlyFields['${col.field}']">
               </input-password>`;
               break;
             }
             case 'select': {
               // eslint-disable-next-line quotes
               inputs += `${spazio}    <input-select v-model="entity['${col.field}']"
-                                :items="this.domini['${col.configType.dominio}']">
+                                :items="this.domini['${col.configType.dominio}']"
+                                :readonlyAttr="readonlyFields['${col.field}']">
                 </input-select>`;
               break;
             }
             case 'date': {
               // eslint-disable-next-line quotes
-              inputs += `${spazio}    <input-date v-model="entity['${col.field}']"> </input-date>`;
+              inputs += `${spazio}    <input-date v-model="entity['${col.field}']"
+              :readonlyAttr="readonlyFields['${col.field}']"> </input-date>`;
               break;
             }
             case 'money': {
               // eslint-disable-next-line quotes
-              inputs += `${spazio}    <input-money v-model="entity['${col.field}']"> </input-money>`;
+              inputs += `${spazio}    <input-money v-model="entity['${col.field}']"
+              :readonlyAttr="readonlyFields['${col.field}']"> </input-money>`;
               break;
             }
             case 'number': {
               // eslint-disable-next-line quotes
-              inputs += `${spazio}    <input-number v-model="entity['${col.field}']"> </input-number>`;
+              inputs += `${spazio}    <input-number v-model="entity['${col.field}']"
+              :readonlyAttr="readonlyFields['${col.field}']"> </input-number>`;
               break;
             }
             case 'textarea': {
               // eslint-disable-next-line quotes
-              inputs += `${spazio}    <input-textarea v-model="entity['${col.field}']"> </input-textarea>`;
+              inputs += `${spazio}    <input-textarea v-model="entity['${col.field}']"
+              :readonlyAttr="readonlyFields['${col.field}']"> </input-textarea>`;
               break;
             }
             default: {
               // eslint-disable-next-line quotes
-              inputs += `${spazio}    <input-text v-model="entity['${col.field}']" label="${col.label}">
+              inputs += `${spazio}    <input-text v-model="entity['${col.field}']" label="${col.label}"
+              :readonlyAttr="readonlyFields['${col.field}']">
               </input-text>\n`;
             }
           }
@@ -189,6 +196,8 @@ export default class FormGenerator {
           currentId: null,
           dominiToLoad: ${this.dominiToLoad()},
           domini: [],
+          invisibleFields: {},
+          readonlyFields: {},
           };
           },
           created() {
@@ -201,6 +210,7 @@ export default class FormGenerator {
           if (this.currentId) {
               this.getEntity(this.currentId);
               this.modePage = 'U';
+              this.setModeFields();
           } else {
               this.loadEntity = true;
               this.modePage = 'I';
@@ -293,6 +303,19 @@ export default class FormGenerator {
               });
             }
           },
+          setModeFields() {
+            const keysPropsFields = Object.keys(this.propsFields);
+            const fieldsInvisible = keysPropsFields
+              .filter(key => this.propsFields[key].invisibleUpdate);
+            fieldsInvisible.forEach((fieldInvisible) => {
+              this.invisibleFields[fieldInvisible] = true;
+            });
+            const fieldsReadOnly = keysPropsFields
+              .filter(key => this.propsFields[key].readonlyUpdate);
+            fieldsReadOnly.forEach((fieldReadOnly) => {
+              this.readonlyFields[fieldReadOnly] = true;
+            });
+          },
           },
           };
           </${this.scriptWord}>`;
@@ -322,11 +345,14 @@ export default class FormGenerator {
     this.config.sections.forEach((section) => {
       section.rows.forEach((cols) => {
         cols.forEach((col) => {
-          let invisibleUpdateStr = '';
+          let otherAttributes = '';
           if (col.invisibleUpdate) {
-            invisibleUpdateStr = ', invisibleUpdate: true';
+            otherAttributes += ', invisibleUpdate: true';
           }
-          objString += `${col.field}: { bind:'${col.bindField}'${invisibleUpdateStr}},\n`;
+          if (col.readonlyUpdate) {
+            otherAttributes += ', readonlyUpdate: true';
+          }
+          objString += `${col.field}: { bind:'${col.bindField}'${otherAttributes}},\n`;
         });
       });
     });

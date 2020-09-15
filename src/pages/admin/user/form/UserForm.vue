@@ -1,5 +1,5 @@
 <template>
-<div class="container">
+<div class="container-fluid mt--6">
   <div class="card mb-4"><div class="card-header">
             <h3 class="mb-0">UTENTI</h3>
         </div>
@@ -9,44 +9,49 @@
                     <p>Dati utente</p>
                  </div>
             <div class="row">
-              <div class="col-12 col-md-6 form-group">
-                <input-text v-model="entity['email']" label="Email">
+              <div class="col-6 form-group" v-if="!invisibleFields['email']">
+                <input-text v-model="entity['email']" label="Email"
+              :readonlyAttr="readonlyFields['email']">
               </input-text>
               </div>
             </div>
             <div class="row">
-              <div class="col-12 col-md-6 form-group">
-                <input-password v-model="entity['password']" label="Password">
+              <div class="col-6 form-group" v-if="!invisibleFields['password']">
+                <input-password v-model="entity['password']" label="Password"
+              :readonlyAttr="readonlyFields['password']">
               </input-password>              </div>
             </div>
             <div class="row">
-              <div class="col-12 col-md-6 form-group">
-                <input-text v-model="entity['nome']" label="Nome">
+              <div class="col-6 form-group" v-if="!invisibleFields['nome']">
+                <input-text v-model="entity['nome']" label="Nome"
+              :readonlyAttr="readonlyFields['nome']">
               </input-text>
               </div>
-              <div class="col-12 col-md-6 form-group">
-                <input-text v-model="entity['cognome']" label="Cognome">
+              <div class="col-6 form-group" v-if="!invisibleFields['cognome']">
+                <input-text v-model="entity['cognome']" label="Cognome"
+              :readonlyAttr="readonlyFields['cognome']">
               </input-text>
               </div>
             </div>
             <div class="row">
-              <div class="col-12 col-md-6 form-group">
+              <div class="col-6 form-group" v-if="!invisibleFields['profile']">
                   <template v-if="loadEntity">
                     <input-autocomplete v-model="entity['profile']"
-                       :config="configTypes['profile']">
+                       :config="configTypes['profile']" :readonlyAttr="readonlyFields['profile']">
                      </input-autocomplete>
                   </template>
               </div>
-              <div class="col-12 col-md-6 form-group">
+              <div class="col-6 form-group" v-if="!invisibleFields['stUtenza']">
                 <input-select v-model="entity['stUtenza']"
-                                :items="this.domini['ST_UTENZA']">
+                                :items="this.domini['ST_UTENZA']"
+                                :readonlyAttr="readonlyFields['stUtenza']">
                 </input-select>              </div>
             </div>
             <div class="row">
-              <div class="col-12 col-md-6 form-group">
+              <div class="col-6 form-group" v-if="!invisibleFields['azienda']">
                   <template v-if="loadEntity">
                     <input-autocomplete v-model="entity['azienda']"
-                       :config="configTypes['azienda']">
+                       :config="configTypes['azienda']" :readonlyAttr="readonlyFields['azienda']">
                      </input-autocomplete>
                   </template>
               </div>
@@ -54,7 +59,7 @@
            </div><div>
                   <div class="row justify-content-end">
                   <template v-if="modePage === 'I'">
-                      <div class="col-6 col-md-3 ">
+                      <div class="col-6 col-md3 ">
                       <button class="btn btn-primary btn-block">Salva</button>
                       </div>
                   </template>
@@ -123,7 +128,7 @@ export default {
         stUtenza: '',
         azienda: '',
       },
-      propsFields: { email: { bind: 'email' },
+      propsFields: { email: { bind: 'email', readonlyUpdate: true },
         password: { bind: 'password', invisibleUpdate: true },
         nome: { bind: 'anagrafica.personaFisica.nome' },
         cognome: { bind: 'anagrafica.personaFisica.cognome' },
@@ -139,6 +144,8 @@ export default {
       currentId: null,
       dominiToLoad: { stUtenza: 'ST_UTENZA' },
       domini: [],
+      invisibleFields: {},
+      readonlyFields: {},
     };
   },
   created() {
@@ -151,6 +158,7 @@ export default {
       if (this.currentId) {
         this.getEntity(this.currentId);
         this.modePage = 'U';
+        this.setModeFields();
       } else {
         this.loadEntity = true;
         this.modePage = 'I';
@@ -242,6 +250,19 @@ export default {
           this.domini = res;
         });
       }
+    },
+    setModeFields() {
+      const keysPropsFields = Object.keys(this.propsFields);
+      const fieldsInvisible = keysPropsFields
+        .filter(key => this.propsFields[key].invisibleUpdate);
+      fieldsInvisible.forEach((fieldInvisible) => {
+        this.invisibleFields[fieldInvisible] = true;
+      });
+      const fieldsReadOnly = keysPropsFields
+        .filter(key => this.propsFields[key].readonlyUpdate);
+      fieldsReadOnly.forEach((fieldReadOnly) => {
+        this.readonlyFields[fieldReadOnly] = true;
+      });
     },
   },
 };

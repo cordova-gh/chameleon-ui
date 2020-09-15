@@ -1,6 +1,6 @@
 <template>
   <div>
-    <template v-if="isReadonly">
+    <template v-if="readonlyAttr">
       <input type="checkbox" v-model="modelValue" onclick="return false;" />
     </template>
     <template v-else>
@@ -19,7 +19,7 @@ export default {
     value: {
       type: Boolean,
     },
-    isReadonly: {
+    readonlyAttr: {
       type: Boolean,
       default: false,
     },

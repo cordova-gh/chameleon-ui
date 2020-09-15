@@ -5,6 +5,7 @@
       :class="classCss"
       cols="5"
       rows="5"
+      :readonly="readonlyAttr"
     ></textarea>
 </template>
 <script>
@@ -24,6 +25,10 @@ export default {
     classCss: {
       type: String,
       default: 'form-control form-control form-control-alternative',
+    },
+    readonlyAttr: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {

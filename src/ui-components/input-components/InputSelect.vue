@@ -1,6 +1,6 @@
 <template>
   <div>
-    <select v-model="modelValue" :class="classCss">
+    <select v-model="modelValue" :class="classCss" :readonly="readonlyAttr">
       <option v-for="item in items" :key="item.id" :value="item._id">
         <template v-if="showCodice">
           {{ item.codice }}
@@ -37,6 +37,10 @@ export default {
     },
     items: {
       type: Array,
+    },
+    readonlyAttr: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {

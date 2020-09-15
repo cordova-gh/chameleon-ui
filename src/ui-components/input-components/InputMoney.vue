@@ -6,6 +6,12 @@
 
 <script>
 export default {
+  props: {
+    readonlyAttr: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data: () => ({
     value: 1000,
   }),

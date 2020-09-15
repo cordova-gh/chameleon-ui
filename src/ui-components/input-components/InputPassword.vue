@@ -1,6 +1,7 @@
 <template >
   <div>
-    <input type="password" :placeholder="label" v-model="modelValue" :class="classCss" />
+    <input type="password" :placeholder="label"
+    v-model="modelValue" :class="classCss" :readonly="readonlyAttr"/>
   </div>
 </template>
 <script>
@@ -15,6 +16,10 @@ export default {
     classCss: {
       type: String,
       default: 'form-control form-control form-control-alternative',
+    },
+    readonlyAttr: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {

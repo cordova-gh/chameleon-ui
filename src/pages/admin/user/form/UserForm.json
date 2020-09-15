@@ -12,7 +12,8 @@
             "label": "Email",
             "field": "email",
             "bindField": "email",
-            "type": "text"
+            "type": "text",
+            "readonlyUpdate": true
           }
         ],
         [

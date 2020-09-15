@@ -21,6 +21,10 @@ export default {
     value: {
       type: String,
     },
+    readonlyAttr: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     modelValue: {
