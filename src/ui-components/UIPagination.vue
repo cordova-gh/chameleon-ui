@@ -7,7 +7,6 @@
           configFormFilter
       "
     >
-
       <ui-form
         :urlApi="urlApi"
         :config="configFormFilter"
@@ -57,7 +56,14 @@
         </table>
         <nav aria-label="Page navigation example">
           <ul class="pagination justify-content-end">
-            <div v-for="(page, idxPage) of pages" :key="idxPage">
+            <li :class="disablePreviousPagination ? 'page-item disabled' : 'page-item'">
+              <a class="page-link" href="#" aria-label="Previous"
+               @click="getEntities(currentPage-1)" >
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </a>
+            </li>
+            <div v-for="(page, idxPage) of visiblePages" :key="idxPage">
               <template v-if="currentPage === page">
                 <li class="page-item active">
                   <a class="page-link">{{ page }}</a>
@@ -65,10 +71,18 @@
               </template>
               <template v-else>
                 <li class="page-item">
-                  <a class="page-link" @click="getEntities(page)">{{ page }}</a>
+                  <a class="page-link"
+                  @click="getEntities(page)">{{ page }}</a>
                 </li>
               </template>
             </div>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next"
+              @click="getEntities(currentPage+1)">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+              </a>
+            </li>
           </ul>
         </nav>
       </div>
@@ -107,6 +121,10 @@ export default {
       httpCall: new HttpCall(this.urlApi),
       configGridListFilter: [],
       configFormFilter: null,
+      visiblePages: [],
+      maxPages: 3,
+      disablePreviousPagination: false,
+      disableNextPagination: false,
     };
   },
   components: {
@@ -121,10 +139,12 @@ export default {
       sectionFilter.label = 'Filtri Ricerca';
       const filterRows = [];
       this.configGridListFilter.forEach((config) => {
-        filterRows.push({ field: config.field,
+        filterRows.push({
+          field: config.field,
           type: config.type,
           bindField: config.field,
-          label: config.label });
+          label: config.label,
+        });
       });
       sectionFilter.rows = [];
       sectionFilter.rows[0] = filterRows;
@@ -135,7 +155,21 @@ export default {
     }
   },
   methods: {
+
     getEntities(page, filterObj) {
+      // eslint-disable-next-line no-console
+      console.log('ciaoaoao');
+      let diff = 0;
+      if (page > 1) {
+        if (page % this.visiblePages[this.visiblePages.length - 1] === 0) {
+          diff = this.visiblePages.length - 1;
+        } else if (this.visiblePages[0] !== 1 && page % this.visiblePages[0] === 0) {
+          diff = -(this.visiblePages.length - 1);
+        }
+      }
+      if (diff !== 0) {
+        this.visiblePages = this.visiblePages.map(changePage => changePage + diff);
+      }
       let filterArray = [];
       let filterString = '';
       if (filterObj) {
@@ -143,6 +177,7 @@ export default {
           .filter(keyFilter => filterObj[keyFilter])
           .map(keyFilter => `${keyFilter}.contains=${filterObj[keyFilter]}`);
         filterString = `&${filterArray.join('&')}`;
+        this.currentPage = 1;
       }
 
       this.currentPage = page;
@@ -151,6 +186,21 @@ export default {
       this.httpCall.get(params).then((data) => {
         this.entities = Utility.createArrayByConfig(data.entities, this.config);
         this.pages = data.pages;
+        // eslint-disable-next-line no-console
+        console.log('popopppo');
+        if (this.pages > 1) {
+          if (this.currentPage <= 1) {
+            this.disablePreviousPagination = true;
+            const pagesToGenerate = this.pages <= this.maxPages ? this.pages : this.maxPages;
+            for (let i = 1; i <= pagesToGenerate; i += 1) {
+              this.visiblePages.push(i);
+            }
+          } else {
+            this.disablePreviousPagination = false;
+          }
+        } else {
+          this.visiblePages = [];
+        }
       });
     },
     deleteEntity(id) {
