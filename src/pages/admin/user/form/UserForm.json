@@ -47,7 +47,7 @@
             "type": "autocomplete",
             "configType": {
               "isDominio": false,
-              "urlApi": "/api/profiles",
+              "urlApi": "/api/profiles/all",
               "fieldId": "_id",
               "showCodice": true
             }

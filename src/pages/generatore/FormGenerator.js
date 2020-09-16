@@ -63,19 +63,22 @@ export default class FormGenerator {
         inputs += `${spazio}<div class="row">\n`;
         cols.forEach((col) => {
           const numCols = this.getNumColsForm(col.numCols, section.numCols);
-          inputs += `${spazio}  <div class="col-12 col-md-${numCols} form-group" v-if="!invisibleFields['${col.field}']">\n`;
+          inputs += `${spazio}  <div class="col-12 col-md-${numCols} form-group" 
+          v-if="!invisibleFields['${col.field}']">\n`;
           switch (col.type) {
             case 'autocomplete': {
               inputs += `${spazio}      <template v-if="loadEntity">
                     <input-autocomplete v-model="entity['${col.field}']"
-                       :config="configTypes['${col.field}']" :readonlyAttr="readonlyFields['${col.field}']">
+                       :config="configTypes['${col.field}']"
+                       :readonlyAttr="readonlyFields['${col.field}']">
                      </input-autocomplete>
                   </template>\n`;
               break;
             }
             case 'password': {
               // eslint-disable-next-line quotes
-              inputs += `${spazio}    <input-password v-model="entity['${col.field}']" label="${col.label}"
+              inputs += `${spazio}    <input-password v-model="entity['${col.field}']" 
+              label="${col.label}"
               :readonlyAttr="readonlyFields['${col.field}']">
               </input-password>`;
               break;
@@ -114,7 +117,8 @@ export default class FormGenerator {
             }
             default: {
               // eslint-disable-next-line quotes
-              inputs += `${spazio}    <input-text v-model="entity['${col.field}']" label="${col.label}"
+              inputs += `${spazio}    <input-text v-model="entity['${col.field}']" 
+              label="${col.label}"
               :readonlyAttr="readonlyFields['${col.field}']">
               </input-text>\n`;
             }

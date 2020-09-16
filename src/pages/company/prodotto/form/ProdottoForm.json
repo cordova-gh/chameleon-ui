@@ -1,4 +1,7 @@
 {
+  "urlApi": "API_PRODOTTO",
+  "title": "PRODOTTI",
+  "isForm": true,
   "numCols":2,
   "sections":[
     {
@@ -9,7 +12,8 @@
             "field": "codice",
             "label": "Codice",
             "bindField": "codice",
-            "type": "text"
+            "type": "text",
+            "readonlyUpdate": true
           }
         ],
         [
@@ -25,6 +29,20 @@
             "bindField": "descrizioneBrev",
             "type": "text"
           }
+        ],
+        [
+          {
+            "field": "imgProdotto",
+            "label": "Immagine",
+            "bindField": "prodotto.img",
+            "type": "text"
+          },
+          {
+            "field": "codiceBarre",
+            "label": "Codice a barre",
+            "bindField": "prodotto.codiceBarre",
+            "type": "text"
+          }
         ]
       ]
     },
@@ -36,20 +54,6 @@
             "field": "tipologiaProdotto",
             "label": "Tipologia Prodotto",
             "bindField": "prodotto.tipologia",
-            "type": "text"
-          },
-          {
-            "field": "codiceBarra",
-            "label": "Codice",
-            "bindField": "prodotto.codiceBarra",
-            "type": "text"
-          }
-        ],
-        [
-          {
-            "field": "imgProdotto",
-            "label": "Immagine",
-            "bindField": "prodotto.img",
             "type": "text"
           }
         ],
@@ -65,26 +69,47 @@
             "label": "Sotto Categoria Prodotto",
             "bindField": "prodotto.sottoCategoria",
             "type": "text"
-          },
+          }
+        ],
+          [
           {
             "field": "provenienzaProdotto",
             "label": "Provenienza",
             "bindField": "prodotto.provenienza",
-            "type": "text"
+            "type": "autocomplete",
+            "configType": {
+              "isDominio": false,
+              "urlApi": "/api/countries/all",
+              "fieldId": "_id",
+              "fieldCodice": "codIsoStato",
+              "showDescrizione": true
+            }
           },
           {
             "field": "marcaProdotto",
             "label": "Marca",
             "bindField": "prodotto.marca",
-            "type": "text"
+            "type": "autocomplete",
+            "configType": {
+              "isDominio": false,
+              "urlApi": "/api/marcas/all",
+              "fieldId": "_id",
+              "showCodice": true
+            }
           }
         ],
         [
           {
             "field": "unitaMisura",
             "label": "Unita di Misura",
-            "bindField": "unitaMisura",
-            "type": "text"
+            "bindField": "prodotto.unitaMisura",
+            "type": "autocomplete",
+            "configType": {
+              "isDominio": false,
+              "urlApi": "/api/unita-misuras/all",
+              "fieldId": "_id",
+              "showCodice": true
+            }
           }
         ]
       ]
