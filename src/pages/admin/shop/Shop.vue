@@ -6,7 +6,6 @@
   </div>
 </template>
 <script>
-import UserPagination from './pagination/ShopPagination.vue';
 import TitlePage from './../../shared/components/TitlePage';
 
 export default {
@@ -17,7 +16,6 @@ export default {
     };
   },
   components: {
-    'user-pagination': UserPagination,
     'title-page': TitlePage,
   },
 };

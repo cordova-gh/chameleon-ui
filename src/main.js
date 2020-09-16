@@ -8,6 +8,9 @@ import store from './store';
 import '@fortawesome/fontawesome-free/css/all.css';
 // eslint-disable-next-line import/first
 import VueCurrencyInput from 'vue-currency-input';
+// eslint-disable-next-line import/first
+import Vuelidate from 'vuelidate';
+
 
 const pluginOptions = {
   /* see config reference */
@@ -19,6 +22,7 @@ const pluginOptions = {
 
 Vue.config.productionTip = false;
 Vue.use(VueCurrencyInput, pluginOptions);
+Vue.use(Vuelidate);
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

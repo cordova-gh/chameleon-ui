@@ -6,7 +6,6 @@
   </div>
 </template>
 <script>
-import InventarioPagination from './pagination/InventarioPagination.vue';
 import TitlePage from './../../shared/components/TitlePage';
 
 export default {
@@ -17,7 +16,6 @@ export default {
     };
   },
   components: {
-    'inventario-pagination': InventarioPagination,
     'title-page': TitlePage,
   },
 };

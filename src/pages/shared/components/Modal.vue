@@ -16,7 +16,7 @@
             I'm the default body!
           </slot>
         </section>
-        <footer class="modal-footer">
+        <!--<footer class="modal-footer">
           <slot name="footer">
             I'm the default footer!
 
@@ -24,7 +24,7 @@
               Close me!
             </button>
           </slot>
-        </footer>
+        </footer>-->
       </div>
     </div>
   </transition>
@@ -44,7 +44,7 @@ export default {
 <style>
 .modal-backdrop {
   position: fixed;
-  top: 10%;
+  top: 0;
   bottom: 0;
   left: 0;
   right: 0;
@@ -61,8 +61,12 @@ export default {
   overflow-x: auto;
   display: flex;
   flex-direction: column;
-  width: 80%;
-  height: 70%
+  width: 70%;
+  height: auto;
+  top: 20%;
+  bottom: 50px;
+  left: 15%;
+  right: 50px;
 }
 
 .modal-header,
@@ -90,7 +94,6 @@ export default {
 .btn-close {
   border: none;
   font-size: 20px;
-  padding: 20px;
   cursor: pointer;
   font-weight: bold;
   color: #4aae9b;

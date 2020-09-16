@@ -40,7 +40,7 @@ export default new Router({
                 },
                 {
                   path: 'list',
-                  component: () => import('@/pages/admin/user/pagination/UserPagination'),
+                  component: () => import('@/pages/admin/user/table/UserTable'),
                 },
               ],
             },
@@ -76,7 +76,7 @@ export default new Router({
                 },
                 {
                   path: 'list',
-                  component: () => import('@/pages/admin/shop/pagination/ShopPagination'),
+                  component: () => import('@/pages/admin/shop/table/ShopTable'),
                 },
               ],
             },
@@ -94,7 +94,7 @@ export default new Router({
                 },
                 {
                   path: 'list',
-                  component: () => import('@/pages/admin/company/pagination/CompanyPagination'),
+                  component: () => import('@/pages/admin/company/table/CompanyTable'),
                 },
               ],
             },
@@ -119,7 +119,7 @@ export default new Router({
                 },
                 {
                   path: 'list',
-                  component: () => import('@/pages/company/anagrafica-cliente-fornitore/pagination/AnagraficaClienteFornitorePagination'),
+                  component: () => import('@/pages/company/anagrafica-cliente-fornitore/table/AnagraficaClienteFornitoreTable'),
                 },
               ],
             },
@@ -137,7 +137,7 @@ export default new Router({
                 },
                 {
                   path: 'list',
-                  component: () => import('@/pages/company/prodotto/pagination/ProdottoPagination'),
+                  component: () => import('@/pages/company/prodotto/table/ProdottoTable'),
                 },
               ],
             },
@@ -155,7 +155,7 @@ export default new Router({
                 },
                 {
                   path: 'list',
-                  component: () => import('@/pages/company/categoria-prodotto/pagination/CategoriaProdottoPagination'),
+                  component: () => import('@/pages/company/categoria-prodotto/table/CategoriaProdottoTable'),
                 },
               ],
             },
@@ -209,7 +209,7 @@ export default new Router({
                 },
                 {
                   path: 'list',
-                  component: () => import('@/pages/company/inventario/pagination/InventarioPagination'),
+                  component: () => import('@/pages/company/inventario/table/InventarioTable'),
                 },
               ],
             },

@@ -54,37 +54,10 @@
             </tr>
           </tbody>
         </table>
-        <nav aria-label="Page navigation example">
-          <ul class="pagination justify-content-end">
-            <li :class="disablePreviousPagination ? 'page-item disabled' : 'page-item'">
-              <a class="page-link" href="#" aria-label="Previous"
-               @click="getEntities(currentPage-1)" >
-                <span aria-hidden="true">&laquo;</span>
-                <span class="sr-only">Previous</span>
-              </a>
-            </li>
-            <div v-for="(page, idxPage) of visiblePages" :key="idxPage">
-              <template v-if="currentPage === page">
-                <li class="page-item active">
-                  <a class="page-link">{{ page }}</a>
-                </li>
-              </template>
-              <template v-else>
-                <li class="page-item">
-                  <a class="page-link"
-                  @click="getEntities(page)">{{ page }}</a>
-                </li>
-              </template>
-            </div>
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Next"
-              @click="getEntities(currentPage+1)">
-                <span aria-hidden="true">&raquo;</span>
-                <span class="sr-only">Next</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
+        <ui-pagination
+          :pages="pages"
+          v-bind:maxPages="10"
+          @clickPage="clickPagePagination"></ui-pagination>
       </div>
     </div>
   </div>
@@ -94,6 +67,7 @@ import HttpCall from '../services/HttpCall';
 import { Utility } from '../utilities/utility';
 import InputCheckBox from './input-components/InputCheckBox';
 import UIForm from './UIForm';
+import UIPagination from './shared/UIPagination';
 
 export default {
   props: {
@@ -121,15 +95,12 @@ export default {
       httpCall: new HttpCall(this.urlApi),
       configGridListFilter: [],
       configFormFilter: null,
-      visiblePages: [],
-      maxPages: 3,
-      disablePreviousPagination: false,
-      disableNextPagination: false,
     };
   },
   components: {
     'input-checkbox': InputCheckBox,
     'ui-form': UIForm,
+    'ui-pagination': UIPagination,
   },
   created() {
     this.getEntities(1, null);
@@ -155,20 +126,10 @@ export default {
     }
   },
   methods: {
-
+    clickPagePagination(page) {
+      this.getEntities(page);
+    },
     getEntities(page, filterObj) {
-      // eslint-disable-next-line no-console
-      let diff = 0;
-      if (page > 1) {
-        if (page % this.visiblePages[this.visiblePages.length - 1] === 0) {
-          diff = this.visiblePages.length - 1;
-        } else if (this.visiblePages[0] !== 1 && page % this.visiblePages[0] === 0) {
-          diff = -(this.visiblePages.length - 1);
-        }
-      }
-      if (diff !== 0) {
-        this.visiblePages = this.visiblePages.map(changePage => changePage + diff);
-      }
       let filterArray = [];
       let filterString = '';
       if (filterObj) {
@@ -185,21 +146,6 @@ export default {
       this.httpCall.get(params).then((data) => {
         this.entities = Utility.createArrayByConfig(data.entities, this.config);
         this.pages = data.pages;
-        // eslint-disable-next-line no-console
-        console.log('popopppo');
-        if (this.pages > 1) {
-          if (this.currentPage <= 1) {
-            this.disablePreviousPagination = true;
-            const pagesToGenerate = this.pages <= this.maxPages ? this.pages : this.maxPages;
-            for (let i = 1; i <= pagesToGenerate; i += 1) {
-              this.visiblePages.push(i);
-            }
-          } else {
-            this.disablePreviousPagination = false;
-          }
-        } else {
-          this.visiblePages = [];
-        }
       });
     },
     deleteEntity(id) {

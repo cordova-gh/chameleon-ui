@@ -32,7 +32,7 @@
 <script>
 import HttpCall from '../../../../services/HttpCall';
 import { Utility } from '../../../../utilities/utility';
-import ConfigPagination from './InventarioPagination.json';
+import ConfigTable from './InventarioTable.json';
 import { API_INVENTARIO } from './../../../../services/constant-services';
 
 export default {
@@ -57,7 +57,7 @@ export default {
       pages: 0,
       currentPage: 1,
       httpCall: new HttpCall(API_INVENTARIO),
-      configPagination: ConfigPagination,
+      configTable: ConfigTable,
     };
   },
   created() {

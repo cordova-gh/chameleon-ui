@@ -3,7 +3,7 @@
     <div class="row">
       <input type="radio" v-model="tipoComponente" name="drone" value="form"/>  Form
       <input type="radio" v-model="tipoComponente" name="drone" value="grid-list"  />  GridList
-      <input type="radio" v-model="tipoComponente" name="drone" value="pagination"  />  Pagination
+      <input type="radio" v-model="tipoComponente" name="drone" value="table"  />  Table
     </div>
     <div class="row">
       <input
@@ -29,7 +29,7 @@
 <script>
 import FormGenerator from './FormGenerator';
 import GridListGenerator from './GridListGenerator';
-import PaginationGenerator from './PaginationGenerator';
+import TableGenerator from './TableGenerator';
 
 export default {
   name: 'button',
@@ -53,9 +53,9 @@ export default {
             this.codeString = formGenerator.generate();
             break;
           }
-          case 'pagination': {
-            const paginationGenerator = new PaginationGenerator(this.config);
-            this.codeString = paginationGenerator.generate();
+          case 'table': {
+            const tableGenerator = new TableGenerator(this.config);
+            this.codeString = tableGenerator.generate();
             break;
           }
           case 'grid-list': {

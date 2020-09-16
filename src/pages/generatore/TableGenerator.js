@@ -9,9 +9,9 @@ export default class GridListGenerator {
     this.config = config;
   }
   generate() {
-    return this.templatePagination() + this.scriptPagination() + this.stylePagination();
+    return this.templateTable() + this.scriptTable() + this.styleTable();
   }
-  templatePagination() {
+  templateTable() {
     // eslint-disable-next-line quotes
     return `
       <${this.templateWord}>
@@ -93,7 +93,7 @@ export default class GridListGenerator {
       </div>
       </${this.templateWord}>`;
   }
-  scriptPagination() {
+  scriptTable() {
     // eslint-disable-next-line quotes
     return `
       <${this.scriptWord}>

@@ -1,5 +1,5 @@
 <template>
     <div>
-        categoria prodotto pagination
+        categoria prodotto list
     </div>
 </template>
