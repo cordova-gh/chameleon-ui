@@ -14,96 +14,60 @@
         v-bind:isForm="false"
         v-bind:isFilter="true"
         @filter="filter"
-      >
-      </ui-form>
+      ></ui-form>
     </div>
     <div class="container py-2">
-          <div class="table-responsive table-hover">
-            <table class="table align-items-center">
-              <thead class="thead-light">
-                <th style="width: 5%"></th>
-                <th v-for="(column, index) in config" :key="index">
-                  {{ column.label }}
-                </th>
-                <th style="width: 5%"></th>
-              </thead>
-              <tbody>
-                <tr
-                  v-for="(entity, indexEntity) of entities"
-                  :key="indexEntity"
-                >
-                  <template v-if="entity._id !== undefined">
-                    <input type="hidden" id="id" :value="entity._id" />
-                    <td>
-                      <i
-                        @click="deleteEntity(entity._id)"
-                        class="fa fa-minus-circle"
-                      ></i>
-                    </td>
-                    <td
-                      v-for="(column, indexColumn) in config"
-                      :key="indexColumn"
-                    >
-                      <input
-                        type="text"
-                        v-model="entity[column.field]"
-                        readonly="true"
-                        class="disableInput"
-                        @dblclick="editableCell($event, 1, indexEntity)"
-                        @focusout="editableCell($event, 0, indexEntity)"
-                      />
-                    </td>
-                    <td>
-                      <i
-                        v-if="manageDetails"
-                        @click="showDetails(entity._id)"
-                        class="fa fa-list-ul"
-                      ></i>
-                    </td>
-                  </template>
-                  <template v-else>
-                    <td></td>
-                    <td
-                      v-for="(column, indexColumn) in config"
-                      :key="indexColumn"
-                    >
-                      <input type="text" v-model="entity[column.field]" />
-                    </td>
-                    <td>
-                      <i
-                        @click="saveEntity(indexEntity)"
-                        class="fa fa-check-circle"
-                      ></i>
-                    </td>
-                  </template>
-                </tr>
-              </tbody>
-            </table>
-            <nav aria-label="Page navigation example">
-              <ul class="pagination justify-content-end">
-                <div v-for="(page, idxPage) of pages" :key="idxPage">
-                  <template v-if="currentPage === page">
-                    <li class="page-item active">
-                      <a class="page-link">{{ page }}</a>
-                    </li>
-                  </template>
-                  <template v-else>
-                    <li class="page-item">
-                      <a class="page-link" @click="getEntities(page)">{{
-                        page
-                      }}</a>
-                    </li>
-                  </template>
-                </div>
-              </ul>
-            </nav>
-          </div>
+      <div class="table-responsive table-hover">
+        <table class="table align-items-center">
+          <thead class="thead-light">
+            <th style="width: 5%"></th>
+            <th v-for="(column, index) in config.cols" :key="index">{{ column.label }}</th>
+            <th style="width: 5%"></th>
+          </thead>
+          <tbody>
+            <tr v-for="(entity, indexEntity) of entities" :key="indexEntity">
+              <template v-if="entity._id !== undefined">
+                <input type="hidden" id="id" :value="entity._id" />
+                <td>
+                  <i @click="deleteEntity(entity._id)" class="fa fa-minus-circle"></i>
+                </td>
+                <td v-for="(column, indexColumn) in config.cols" :key="indexColumn">
+                  <input
+                    type="text"
+                    v-model="entity[column.field]"
+                    readonly="true"
+                    class="disableInput"
+                    @dblclick="editableCell($event, 1, indexEntity)"
+                    @focusout="editableCell($event, 0, indexEntity)"
+                  />
+                </td>
+                <td>
+                  <i v-if="manageDetails" @click="showDetails(entity._id)"
+                  class="fa fa-list-ul"></i>
+                </td>
+              </template>
+              <template v-else>
+                <td></td>
+                <td v-for="(column, indexColumn) in config.cols" :key="indexColumn">
+                  <input type="text" v-model="entity[column.field]" />
+                </td>
+                <td>
+                  <i @click="saveEntity(indexEntity)" class="fa fa-check-circle"></i>
+                </td>
+              </template>
+            </tr>
+          </tbody>
+        </table>
+        <ui-pagination :pages="pages" v-bind:maxPages="5"
+          @clickPage="clickPagePagination"></ui-pagination>
+      </div>
     </div>
   </div>
 </template>
 <script>
 import HttpCall from '../services/HttpCall';
 import UIForm from './UIForm';
+import UIPagination from './shared/UIPagination';
 
 export default {
   props: {
@@ -114,7 +78,8 @@ export default {
       type: String,
     },
     config: {
-      type: Array,
+      type: Object,
+      required: true,
     },
     manageDetails: {
       type: Boolean,
@@ -140,19 +105,22 @@ export default {
   },
   components: {
     'ui-form': UIForm,
+    'ui-pagination': UIPagination,
   },
   created() {
     this.getEntities(1);
-    this.configGridListFilter = this.config.filter(config => config.isFilter);
+    this.configGridListFilter = this.config.cols.filter(config => config.filter);
     if (this.configGridListFilter.length > 0) {
       const sectionFilter = {};
       sectionFilter.label = 'Filtri Ricerca';
       const filterRows = [];
       this.configGridListFilter.forEach((config) => {
-        filterRows.push({ field: config.field,
+        filterRows.push({
+          field: config.field,
           type: config.type,
           bindField: config.field,
-          label: config.label });
+          label: config.label,
+        });
       });
       sectionFilter.rows = [];
       sectionFilter.rows[0] = filterRows;
@@ -163,6 +131,9 @@ export default {
     }
   },
   methods: {
+    clickPagePagination(page) {
+      this.getEntities(page);
+    },
     getEntities(page, params = '') {
       this.currentPage = page;
       // eslint-disable-next-line no-param-reassign
@@ -182,7 +153,7 @@ export default {
     },
     createEntity() {
       const obj = {};
-      this.config.forEach((config) => {
+      this.config.cols.forEach((config) => {
         obj[config.field] = '';
       });
       return obj;

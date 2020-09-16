@@ -1,19 +1,21 @@
-[
+{
+  "urlApi": "",
+  "cols": [
     {
-        "label": "Email",
-        "field": "email",
-        "bindField": "email",
-        "type": "text"
+      "label": "Email",
+      "field": "email",
+      "bindField": "email",
+      "type": "text"
     },
     {
-        "label": "Nome",
-        "field": "nome",
-        "bindField": "anagrafica.personaFisica.nome"
+      "label": "Nome",
+      "field": "nome",
+      "bindField": "anagrafica.personaFisica.nome"
     },
     {
-        "label": "Cognome",
-        "field": "cognome",
-        "bindField": "anagrafica.personaFisica.cognome"
+      "label": "Cognome",
+      "field": "cognome",
+      "bindField": "anagrafica.personaFisica.cognome"
     },
     {
       "label": "Profilo",
@@ -21,13 +23,14 @@
       "bindField": "profile.codice"
     },
     {
-        "label": "Stato Utenza",
-        "field": "stUtenza",
-        "bindField": "stUtenza.descrizione"
+      "label": "Stato Utenza",
+      "field": "stUtenza",
+      "bindField": "stUtenza.descrizione"
     },
     {
       "label": "Azienda",
       "field": "azienda",
       "bindField": "azienda.codice"
-  }
-]
+    }
+  ]
+}

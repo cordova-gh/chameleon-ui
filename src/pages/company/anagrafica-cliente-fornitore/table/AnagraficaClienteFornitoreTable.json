@@ -1,32 +1,35 @@
-[
-  {
-    "label": "Codice",
-    "field": "codice",
-    "bindField": "codice",
-    "type": "text"
-},
 {
-    "label": "Descrizione",
-    "field": "descrAttivita",
-    "bindField": "entitaGiuridica.descrAttivita",
-    "type": "text"
-},
-{
-  "field": "cliente",
-  "label": "Cliente",
-  "bindField": "isCliente",
-  "type": "checkbox"
-},
-{
-  "field": "fornitore",
-  "label": "Fornitore",
-  "bindField": "isFornitore",
-  "type": "checkbox"
-},
-{
-  "field": "nomeReferente",
-  "label": "Referente",
-  "bindField": "contattoReferente.nome",
-  "type": "text"
+  "urlApi": "",
+  "cols": [
+    {
+      "label": "Codice",
+      "field": "codice",
+      "bindField": "codice",
+      "type": "text"
+    },
+    {
+      "label": "Descrizione",
+      "field": "descrAttivita",
+      "bindField": "entitaGiuridica.descrAttivita",
+      "type": "text"
+    },
+    {
+      "field": "cliente",
+      "label": "Cliente",
+      "bindField": "isCliente",
+      "type": "checkbox"
+    },
+    {
+      "field": "fornitore",
+      "label": "Fornitore",
+      "bindField": "isFornitore",
+      "type": "checkbox"
+    },
+    {
+      "field": "nomeReferente",
+      "label": "Referente",
+      "bindField": "contattoReferente.nome",
+      "type": "text"
+    }
+  ]
 }
-]

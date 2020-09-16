@@ -1,19 +1,26 @@
-[
-  {
+{
+  "urlApi": "",
+  "cols": [
+    {
       "label": "Dominio",
       "field": "dominio",
       "type": "text",
-      "isFilter": true
-  },
-  {
+      "filter": {
+        "type": "contains"
+      }
+    },
+    {
       "label": "Codice",
       "field": "codice",
       "type": "text",
-      "isFilter": true
-  },
-  {
+      "filter": {
+        "type": "contains"
+      }
+    },
+    {
       "label": "Descrizione",
       "field": "descrizione",
       "type": "text"
-  }
-]
+    }
+  ]
+}

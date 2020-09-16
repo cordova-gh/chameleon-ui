@@ -1,29 +1,36 @@
-        [
-          {
-            "field": "codIsoStato",
-            "label": "Codice",
-            "type": "text",
-            "isFilter": true
-          },
-          {
-            "field": "descrizione",
-            "label": "Descrizione",
-            "type": "text"
-            ,"isFilter": true
-          },
-          {
-            "field": "cittadinanza",
-            "label": "Cittadinanza",
-            "type": "text"
-          },
-          {
-            "field": "dtaInizioValidita",
-            "label": "Inizio Validità",
-            "type": "text"
-          },
-          {
-            "field": "dtaFineValidita",
-            "label": "Fine Validità",
-            "type": "text"
-          }
-        ]
+{
+  "urlApi": "",
+  "cols": [
+    {
+      "field": "codIsoStato",
+      "label": "Codice",
+      "type": "text",
+      "filter": {
+        "type": "contains"
+      }
+    },
+    {
+      "field": "descrizione",
+      "label": "Descrizione",
+      "type": "text",
+      "filter": {
+        "type": "contains"
+      }
+    },
+    {
+      "field": "cittadinanza",
+      "label": "Cittadinanza",
+      "type": "text"
+    },
+    {
+      "field": "dtaInizioValidita",
+      "label": "Inizio Validità",
+      "type": "text"
+    },
+    {
+      "field": "dtaFineValidita",
+      "label": "Fine Validità",
+      "type": "text"
+    }
+  ]
+}

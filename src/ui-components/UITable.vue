@@ -21,7 +21,7 @@
         <table class="table align-items-center">
           <thead class="thead-light">
             <th style="width: 5%"></th>
-            <th v-for="(column, index) in config" :key="index" class="sort">
+            <th v-for="(column, index) in config.cols" :key="index" class="sort">
               {{ column.label }}
             </th>
             <th style="width: 5%"></th>
@@ -34,7 +34,7 @@
                   class="fa fa-minus-circle"
                 ></i>
               </td>
-              <td v-for="(column, indexColumn) in config" :key="indexColumn">
+              <td v-for="(column, indexColumn) in config.cols" :key="indexColumn">
                 <template v-if="column.type === 'checkbox'">
                   <input-checkbox
                     v-model="entity[column.field]"
@@ -56,18 +56,19 @@
         </table>
         <ui-pagination
           :pages="pages"
-          v-bind:maxPages="10"
+          v-bind:maxPages="5"
           @clickPage="clickPagePagination"></ui-pagination>
       </div>
     </div>
   </div>
 </template>
 <script>
+import UIPagination from '@/ui-components/shared/UIPagination';
 import HttpCall from '../services/HttpCall';
 import { Utility } from '../utilities/utility';
 import InputCheckBox from './input-components/InputCheckBox';
 import UIForm from './UIForm';
-import UIPagination from './shared/UIPagination';
+
 
 export default {
   props: {
@@ -79,7 +80,8 @@ export default {
       value: '',
     },
     config: {
-      type: Array,
+      type: Object,
+      required: true,
     },
     showButtonPlus: {
       type: Boolean,
@@ -104,7 +106,7 @@ export default {
   },
   created() {
     this.getEntities(1, null);
-    this.configGridListFilter = this.config.filter(config => config.isFilter);
+    this.configGridListFilter = this.config.cols.filter(config => config.filter);
     if (this.configGridListFilter.length > 0) {
       const sectionFilter = {};
       sectionFilter.label = 'Filtri Ricerca';
@@ -141,10 +143,9 @@ export default {
       }
 
       this.currentPage = page;
-      // eslint-disable-next-line no-param-reassign
       const params = `?page=${this.currentPage}${filterString}`;
       this.httpCall.get(params).then((data) => {
-        this.entities = Utility.createArrayByConfig(data.entities, this.config);
+        this.entities = Utility.createArrayByConfig(data.entities, this.config.cols);
         this.pages = data.pages;
       });
     },

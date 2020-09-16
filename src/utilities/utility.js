@@ -20,6 +20,26 @@ export const Utility = {
     }
     return arrayRet;
   },
+  createArrayByConfigV2(array, config) {
+    const arrayRet = [];
+    for (let index = 0; index < array.length; index += 1) {
+      const newElement = {};
+      const element = array[index];
+      // eslint-disable-next-line no-underscore-dangle
+      newElement._id = element._id;
+      const keysConfig = Object.keys(config);
+      keysConfig.forEach((keyConfig) => {
+        const configElement = config[keyConfig];
+        if (configElement.bind.indexOf('.') > 0) {
+          newElement[keyConfig] = this.getAnnidateValue(configElement.bind.split('.'), element);
+        } else {
+          newElement[keyConfig] = element[configElement.bind];
+        }
+      });
+      arrayRet.push(newElement);
+    }
+    return arrayRet;
+  },
   getAnnidateValue(annidateFields, obj) {
     let objTemp = obj;
     for (let k = 0; k < annidateFields.length; k += 1) {

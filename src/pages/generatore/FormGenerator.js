@@ -9,7 +9,14 @@ export default class FormGenerator {
     this.config = config;
   }
   generate() {
-    return this.templateForm() + this.scriptForm() + this.styleForm();
+    // eslint-disable-next-line prefer-template
+    return `<${this.templateWord}> `
+          + this.templateForm()
+          + `</${this.templateWord}>`
+          + `<${this.scriptWord}>`
+          + this.scriptForm()
+          + `</${this.scriptWord}>`
+          + this.styleForm();
   }
 
   templateForm() {
@@ -63,7 +70,7 @@ export default class FormGenerator {
         inputs += `${spazio}<div class="row">\n`;
         cols.forEach((col) => {
           const numCols = this.getNumColsForm(col.numCols, section.numCols);
-          inputs += `${spazio}  <div class="col-12 col-md-${numCols} form-group" 
+          inputs += `${spazio}  <div class="col-12 col-md-${numCols} form-group"
           v-if="!invisibleFields['${col.field}']">\n`;
           switch (col.type) {
             case 'autocomplete': {
@@ -77,7 +84,7 @@ export default class FormGenerator {
             }
             case 'password': {
               // eslint-disable-next-line quotes
-              inputs += `${spazio}    <input-password v-model="entity['${col.field}']" 
+              inputs += `${spazio}    <input-password v-model="entity['${col.field}']"
               label="${col.label}"
               :readonlyAttr="readonlyFields['${col.field}']">
               </input-password>`;
@@ -124,7 +131,7 @@ export default class FormGenerator {
             }
             default: {
               // eslint-disable-next-line quotes
-              inputs += `${spazio}    <input-text v-model="entity['${col.field}']" 
+              inputs += `${spazio}    <input-text v-model="entity['${col.field}']"
               label="${col.label}"
               :readonlyAttr="readonlyFields['${col.field}']">
               </input-text>\n`;
@@ -139,29 +146,17 @@ export default class FormGenerator {
     });
     // eslint-disable-next-line quotes
     inputs += `           </div>`;
-    return `<${this.templateWord}>
+    return `
 <div class="container box-container my-2 py-3">
       <form @submit.prevent="saveEntity">
         ${inputs}${isFormIf}${isFilterIf}
       </form>
 </div>
-</${this.templateWord}>\n`;
+`;
   }
   scriptForm() {
-    return `<${this.scriptWord}>
-          import Vue from 'vue';
-          import InputAutocomplete from '@/ui-components/input-components/InputAutocomplete';
-          import InputSelect from '@/ui-components/input-components/InputSelect';
-          import InputText from '@/ui-components/input-components/InputText';
-          import InputPassword from '@/ui-components/input-components/InputPassword';
-          import InputNumber from '@/ui-components/input-components/InputNumber';
-          import InputDate from '@/ui-components/input-components/InputDate';
-          import InputMoney from '@/ui-components/input-components/InputMoney';
-          import InputTextArea from '@/ui-components/input-components/InputTextArea';
-          import InputCheckbox from '@/ui-components/input-components/InputCheckBox';
-          import HttpCall from '@/services/HttpCall';
-          import { Utility } from '@/utilities/utility';
-          import { ${this.config.urlApi}, API_DOMINIO  } from '@/services/constant-services';
+    return `
+          ${this.getScriptFormImport()}
 
           export default {
           props: {
@@ -328,7 +323,22 @@ export default class FormGenerator {
           },
           },
           };
-          </${this.scriptWord}>`;
+          `;
+  }
+  getScriptFormImport() {
+    return `import Vue from 'vue';
+    import InputAutocomplete from '@/ui-components/input-components/InputAutocomplete';
+    import InputSelect from '@/ui-components/input-components/InputSelect';
+    import InputText from '@/ui-components/input-components/InputText';
+    import InputPassword from '@/ui-components/input-components/InputPassword';
+    import InputNumber from '@/ui-components/input-components/InputNumber';
+    import InputDate from '@/ui-components/input-components/InputDate';
+    import InputMoney from '@/ui-components/input-components/InputMoney';
+    import InputTextArea from '@/ui-components/input-components/InputTextArea';
+    import InputCheckbox from '@/ui-components/input-components/InputCheckBox';
+    import HttpCall from '@/services/HttpCall';
+    import { Utility } from '@/utilities/utility';
+    import { ${this.config.urlApi}, API_DOMINIO  } from '@/services/constant-services';`;
   }
   styleForm() {
     return `<${this.styleWord}>

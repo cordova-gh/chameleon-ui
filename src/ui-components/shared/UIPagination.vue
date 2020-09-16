@@ -30,6 +30,7 @@
 </template>
 <script>
 export default {
+  name: 'UIPagination',
   props: {
     pages: {
       type: Number,

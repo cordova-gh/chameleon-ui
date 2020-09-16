@@ -1,38 +1,41 @@
-[
+{
+  "urlApi": "",
+  "cols": [
     {
-        "label": "ID Prodotto",
-        "field": "prodottoId",
-        "bindField": "prodottoId",
-        "type": "text"
+      "label": "ID Prodotto",
+      "field": "prodottoId",
+      "bindField": "prodottoId",
+      "type": "text"
     },
     {
-        "label": "Data Registrazione",
-        "field": "dataRegistrazione",
-        "bindField": "dataRegistrazione",
-        "type": "date"
+      "label": "Data Registrazione",
+      "field": "dataRegistrazione",
+      "bindField": "dataRegistrazione",
+      "type": "date"
     },
     {
-        "label": "Quantita",
-        "field": "quantita",
-        "bindField": "quantita",
-        "type": "number"
+      "label": "Quantita",
+      "field": "quantita",
+      "bindField": "quantita",
+      "type": "number"
     },
     {
-        "label": "Prezzo",
-        "field": "prezzo",
-        "bindField": "prezzo",
-        "type": "text"
+      "label": "Prezzo",
+      "field": "prezzo",
+      "bindField": "prezzo",
+      "type": "text"
     },
     {
-        "label": "Data Scadenza",
-        "field": "dtaScadenza",
-        "bindField": "dtaScadenza",
-        "type": "date"
+      "label": "Data Scadenza",
+      "field": "dtaScadenza",
+      "bindField": "dtaScadenza",
+      "type": "date"
     },
     {
-        "label": "Note",
-        "field": "note",
-        "bindField": "note",
-        "type": "text"
+      "label": "Note",
+      "field": "note",
+      "bindField": "note",
+      "type": "text"
     }
-]
+  ]
+}

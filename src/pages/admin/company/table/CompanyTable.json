@@ -1,32 +1,35 @@
-[
-  {
-    "label": "Codice",
-    "field": "codice",
-    "bindField": "codice"
-},
 {
-    "label": "Descrizione",
-    "field": "descrAttivita",
-    "bindField": "anagrafica.entitaGiuridica.descrAttivita"
-},
-{
-  "field": "viaSedeLegale",
-  "label": "Via",
-  "bindField": "anagrafica.entitaGiuridica.indirizzoSedeLegale.via"
-},
-{
-  "field": "numeroSedeLegale",
-  "label": "N°",
-  "bindField": "anagrafica.entitaGiuridica.indirizzoSedeLegale.numero"
-},
-{
-  "field": "comuneSedeLegale",
-  "label": "Comune",
-  "bindField": "anagrafica.entitaGiuridica.indirizzoSedeLegale.comune"
-},
-{
-  "field": "nomeReferente",
-  "label": "Referente",
-  "bindField": "contattoReferente.nome"
+  "urlApi": "",
+  "cols": [
+    {
+      "label": "Codice",
+      "field": "codice",
+      "bindField": "codice"
+    },
+    {
+      "label": "Descrizione",
+      "field": "descrAttivita",
+      "bindField": "anagrafica.entitaGiuridica.descrAttivita"
+    },
+    {
+      "field": "viaSedeLegale",
+      "label": "Via",
+      "bindField": "anagrafica.entitaGiuridica.indirizzoSedeLegale.via"
+    },
+    {
+      "field": "numeroSedeLegale",
+      "label": "N°",
+      "bindField": "anagrafica.entitaGiuridica.indirizzoSedeLegale.numero"
+    },
+    {
+      "field": "comuneSedeLegale",
+      "label": "Comune",
+      "bindField": "anagrafica.entitaGiuridica.indirizzoSedeLegale.comune"
+    },
+    {
+      "field": "nomeReferente",
+      "label": "Referente",
+      "bindField": "contattoReferente.nome"
+    }
+  ]
 }
-]

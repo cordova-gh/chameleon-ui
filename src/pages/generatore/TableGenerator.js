@@ -1,12 +1,20 @@
+import FormGenerator from './FormGenerator';
+
 export default class GridListGenerator {
   templateWord = 'template';
   scriptWord = 'script';
   styleWord = 'style';
   braceWord = '${';
   backTickWord = '`';
-
+  configFilterForm = null;
+  importFilter='';
+  formGenerator = null;
   constructor(config) {
     this.config = config;
+    this.configFilterForm = this.setConfigFilterForm();
+    if (this.configFilterForm) {
+      this.formGenerator = new FormGenerator(this.configFilterForm);
+    }
   }
   generate() {
     return this.templateTable() + this.scriptTable() + this.styleTable();
@@ -14,99 +22,71 @@ export default class GridListGenerator {
   templateTable() {
     // eslint-disable-next-line quotes
     return `
-      <${this.templateWord}>
-      <div>
-          <div
-          v-if="
-              configGridListFilter &&
-              configGridListFilter.length > 0 &&
-              configFormFilter
-          "
-          >
+<${this.templateWord}>
+<div>
+      ${this.getHtmlFilterForm()}
+      <div class="container box-container my-2 py-5">
 
-          <ui-form
-              :urlApi="urlApi"
-              :config="configFormFilter"
-              :currentId="currentId"
-              v-bind:isForm="false"
-              v-bind:isFilter="true"
-              @filter="filter"
-          >
-          </ui-form>
-          </div>
-          <div class="container">
-          <div class="table table-hover">
-              <table class="table align-items-center">
-              <thead class="thead-light">
-                  <th style="width: 5%"></th>
-                  <th v-for="(column, index) in config" :key="index" class="sort">
-                  {{ column.label }}
-                  </th>
-                  <th style="width: 5%"></th>
-              </thead>
-              <tbody>
-                  <tr v-for="entity of entities" :key="entity.id">
-                  <td>
-                      <i
-                      @click="deleteEntity(entity._id)"
-                      class="fa fa-minus-circle"
-                      ></i>
-                  </td>
-                  <td v-for="(column, indexColumn) in config" :key="indexColumn">
-                      <template v-if="column.type === 'checkbox'">
-                      <input-checkbox
-                          v-model="entity[column.field]"
-                          v-bind:isReadonly="true"
-                      >
-                      </input-checkbox>
-                      </template>
-                      <template v-else>
-                      {{ entity[column.field] }}
-                      </template>
-                  </td>
-                  <td>
-                      <router-link :to="'edit/' + entity._id"
-                      ><i class="fas fa-edit"></i
-                      ></router-link>
-                  </td>
-                  </tr>
-              </tbody>
-              </table>
-              <nav aria-label="Page navigation example">
-              <ul class="pagination justify-content-end">
-                  <div v-for="(page, idxPage) of pages" :key="idxPage">
-                  <template v-if="currentPage === page">
-                      <li class="page-item active">
-                      <a class="page-link">{{ page }}</a>
-                      </li>
-                  </template>
-                  <template v-else>
-                      <li class="page-item">
-                      <a class="page-link" @click="getEntities(page)">{{ page }}</a>
-                      </li>
-                  </template>
-                  </div>
-              </ul>
-              </nav>
-          </div>
-          </div>
+    <div class="container">
+      <div class="table-responsive table-hover">
+        <table class="table align-items-center">
+          <thead class="thead-light">
+            <th style="width: 5%"></th>
+              ${this.getTestata()}
+            <th style="width: 5%"></th>
+          </thead>
+          <tbody>
+            <tr v-for="entity of entities" :key="entity.id">
+              <td>
+                <i
+                  @click="deleteEntity(entity._id)"
+                  class="fa fa-minus-circle"
+                ></i>
+              </td>
+              <td v-for="(keyColumn, indexColumn) in Object.keys(propsColumns)" :key="indexColumn">
+                <template v-if="propsColumns[keyColumn].type === 'checkbox'">
+                  <input-checkbox
+                    v-model="entity[keyColumn]"
+                    v-bind:isReadonly="true"
+                  >
+                  </input-checkbox>
+                </template>
+                <template v-else>
+                  {{ entity[keyColumn] }}
+                </template>
+              </td>
+              <td>
+                <router-link :to="'edit/' + entity._id"
+                  ><i class="fas fa-edit"></i
+                ></router-link>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <ui-pagination
+          :pages="pages"
+          v-bind:maxPages="5"
+          @clickPage="clickPagePagination">
+          </ui-pagination>
       </div>
-      </${this.templateWord}>`;
+    </div>
+  </div>
+</div>
+</${this.templateWord}>`;
   }
   scriptTable() {
     // eslint-disable-next-line quotes
     return `
       <${this.scriptWord}>
-      import HttpCall from '@/services/HttpCall';
+import UIPagination from '@/ui-components/shared/UIPagination';
+import {${this.config.urlApi}}from '@/services/constant-services';
+import HttpCall from '@/services/HttpCall';
 import { Utility } from '@/utilities/utility';
 import InputCheckBox from '@/ui-components/input-components/InputCheckBox';
-import UIForm from './UIForm';
 
+${this.getImportFilterForm()}
 export default {
 props: {
-  urlApi: {
-    type: String,
-  },
   title: {
     type: String,
     value: '',
@@ -129,42 +109,28 @@ data() {
     modePage: 'LIST',
     pages: 0,
     currentPage: 1,
-    httpCall: new HttpCall(this.urlApi),
-    configGridListFilter: [],
-    configFormFilter: null,
+    httpCall: new HttpCall(${this.config.urlApi}),
+    propsColumns: ${this.propsColumns()},
+    ${this.getEntityFilter()}
   };
 },
 components: {
   'input-checkbox': InputCheckBox,
-  'ui-form': UIForm,
+  'ui-pagination': UIPagination,
+  ${this.getComponentFilterForm()}
 },
 created() {
   this.getEntities(1);
-  this.configGridListFilter = this.config.filter(config => config.isFilter);
-  if (this.configGridListFilter.length > 0) {
-    const sectionFilter = {};
-    sectionFilter.label = 'Filtri Ricerca';
-    const filterRows = [];
-    this.configGridListFilter.forEach((config) => {
-      filterRows.push({ field: config.field,
-        type: config.type,
-        bindField: config.field,
-        label: config.label });
-    });
-    sectionFilter.rows = [];
-    sectionFilter.rows[0] = filterRows;
-    this.configFormFilter = {};
-    this.configFormFilter.numCols = '2';
-    this.configFormFilter.sections = [];
-    this.configFormFilter.sections[0] = sectionFilter;
-  }
 },
 methods: {
+  clickPagePagination(page) {
+    this.getEntities(page);
+  },
   getEntities(page) {
     this.currentPage = page;
     const params = ${this.backTickWord}?page=${this.braceWord}this.currentPage}${this.backTickWord};
     this.httpCall.get(params).then((data) => {
-      this.entities = Utility.createArrayByConfig(data.entities, this.config);
+      this.entities = Utility.createArrayByConfigV2(data.entities, this.propsColumns);
       this.pages = data.pages;
     });
   },
@@ -180,13 +146,7 @@ methods: {
   newEntity() {
     this.$emit('onCreate');
   },
-  filter(filterObj) {
-    const filterArray = Object.keys(filterObj)
-      .filter(keyFilter => filterObj[keyFilter])
-      .map(keyFilter => ${this.backTickWord}${this.braceWord}keyFilter}=${this.braceWord}filterObj[keyFilter]}${this.backTickWord});
-    const params = filterArray.join('&');
-    this.getEntities(1, params);
-  },
+  ${this.getMethodFilter()}
 },
 watch: {
   reload: {
@@ -201,4 +161,93 @@ watch: {
 };
       </${this.scriptWord}>   `;
   }
+  // eslint-disable-next-line class-methods-use-this
+  styleTable() {
+    return `
+    .fa {
+      cursor: pointer;
+    }
+    .fas {
+      cursor: pointer;
+    } `;
+  }
+  getTestata() {
+    let testata = '';
+    this.config.cols.forEach((config) => {
+      testata += `<th  class="sort">
+                  ${config.label}
+              </th>`;
+    });
+    return testata;
+  }
+  propsColumns() {
+    let objString = '{';
+    this.config.cols.forEach((col) => {
+      objString += `${col.field}: { bind:'${col.bindField}', type: '${col.type}'},\n`;
+    });
+    // eslint-disable-next-line prefer-template
+    return objString + '}';
+  }
+  setConfigFilterForm() {
+    this.configFilterList = this.config.cols.filter(config => config.filter);
+    if (this.configFilterList.length > 0) {
+      const sectionFilter = {};
+      sectionFilter.label = 'Filtri Ricerca';
+      const filterRows = [];
+      this.configFilterList.forEach((config) => {
+        filterRows.push({ field: config.field,
+          type: config.type,
+          bindField: config.field,
+          label: config.label });
+      });
+      sectionFilter.rows = [];
+      sectionFilter.rows[0] = filterRows;
+      const configFormFilter = {};
+      configFormFilter.isFilter = true;
+      configFormFilter.numCols = '2';
+      configFormFilter.sections = [];
+      configFormFilter.sections[0] = sectionFilter;
+      return configFormFilter;
+    }
+    return [];
+  }
+  getHtmlFilterForm() {
+    return this.formGenerator ? this.formGenerator.templateForm() : '';
+  }
+  getImportFilterForm() {
+    return this.formGenerator ? `import InputAutocomplete from '@/ui-components/input-components/InputAutocomplete';
+    import InputSelect from '@/ui-components/input-components/InputSelect';
+    import InputText from '@/ui-components/input-components/InputText';
+    import InputPassword from '@/ui-components/input-components/InputPassword';
+    import InputNumber from '@/ui-components/input-components/InputNumber';
+    import InputDate from '@/ui-components/input-components/InputDate';
+    import InputMoney from '@/ui-components/input-components/InputMoney';
+    import InputTextArea from '@/ui-components/input-components/InputTextArea';` : '';
+  }
+  getComponentFilterForm() {
+    return this.formGenerator ? `          'input-autocomplete': InputAutocomplete,
+    'input-select': InputSelect,
+    'input-text': InputText,
+    'input-password': InputPassword,
+    'input-number': InputNumber,
+    'input-date': InputDate,
+    'input-money': InputMoney,
+    'input-textarea': InputTextArea,` : '';
+  }
+  getEntityFilter() {
+    return this.formGenerator ? `invisibleFields: {},
+    readonlyFields: {}
+    , entity: ${this.formGenerator.getEntity()}
+    , propsFilterEntity: ${this.formGenerator.getPropsFields()}` : '';
+  }
+  getMethodFilter() {
+    return this.formGenerator ? `onFind() {
+      this.$emit('filter', this.entity);
+    },
+    onReset() {
+      this.entity = this.createEntityForm();
+      this.onFind();
+    },` : '';
+  }
 }
+

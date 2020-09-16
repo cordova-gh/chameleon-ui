@@ -1,12 +1,15 @@
-[
+{
+  "urlApi": "",
+  "cols": [
     {
-        "label": "Codice",
-        "field": "codice",
-        "type": "text"
+      "label": "Codice",
+      "field": "codice",
+      "type": "text"
     },
     {
-        "label": "Descrizione",
-        "field": "descrizione",
-        "type": "text"
+      "label": "Descrizione",
+      "field": "descrizione",
+      "type": "text"
     }
-]
+  ]
+}

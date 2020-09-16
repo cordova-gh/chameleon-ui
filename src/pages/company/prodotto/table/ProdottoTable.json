@@ -1,34 +1,41 @@
-[
-  {
-    "field": "codice",
-    "label": "Codice",
-    "bindField": "codice",
-    "type": "text",
-    "isFilter": true
-  },
-  {
-    "field": "descrizione",
-    "label": "Descrizione",
-    "bindField": "descrizione",
-    "type": "text",
-    "isFilter": true
-  },
-  {
-    "field": "sottoCategoriaProdotto",
-    "label": "Sotto Categoria",
-    "bindField": "Prodotto.sottoCategoria",
-    "type": "text"
-  },
-  {
-    "field": "provenienzaProdotto",
-    "label": "Provenienza",
-    "bindField": "prodotto.provenienza.descrizione",
-    "type": "text"
-  },
-  {
-    "field": "marcaProdotto",
-    "label": "Marca",
-    "bindField": "prodotto.marca.codice",
-    "type": "text"
-  }
-]
+{
+  "urlApi": "API_PRODOTTO",
+  "cols": [
+    {
+      "field": "codice",
+      "label": "Codice",
+      "bindField": "codice",
+      "type": "text",
+      "filter": {
+        "type": "contains"
+      }
+    },
+    {
+      "field": "descrizione",
+      "label": "Descrizione",
+      "bindField": "descrizione",
+      "type": "text",
+      "filter": {
+        "type": "contains"
+      }
+    },
+    {
+      "field": "sottoCategoriaProdotto",
+      "label": "Sotto Categoria",
+      "bindField": "Prodotto.sottoCategoria",
+      "type": "text"
+    },
+    {
+      "field": "provenienzaProdotto",
+      "label": "Provenienza",
+      "bindField": "prodotto.provenienza.descrizione",
+      "type": "text"
+    },
+    {
+      "field": "marcaProdotto",
+      "label": "Marca",
+      "bindField": "prodotto.marca.codice",
+      "type": "text"
+    }
+  ]
+}

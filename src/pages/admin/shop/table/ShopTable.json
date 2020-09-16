@@ -1,46 +1,46 @@
-[
+{
+  "urlApi": "",
+  "cols": [
     {
-        "label": "Codice",
-        "field": "codice",
-        "bindField": "codice",
-        "type": "text"
+      "label": "Codice",
+      "field": "codice",
+      "bindField": "codice",
+      "type": "text"
     },
     {
-        "label": "Descrizione",
-        "field": "descrizione",
-        "bindField": "descrizione"
+      "label": "Descrizione",
+      "field": "descrizione",
+      "bindField": "descrizione"
     },
     {
-        "label": "Comune",
-        "field": "indirizzo",
-        "bindField": "indirizzo.comune"
+      "label": "Comune",
+      "field": "indirizzo",
+      "bindField": "indirizzo.comune"
     },
     {
-        "label": "Via",
-        "field": "cognome",
-        "bindField": "indirizzo.via"
+      "label": "Via",
+      "field": "cognome",
+      "bindField": "indirizzo.via"
     },
     {
-        "label": "Numero",
-        "field": "numero",
-        "bindField": "indirizzo.numero"
+      "label": "Numero",
+      "field": "numero",
+      "bindField": "indirizzo.numero"
     },
     {
-        "label": "Telefono",
-        "field": "telefono",
-        "bindField": "telefono"
+      "label": "Telefono",
+      "field": "telefono",
+      "bindField": "telefono"
     },
     {
-        "label": "Cellulare",
-        "field": "cellulare",
-        "bindField": "cellulare"
+      "label": "Cellulare",
+      "field": "cellulare",
+      "bindField": "cellulare"
     },
     {
-        "label": "Email",
-        "field": "email",
-        "bindField": "email"
+      "label": "Email",
+      "field": "email",
+      "bindField": "email"
     }
-]
-
-
-
+  ]
+}

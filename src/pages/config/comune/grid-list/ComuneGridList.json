@@ -1,37 +1,40 @@
-[
+{
+  "urlApi": "",
+  "cols": [
     {
-        "label": "Descrizione",
-        "field": "descrizione",
-        "type": "text"
+      "label": "Descrizione",
+      "field": "descrizione",
+      "type": "text"
     },
     {
-        "label": "Provincia",
-        "field": "provincia",
-        "type": "text"
+      "label": "Provincia",
+      "field": "provincia",
+      "type": "text"
     },
     {
-        "label": "Stato",
-        "field": "stato",
-        "type": "text"
+      "label": "Stato",
+      "field": "stato",
+      "type": "text"
     },
     {
-        "label": "Cod. Catastale",
-        "field": "cod_catastale",
-        "type": "text"
+      "label": "Cod. Catastale",
+      "field": "cod_catastale",
+      "type": "text"
     },
     {
-        "field": "dta_inizio_validita",
-        "label": "Inizio Validità",
-        "type": "text"
-      },
-      {
-        "field": "dta_fine_validita",
-        "label": "Fine Validità",
-        "type": "text"
-      },
-      {
-        "field": "note",
-        "label": "note",
-        "type": "text"
-      }
-]
+      "field": "dta_inizio_validita",
+      "label": "Inizio Validità",
+      "type": "text"
+    },
+    {
+      "field": "dta_fine_validita",
+      "label": "Fine Validità",
+      "type": "text"
+    },
+    {
+      "field": "note",
+      "label": "note",
+      "type": "text"
+    }
+  ]
+}
