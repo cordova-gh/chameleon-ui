@@ -22,13 +22,13 @@
   {
     "field": "provenienzaProdotto",
     "label": "Provenienza",
-    "bindField": "prodotto.provenienza",
+    "bindField": "prodotto.provenienza.descrizione",
     "type": "text"
   },
   {
     "field": "marcaProdotto",
     "label": "Marca",
-    "bindField": "prodotto.marca",
+    "bindField": "prodotto.marca.codice",
     "type": "text"
   }
 ]

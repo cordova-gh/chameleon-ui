@@ -115,6 +115,13 @@ export default class FormGenerator {
               :readonlyAttr="readonlyFields['${col.field}']"> </input-textarea>`;
               break;
             }
+            case 'checkbox': {
+              // eslint-disable-next-line quotes
+              inputs += `${spazio}    <input-checkbox v-model="entity['${col.field}']"
+              label="${col.label}"
+              :readonlyAttr="readonlyFields['${col.field}']"> </input-checkbox>`;
+              break;
+            }
             default: {
               // eslint-disable-next-line quotes
               inputs += `${spazio}    <input-text v-model="entity['${col.field}']" 
@@ -151,6 +158,7 @@ export default class FormGenerator {
           import InputDate from '@/ui-components/input-components/InputDate';
           import InputMoney from '@/ui-components/input-components/InputMoney';
           import InputTextArea from '@/ui-components/input-components/InputTextArea';
+          import InputCheckbox from '@/ui-components/input-components/InputCheckBox';
           import HttpCall from '@/services/HttpCall';
           import { Utility } from '@/utilities/utility';
           import { ${this.config.urlApi}, API_DOMINIO  } from '@/services/constant-services';
@@ -183,6 +191,7 @@ export default class FormGenerator {
           'input-date': InputDate,
           'input-money': InputMoney,
           'input-textarea': InputTextArea,
+          'input-checkbox': InputCheckbox,
           },
           data() {
           return {

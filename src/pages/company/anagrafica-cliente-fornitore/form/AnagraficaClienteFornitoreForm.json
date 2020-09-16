@@ -1,4 +1,7 @@
 {
+  "urlApi": "API_FORNITORE_CLIENTE",
+  "title": "Fornitore / Cliente",
+  "isForm": true,
   "numCols": 3,
   "sections": [
     {
@@ -9,79 +12,78 @@
             "field": "codice",
             "label": "Codice",
             "bindField": "codice",
+            "type": "text",
+            "readonlyUpdate": true
+          }
+        ],
+        [
+          {
+            "field": "ragioneSociale",
+            "label": "Ragione Sociale",
+            "bindField": "entitaGiuridica.ragioneSociale",
+            "type": "text"
+          },
+          {
+            "field": "descrAttivita",
+            "label": "Descrizione Attivita",
+            "bindField": "entitaGiuridica.descrAttivita",
             "type": "text"
           }
         ],
         [
           {
-              "field": "ragioneSociale",
-              "label": "Ragione Sociale",
-              "bindField": "entitaGiuridica.ragioneSociale",
-              "type": "text"
+            "field": "codiceFiscale",
+            "label": "Codice Fiscale",
+            "bindField": "codiceFiscale",
+            "type": "text"
           },
-        {
-          "field": "descrAttivita",
-          "label": "Descrizione Attivita",
-          "bindField": "entitaGiuridica.descrAttivita",
-          "type": "text"
-        }
-      ],
-      [
-        {
-          "field": "codiceFiscale",
-          "label": "Codice Fiscale",
-          "bindField": "codiceFiscale",
-          "type": "text"
-        },
-        {
-          "field": "partitaIva",
-          "label": "Partita Iva",
-          "bindField": "partitaIva",
-          "type": "text"
-        },
-        {
-          "field": ".partitaIvaEstera",
-          "label": "Partita Iva Estera",
-          "bindField": "partitaIvaEstera",
-          "type": "text"
-        }
-      ],
-      [
-        {
-          "field": "telefono",
-          "label": "Telefono",
-          "bindField": "telefono",
-          "type": "text"
-        },
-        {
-          "field": "cellulare",
-          "label": "Cellulare",
-          "bindField": "cellulare",
-          "type": "text"
-        }
-      ],
-      [
-        {
-          "field": "naturaGiurica",
-          "label": "Natura Giuridica",
-          "bindField": "entitaGiuridica.naturaGiur",
-          "type": "text"
-      }
-      ],
-      [
-        {
-          "field": "cliente",
-          "label": "Cliente",
-          "bindField": "cliente",
-          "type": "text"
-        },
-        {
-          "field": "fornitore",
-          "label": "Fornitore",
-          "bindField": "fornitore",
-          "type": "text"
-        }
-      ]
+          {
+            "field": "partitaIva",
+            "label": "Partita Iva",
+            "bindField": "partitaIva",
+            "type": "text"
+          },
+          {
+            "field": "partitaIvaEstera",
+            "label": "Partita Iva Estera",
+            "bindField": "partitaIvaEstera",
+            "type": "text"
+          }
+        ],
+        [
+          {
+            "field": "telefono",
+            "label": "Telefono",
+            "bindField": "telefono",
+            "type": "text"
+          },
+          {
+            "field": "cellulare",
+            "label": "Cellulare",
+            "bindField": "cellulare",
+            "type": "text"
+          }
+        ],
+        [
+          {
+            "field": "naturaGiurica",
+            "label": "Natura Giuridica",
+            "bindField": "entitaGiuridica.naturaGiur",
+            "type": "text"
+          },
+          {
+            "field": "cliente",
+            "label": "Cliente",
+            "bindField": "cliente",
+            "type": "checkbox"
+          },
+          {
+            "field": "fornitore",
+            "label": "Fornitore",
+            "bindField": "fornitore",
+            "type": "checkbox"
+          }
+        ]
       ]
     },
     {
@@ -92,7 +94,14 @@
             "field": "statoSedeLegale",
             "label": "Stato",
             "bindField": "entitaGiuridica.indirizzoSedeLegale.stato",
-            "type": "text"
+            "type": "autocomplete",
+            "configType": {
+              "isDominio": false,
+              "urlApi": "/api/countries/all",
+              "fieldId": "_id",
+              "fieldCodice": "codIsoStato",
+              "showDescrizione": true
+            }
           },
           {
             "field": "provinciaSedeLegale",
@@ -133,46 +142,53 @@
       "label": "Sede Costituzione",
       "rows": [
         [
-        {
-          "field": "statoSedeCostituzione",
-          "label": "Stato",
-          "bindField": "entitaGiuridica.indirizzoSedeCostituzione.stato",
-          "type": "text"
-        },
-        {
-          "field": "provinciaSedeCostituzione",
-          "label": "Provincia",
-          "bindField": "entitaGiuridica.indirizzoSedeCostituzione.provincia",
-          "type": "text"
-        },
-        {
-          "field": "comuneSedeCostituzione",
-          "label": "Comune",
-          "bindField": "entitaGiuridica.indirizzoSedeCostituzione.comune",
-          "type": "text"
-        }
-      ],
-      [
-        {
-          "field": "viaSedeCostituzione",
-          "label": "Via",
-          "bindField": "entitaGiuridica.indirizzoSedeCostituzione.via",
-          "type": "text"
-        },
-        {
-          "field": "numeroSedeCostituzione",
-          "label": "Numero",
-          "bindField": "entitaGiuridica.indirizzoSedeCostituzione.numero",
-          "type": "text"
-        },
-        {
-          "field": "capSedeCostituzione",
-          "label": "Cap",
-          "bindField": "entitaGiuridica.indirizzoSedeCostituzione.cap",
-          "type": "text"
-        }
+          {
+            "field": "statoSedeCostituzione",
+            "label": "Stato",
+            "bindField": "entitaGiuridica.indirizzoSedeCostituzione.stato",
+            "type": "autocomplete",
+            "configType": {
+              "isDominio": false,
+              "urlApi": "/api/countries/all",
+              "fieldId": "_id",
+              "fieldCodice": "codIsoStato",
+              "showDescrizione": true
+            }
+          },
+          {
+            "field": "provinciaSedeCostituzione",
+            "label": "Provincia",
+            "bindField": "entitaGiuridica.indirizzoSedeCostituzione.provincia",
+            "type": "text"
+          },
+          {
+            "field": "comuneSedeCostituzione",
+            "label": "Comune",
+            "bindField": "entitaGiuridica.indirizzoSedeCostituzione.comune",
+            "type": "text"
+          }
+        ],
+        [
+          {
+            "field": "viaSedeCostituzione",
+            "label": "Via",
+            "bindField": "entitaGiuridica.indirizzoSedeCostituzione.via",
+            "type": "text"
+          },
+          {
+            "field": "numeroSedeCostituzione",
+            "label": "Numero",
+            "bindField": "entitaGiuridica.indirizzoSedeCostituzione.numero",
+            "type": "text"
+          },
+          {
+            "field": "capSedeCostituzione",
+            "label": "Cap",
+            "bindField": "entitaGiuridica.indirizzoSedeCostituzione.cap",
+            "type": "text"
+          }
+        ]
       ]
-    ]
     },
     {
       "label": "Altri Dati",
@@ -188,7 +204,7 @@
             "field": "capitaleSociale",
             "label": "Capitale Sociale",
             "bindField": "entitaGiuridica.capitaleSociale",
-            "type": "text"
+            "type": "number"
           }
         ],
         [
@@ -213,17 +229,23 @@
         ],
         [
           {
-            "label": "Azienda ID",
+            "label": "Azienda",
             "field": "aziendaleId",
             "bindField": "aziendaleId",
-            "type": "text"
+            "type": "autocomplete",
+            "configType": {
+              "isDominio": false,
+              "urlApi": "/api/companies/all",
+              "fieldId": "_id",
+              "showCodice": true
+            }
           }
         ]
       ]
     },
     {
       "label": "Contatto Referente",
-      "rows" : [
+      "rows": [
         [
           {
             "label": "Nome",

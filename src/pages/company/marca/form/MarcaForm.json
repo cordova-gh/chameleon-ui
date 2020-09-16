@@ -1,4 +1,7 @@
 {
+  "urlApi": "API_MARCA",
+  "title": "Marca",
+  "isForm": true,
   "numCols": 1,
   "sections":[
     {

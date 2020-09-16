@@ -1,11 +1,12 @@
 <template>
-  <div>
+  <div class="text-left">
     <template v-if="readonlyAttr">
       <input type="checkbox" v-model="modelValue" onclick="return false;" />
     </template>
     <template v-else>
       <input type="checkbox" v-model="modelValue" />
     </template>
+    {{label}}
   </div>
 </template>
 
@@ -22,6 +23,10 @@ export default {
     readonlyAttr: {
       type: Boolean,
       default: false,
+    },
+    label: {
+      type: String,
+      default: '',
     },
   },
   computed: {

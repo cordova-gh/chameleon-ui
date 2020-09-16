@@ -158,7 +158,6 @@ export default {
 
     getEntities(page, filterObj) {
       // eslint-disable-next-line no-console
-      console.log('ciaoaoao');
       let diff = 0;
       if (page > 1) {
         if (page % this.visiblePages[this.visiblePages.length - 1] === 0) {

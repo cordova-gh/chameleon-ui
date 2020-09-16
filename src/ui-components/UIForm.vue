@@ -61,6 +61,10 @@
                 <template v-else-if="colElement.type === 'textarea'">
                   <input-textarea v-model="entity[colElement.field]"> </input-textarea>
                 </template>
+                 <template v-else-if="colElement.type === 'checkbox'">
+                  <input-checkbox v-model="entity[colElement.field]"
+                  :label="colElement.label"> </input-checkbox>
+                </template>
               </div>
             </div>
           </div>
@@ -103,6 +107,7 @@ import InputPassword from '@/ui-components/input-components/InputPassword';
 import InputNumber from '@/ui-components/input-components/InputNumber';
 import InputDate from '@/ui-components/input-components/InputDate';
 import InputMoney from '@/ui-components/input-components/InputMoney';
+import InputCheckbox from '@/ui-components/input-components/InputCheckBox';
 import HttpCall from '../services/HttpCall';
 import { Utility } from '../utilities/utility';
 
@@ -146,6 +151,7 @@ export default {
     'input-date': InputDate,
     'input-money': InputMoney,
     'input-textarea': InputTextArea,
+    'input-checkbox': InputCheckbox,
   },
   data() {
     return {
@@ -295,4 +301,5 @@ export default {
   border-left-width: 10px solid;
   border-left-color: #000;
 }
+
 </style>

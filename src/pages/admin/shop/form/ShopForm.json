@@ -1,4 +1,7 @@
 {
+  "urlApi": "API_SHOP",
+  "title": "Punti vendita",
+  "isForm": true,
   "numCols": 3,
   "sections":[
     {
@@ -9,7 +12,8 @@
             "field": "codice",
             "label": "Codice",
             "bindField": "codice",
-            "type": "text"
+            "type": "text",
+            "readonlyUpdate": true
           }
         ],
         [

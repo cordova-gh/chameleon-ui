@@ -1,56 +1,79 @@
 <template>
-<div class="container-fluid mt--6">
-  <div class="card mb-4"><div class="card-header">
-            <h3 class="mb-0">Company</h3>
-        </div>
-    <div class="card-body">
+<div class="container box-container my-2 py-3">
       <form @submit.prevent="saveEntity">
         <div class="card-body"><div class="title-form">
                     <p>Dati Generali</p>
                  </div>
             <div class="row">
-              <div class="col-12 col-md-4 form-group">
-                <input-text v-model="entity['codice']" label="Codice">
+              <div class="col-12 col-md-4 form-group"
+          v-if="!invisibleFields['codice']">
+                <input-text v-model="entity['codice']"
+              label="Codice"
+              :readonlyAttr="readonlyFields['codice']">
               </input-text>
               </div>
             </div>
             <div class="row">
-              <div class="col-12 col-md-4 form-group">
-                <input-text v-model="entity['ragioneSociale']" label="Ragione Sociale">
+              <div class="col-12 col-md-4 form-group"
+          v-if="!invisibleFields['ragioneSociale']">
+                <input-text v-model="entity['ragioneSociale']"
+              label="Ragione Sociale"
+              :readonlyAttr="readonlyFields['ragioneSociale']">
               </input-text>
               </div>
-              <div class="col-12 col-md-4 form-group">
-                <input-text v-model="entity['descrAttivita']" label="Descrizione Attivita">
-              </input-text>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-12 col-md-4 form-group">
-                <input-text v-model="entity['codiceFiscale']" label="Codice Fiscale">
-              </input-text>
-              </div>
-              <div class="col-12 col-md-4 form-group">
-                <input-text v-model="entity['partitaIva']" label="Partita Iva">
-              </input-text>
-              </div>
-              <div class="col-12 col-md-4 form-group">
-                <input-text v-model="entity['partitaIvaEstera']" label="Partita Iva Estera">
+              <div class="col-12 col-md-4 form-group"
+          v-if="!invisibleFields['descrAttivita']">
+                <input-text v-model="entity['descrAttivita']"
+              label="Descrizione Attivita"
+              :readonlyAttr="readonlyFields['descrAttivita']">
               </input-text>
               </div>
             </div>
             <div class="row">
-              <div class="col-12 col-md-4 form-group">
-                <input-text v-model="entity['telefono']" label="Telefono">
+              <div class="col-12 col-md-4 form-group"
+          v-if="!invisibleFields['codiceFiscale']">
+                <input-text v-model="entity['codiceFiscale']"
+              label="Codice Fiscale"
+              :readonlyAttr="readonlyFields['codiceFiscale']">
               </input-text>
               </div>
-              <div class="col-12 col-md-4 form-group">
-                <input-text v-model="entity['cellulare']" label="Cellulare">
+              <div class="col-12 col-md-4 form-group"
+          v-if="!invisibleFields['partitaIva']">
+                <input-text v-model="entity['partitaIva']"
+              label="Partita Iva"
+              :readonlyAttr="readonlyFields['partitaIva']">
+              </input-text>
+              </div>
+              <div class="col-12 col-md-4 form-group"
+          v-if="!invisibleFields['partitaIvaEstera']">
+                <input-text v-model="entity['partitaIvaEstera']"
+              label="Partita Iva Estera"
+              :readonlyAttr="readonlyFields['partitaIvaEstera']">
               </input-text>
               </div>
             </div>
             <div class="row">
-              <div class="col-12 col-md-4 form-group">
-                <input-text v-model="entity['naturaGiurica']" label="Natura Giuridica">
+              <div class="col-12 col-md-4 form-group"
+          v-if="!invisibleFields['telefono']">
+                <input-text v-model="entity['telefono']"
+              label="Telefono"
+              :readonlyAttr="readonlyFields['telefono']">
+              </input-text>
+              </div>
+              <div class="col-12 col-md-4 form-group"
+          v-if="!invisibleFields['cellulare']">
+                <input-text v-model="entity['cellulare']"
+              label="Cellulare"
+              :readonlyAttr="readonlyFields['cellulare']">
+              </input-text>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-md-4 form-group"
+          v-if="!invisibleFields['naturaGiurica']">
+                <input-text v-model="entity['naturaGiurica']"
+              label="Natura Giuridica"
+              :readonlyAttr="readonlyFields['naturaGiurica']">
               </input-text>
               </div>
             </div>
@@ -58,33 +81,50 @@
                     <p>Sede Legale</p>
                  </div>
             <div class="row">
-              <div class="col-12 col-md-4 form-group">
+              <div class="col-12 col-md-4 form-group"
+          v-if="!invisibleFields['statoSedeLegale']">
                   <template v-if="loadEntity">
                     <input-autocomplete v-model="entity['statoSedeLegale']"
-                       :config="configTypes['statoSedeLegale']">
+                       :config="configTypes['statoSedeLegale']"
+                       :readonlyAttr="readonlyFields['statoSedeLegale']">
                      </input-autocomplete>
                   </template>
               </div>
-              <div class="col-12 col-md-4 form-group">
-                <input-text v-model="entity['provinciaSedeLegale']" label="Provincia">
+              <div class="col-12 col-md-4 form-group"
+          v-if="!invisibleFields['provinciaSedeLegale']">
+                <input-text v-model="entity['provinciaSedeLegale']"
+              label="Provincia"
+              :readonlyAttr="readonlyFields['provinciaSedeLegale']">
               </input-text>
               </div>
-              <div class="col-12 col-md-4 form-group">
-                <input-text v-model="entity['comuneSedeLegale']" label="Comune">
+              <div class="col-12 col-md-4 form-group"
+          v-if="!invisibleFields['comuneSedeLegale']">
+                <input-text v-model="entity['comuneSedeLegale']"
+              label="Comune"
+              :readonlyAttr="readonlyFields['comuneSedeLegale']">
               </input-text>
               </div>
             </div>
             <div class="row">
-              <div class="col-12 col-md-4 form-group">
-                <input-text v-model="entity['viaSedeLegale']" label="Via">
+              <div class="col-12 col-md-4 form-group"
+          v-if="!invisibleFields['viaSedeLegale']">
+                <input-text v-model="entity['viaSedeLegale']"
+              label="Via"
+              :readonlyAttr="readonlyFields['viaSedeLegale']">
               </input-text>
               </div>
-              <div class="col-12 col-md-4 form-group">
-                <input-text v-model="entity['numeroSedeLegale']" label="Numero">
+              <div class="col-12 col-md-4 form-group"
+          v-if="!invisibleFields['numeroSedeLegale']">
+                <input-text v-model="entity['numeroSedeLegale']"
+              label="Numero"
+              :readonlyAttr="readonlyFields['numeroSedeLegale']">
               </input-text>
               </div>
-              <div class="col-12 col-md-4 form-group">
-                <input-text v-model="entity['capSedeLegale']" label="Cap">
+              <div class="col-12 col-md-4 form-group"
+          v-if="!invisibleFields['capSedeLegale']">
+                <input-text v-model="entity['capSedeLegale']"
+              label="Cap"
+              :readonlyAttr="readonlyFields['capSedeLegale']">
               </input-text>
               </div>
             </div>
@@ -92,33 +132,50 @@
                     <p>Sede Costituzione</p>
                  </div>
             <div class="row">
-              <div class="col-12 col-md-4 form-group">
+              <div class="col-12 col-md-4 form-group"
+          v-if="!invisibleFields['statoSedeCostituzione']">
                   <template v-if="loadEntity">
                     <input-autocomplete v-model="entity['statoSedeCostituzione']"
-                       :config="configTypes['statoSedeCostituzione']">
+                       :config="configTypes['statoSedeCostituzione']"
+                       :readonlyAttr="readonlyFields['statoSedeCostituzione']">
                      </input-autocomplete>
                   </template>
               </div>
-              <div class="col-12 col-md-4 form-group">
-                <input-text v-model="entity['provinciaSedeCostituzione']" label="Provincia">
+              <div class="col-12 col-md-4 form-group"
+          v-if="!invisibleFields['provinciaSedeCostituzione']">
+                <input-text v-model="entity['provinciaSedeCostituzione']"
+              label="Provincia"
+              :readonlyAttr="readonlyFields['provinciaSedeCostituzione']">
               </input-text>
               </div>
-              <div class="col-12 col-md-4 form-group">
-                <input-text v-model="entity['comuneSedeCostituzione']" label="Comune">
+              <div class="col-12 col-md-4 form-group"
+          v-if="!invisibleFields['comuneSedeCostituzione']">
+                <input-text v-model="entity['comuneSedeCostituzione']"
+              label="Comune"
+              :readonlyAttr="readonlyFields['comuneSedeCostituzione']">
               </input-text>
               </div>
             </div>
             <div class="row">
-              <div class="col-12 col-md-4 form-group">
-                <input-text v-model="entity['viaSedeCostituzione']" label="Via">
+              <div class="col-12 col-md-4 form-group"
+          v-if="!invisibleFields['viaSedeCostituzione']">
+                <input-text v-model="entity['viaSedeCostituzione']"
+              label="Via"
+              :readonlyAttr="readonlyFields['viaSedeCostituzione']">
               </input-text>
               </div>
-              <div class="col-12 col-md-4 form-group">
-                <input-text v-model="entity['numeroSedeCostituzione']" label="Numero">
+              <div class="col-12 col-md-4 form-group"
+          v-if="!invisibleFields['numeroSedeCostituzione']">
+                <input-text v-model="entity['numeroSedeCostituzione']"
+              label="Numero"
+              :readonlyAttr="readonlyFields['numeroSedeCostituzione']">
               </input-text>
               </div>
-              <div class="col-12 col-md-4 form-group">
-                <input-text v-model="entity['capSedeCostituzione']" label="Cap">
+              <div class="col-12 col-md-4 form-group"
+          v-if="!invisibleFields['capSedeCostituzione']">
+                <input-text v-model="entity['capSedeCostituzione']"
+              label="Cap"
+              :readonlyAttr="readonlyFields['capSedeCostituzione']">
               </input-text>
               </div>
             </div>
@@ -126,22 +183,35 @@
                     <p>Altri Dati</p>
                  </div>
             <div class="row">
-              <div class="col-12 col-md-4 form-group">
-                <input-date v-model="entity['dataCostituzione']"> </input-date>              </div>
-              <div class="col-12 col-md-4 form-group">
-                <input-text v-model="entity['capitaleSociale']" label="Capitale Sociale">
+              <div class="col-12 col-md-4 form-group"
+          v-if="!invisibleFields['dataCostituzione']">
+                <input-date v-model="entity['dataCostituzione']"
+              :readonlyAttr="readonlyFields['dataCostituzione']"> </input-date>              </div>
+              <div class="col-12 col-md-4 form-group"
+          v-if="!invisibleFields['capitaleSociale']">
+                <input-text v-model="entity['capitaleSociale']"
+              label="Capitale Sociale"
+              :readonlyAttr="readonlyFields['capitaleSociale']">
               </input-text>
               </div>
             </div>
             <div class="row">
-              <div class="col-12 col-md-4 form-group">
-                <input-date v-model="entity['dataIscrCciaa']"> </input-date>              </div>
-              <div class="col-12 col-md-4 form-group">
-                <input-text v-model="entity['nrIscrCciaa']" label="N° Iscr.Cciaa">
+              <div class="col-12 col-md-4 form-group"
+          v-if="!invisibleFields['dataIscrCciaa']">
+                <input-date v-model="entity['dataIscrCciaa']"
+              :readonlyAttr="readonlyFields['dataIscrCciaa']"> </input-date>              </div>
+              <div class="col-12 col-md-4 form-group"
+          v-if="!invisibleFields['nrIscrCciaa']">
+                <input-text v-model="entity['nrIscrCciaa']"
+              label="N° Iscr.Cciaa"
+              :readonlyAttr="readonlyFields['nrIscrCciaa']">
               </input-text>
               </div>
-              <div class="col-12 col-md-4 form-group">
-                <input-text v-model="entity['provIscrCciaa']" label="Prov. Iscr.Cciaa">
+              <div class="col-12 col-md-4 form-group"
+          v-if="!invisibleFields['provIscrCciaa']">
+                <input-text v-model="entity['provIscrCciaa']"
+              label="Prov. Iscr.Cciaa"
+              :readonlyAttr="readonlyFields['provIscrCciaa']">
               </input-text>
               </div>
             </div>
@@ -149,20 +219,32 @@
                     <p>Contatto Riferimento</p>
                  </div>
             <div class="row">
-              <div class="col-12 col-md-4 form-group">
-                <input-text v-model="entity['nomeRiferimento']" label="Nome">
+              <div class="col-12 col-md-4 form-group"
+          v-if="!invisibleFields['nomeRiferimento']">
+                <input-text v-model="entity['nomeRiferimento']"
+              label="Nome"
+              :readonlyAttr="readonlyFields['nomeRiferimento']">
               </input-text>
               </div>
-              <div class="col-12 col-md-4 form-group">
-                <input-text v-model="entity['telefonoReferente']" label="Telefono">
+              <div class="col-12 col-md-4 form-group"
+          v-if="!invisibleFields['telefonoReferente']">
+                <input-text v-model="entity['telefonoReferente']"
+              label="Telefono"
+              :readonlyAttr="readonlyFields['telefonoReferente']">
               </input-text>
               </div>
-              <div class="col-12 col-md-4 form-group">
-                <input-text v-model="entity['cellulareRiferimento']" label="Cellulare">
+              <div class="col-12 col-md-4 form-group"
+          v-if="!invisibleFields['cellulareRiferimento']">
+                <input-text v-model="entity['cellulareRiferimento']"
+              label="Cellulare"
+              :readonlyAttr="readonlyFields['cellulareRiferimento']">
               </input-text>
               </div>
-              <div class="col-12 col-md-4 form-group">
-                <input-text v-model="entity['emailReferente']" label="Email">
+              <div class="col-12 col-md-4 form-group"
+          v-if="!invisibleFields['emailReferente']">
+                <input-text v-model="entity['emailReferente']"
+              label="Email"
+              :readonlyAttr="readonlyFields['emailReferente']">
               </input-text>
               </div>
             </div>
@@ -181,8 +263,6 @@
                   </div>
               </div>
       </form>
-    </div>
-  </div>
 </div>
 </template>
 <script>
@@ -261,7 +341,7 @@ export default {
         cellulareRiferimento: '',
         emailReferente: '',
       },
-      propsFields: { codice: { bind: 'codice' },
+      propsFields: { codice: { bind: 'codice', readonlyUpdate: true },
         ragioneSociale: { bind: 'anagrafica.entitaGiuridica.ragioneSociale' },
         descrAttivita: { bind: 'anagrafica.entitaGiuridica.descrAttivita' },
         codiceFiscale: { bind: 'anagrafica.codiceFiscale' },
@@ -300,6 +380,8 @@ export default {
       currentId: null,
       dominiToLoad: {},
       domini: [],
+      invisibleFields: {},
+      readonlyFields: {},
     };
   },
   created() {
@@ -312,6 +394,7 @@ export default {
       if (this.currentId) {
         this.getEntity(this.currentId);
         this.modePage = 'U';
+        this.setModeFields();
       } else {
         this.loadEntity = true;
         this.modePage = 'I';
@@ -403,6 +486,19 @@ export default {
           this.domini = res;
         });
       }
+    },
+    setModeFields() {
+      const keysPropsFields = Object.keys(this.propsFields);
+      const fieldsInvisible = keysPropsFields
+        .filter(key => this.propsFields[key].invisibleUpdate);
+      fieldsInvisible.forEach((fieldInvisible) => {
+        this.invisibleFields[fieldInvisible] = true;
+      });
+      const fieldsReadOnly = keysPropsFields
+        .filter(key => this.propsFields[key].readonlyUpdate);
+      fieldsReadOnly.forEach((fieldReadOnly) => {
+        this.readonlyFields[fieldReadOnly] = true;
+      });
     },
   },
 };
