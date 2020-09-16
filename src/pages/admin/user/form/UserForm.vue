@@ -18,10 +18,14 @@
               </input-password>              </div>
             </div>
             <div class="row">
-              <div class="col-12 col-md-6 form-group" v-if="!invisibleFields['nome']">
-                <input-text v-model="entity['nome']" label="Nome"
-              :readonlyAttr="readonlyFields['nome']">
-              </input-text>
+              <div class="col-12 col-md-6 form-group"
+              :class="{ 'form-group--error': $v.entity.nome.$error }"
+              v-if="!invisibleFields['nome']">
+                <input-text v-model="$v.entity.nome.$model" label="Nome"
+                  :readonlyAttr="readonlyFields['nome']"
+                  :classCss="'form__input'">
+                </input-text>
+                <div class="error" v-if="!$v.entity.nome.required">Field is required.</div>
               </div>
               <div class="col-12 col-md-6 form-group" v-if="!invisibleFields['cognome']">
                 <input-text v-model="entity['cognome']" label="Cognome"
@@ -82,6 +86,8 @@ import InputTextArea from '@/ui-components/input-components/InputTextArea';
 import HttpCall from '@/services/HttpCall';
 import { Utility } from '@/utilities/utility';
 import { API_USER, API_DOMINIO } from '@/services/constant-services';
+import { required } from 'vuelidate/lib/validators';
+
 
 export default {
   props: {
@@ -141,6 +147,13 @@ export default {
       invisibleFields: {},
       readonlyFields: {},
     };
+  },
+  validations: {
+    entity: {
+      nome: {
+        required,
+      },
+    },
   },
   created() {
     this.onCreated();
@@ -264,5 +277,8 @@ export default {
           .title-form {
           border-left-width: 10px solid;
           border-left-color: #000;
+          }
+          .form-input{
+            width: auto !important;
           }
           </style>
