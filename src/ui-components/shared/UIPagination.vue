@@ -62,21 +62,23 @@ export default {
       this.$emit('clickPage', page);
     },
     calculateVisiblePage() {
-      let diff = 0;
-      if (this.currentPage % this.visiblePages[this.visiblePages.length - 1] === 0) {
-        diff = this.visiblePages.length - 1;
-      } else if (this.currentPage % this.visiblePages[0] === 0 && this.visiblePages[0] !== 1) {
-        diff = -(this.visiblePages.length - 1);
-      }
-      if (diff !== 0) {
-        this.visiblePages = this.visiblePages.map(changePage => changePage + diff);
+      if (this.currentPage < this.pages) {
+        let diff = 0;
+        if (this.currentPage % this.visiblePages[this.visiblePages.length - 1] === 0) {
+          diff = this.visiblePages.length - 1;
+        } else if (this.currentPage % this.visiblePages[0] === 0 && this.visiblePages[0] !== 1) {
+          diff = -(this.visiblePages.length - 1);
+        }
+        if (diff !== 0) {
+          this.visiblePages = this.visiblePages.map(changePage => changePage + diff);
+        }
       }
     },
   },
   watch: {
     pages() {
-      // eslint-disable-next-line no-console
-      console.log('sono cambiato');
+      this.visiblePages = [];
+      this.currentPage = 1;
       const pagesToGenerate = this.pages <= this.maxPages ? this.pages : this.maxPages;
       for (let i = 1; i <= pagesToGenerate; i += 1) {
         this.visiblePages.push(i);
