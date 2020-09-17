@@ -86,29 +86,10 @@ import InputCheckBox from '@/ui-components/input-components/InputCheckBox';
 
 ${this.getImportFilterForm()}
 export default {
-props: {
-  title: {
-    type: String,
-    value: '',
-  },
-  config: {
-    type: Array,
-  },
-  reload: {
-    type: Boolean,
-    default: false,
-  },
-  showButtonPlus: {
-    type: Boolean,
-    default: true,
-  },
-},
 data() {
   return {
     entities: [],
-    modePage: 'LIST',
     pages: 0,
-    currentPage: 1,
     httpCall: new HttpCall(${this.config.urlApi}),
     propsColumns: ${this.propsColumns()},
     ${this.getPropsFilter()}
@@ -133,11 +114,9 @@ methods: {
       filterArray = Object.keys(this.entity)
         .filter(keyFilter => this.entity[keyFilter])
         .map(keyFilter => ${this.backTickWord}${this.braceWord}keyFilter}.${this.braceWord}this.propsFilterEntity[keyFilter].type}=${this.braceWord}this.entity[keyFilter]}${this.backTickWord});
-      filterString = ${this.backTickWord}&${this.braceWord}filterArray.join('&')}${this.backTickWord};
-      this.currentPage = 1;
+      filterString = filterArray.length > 0 ? ${this.backTickWord}&${this.braceWord}filterArray.join('&')}${this.backTickWord} : '';
     }
-    this.currentPage = page;
-    const params = ${this.backTickWord}?page=${this.braceWord}this.currentPage}${this.braceWord}filterString}${this.backTickWord};
+    const params = ${this.backTickWord}?page=${this.braceWord}page}${this.braceWord}filterString}${this.backTickWord};
     this.httpCall.get(params).then((data) => {
       this.entities = Utility.createArrayByConfigV2(data.entities, this.propsColumns);
       this.pages = data.pages;
@@ -248,6 +227,7 @@ watch: {
     if (this.fromFilterGenerator) {
       entityFilter += `invisibleFields: {},
         readonlyFields: {}
+        , disableBtnResetFilters: true
         , entity: ${this.fromFilterGenerator.getEntity()}`;
       const propsFilterEntity = JSON.parse(this.fromFilterGenerator.getPropsFields(true));
       this.config.cols
@@ -266,6 +246,7 @@ watch: {
   }
   getMethodFilter() {
     return this.fromFilterGenerator ? `onFind() {
+      this.disableBtnResetFilters = false;
       this.getEntities(1);
     },
     onReset() {
@@ -273,6 +254,7 @@ watch: {
         (key) => { this.entity[key] = ''; },
       );
       this.onFind();
+      this.disableBtnResetFilters = true;
     },` : '';
   }
 }

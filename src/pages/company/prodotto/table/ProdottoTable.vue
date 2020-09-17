@@ -25,11 +25,11 @@
             </div>
            </div><div>
                   <div class="row justify-content-end">
-                  <div class="col-2">
+                  <div class="col-6 col-md-3">
                       <input type="button" class="btn btn-secondary btn-block"
-                      @click="onReset" value="Pulisci">
+                      @click="onReset" value="Pulisci" :disabled="disableBtnResetFilters">
                   </div>
-                  <div class="col-2">
+                  <div class="col-6 col-md-3">
                       <input type="button" class="btn btn-primary btn-block"
                       @click="onFind" value="Cerca">
                   </div>
@@ -113,29 +113,10 @@ import InputMoney from '@/ui-components/input-components/InputMoney';
 import InputTextArea from '@/ui-components/input-components/InputTextArea';
 
 export default {
-  props: {
-    title: {
-      type: String,
-      value: '',
-    },
-    config: {
-      type: Array,
-    },
-    reload: {
-      type: Boolean,
-      default: false,
-    },
-    showButtonPlus: {
-      type: Boolean,
-      default: true,
-    },
-  },
   data() {
     return {
       entities: [],
-      modePage: 'LIST',
       pages: 0,
-      currentPage: 1,
       httpCall: new HttpCall(API_PRODOTTO),
       propsColumns: { codice: { bind: 'codice', type: 'text' },
         descrizione: { bind: 'descrizione', type: 'text' },
@@ -145,6 +126,7 @@ export default {
       },
       invisibleFields: {},
       readonlyFields: {},
+      disableBtnResetFilters: true,
       entity: { codice: '',
         descrizione: '',
       },
@@ -177,11 +159,9 @@ export default {
         filterArray = Object.keys(this.entity)
           .filter(keyFilter => this.entity[keyFilter])
           .map(keyFilter => `${keyFilter}.${this.propsFilterEntity[keyFilter].type}=${this.entity[keyFilter]}`);
-        filterString = `&${filterArray.join('&')}`;
-        this.currentPage = 1;
+        filterString = filterArray.length > 0 ? `&${filterArray.join('&')}` : '';
       }
-      this.currentPage = page;
-      const params = `?page=${this.currentPage}${filterString}`;
+      const params = `?page=${page}${filterString}`;
       this.httpCall.get(params).then((data) => {
         this.entities = Utility.createArrayByConfigV2(data.entities, this.propsColumns);
         this.pages = data.pages;
@@ -200,6 +180,7 @@ export default {
       this.$emit('onCreate');
     },
     onFind() {
+      this.disableBtnResetFilters = false;
       this.getEntities(1);
     },
     onReset() {
@@ -207,6 +188,7 @@ export default {
         (key) => { this.entity[key] = ''; },
       );
       this.onFind();
+      this.disableBtnResetFilters = true;
     },
   },
   watch: {

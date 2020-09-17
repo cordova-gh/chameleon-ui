@@ -46,11 +46,11 @@ export default class FormGenerator {
     const isFilterIf = this.config.isFilter
       ? `<div>
                   <div class="row justify-content-end">
-                  <div class="col-2">
+                  <div class="col-6 col-md-3">
                       <input type="button" class="btn btn-secondary btn-block"
-                      @click="onReset" value="Pulisci">
+                      @click="onReset" value="Pulisci" :disabled="disableBtnResetFilters">
                   </div>
-                  <div class="col-2">
+                  <div class="col-6 col-md-3">
                       <input type="button" class="btn btn-primary btn-block"
                       @click="onFind" value="Cerca">
                   </div>
