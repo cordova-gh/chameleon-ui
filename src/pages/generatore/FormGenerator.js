@@ -360,24 +360,29 @@ export default class FormGenerator {
     // eslint-disable-next-line prefer-template
     return objString + '}';
   }
-  getPropsFields() {
-    let objString = '{';
+  getPropsFields(jsonValue = false) {
+    const doubleQuote = jsonValue ? '"' : '';
+    const singleQuote = jsonValue ? '"' : '\'';
+    let objString = '';
     this.config.sections.forEach((section) => {
       section.rows.forEach((cols) => {
         cols.forEach((col) => {
           let otherAttributes = '';
           if (col.invisibleUpdate) {
-            otherAttributes += ', invisibleUpdate: true';
+            otherAttributes += `,${doubleQuote}invisibleUpdate${doubleQuote}: true`;
           }
           if (col.readonlyUpdate) {
-            otherAttributes += ', readonlyUpdate: true';
+            otherAttributes += `,${doubleQuote}readonlyUpdate${doubleQuote}: true`;
           }
-          objString += `${col.field}: { bind:'${col.bindField}'${otherAttributes}},\n`;
+          objString += `${objString !== '' ? ',' : ''} ${doubleQuote + col.field + doubleQuote}: {
+                          ${doubleQuote}bind${doubleQuote}:${singleQuote + col.bindField + singleQuote}
+                          ${otherAttributes}
+                        }`;
         });
       });
     });
     // eslint-disable-next-line prefer-template
-    return objString + '}';
+    return '{' + objString + '}';
   }
   getConfigTypesAutocomplete() {
     const objString = {};

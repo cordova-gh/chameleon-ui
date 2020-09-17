@@ -8,12 +8,12 @@ export default class GridListGenerator {
   backTickWord = '`';
   configFilterForm = null;
   importFilter='';
-  formGenerator = null;
+  fromFilterGenerator = null;
   constructor(config) {
     this.config = config;
     this.configFilterForm = this.setConfigFilterForm();
     if (this.configFilterForm) {
-      this.formGenerator = new FormGenerator(this.configFilterForm);
+      this.fromFilterGenerator = new FormGenerator(this.configFilterForm);
     }
   }
   generate() {
@@ -111,7 +111,7 @@ data() {
     currentPage: 1,
     httpCall: new HttpCall(${this.config.urlApi}),
     propsColumns: ${this.propsColumns()},
-    ${this.getEntityFilter()}
+    ${this.getPropsFilter()}
   };
 },
 components: {
@@ -127,8 +127,17 @@ methods: {
     this.getEntities(page);
   },
   getEntities(page) {
+    let filterString = '';
+    if (this.entity) {
+      let filterArray = [];
+      filterArray = Object.keys(this.entity)
+        .filter(keyFilter => this.entity[keyFilter])
+        .map(keyFilter => ${this.backTickWord}${this.braceWord}keyFilter}.${this.braceWord}this.propsFilterEntity[keyFilter].type}=${this.braceWord}this.entity[keyFilter]}${this.backTickWord});
+      filterString = ${this.backTickWord}&${this.braceWord}filterArray.join('&')}${this.backTickWord};
+      this.currentPage = 1;
+    }
     this.currentPage = page;
-    const params = ${this.backTickWord}?page=${this.braceWord}this.currentPage}${this.backTickWord};
+    const params = ${this.backTickWord}?page=${this.braceWord}this.currentPage}${this.braceWord}filterString}${this.backTickWord};
     this.httpCall.get(params).then((data) => {
       this.entities = Utility.createArrayByConfigV2(data.entities, this.propsColumns);
       this.pages = data.pages;
@@ -163,13 +172,13 @@ watch: {
   }
   // eslint-disable-next-line class-methods-use-this
   styleTable() {
-    return `
+    return `<${this.styleWord}>
     .fa {
       cursor: pointer;
     }
     .fas {
       cursor: pointer;
-    } `;
+    } </${this.styleWord}>`;
   }
   getTestata() {
     let testata = '';
@@ -212,10 +221,10 @@ watch: {
     return [];
   }
   getHtmlFilterForm() {
-    return this.formGenerator ? this.formGenerator.templateForm() : '';
+    return this.fromFilterGenerator ? this.fromFilterGenerator.templateForm() : '';
   }
   getImportFilterForm() {
-    return this.formGenerator ? `import InputAutocomplete from '@/ui-components/input-components/InputAutocomplete';
+    return this.fromFilterGenerator ? `import InputAutocomplete from '@/ui-components/input-components/InputAutocomplete';
     import InputSelect from '@/ui-components/input-components/InputSelect';
     import InputText from '@/ui-components/input-components/InputText';
     import InputPassword from '@/ui-components/input-components/InputPassword';
@@ -225,7 +234,7 @@ watch: {
     import InputTextArea from '@/ui-components/input-components/InputTextArea';` : '';
   }
   getComponentFilterForm() {
-    return this.formGenerator ? `          'input-autocomplete': InputAutocomplete,
+    return this.fromFilterGenerator ? `          'input-autocomplete': InputAutocomplete,
     'input-select': InputSelect,
     'input-text': InputText,
     'input-password': InputPassword,
@@ -234,18 +243,35 @@ watch: {
     'input-money': InputMoney,
     'input-textarea': InputTextArea,` : '';
   }
-  getEntityFilter() {
-    return this.formGenerator ? `invisibleFields: {},
-    readonlyFields: {}
-    , entity: ${this.formGenerator.getEntity()}
-    , propsFilterEntity: ${this.formGenerator.getPropsFields()}` : '';
+  getPropsFilter() {
+    let entityFilter = '';
+    if (this.fromFilterGenerator) {
+      entityFilter += `invisibleFields: {},
+        readonlyFields: {}
+        , entity: ${this.fromFilterGenerator.getEntity()}`;
+      const propsFilterEntity = JSON.parse(this.fromFilterGenerator.getPropsFields(true));
+      this.config.cols
+        .filter(col => col.filter)
+        .forEach((col) => {
+          propsFilterEntity[col.field].type = col.filter.type;
+        });
+
+      entityFilter += `, propsFilterEntity: ${JSON.stringify(propsFilterEntity)
+        .replaceAll('":', ':')
+        .replaceAll('{"', '{')
+        .replaceAll(',"', ',')
+        .replaceAll('"', '\'')}`;
+    }
+    return entityFilter;
   }
   getMethodFilter() {
-    return this.formGenerator ? `onFind() {
-      this.$emit('filter', this.entity);
+    return this.fromFilterGenerator ? `onFind() {
+      this.getEntities(1);
     },
     onReset() {
-      this.entity = this.createEntityForm();
+      Object.keys(this.entity).forEach(
+        (key) => { this.entity[key] = ''; },
+      );
       this.onFind();
     },` : '';
   }

@@ -132,9 +132,9 @@ export default {
       this.getEntities(page);
     },
     getEntities(page, filterObj) {
-      let filterArray = [];
       let filterString = '';
       if (filterObj) {
+        let filterArray = [];
         filterArray = Object.keys(filterObj)
           .filter(keyFilter => filterObj[keyFilter])
           .map(keyFilter => `${keyFilter}.contains=${filterObj[keyFilter]}`);

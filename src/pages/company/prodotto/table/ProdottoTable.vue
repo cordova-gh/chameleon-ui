@@ -1,26 +1,229 @@
+
 <template>
+<div>
+
+<div class="container box-container my-2 py-3">
+      <form @submit.prevent="saveEntity">
+        <div class="card-body"><div class="title-form">
+                    <p>Filtri Ricerca</p>
+                 </div>
+            <div class="row">
+              <div class="col-12 col-md-6 form-group"
+          v-if="!invisibleFields['codice']">
+                <input-text v-model="entity['codice']"
+              label="Codice"
+              :readonlyAttr="readonlyFields['codice']">
+              </input-text>
+              </div>
+              <div class="col-12 col-md-6 form-group"
+          v-if="!invisibleFields['descrizione']">
+                <input-text v-model="entity['descrizione']"
+              label="Descrizione"
+              :readonlyAttr="readonlyFields['descrizione']">
+              </input-text>
+              </div>
+            </div>
+           </div><div>
+                  <div class="row justify-content-end">
+                  <div class="col-2">
+                      <input type="button" class="btn btn-secondary btn-block"
+                      @click="onReset" value="Pulisci">
+                  </div>
+                  <div class="col-2">
+                      <input type="button" class="btn btn-primary btn-block"
+                      @click="onFind" value="Cerca">
+                  </div>
+                  </div>
+          </div>
+      </form>
+</div>
+
+      <div class="container box-container my-2 py-5">
+
     <div class="container">
-        <ui-table
-        :config="configTable"
-        :urlApi="urlApi"
-        ></ui-table>
+      <div class="table-responsive table-hover">
+        <table class="table align-items-center">
+          <thead class="thead-light">
+            <th style="width: 5%"></th>
+              <th  class="sort">
+                  Codice
+              </th><th  class="sort">
+                  Descrizione
+              </th><th  class="sort">
+                  Sotto Categoria
+              </th><th  class="sort">
+                  Provenienza
+              </th><th  class="sort">
+                  Marca
+              </th>
+            <th style="width: 5%"></th>
+          </thead>
+          <tbody>
+            <tr v-for="entity of entities" :key="entity.id">
+              <td>
+                <i
+                  @click="deleteEntity(entity._id)"
+                  class="fa fa-minus-circle"
+                ></i>
+              </td>
+              <td v-for="(keyColumn, indexColumn) in Object.keys(propsColumns)" :key="indexColumn">
+                <template v-if="propsColumns[keyColumn].type === 'checkbox'">
+                  <input-checkbox
+                    v-model="entity[keyColumn]"
+                    v-bind:isReadonly="true"
+                  >
+                  </input-checkbox>
+                </template>
+                <template v-else>
+                  {{ entity[keyColumn] }}
+                </template>
+              </td>
+              <td>
+                <router-link :to="'edit/' + entity._id"
+                  ><i class="fas fa-edit"></i
+                ></router-link>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <ui-pagination
+          :pages="pages"
+          v-bind:maxPages="5"
+          @clickPage="clickPagePagination">
+          </ui-pagination>
+      </div>
     </div>
+  </div>
+</div>
 </template>
 <script>
-import UITable from '@/ui-components/UITable';
-import { API_PRODOTTO } from '../../../../services/constant-services';
-import ConfigTable from './ProdottoTable.json';
+import UIPagination from '@/ui-components/shared/UIPagination';
+import { API_PRODOTTO } from '@/services/constant-services';
+import HttpCall from '@/services/HttpCall';
+import { Utility } from '@/utilities/utility';
+import InputCheckBox from '@/ui-components/input-components/InputCheckBox';
+
+import InputAutocomplete from '@/ui-components/input-components/InputAutocomplete';
+import InputSelect from '@/ui-components/input-components/InputSelect';
+import InputText from '@/ui-components/input-components/InputText';
+import InputPassword from '@/ui-components/input-components/InputPassword';
+import InputNumber from '@/ui-components/input-components/InputNumber';
+import InputDate from '@/ui-components/input-components/InputDate';
+import InputMoney from '@/ui-components/input-components/InputMoney';
+import InputTextArea from '@/ui-components/input-components/InputTextArea';
 
 export default {
-  name: 'ProdottoTable',
+  props: {
+    title: {
+      type: String,
+      value: '',
+    },
+    config: {
+      type: Array,
+    },
+    reload: {
+      type: Boolean,
+      default: false,
+    },
+    showButtonPlus: {
+      type: Boolean,
+      default: true,
+    },
+  },
   data() {
     return {
-      urlApi: API_PRODOTTO,
-      configTable: ConfigTable,
+      entities: [],
+      modePage: 'LIST',
+      pages: 0,
+      currentPage: 1,
+      httpCall: new HttpCall(API_PRODOTTO),
+      propsColumns: { codice: { bind: 'codice', type: 'text' },
+        descrizione: { bind: 'descrizione', type: 'text' },
+        sottoCategoriaProdotto: { bind: 'Prodotto.sottoCategoria', type: 'text' },
+        provenienzaProdotto: { bind: 'prodotto.provenienza.descrizione', type: 'text' },
+        marcaProdotto: { bind: 'prodotto.marca.codice', type: 'text' },
+      },
+      invisibleFields: {},
+      readonlyFields: {},
+      entity: { codice: '',
+        descrizione: '',
+      },
+      propsFilterEntity: { codice: { bind: 'codice', type: 'contains' }, descrizione: { bind: 'descrizione', type: 'contains' } },
     };
   },
   components: {
-    'ui-table': UITable,
+    'input-checkbox': InputCheckBox,
+    'ui-pagination': UIPagination,
+    'input-autocomplete': InputAutocomplete,
+    'input-select': InputSelect,
+    'input-text': InputText,
+    'input-password': InputPassword,
+    'input-number': InputNumber,
+    'input-date': InputDate,
+    'input-money': InputMoney,
+    'input-textarea': InputTextArea,
+  },
+  created() {
+    this.getEntities(1);
+  },
+  methods: {
+    clickPagePagination(page) {
+      this.getEntities(page);
+    },
+    getEntities(page) {
+      let filterString = '';
+      if (this.entity) {
+        let filterArray = [];
+        filterArray = Object.keys(this.entity)
+          .filter(keyFilter => this.entity[keyFilter])
+          .map(keyFilter => `${keyFilter}.${this.propsFilterEntity[keyFilter].type}=${this.entity[keyFilter]}`);
+        filterString = `&${filterArray.join('&')}`;
+        this.currentPage = 1;
+      }
+      this.currentPage = page;
+      const params = `?page=${this.currentPage}${filterString}`;
+      this.httpCall.get(params).then((data) => {
+        this.entities = Utility.createArrayByConfigV2(data.entities, this.propsColumns);
+        this.pages = data.pages;
+      });
+    },
+    deleteEntity(id) {
+      this.httpCall.delete(id).then(() => {
+        this.getEntities();
+        this.$emit('onDelete', 'Sto cancellando');
+      });
+    },
+    modifyEntity(id) {
+      this.$emit('onModify', id);
+    },
+    newEntity() {
+      this.$emit('onCreate');
+    },
+    onFind() {
+      this.getEntities(1);
+    },
+    onReset() {
+      Object.keys(this.entity).forEach(
+        (key) => { this.entity[key] = ''; },
+      );
+      this.onFind();
+    },
+  },
+  watch: {
+    reload: {
+      immediate: true,
+      deep: true,
+      handler() {
+        this.getEntities(1);
+        this.$emit('endLoadPagination');
+      },
+    },
   },
 };
-</script>
+</script>   <style>
+    .fa {
+      cursor: pointer;
+    }
+    .fas {
+      cursor: pointer;
+    } </style>
