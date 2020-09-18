@@ -282,17 +282,17 @@ export default new Router({
             },
           ],
         },
+        {
+          path: '/Generator',
+          name: 'Generator',
+          component: UIGenerator,
+        },
       ],
     },
     {
       path: '/login',
       name: 'Login',
       component: Login,
-    },
-    {
-      path: '/Generator',
-      name: 'Generator',
-      component: UIGenerator,
     },
   ],
 });
