@@ -6,6 +6,7 @@
       v-model="modelValue"
       :class="classCss"
       :readonly="readonlyAttr"
+      :id="'field_'+fieldName"
     />
     <label for="inputEmail">{{label}}</label>
   </div>
@@ -26,6 +27,10 @@ export default {
     readonlyAttr: {
       type: Boolean,
       default: false,
+    },
+    fieldName: {
+      type: String,
+      default: '',
     },
   },
   computed: {

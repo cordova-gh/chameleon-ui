@@ -27,6 +27,7 @@
                   <input-text
                     v-model="entity[colElement.field]"
                     :label="colElement.label"
+                    :fieldName="colElement.field"
                   ></input-text>
                 </template>
                 <template v-else-if="colElement.type === 'password'">

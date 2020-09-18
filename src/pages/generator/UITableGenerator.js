@@ -171,7 +171,7 @@ watch: {
   propsColumns() {
     let objString = '{';
     this.config.cols.forEach((col) => {
-      objString += `${col.field}: { bind:'${col.bindField}', type: '${col.type}'},\n`;
+      objString += `${col.field}: { bind:'${col.bindField ? col.bindField : col.field}', type: '${col.type}'},\n`;
     });
     // eslint-disable-next-line prefer-template
     return objString + '}';

@@ -36,35 +36,31 @@ export default class UIGridListGenerator {
             </thead>
             <tbody>
               <tr v-for="(entity, indexEntity) of entities" :key="indexEntity">
-                <template v-if="entity._id !== undefined">
+                <${this.templateWord} v-if="entity._id !== undefined">
                   <input type="hidden" id="id" :value="entity._id" />
                   <td>
                     <i @click="deleteEntity(entity._id)" class="fa fa-minus-circle"></i>
                   </td>
-                  <td v-for="(column, indexColumn) in config.cols" :key="indexColumn">
+                  <td v-for="(keyColumn, indexColumn) in Object.keys(propsColumns)" :key="indexColumn">
                     <input
                       type="text"
-                      v-model="entity[column.field]"
+                      v-model="entity[keyColumn]"
                       readonly="true"
                       class="disableInput"
                       @dblclick="editableCell($event, 1, indexEntity)"
                       @focusout="editableCell($event, 0, indexEntity)"
                     />
                   </td>
-                  <td>
-                    <i v-if="manageDetails" @click="showDetails(entity._id)"
-                    class="fa fa-list-ul"></i>
-                  </td>
-                </template>
-                <template v-else>
+                </${this.templateWord}>
+                <${this.templateWord} v-else>
                   <td></td>
-                  <td v-for="(column, indexColumn) in config.cols" :key="indexColumn">
-                    <input type="text" v-model="entity[column.field]" />
+                  <td v-for="(keyColumn, indexColumn) in Object.keys(propsColumns)" :key="indexColumn">
+                    <input type="text" v-model="entity[keyColumn]" />
                   </td>
                   <td>
                     <i @click="saveEntity(indexEntity)" class="fa fa-check-circle"></i>
                   </td>
-                </template>
+                </${this.templateWord}>
               </tr>
             </tbody>
           </table>
@@ -73,15 +69,16 @@ export default class UIGridListGenerator {
         </div>
       </div>
     </div>
-  </template>`;
+    </${this.templateWord}>`;
   }
   // eslint-disable-next-line class-methods-use-this
   scriptGridList() {
     return `<${this.scriptWord}>
+    import UIPagination from '@/ui-components/shared/UIPagination';
     import {${this.config.urlApi}}from '@/services/constant-services';
-    import HttpCall from '../services/HttpCall';
-    import UIForm from './UIForm';
-    import UIPagination from './shared/UIPagination';
+    import HttpCall from '@/services/HttpCall';
+    import { Utility } from '@/utilities/utility';
+    import InputCheckBox from '@/ui-components/input-components/InputCheckBox';
     ${this.getImportFilterForm()}
 
     export default {
@@ -95,32 +92,12 @@ export default class UIGridListGenerator {
         };
       },
       components: {
-        'ui-form': UIForm,
         'ui-pagination': UIPagination,
+        'input-checkbox': InputCheckBox,
         ${this.getComponentFilterForm()}
       },
       created() {
         this.getEntities(1);
-        this.configGridListFilter = this.config.cols.filter(config => config.filter);
-        if (this.configGridListFilter.length > 0) {
-          const sectionFilter = {};
-          sectionFilter.label = 'Filtri Ricerca';
-          const filterRows = [];
-          this.configGridListFilter.forEach((config) => {
-            filterRows.push({
-              field: config.field,
-              type: config.type,
-              bindField: config.field,
-              label: config.label,
-            });
-          });
-          sectionFilter.rows = [];
-          sectionFilter.rows[0] = filterRows;
-          this.configFormFilter = {};
-          this.configFormFilter.numCols = '2';
-          this.configFormFilter.sections = [];
-          this.configFormFilter.sections[0] = sectionFilter;
-        }
       },
       methods: {
         clickPagePagination(page) {
@@ -281,7 +258,7 @@ export default class UIGridListGenerator {
   propsColumns() {
     let objString = '{';
     this.config.cols.forEach((col) => {
-      objString += `${col.field}: { bind:'${col.bindField}', type: '${col.type}'},\n`;
+      objString += `${col.field}: { bind:'${col.bindField ? col.bindField : col.field}', type: '${col.type}'},\n`;
     });
     // eslint-disable-next-line prefer-template
     return objString + '}';
@@ -320,5 +297,15 @@ export default class UIGridListGenerator {
       this.onFind();
       this.disableBtnResetFilters = true;
     },` : '';
+  }
+  getComponentFilterForm() {
+    return this.fromFilterGenerator ? `          'input-autocomplete': InputAutocomplete,
+    'input-select': InputSelect,
+    'input-text': InputText,
+    'input-password': InputPassword,
+    'input-number': InputNumber,
+    'input-date': InputDate,
+    'input-money': InputMoney,
+    'input-textarea': InputTextArea,` : '';
   }
 }
