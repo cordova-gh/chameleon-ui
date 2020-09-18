@@ -5,7 +5,7 @@ import MainContainer from '@/structure/MainContainer';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from '@/pages/auth/login/Login';
-import Generatore from '@/pages/generatore/Generator';
+import UIGenerator from '@/pages/generator/UIGenerator';
 
 Vue.use(Router);
 
@@ -292,7 +292,7 @@ export default new Router({
     {
       path: '/Generator',
       name: 'Generator',
-      component: Generatore,
+      component: UIGenerator,
     },
   ],
 });

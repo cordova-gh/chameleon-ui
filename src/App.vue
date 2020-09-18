@@ -33,7 +33,7 @@ html {
 
   font-family: "Sailec-Regular", system-ui, -apple-system, BlinkMacSystemFont
   , Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   line-height: 1;
   color: #0d2d6b !important;
   -webkit-text-size-adjust: 100%;

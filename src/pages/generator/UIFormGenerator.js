@@ -1,4 +1,4 @@
-export default class FormGenerator {
+export default class UIFormGenerator {
   templateWord = 'template';
   scriptWord = 'script';
   styleWord = 'style';

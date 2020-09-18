@@ -27,9 +27,9 @@
   </div>
 </template>
 <script>
-import FormGenerator from './FormGenerator';
-import GridListGenerator from './GridListGenerator';
-import TableGenerator from './TableGenerator';
+import FormGenerator from './UIFormGenerator';
+import GridListGenerator from './UIGridListGenerator';
+import TableGenerator from './UITableGenerator';
 
 export default {
   name: 'button',

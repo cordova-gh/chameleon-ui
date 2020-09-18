@@ -1,6 +1,6 @@
-import FormGenerator from './FormGenerator';
+import UIFormGenerator from './UIFormGenerator';
 
-export default class GridListGenerator {
+export default class UITableGenerator {
   templateWord = 'template';
   scriptWord = 'script';
   styleWord = 'style';
@@ -13,7 +13,7 @@ export default class GridListGenerator {
     this.config = config;
     this.configFilterForm = this.setConfigFilterForm();
     if (this.configFilterForm) {
-      this.fromFilterGenerator = new FormGenerator(this.configFilterForm);
+      this.fromFilterGenerator = new UIFormGenerator(this.configFilterForm);
     }
   }
   generate() {
@@ -83,8 +83,8 @@ import {${this.config.urlApi}}from '@/services/constant-services';
 import HttpCall from '@/services/HttpCall';
 import { Utility } from '@/utilities/utility';
 import InputCheckBox from '@/ui-components/input-components/InputCheckBox';
-
 ${this.getImportFilterForm()}
+
 export default {
 data() {
   return {
