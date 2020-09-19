@@ -1,14 +1,14 @@
 <template>
-  <div class="form-label-group">
+  <div class="formBody">
     <input
-    type="input"
-    class="form-input"
-    :id="'field_'+fieldName"
-    :placeholder="label"
+      type="input"
+      class="form-input"
+      :id="'field_' + fieldName"
+      :placeholder="label"
       v-model="modelValue"
       :readonly="readonlyAttr"
     />
-    <label for="field">{{label}}</label>
+    <label for= "'field_' + fieldName"> {{ label }} </label>
   </div>
 </template>
 <script>
@@ -42,35 +42,38 @@ export default {
 };
 </script>
 <style lang="scss">
-$primary: #11998e;
-$secondary: #38ef7d;
+$primary: #383ab3;
+$secondary: #37d6c9;
 
-.form-label-group {
+.formBody {
   position: relative;
   padding: 15px 0 0;
   margin-top: 15px;
   width: 100%;
 }
 input {
-   font-family: inherit;
-  width: 100% !important;
+  background: transparent;
   border: 0;
   border-bottom: 1px solid gray;
-  outline:0;
-  font-size: 1.3rem;
-  color:rgba(20, 19, 19, 0.74);
+  color: rgba(20, 19, 19, 0.74);
+  font-size: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: lighter;
+  outline: 0;
   padding: 7px 0;
-  background: transparent;
-  transition: border 0.2s;
-}
-.form-input::placeholder {
-  color: transparent;
-}
-.form-input:placeholder-shown~label {
-  top: 20px;
-  cursor: text;
-  font-size: 0.9rem;
-  color: #777;
+  transition: border-color 0.2s;
+  text-transform: capitalize;
+  width: 100% !important;
+
+  &::placeholder {
+    color: transparent;
+  }
+  &:placeholder-shown ~ label {
+    top: 20px;
+    cursor: text;
+    font-size: 0.9rem;
+    color: #777;
+  }
 }
 
 label {
@@ -81,7 +84,7 @@ label {
   font-size: 1rem;
   color: gray;
 }
-.form__field:focus {
+input:focus {
   ~ label {
     position: absolute;
     top: 0;
@@ -89,12 +92,12 @@ label {
     transition: 0.2s;
     font-size: 1rem;
     color: $primary;
-    font-weight:700;
+    font-weight: 700;
   }
   padding-bottom: 6px;
   font-weight: 700;
   border-width: 3px;
-  border-image: linear-gradient(to right, $primary,$secondary);
+  border-image: linear-gradient(to right, $primary, $secondary);
   border-image-slice: 1;
 }
 </style>
