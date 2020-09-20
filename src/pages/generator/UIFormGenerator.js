@@ -10,10 +10,12 @@ export default class UIFormGenerator {
   }
   generate() {
     // eslint-disable-next-line prefer-template
-    return `<${this.templateWord}> `
+    return `<${this.templateWord}>
+  `
           + this.templateForm()
           + `</${this.templateWord}>`
-          + `<${this.scriptWord}>`
+          + `
+<${this.scriptWord}>`
           + this.scriptForm()
           + `</${this.scriptWord}>`
           + this.styleForm();
@@ -28,74 +30,70 @@ export default class UIFormGenerator {
       : '';
 
     const isFormIf = this.config.isForm
-      ? `<div>
-                  <div class="row justify-content-end">
-                  <template v-if="modePage === 'I'">
-                      <div class="col-6 col-md-3 ">
-                      <button class="btn btn-primary btn-block">Salva</button>
-                      </div>
-                  </template>
-                  <template v-else>
-                      <div class="col-6 col-md-3">
-                      <button class="btn btn-primary btn-block">Modifica</button>
-                      </div>
-                  </template>
-                  </div>
-              </div>`
+      ? `       <div>
+        <div class="row justify-content-end">
+          <template v-if="modePage === 'I'">
+            <div class="col-6 col-md-3 ">
+              <button class="btn btn-primary btn-block">Salva</button>
+            </div>
+          </template>
+          <template v-else>
+            <div class="col-6 col-md-3">
+              <button class="btn btn-primary btn-block">Modifica</button>
+            </div>
+          </template>
+        </div>
+      </div>`
       : '';
     const isFilterIf = this.config.isFilter
-      ? `<div>
-                  <div class="row justify-content-end">
-                  <div class="col-6 col-md-3">
-                      <input type="button" class="btn btn-secondary btn-block"
-                      @click="onReset" value="Pulisci" :disabled="disableBtnResetFilters">
-                  </div>
-                  <div class="col-6 col-md-3">
-                      <input type="button" class="btn btn-primary btn-block"
-                      @click="onFind" value="Cerca">
-                  </div>
-                  </div>
-          </div>`
+      ? `       <div>
+        <div class="row justify-content-end">
+          <div class="col-6 col-md-3">
+            <input type="button" class="btn btn-secondary btn-block" value="Pulisci"
+              @click="onReset" :disabled="disableBtnResetFilters">
+          </div>
+          <div class="col-6 col-md-3">
+            <input type="button" class="btn btn-primary btn-block" value="Cerca"
+              @click="onFind">
+          </div>
+        </div>
+      </div>`
       : '';
     // eslint-disable-next-line quotes
-    const spazio = `            `;
+    const spazio = `        `;
     // eslint-disable-next-line quotes
-    let inputs = `<div class="card-body">`;
+    let inputs = `<div class="card-body">\n`;
     this.config.sections.forEach((section) => {
       // eslint-disable-next-line no-const-assign
-      inputs += `<div class="title-form">
-                    <p>${section.label}</p>
-                 </div>\n`;
+      inputs += `        <div class="title-form">
+          <p>${section.label}</p>
+        </div>\n`;
       section.rows.forEach((cols) => {
         inputs += `${spazio}<div class="row">\n`;
         cols.forEach((col) => {
           const numCols = this.getNumColsForm(col.numCols, section.numCols);
-          inputs += `${spazio}  <div class="col-12 col-md-${numCols} form-group"
-          v-if="!invisibleFields['${col.field}']">\n`;
+          inputs += `${spazio}  <div class="col-12 col-md-${numCols} form-group" v-if="!invisibleFields['${col.field}']">\n`;
           switch (col.type) {
             case 'autocomplete': {
-              inputs += `${spazio}      <template v-if="loadEntity">
-                    <input-autocomplete v-model="entity['${col.field}']"
-                       :config="configTypes['${col.field}']"
-                       :readonlyAttr="readonlyFields['${col.field}']">
-                     </input-autocomplete>
-                  </template>\n`;
+              inputs += `${spazio}    <template v-if="loadEntity">
+              <input-autocomplete v-model="entity['${col.field}']" :config="configTypes['${col.field}']"
+                :readonlyAttr="readonlyFields['${col.field}']">
+              </input-autocomplete>
+            </template>\n`;
               break;
             }
             case 'password': {
               // eslint-disable-next-line quotes
-              inputs += `${spazio}    <input-password v-model="entity['${col.field}']"
-              label="${col.label}"
-              :readonlyAttr="readonlyFields['${col.field}']">
-              </input-password>`;
+              inputs += `${spazio}    <input-password v-model="entity['${col.field}']" label="${col.label}"
+                :readonlyAttr="readonlyFields['${col.field}']">
+            </input-password>\n`;
               break;
             }
             case 'select': {
               // eslint-disable-next-line quotes
-              inputs += `${spazio}    <input-select v-model="entity['${col.field}']"
-                                :items="this.domini['${col.configType.dominio}']"
-                                :readonlyAttr="readonlyFields['${col.field}']">
-                </input-select>`;
+              inputs += `${spazio}    <input-select v-model="entity['${col.field}']" :items="this.domini['${col.configType.dominio}']"
+                :readonlyAttr="readonlyFields['${col.field}']">
+            </input-select>\n`;
               break;
             }
             case 'date': {
@@ -131,10 +129,9 @@ export default class UIFormGenerator {
             }
             default: {
               // eslint-disable-next-line quotes
-              inputs += `${spazio}    <input-text v-model="entity['${col.field}']"
-              label="${col.label}"
-              :readonlyAttr="readonlyFields['${col.field}']">
-              </input-text>\n`;
+              inputs += `${spazio}    <input-text v-model="entity['${col.field}']" label="${col.label}"
+                :readonlyAttr="readonlyFields['${col.field}']">
+            </input-text>\n`;
             }
           }
           // eslint-disable-next-line quotes
@@ -145,13 +142,12 @@ export default class UIFormGenerator {
       });
     });
     // eslint-disable-next-line quotes
-    inputs += `           </div>`;
-    return `
-<div class="container box-container my-2 py-3">
-      <form @submit.prevent="saveEntity">
-        ${inputs}${isFormIf}${isFilterIf}
-      </form>
-</div>
+    inputs += `      </div>\n`;
+    return `<div class="container box-container my-2 py-3">
+    <form @submit.prevent="saveEntity">
+      ${inputs}${isFormIf}${isFilterIf}
+    </form>
+  </div>
 `;
   }
   scriptForm() {
@@ -341,12 +337,13 @@ export default class UIFormGenerator {
     import { ${this.config.urlApi}, API_DOMINIO  } from '@/services/constant-services';`;
   }
   styleForm() {
-    return `<${this.styleWord}>
-          .title-form {
-          border-left-width: 10px solid;
-          border-left-color: #000;
-          }
-          </${this.styleWord}>`;
+    return `
+<${this.styleWord}>
+  .title-form {
+    border-left-width: 10px solid;
+    border-left-color: #000;
+  }
+</${this.styleWord}>`;
   }
   getEntity() {
     let objString = '{';

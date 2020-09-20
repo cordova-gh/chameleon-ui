@@ -23,10 +23,9 @@ export default class UITableGenerator {
     // eslint-disable-next-line quotes
     return `
 <${this.templateWord}>
-<div>
-      ${this.getHtmlFilterForm()}
-      <div class="container box-container my-2 py-5">
-
+  <div>
+  ${this.getHtmlFilterForm()}
+  <div class="container box-container my-2 py-5">
     <div class="container">
       <div class="table-responsive table-hover">
         <table class="table align-items-center">
@@ -38,17 +37,12 @@ export default class UITableGenerator {
           <tbody>
             <tr v-for="entity of entities" :key="entity.id">
               <td>
-                <i
-                  @click="deleteEntity(entity._id)"
-                  class="fa fa-minus-circle"
+                <i @click="deleteEntity(entity._id)" class="fa fa-minus-circle"
                 ></i>
               </td>
               <td v-for="(keyColumn, indexColumn) in Object.keys(propsColumns)" :key="indexColumn">
                 <template v-if="propsColumns[keyColumn].type === 'checkbox'">
-                  <input-checkbox
-                    v-model="entity[keyColumn]"
-                    v-bind:isReadonly="true"
-                  >
+                  <input-checkbox v-model="entity[keyColumn]" v-bind:isReadonly="true">
                   </input-checkbox>
                 </template>
                 <template v-else>
@@ -56,18 +50,16 @@ export default class UITableGenerator {
                 </template>
               </td>
               <td>
-                <router-link :to="'edit/' + entity._id"
-                  ><i class="fas fa-edit"></i
-                ></router-link>
+                <router-link :to="'edit/' + entity._id">
+                  <i class="fas fa-edit">
+                  </i>
+                </router-link>
               </td>
             </tr>
           </tbody>
         </table>
-        <ui-pagination
-          :pages="pages"
-          v-bind:maxPages="5"
-          @clickPage="clickPagePagination">
-          </ui-pagination>
+        <ui-pagination :pages="pages" v-bind:maxPages="5" @clickPage="clickPagePagination">
+        </ui-pagination>
       </div>
     </div>
   </div>
@@ -162,9 +154,13 @@ watch: {
   getTestata() {
     let testata = '';
     this.config.cols.forEach((config) => {
-      testata += `<th  class="sort">
-                  ${config.label}
-              </th>`;
+      if (testata !== '') {
+        testata += `
+            `;
+      }
+      testata += `<th class="sort">
+              ${config.label}
+            </th>`;
     });
     return testata;
   }

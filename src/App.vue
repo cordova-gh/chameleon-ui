@@ -30,7 +30,6 @@ body{
 }
 
 html {
-
   font-family: "Sailec-Regular", system-ui, -apple-system, BlinkMacSystemFont
   , Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 0.75rem;

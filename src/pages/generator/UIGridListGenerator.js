@@ -23,53 +23,51 @@ export default class UIGridListGenerator {
   // eslint-disable-next-line class-methods-use-this
   templateGridList() {
     return `<${this.templateWord}>
-    <div>
-    ${this.getHtmlFilterForm()}
-
-      <div class="container box-container my-2 py-5">
-        <div class="table-responsive table-hover">
-          <table class="table align-items-center">
-            <thead class="thead-light">
-              <th style="width: 5%"></th>
-              ${this.getTestata()}
-              <th style="width: 5%"></th>
-            </thead>
-            <tbody>
-              <tr v-for="(entity, indexEntity) of entities" :key="indexEntity">
-                <${this.templateWord} v-if="entity._id !== undefined">
-                  <input type="hidden" id="id" :value="entity._id" />
-                  <td>
-                    <i @click="deleteEntity(entity._id)" class="fa fa-minus-circle"></i>
-                  </td>
-                  <td v-for="(keyColumn, indexColumn) in Object.keys(propsColumns)" :key="indexColumn">
-                    <input
-                      type="text"
-                      v-model="entity[keyColumn]"
-                      readonly="true"
-                      class="disableInput"
-                      @dblclick="editableCell($event, 1, indexEntity)"
-                      @focusout="editableCell($event, 0, indexEntity)"
+  <div>
+  ${this.getHtmlFilterForm()}
+    <div class="container box-container my-2 py-5">
+      <div class="table-responsive table-hover">
+        <table class="table align-items-center">
+          <thead class="thead-light">
+            <th style="width: 5%"></th>
+            ${this.getTestata()}
+            <th style="width: 5%"></th>
+          </thead>
+          <tbody>
+            <tr v-for="(entity, indexEntity) of entities" :key="indexEntity">
+              <${this.templateWord} v-if="entity._id !== undefined">
+                <input type="hidden" id="id" :value="entity._id" />
+                <td>
+                  <i @click="deleteEntity(entity._id)" class="fa fa-minus-circle"></i>
+                </td>
+                <td v-for="(keyColumn, indexColumn) in Object.keys(propsColumns)"
+                  :key="indexColumn">
+                  <input type="text" v-model="entity[keyColumn]" readonly="true"
+                    class="disableInput"
+                    @dblclick="editableCell($event, 1, indexEntity)"
+                    @focusout="editableCell($event, 0, indexEntity)"
                     />
-                  </td>
-                </${this.templateWord}>
-                <${this.templateWord} v-else>
-                  <td></td>
-                  <td v-for="(keyColumn, indexColumn) in Object.keys(propsColumns)" :key="indexColumn">
-                    <input type="text" v-model="entity[keyColumn]" />
-                  </td>
-                  <td>
-                    <i @click="saveEntity(indexEntity)" class="fa fa-check-circle"></i>
-                  </td>
-                </${this.templateWord}>
-              </tr>
-            </tbody>
-          </table>
-          <ui-pagination :pages="pages" v-bind:maxPages="5"
-            @clickPage="clickPagePagination"></ui-pagination>
-        </div>
+                </td>
+              </${this.templateWord}>
+              <${this.templateWord} v-else>
+                <td></td>
+                <td v-for="(keyColumn, indexColumn) in Object.keys(propsColumns)"
+                  :key="indexColumn">
+                  <input type="text" v-model="entity[keyColumn]" />
+                </td>
+                <td>
+                  <i @click="saveEntity(indexEntity)" class="fa fa-check-circle"></i>
+                </td>
+              </${this.templateWord}>
+            </tr>
+          </tbody>
+        </table>
+        <ui-pagination :pages="pages" v-bind:maxPages="5" @clickPage="clickPagePagination">
+        </ui-pagination>
       </div>
     </div>
-    </${this.templateWord}>`;
+  </div>
+</${this.templateWord}>\n`;
   }
   // eslint-disable-next-line class-methods-use-this
   scriptGridList() {
@@ -239,9 +237,13 @@ export default class UIGridListGenerator {
   getTestata() {
     let testata = '';
     this.config.cols.forEach((config) => {
-      testata += `<th  class="sort">
-                  ${config.label}
-              </th>`;
+      if (testata !== '') {
+        testata += `
+            `;
+      }
+      testata += `<th class="sort">
+              ${config.label}
+            </th>`;
     });
     return testata;
   }
