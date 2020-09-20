@@ -25,7 +25,7 @@ export default class UITableGenerator {
 <${this.templateWord}>
   <div>
   ${this.getHtmlFilterForm()}
-  <div class="container box-container my-2 py-5">
+  <div class="container shadow p-2 mb-3 bg-white rounded">
     <div class="container">
       <div class="table-responsive table-hover">
         <table class="table align-items-center">
@@ -58,7 +58,8 @@ export default class UITableGenerator {
             </tr>
           </tbody>
         </table>
-        <ui-pagination :pages="pages" v-bind:maxPages="5" @clickPage="clickPagePagination">
+        <ui-pagination :pages="pages" v-bind:maxPages="5" :numOfResults="numOfResults"
+          @clickPage="clickPagePagination">
         </ui-pagination>
       </div>
     </div>
@@ -82,6 +83,7 @@ data() {
   return {
     entities: [],
     pages: 0,
+    numOfResults: 0,
     httpCall: new HttpCall(${this.config.urlApi}),
     propsColumns: ${this.propsColumns()},
     ${this.getPropsFilter()}
@@ -96,10 +98,10 @@ created() {
   this.getEntities(1);
 },
 methods: {
-  clickPagePagination(page) {
-    this.getEntities(page);
+  clickPagePagination(page, rowsPerPage) {
+    this.getEntities(page, rowsPerPage);
   },
-  getEntities(page) {
+  getEntities(page, rowsPerPage) {
     let filterString = '';
     if (this.entity) {
       let filterArray = [];
@@ -109,9 +111,11 @@ methods: {
       filterString = filterArray.length > 0 ? ${this.backTickWord}&${this.braceWord}filterArray.join('&')}${this.backTickWord} : '';
     }
     const params = ${this.backTickWord}?page=${this.braceWord}page}${this.braceWord}filterString}${this.backTickWord};
+    if (rowsPerPage) params += ${this.backTickWord}&rowsPerPage=${this.braceWord}rowsPerPage}${this.backTickWord};
     this.httpCall.get(params).then((data) => {
       this.entities = Utility.createArrayByConfigV2(data.entities, this.propsColumns);
       this.pages = data.pages;
+      this.numOfResults = data.numOfResults;
     });
   },
   deleteEntity(id) {

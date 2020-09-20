@@ -1,7 +1,7 @@
 <template >
   <div>
-    <input type="password" :placeholder="label"
-    v-model="modelValue" :class="classCss" :readonly="readonlyAttr"/>
+    <input type="password" :placeholder="label" v-model="modelValue"
+      :class="classCss" :readonly="readonlyAttr"/>
   </div>
 </template>
 <script>

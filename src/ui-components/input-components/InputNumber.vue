@@ -1,12 +1,8 @@
 <template >
   <div>
     <input
-      type="text"
-      v-model="modelValue"
-      :placeholder="label"
-      :class="classCss"
-      @keypress="onlyNumber"
-      :readonly="readonlyAttr"
+      type="text" v-model="modelValue" :placeholder="label"
+        :class="classCss" :readonly="readonlyAttr" @keypress="onlyNumber"
     />
   </div>
 </template>

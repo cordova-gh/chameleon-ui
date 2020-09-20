@@ -143,7 +143,7 @@ export default class UIFormGenerator {
     });
     // eslint-disable-next-line quotes
     inputs += `      </div>\n`;
-    return `<div class="container box-container my-2 py-3">
+    return `<div class="container shadow p-2 mb-3 bg-white rounded">
     <form @submit.prevent="saveEntity">
       ${inputs}${isFormIf}${isFilterIf}
     </form>

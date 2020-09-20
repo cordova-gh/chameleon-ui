@@ -2,7 +2,7 @@
 <template>
 <div>
 
-<div class="container box-container my-2 py-3">
+<div class="container shadow p-2 mb-3 bg-white rounded">
       <form @submit.prevent="saveEntity">
         <div class="card-body"><div class="title-form">
                     <p>Filtri Ricerca</p>
@@ -38,7 +38,7 @@
       </form>
 </div>
 
-      <div class="container box-container my-2 py-5">
+      <div class="container shadow-lg p-3 mb-3 bg-white rounded">
 
     <div class="container">
       <div class="table-responsive table-hover">
@@ -89,6 +89,7 @@
         <ui-pagination
           :pages="pages"
           v-bind:maxPages="5"
+          :numOfResults="numOfResults"
           @clickPage="clickPagePagination">
           </ui-pagination>
       </div>
@@ -117,6 +118,7 @@ export default {
     return {
       entities: [],
       pages: 0,
+      numOfResults: 0,
       httpCall: new HttpCall(API_PRODOTTO),
       propsColumns: { codice: { bind: 'codice', type: 'text' },
         descrizione: { bind: 'descrizione', type: 'text' },
@@ -149,10 +151,10 @@ export default {
     this.getEntities(1);
   },
   methods: {
-    clickPagePagination(page) {
-      this.getEntities(page);
+    clickPagePagination(page, rowsPerPage) {
+      this.getEntities(page, rowsPerPage);
     },
-    getEntities(page) {
+    getEntities(page, rowsPerPage) {
       let filterString = '';
       if (this.entity) {
         let filterArray = [];
@@ -161,10 +163,12 @@ export default {
           .map(keyFilter => `${keyFilter}.${this.propsFilterEntity[keyFilter].type}=${this.entity[keyFilter]}`);
         filterString = filterArray.length > 0 ? `&${filterArray.join('&')}` : '';
       }
-      const params = `?page=${page}${filterString}`;
+      let params = `?page=${page}${filterString}`;
+      if (rowsPerPage) params += `&rowsPerPage=${rowsPerPage}`;
       this.httpCall.get(params).then((data) => {
         this.entities = Utility.createArrayByConfigV2(data.entities, this.propsColumns);
         this.pages = data.pages;
+        this.numOfResults = data.numOfResults;
       });
     },
     deleteEntity(id) {

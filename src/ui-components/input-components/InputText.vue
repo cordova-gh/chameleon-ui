@@ -3,12 +3,12 @@
     <input
       type="input"
       class="form-input"
-      :id="'field_' + fieldName"
+      :id="fieldName !== '' ? 'field_' + fieldName: ''"
       :placeholder="label"
       v-model="modelValue"
       :readonly="readonlyAttr"
     />
-    <label for= "'field_' + fieldName"> {{ label }} </label>
+    <label :for= "'label_' + fieldName"> {{ label }} </label>
   </div>
 </template>
 <script>
@@ -48,7 +48,7 @@ $secondary: #37d6c9;
 .formBody {
   position: relative;
   padding: 15px 0 0;
-  margin-top: 15px;
+
   width: 100%;
 }
 input {
