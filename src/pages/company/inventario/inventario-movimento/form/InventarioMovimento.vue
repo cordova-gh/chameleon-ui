@@ -1,65 +1,118 @@
 <template>
   <div class="container shadow p-2 mb-3 bg-white rounded">
-    entità{{this.entity}}
     <form @submit.prevent="saveEntity">
       <div class="card-body">
         <div class="title-form">
           <p>Prodotto</p>
         </div>
         <div class="row">
-          <div class="col-12 col-md-6 form-group" v-if="!invisibleFields['articolo']">
+          <div
+            class="col-12 col-md-6 form-group"
+            v-if="!invisibleFields['articolo']"
+          >
             <template v-if="loadEntity">
-              <input-autocomplete v-model="entity['articolo']"
-              :config="configTypes['articolo']"
-                :readonlyAttr="readonlyFields['articolo']" label="Prodotto">
+              <input-autocomplete
+                v-model="entity['articolo']"
+                :config="configTypes['articolo']"
+                :readonlyAttr="readonlyFields['articolo']"
+                label="Prodotto"
+              >
               </input-autocomplete>
             </template>
           </div>
         </div>
         <div class="row">
-          <div class="col-12 col-md-6 form-group" v-if="!invisibleFields['dataRegistrazione']">
-            <input-date v-model="entity['dataRegistrazione']"
+          <div
+            class="col-12 col-md-6 form-group"
+            v-if="!invisibleFields['dataRegistrazione']"
+          >
+            <input-date
+              v-model="entity['dataRegistrazione']"
               :readonlyAttr="readonlyFields['dataRegistrazione']"
-              label="Data Registrazione"> </input-date>          </div>
-          <div class="col-12 col-md-6 form-group" v-if="!invisibleFields['fornitore']">
+              label="Data Registrazione"
+            >
+            </input-date>
+          </div>
+          <div
+            class="col-12 col-md-6 form-group"
+            v-if="!invisibleFields['fornitore']"
+          >
             <template v-if="loadEntity">
-              <input-autocomplete v-model="entity['fornitore']" :config="configTypes['fornitore']"
-                :readonlyAttr="readonlyFields['fornitore']" label="Fornitore ">
+              <input-autocomplete
+                v-model="entity['fornitore']"
+                :config="configTypes['fornitore']"
+                :readonlyAttr="readonlyFields['fornitore']"
+                label="Fornitore "
+              >
               </input-autocomplete>
             </template>
           </div>
         </div>
         <div class="row">
-          <div class="col-12 col-md-6 form-group" v-if="!invisibleFields['segno']">
-            <input-select v-model="entity['segno']"
-            :items="this.domini['SEGNO_MOVIMENTO_INVENTARIO']"
-                :readonlyAttr="readonlyFields['segno']" label="Segno ">
+          <div
+            class="col-12 col-md-6 form-group"
+            v-if="!invisibleFields['segno']"
+          >
+            <input-select
+              v-model="entity['segno']"
+              :items="this.domini['SEGNO_MOVIMENTO_INVENTARIO']"
+              :readonlyAttr="readonlyFields['segno']"
+              label="Segno "
+            >
             </input-select>
           </div>
-          <div class="col-12 col-md-6 form-group" v-if="!invisibleFields['causale']">
-            <input-text v-model="entity['causale']" label="Causale"
-                :readonlyAttr="readonlyFields['causale']">
-            </input-text>
+          <div
+            class="col-12 col-md-6 form-group"
+            v-if="!invisibleFields['causale']"
+          >
+            <input-select
+              v-model="entity['causale']"
+              :items="this.domini['CAUSALE_MOVIMENTO_INVENTARIO']"
+              :readonlyAttr="readonlyFields['causale']"
+              label="Causale"
+            >
+            </input-select>
           </div>
         </div>
         <div class="row">
-          <div class="col-12 col-md-6 form-group" v-if="!invisibleFields['quantita']">
-            <input-number v-model="entity['quantita']"
-              :readonlyAttr="readonlyFields['quantita']" label="Quantita"> </input-number>
-              </div>
-          <div class="col-12 col-md-6 form-group" v-if="!invisibleFields['dataScadenza']">
-            <input-date v-model="entity['dataScadenza']"
+          <div
+            class="col-12 col-md-6 form-group"
+            v-if="!invisibleFields['quantita']"
+          >
+            <input-number
+              v-model="entity['quantita']"
+              :readonlyAttr="readonlyFields['quantita']"
+              label="Quantita"
+            >
+            </input-number>
+          </div>
+          <div
+            class="col-12 col-md-6 form-group"
+            v-if="!invisibleFields['dataScadenza']"
+          >
+            <input-date
+              v-model="entity['dataScadenza']"
               :readonlyAttr="readonlyFields['dataScadenza']"
-              label="Data scadenza"> </input-date>
-              </div>
+              label="Data scadenza"
+            >
+            </input-date>
+          </div>
         </div>
         <div class="row">
-          <div class="col-12 col-md-6 form-group" v-if="!invisibleFields['note']">
-            <input-textarea v-model="entity['note']"
-              :readonlyAttr="readonlyFields['note']" label="Note"> </input-textarea>          </div>
+          <div
+            class="col-12 col-md-6 form-group"
+            v-if="!invisibleFields['note']"
+          >
+            <input-textarea
+              v-model="entity['note']"
+              :readonlyAttr="readonlyFields['note']"
+              label="Note"
+            >
+            </input-textarea>
+          </div>
         </div>
       </div>
-       <div>
+      <div>
         <div class="row justify-content-end">
           <template v-if="modePage === 'I'">
             <div class="col-6 col-md-3 ">
@@ -89,7 +142,10 @@ import InputTextArea from '@/ui-components/input-components/InputTextArea';
 import InputCheckbox from '@/ui-components/input-components/InputCheckBox';
 import HttpCall from '@/services/HttpCall';
 import { Utility } from '@/utilities/utility';
-import { API_INVENTARIO_MOVIMENTO, API_DOMINIO } from '@/services/constant-services';
+import {
+  API_INVENTARIO_MOVIMENTO,
+  API_DOMINIO,
+} from '@/services/constant-services';
 
 export default {
   props: {
@@ -126,7 +182,8 @@ export default {
   },
   data() {
     return {
-      entity: { articolo: '',
+      entity: {
+        articolo: '',
         dataRegistrazione: '',
         fornitore: '',
         segno: '',
@@ -135,45 +192,54 @@ export default {
         dataScadenza: '',
         note: '',
       },
-      propsFields: { articolo: {
-        bind: 'articolo',
-
+      propsFields: {
+        articolo: {
+          bind: 'articolo',
+        },
+        dataRegistrazione: {
+          bind: 'dataRegistrazione',
+        },
+        fornitore: {
+          bind: 'fornitore',
+        },
+        segno: {
+          bind: 'segno',
+        },
+        causale: {
+          bind: 'causale',
+        },
+        quantita: {
+          bind: 'quantita',
+        },
+        dataScadenza: {
+          bind: 'dataScadenza',
+        },
+        note: {
+          bind: 'note',
+        },
       },
-      dataRegistrazione: {
-        bind: 'dataRegistrazione',
-
-      },
-      fornitore: {
-        bind: 'fornitore',
-
-      },
-      segno: {
-        bind: 'segno',
-
-      },
-      causale: {
-        bind: 'causale',
-
-      },
-      quantita: {
-        bind: 'quantita',
-
-      },
-      dataScadenza: {
-        bind: 'dataScadenza',
-
-      },
-      note: {
-        bind: 'note',
-
-      } },
       modePage: '',
       httpCall: new HttpCall(API_INVENTARIO_MOVIMENTO),
       loadEntity: false,
-      configTypes:
-              { articolo: { isDominio: false, urlApi: '/api/prodottos/all', fieldId: '_id', showCodice: true }, fornitore: { isDominio: false, urlApi: '/api/anagrafica-fornitore-clientes', fieldId: '_id', showCodice: true } },
+      configTypes: {
+        articolo: {
+          isDominio: false,
+          urlApi: '/api/prodottos/all',
+          fieldId: '_id',
+          showCodice: true,
+        },
+        fornitore: {
+          isDominio: false,
+          urlApi: '/api/anagrafica-fornitore-clientes',
+          fieldId: '_id',
+          showCodice: true,
+        },
+      },
       currentId: null,
-      dominiToLoad: { segno: 'SEGNO_MOVIMENTO_INVENTARIO' },
+      dominiToLoad: {
+        segno: 'SEGNO_MOVIMENTO_INVENTARIO',
+        causale: 'CAUSALE_MOVIMENTO_INVENTARIO',
+      },
       domini: [],
       invisibleFields: {},
       readonlyFields: {},
@@ -191,11 +257,11 @@ export default {
         this.modePage = 'U';
         this.setModeFields();
       } else {
-        this.modePage = 'I';
         if (this.baseObject) {
           this.setEntity(this.baseObject);
         }
         this.loadEntity = true;
+        this.modePage = 'I';
       }
     },
     saveEntity() {
@@ -246,11 +312,7 @@ export default {
               }
               objTemp = objTemp[annidateField];
             } else {
-              Vue.set(
-                objTemp,
-                annidateField,
-                this.entity[key],
-              );
+              Vue.set(objTemp, annidateField, this.entity[key]);
             }
           }
         } else {
@@ -278,22 +340,28 @@ export default {
     getDominios() {
       const keysObjectDominiToLoad = Object.keys(this.dominiToLoad);
       if (keysObjectDominiToLoad.length > 0) {
-        const dominiIncludes = Object.keys(this.dominiToLoad).map(key => this.dominiToLoad[key]);
+        const dominiIncludes = Object.keys(this.dominiToLoad).map(
+          key => this.dominiToLoad[key],
+        );
         const httpCallDomini = new HttpCall(API_DOMINIO);
-        httpCallDomini.getCustom('/includes', `?domini=${dominiIncludes.join(',')}`).then((res) => {
-          this.domini = res;
-        });
+        httpCallDomini
+          .getCustom('/includes', `?domini=${dominiIncludes.join(',')}`)
+          .then((res) => {
+            this.domini = res;
+          });
       }
     },
     setModeFields() {
       const keysPropsFields = Object.keys(this.propsFields);
-      const fieldsInvisible = keysPropsFields
-        .filter(key => this.propsFields[key].invisibleUpdate);
+      const fieldsInvisible = keysPropsFields.filter(
+        key => this.propsFields[key].invisibleUpdate,
+      );
       fieldsInvisible.forEach((fieldInvisible) => {
         this.invisibleFields[fieldInvisible] = true;
       });
-      const fieldsReadOnly = keysPropsFields
-        .filter(key => this.propsFields[key].readonlyUpdate);
+      const fieldsReadOnly = keysPropsFields.filter(
+        key => this.propsFields[key].readonlyUpdate,
+      );
       fieldsReadOnly.forEach((fieldReadOnly) => {
         this.readonlyFields[fieldReadOnly] = true;
       });
@@ -302,8 +370,8 @@ export default {
 };
 </script>
 <style>
-  .title-form {
-    border-left-width: 10px solid;
-    border-left-color: #000;
-  }
+.title-form {
+  border-left-width: 10px solid;
+  border-left-color: #000;
+}
 </style>

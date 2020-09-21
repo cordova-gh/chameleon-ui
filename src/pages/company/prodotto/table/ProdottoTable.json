@@ -20,9 +20,9 @@
       }
     },
     {
-      "field": "sottoCategoriaProdotto",
+      "field": "categoriaProdotto",
       "label": "Sotto Categoria",
-      "bindField": "Prodotto.sottoCategoria",
+      "bindField": "Prodotto.categoria",
       "type": "text"
     },
     {

@@ -8,7 +8,7 @@
       v-model="modelValue"
       :readonly="readonlyAttr"
     />
-    <label :for= "'label_' + fieldName"> {{ label }} </label>
+    <label :for= "'label_' + fieldName"> {{ label}} </label>
   </div>
 </template>
 <script>
@@ -42,8 +42,8 @@ export default {
 };
 </script>
 <style lang="scss">
-$primary: #383ab3;
-$secondary: #37d6c9;
+$primary: #2c3e50;
+$secondary:#007bff8a;
 
 .formBody {
   position: relative;
@@ -54,8 +54,8 @@ $secondary: #37d6c9;
 input {
   background: transparent;
   border: 0;
-  border-bottom: 1px solid gray;
-  color: rgba(20, 19, 19, 0.74);
+  border-bottom: 1px solid #ced4da;
+  color:#495057;
   font-size: 1rem;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: lighter;
@@ -71,8 +71,8 @@ input {
   &:placeholder-shown ~ label {
     top: 20px;
     cursor: text;
-    font-size: 0.9rem;
-    color: #777;
+    font-size: 1rem;
+    color: $primary;
   }
 }
 
@@ -81,8 +81,9 @@ label {
   top: 0;
   display: block;
   transition: 0.2s;
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: gray;
+  opacity: 0.9;
 }
 input:focus {
   ~ label {
@@ -90,14 +91,17 @@ input:focus {
     top: 0;
     display: block;
     transition: 0.2s;
-    font-size: 1rem;
-    color: $primary;
-    font-weight: 700;
+    color: $secondary;
+    font-weight: normal;
   }
+  font-size: inherit;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: 200;
   padding-bottom: 6px;
-  font-weight: 700;
-  border-width: 3px;
-  border-image: linear-gradient(to right, $primary, $secondary);
+  font-weight: lighter;
+  border-width: 1px;
+  border-image: linear-gradient(to right, rgba(0,123,255,.25),rgba(0, 174, 255, 0.514));
   border-image-slice: 1;
+  color: $primary;
 }
 </style>

@@ -10,8 +10,8 @@
         [
           {
             "label": "Prodotto",
-            "field": "prodotto",
-            "bindField": "prodotto",
+            "field": "articolo",
+            "bindField": "articolo",
             "type": "autocomplete",
             "configType": {
               "isDominio": false,
@@ -57,7 +57,12 @@
             "label": "Causale",
             "field": "causale",
             "bindField": "causale",
-            "type": "text"
+            "type": "select",
+            "configType": {
+              "isDominio": true,
+              "dominio": "CAUSALE_MOVIMENTO_INVENTARIO",
+              "showDescrizione": true
+            }
           }
         ],
         [
