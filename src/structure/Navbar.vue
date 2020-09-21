@@ -44,7 +44,7 @@
               Unità di Misura
               </router-link>
               <router-link to="/company/marca/list" class="dropdown-item">Marche</router-link>
-              <router-link to="/company/inventario/list" class="dropdown-item">
+              <router-link to="/company/inventario" class="dropdown-item">
               Inventario
               </router-link>
             </div>

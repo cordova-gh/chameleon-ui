@@ -10,7 +10,8 @@ import '@fortawesome/fontawesome-free/css/all.css';
 import VueCurrencyInput from 'vue-currency-input';
 // eslint-disable-next-line import/first
 import Vuelidate from 'vuelidate';
-
+// eslint-disable-next-line import/first
+import moment from 'moment';
 
 const pluginOptions = {
   /* see config reference */
@@ -19,10 +20,18 @@ const pluginOptions = {
 // eslint-disable-next-line import/extensions
 // import '@fortawesome/fontawesome-free/js/all.js';
 
+Vue.filter('formatDate', (value, format) => {
+  if (value) {
+    return moment(String(value)).format(format);
+  }
+  return '';
+});
+
 
 Vue.config.productionTip = false;
 Vue.use(VueCurrencyInput, pluginOptions);
 Vue.use(Vuelidate);
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

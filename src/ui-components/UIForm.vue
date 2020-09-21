@@ -41,26 +41,32 @@
                   <input-autocomplete
                     v-model="entity[colElement.field]"
                     :config="colElement.configType"
+                    :label="colElement.label"
                   ></input-autocomplete>
                 </template>
                 <template v-else-if="colElement.type === 'select'">
                   <input-select
                     v-model="entity[colElement.field]"
                     :config="colElement.configType"
+                    :label="colElement.label"
                   >
                   </input-select>
                 </template>
                 <template v-else-if="colElement.type === 'date' ">
-                  <input-date v-model="entity[colElement.field]"> </input-date>
+                  <input-date v-model="entity[colElement.field]"
+                  :label="colElement.label"> </input-date>
                 </template>
                 <template v-else-if="colElement.type === 'money'">
-                  <input-money v-model="entity[colElement.field]"> </input-money>
+                  <input-money v-model="entity[colElement.field]"
+                  :label="colElement.label"> </input-money>
                 </template>
                 <template v-else-if="colElement.type === 'number'">
-                  <input-number v-model="entity[colElement.field]"> </input-number>
+                  <input-number v-model="entity[colElement.field]"
+                  :label="colElement.label"> </input-number>
                 </template>
                 <template v-else-if="colElement.type === 'textarea'">
-                  <input-textarea v-model="entity[colElement.field]"> </input-textarea>
+                  <input-textarea v-model="entity[colElement.field]"
+                  :label="colElement.label"> </input-textarea>
                 </template>
                  <template v-else-if="colElement.type === 'checkbox'">
                   <input-checkbox v-model="entity[colElement.field]"

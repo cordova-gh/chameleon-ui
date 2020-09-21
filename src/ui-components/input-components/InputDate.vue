@@ -1,6 +1,7 @@
 <template>
   <div>
-    <date-picker :class="classCss" v-model="modelValue" valueType="format">
+    <date-picker :class="classCss" v-model="modelValue" placeholder="label" valueType="format" >
+
     </date-picker>
   </div>
 </template>
@@ -16,6 +17,9 @@ export default {
       default: 'form-control form-control form-control-alternative',
     },
     value: {
+      type: String,
+    },
+    label: {
       type: String,
     },
     readonlyAttr: {
@@ -55,5 +59,8 @@ export default {
 .mx-input:hover,
 .mx-input:focus {
   border-color: #ffffff;
+}
+.mx-datepicker {
+    width: 100%;
 }
 </style>

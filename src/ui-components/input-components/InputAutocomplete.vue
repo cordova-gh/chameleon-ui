@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input type="hidden" v-model="modelValue" />
+    <input type="hidden" v-model="modelValue"  />
     <input
       type="text"
       @input="findDebounce"
@@ -8,6 +8,7 @@
       :class="classCss"
       @focus="enter"
       :readonly="readonlyAttr"
+      :placeholder="label"
     />
     <ul id="autocomplete-results" v-show="isOpen" class="autocomplete-results">
       <li class="loading" v-if="isLoading">Loading results...</li>
@@ -34,6 +35,9 @@ export default {
       default: () => ({}),
     },
     value: {
+      type: String,
+    },
+    label: {
       type: String,
     },
     classCss: {

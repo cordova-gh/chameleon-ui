@@ -1,0 +1,88 @@
+{
+  "urlApi": "API_INVENTARIO_MOVIMENTO",
+  "title": "Movimento Inventario",
+  "isForm": true,
+  "numCols": 2,
+  "sections":[
+    {
+      "label": "Prodotto",
+      "rows": [
+        [
+          {
+            "label": "Prodotto",
+            "field": "prodotto",
+            "bindField": "prodotto",
+            "type": "autocomplete",
+            "configType": {
+              "isDominio": false,
+              "urlApi": "/api/prodottos/all",
+              "fieldId": "_id",
+              "showCodice": true
+            }
+          }
+        ],
+        [
+          {
+            "label": "Data Registrazione",
+            "field": "dataRegistrazione",
+            "bindField": "dataRegistrazione",
+            "type": "date"
+          },
+          {
+            "label": "Fornitore ",
+            "field": "fornitore",
+            "bindField": "fornitore",
+            "type": "autocomplete",
+            "configType": {
+              "isDominio": false,
+              "urlApi": "/api/anagrafica-fornitore-clientes",
+              "fieldId": "_id",
+              "showCodice": true
+            }
+          }
+        ],
+        [
+          {
+            "label": "Segno ",
+            "field": "segno",
+            "bindField": "segno",
+            "type": "select",
+            "configType": {
+              "isDominio": true,
+              "dominio": "SEGNO_MOVIMENTO_INVENTARIO",
+              "showDescrizione": true
+            }
+          },
+          {
+            "label": "Causale",
+            "field": "causale",
+            "bindField": "causale",
+            "type": "text"
+          }
+        ],
+        [
+          {
+            "label": "Quantita",
+            "field": "quantita",
+            "bindField": "quantita",
+            "type": "number"
+          },
+          {
+            "label": "Data scadenza",
+            "field": "dataScadenza",
+            "bindField": "dataScadenza",
+            "type": "date"
+          }
+        ],
+        [
+          {
+            "label": "Note",
+            "field": "note",
+            "bindField": "note",
+            "type": "textarea"
+          }
+        ]
+      ]
+    }
+  ]
+}

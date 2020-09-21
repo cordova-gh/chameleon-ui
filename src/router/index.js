@@ -198,20 +198,6 @@ export default new Router({
             {
               path: 'inventario',
               component: () => import('@/pages/company/inventario/Inventario'),
-              children: [
-                {
-                  path: 'new',
-                  component: () => import('@/pages/company/inventario/form/InventarioForm'),
-                },
-                {
-                  path: 'edit/:id',
-                  component: () => import('@/pages/company/inventario/form/InventarioForm'),
-                },
-                {
-                  path: 'list',
-                  component: () => import('@/pages/company/inventario/table/InventarioTable'),
-                },
-              ],
             },
           ],
         },

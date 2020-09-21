@@ -1,6 +1,7 @@
 <template>
   <div>
     <select v-model="modelValue" :class="classCss" :readonly="readonlyAttr">
+      <option value="" disabled selected hidden>{{label}}</option>
       <option v-for="item in items" :key="item.id" :value="item._id">
         <template v-if="showCodice">
           {{ item.codice }}
@@ -21,6 +22,9 @@ export default {
       default: () => ({}),
     },
     value: {
+      type: String,
+    },
+    label: {
       type: String,
     },
     classCss: {
