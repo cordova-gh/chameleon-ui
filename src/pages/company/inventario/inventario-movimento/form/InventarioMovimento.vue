@@ -1,16 +1,17 @@
 <template>
   <div class="container shadow p-2 mb-3 bg-white rounded">
+    entità{{this.entity}}
     <form @submit.prevent="saveEntity">
       <div class="card-body">
         <div class="title-form">
           <p>Prodotto</p>
         </div>
         <div class="row">
-          <div class="col-12 col-md-6 form-group" v-if="!invisibleFields['prodotto']">
+          <div class="col-12 col-md-6 form-group" v-if="!invisibleFields['articolo']">
             <template v-if="loadEntity">
-              <input-autocomplete v-model="entity['prodotto']"
-              :config="configTypes['prodotto']"
-                :readonlyAttr="readonlyFields['prodotto']" label="Prodotto">
+              <input-autocomplete v-model="entity['articolo']"
+              :config="configTypes['articolo']"
+                :readonlyAttr="readonlyFields['articolo']" label="Prodotto">
               </input-autocomplete>
             </template>
           </div>
@@ -108,6 +109,9 @@ export default {
       type: Boolean,
       default: false,
     },
+    baseObject: {
+      type: Object,
+    },
   },
   components: {
     'input-autocomplete': InputAutocomplete,
@@ -122,7 +126,7 @@ export default {
   },
   data() {
     return {
-      entity: { prodotto: '',
+      entity: { articolo: '',
         dataRegistrazione: '',
         fornitore: '',
         segno: '',
@@ -131,8 +135,8 @@ export default {
         dataScadenza: '',
         note: '',
       },
-      propsFields: { prodotto: {
-        bind: 'prodotto',
+      propsFields: { articolo: {
+        bind: 'articolo',
 
       },
       dataRegistrazione: {
@@ -167,7 +171,7 @@ export default {
       httpCall: new HttpCall(API_INVENTARIO_MOVIMENTO),
       loadEntity: false,
       configTypes:
-              { prodotto: { isDominio: false, urlApi: '/api/prodottos/all', fieldId: '_id', showCodice: true }, fornitore: { isDominio: false, urlApi: '/api/anagrafica-fornitore-clientes', fieldId: '_id', showCodice: true } },
+              { articolo: { isDominio: false, urlApi: '/api/prodottos/all', fieldId: '_id', showCodice: true }, fornitore: { isDominio: false, urlApi: '/api/anagrafica-fornitore-clientes', fieldId: '_id', showCodice: true } },
       currentId: null,
       dominiToLoad: { segno: 'SEGNO_MOVIMENTO_INVENTARIO' },
       domini: [],
@@ -187,8 +191,11 @@ export default {
         this.modePage = 'U';
         this.setModeFields();
       } else {
-        this.loadEntity = true;
         this.modePage = 'I';
+        if (this.baseObject) {
+          this.setEntity(this.baseObject);
+        }
+        this.loadEntity = true;
       }
     },
     saveEntity() {

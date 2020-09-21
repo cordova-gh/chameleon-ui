@@ -3,7 +3,10 @@
     <title-page v-bind:titolo="titolo"></title-page>
     <input type="button" value="New" @click="onNew"/>
     <div v-if="showForm">
-      <inventario-movimento></inventario-movimento>
+    {{baseObjectInventarioMov}}
+      <inventario-movimento :baseObject="baseObjectInventarioMov"
+      v-if="baseObjectInventarioMov['articolo']">
+      </inventario-movimento>
     </div>
     <div class="container">
       <div class="accordion" id="accordionExample">
@@ -50,6 +53,14 @@ import { API_INVENTARIO_MOVIMENTO, API_SHOP } from '@/services/constant-services
 
 export default {
   name: 'inventario',
+  props: {
+    params: {
+      type: Object,
+    },
+    prodottoId: {
+      type: String,
+    },
+  },
   data() {
     return {
       titolo: 'Inventario ',
@@ -58,6 +69,7 @@ export default {
       shops: [],
       httpCallInventarioMov: new HttpCall(API_INVENTARIO_MOVIMENTO),
       httpCallShop: new HttpCall(API_SHOP),
+      baseObjectInventarioMov: {},
     };
   },
   created() {
@@ -70,10 +82,13 @@ export default {
   },
   methods: {
     onNew() {
+      this.baseObjectInventarioMov.articolo = this.prodottoId;
       this.showForm = true;
     },
     loadEntities() {
-      this.httpCallInventarioMov.get().then((data) => {
+      let params = '';
+      if (this.prodottoId !== '') params += `?articolo.equals=${this.prodottoId}`;
+      this.httpCallInventarioMov.get(params).then((data) => {
         this.entities = data.entities;
         this.pages = data.pages;
         this.numOfResults = data.numOfResults;
@@ -83,6 +98,12 @@ export default {
       this.httpCallShop.get().then((data) => {
         this.shops = data.entities;
       });
+    },
+  },
+  watch: {
+    prodottoId() {
+      this.showForm = false;
+      this.loadEntities();
     },
   },
 };

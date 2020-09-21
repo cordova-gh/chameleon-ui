@@ -172,6 +172,9 @@ export default class UIFormGenerator {
           type: Boolean,
           default: false,
           },
+          baseObject: {
+            type: Object,
+          },
           },
           components: {
           'input-autocomplete': InputAutocomplete,
@@ -213,8 +216,11 @@ export default class UIFormGenerator {
               this.modePage = 'U';
               this.setModeFields();
           } else {
-              this.loadEntity = true;
-              this.modePage = 'I';
+            if (this.baseObject) {
+              this.setEntity(this.baseObject);
+            }
+            this.loadEntity = true;
+            this.modePage = 'I';
           }
           },
           saveEntity() {
