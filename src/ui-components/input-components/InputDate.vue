@@ -1,7 +1,12 @@
 <template>
   <div>
-    <date-picker :class="classCss" v-model="modelValue" placeholder="label"
-      valueType="date" format="DD/MM/YYYY">
+    <date-picker
+      :class="classCss"
+      v-model="modelValue"
+      :placeholder="label"
+      valueType="date"
+      format="DD/MM/YYYY"
+    >
     </date-picker>
   </div>
 </template>
@@ -46,7 +51,7 @@ export default {
   },
 };
 </script>
-<style>
+<style lang="scss">
 .mx-input {
   height: 100% !important;
   border: 1px solid #fff;
@@ -54,6 +59,11 @@ export default {
   font-size: inherit;
   -webkit-box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.075);
+  // to be review
+  &::placeholder {
+    color: gray;
+    opacity: 1;
+  }
 }
 
 .mx-input:hover,
@@ -61,6 +71,6 @@ export default {
   border-color: #ffffff;
 }
 .mx-datepicker {
-    width: 100%;
+  width: 100%;
 }
 </style>
