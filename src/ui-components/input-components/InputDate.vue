@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="input-box">
     <date-picker
       :class="classCss"
       v-model="modelValue"
@@ -87,7 +87,7 @@ date-picker {
 .mx-input:hover,
 .mx-input:focus {
   ~ label {
-        position: absolute;
+    position: absolute;
     top: 0;
     display: block;
     transition: 0.2s;

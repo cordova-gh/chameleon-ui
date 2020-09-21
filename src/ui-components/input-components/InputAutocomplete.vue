@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="input-box">
     <input type="hidden" v-model="modelValue"  />
     <input
       type="text"

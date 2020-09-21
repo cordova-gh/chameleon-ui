@@ -1,5 +1,5 @@
 <template>
-  <div class="formBody">
+  <div class="input-box">
     <input
       type="input"
       class="form-input"
@@ -45,12 +45,7 @@ export default {
 $primary: #2c3e50;
 $secondary:#007bff8a;
 
-.formBody {
-  position: relative;
-  padding: 15px 0 0;
 
-  width: 100%;
-}
 input {
   background: transparent;
   border: 0;
@@ -81,8 +76,6 @@ label {
   top: 0;
   display: block;
   transition: 0.2s;
-  font-size: 1.2rem;
-  color: gray;
   opacity: 0.9;
 }
 input:focus {

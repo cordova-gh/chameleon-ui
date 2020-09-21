@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="input-box">
     <currency-input v-model="value" currency="EUR" locale="de" />
   </div>
 </template>

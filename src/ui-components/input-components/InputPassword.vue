@@ -1,5 +1,5 @@
 <template >
-  <div>
+  <div class="input-box">
     <input type="password" :placeholder="label" v-model="modelValue"
       :class="classCss" :readonly="readonlyAttr"/>
   </div>

@@ -1,5 +1,6 @@
 <template>
-<textarea
+  <div class="input-box">
+    <textarea
       :placeholder="label"
       v-model="modelValue"
       :class="classCss"
@@ -7,6 +8,7 @@
       rows="5"
       :readonly="readonlyAttr"
     ></textarea>
+  </div>
 </template>
 <script>
 export default {

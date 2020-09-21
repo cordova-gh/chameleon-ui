@@ -1,5 +1,5 @@
 <template >
-  <div>
+  <div class="input-box">
     <input
       type="text" v-model="modelValue" :placeholder="label"
         :class="classCss" :readonly="readonlyAttr" @keypress="onlyNumber"

@@ -69,4 +69,9 @@ html {
 .card-body {
     padding: 0.25rem;
 }
+.input-box {
+  position: relative;
+  padding: 15px 0 0;
+  width: 100%;
+}
 </style>
