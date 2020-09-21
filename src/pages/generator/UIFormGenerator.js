@@ -77,60 +77,75 @@ export default class UIFormGenerator {
             case 'autocomplete': {
               inputs += `${spazio}    <template v-if="loadEntity">
               <input-autocomplete v-model="entity['${col.field}']" :config="configTypes['${col.field}']"
-                :readonlyAttr="readonlyFields['${col.field}']" label="${col.label}">
+                :readonlyAttr="readonlyFields['${col.field}']" label="${col.label}"
+                :fieldName="${col.field}">
               </input-autocomplete>
             </template>\n`;
               break;
             }
             case 'password': {
               // eslint-disable-next-line quotes
-              inputs += `${spazio}    <input-password v-model="entity['${col.field}']" label="${col.label}"
-                :readonlyAttr="readonlyFields['${col.field}']" label="${col.label}">
+              inputs += `${spazio}    <input-password v-model="entity['${col.field}']"
+                :readonlyAttr="readonlyFields['${col.field}']" label="${col.label}"
+                :fieldName="${col.field}">
             </input-password>\n`;
               break;
             }
             case 'select': {
               // eslint-disable-next-line quotes
-              inputs += `${spazio}    <input-select v-model="entity['${col.field}']" :items="this.domini['${col.configType.dominio}']"
-                :readonlyAttr="readonlyFields['${col.field}']" label="${col.label}">
+              inputs += `${spazio}    <input-select v-model="entity['${col.field}']"
+                :items="this.domini['${col.configType.dominio}']"
+                :readonlyAttr="readonlyFields['${col.field}']" label="${col.label}"
+                :fieldName="${col.field}">
             </input-select>\n`;
               break;
             }
             case 'date': {
               // eslint-disable-next-line quotes
               inputs += `${spazio}    <input-date v-model="entity['${col.field}']"
-              :readonlyAttr="readonlyFields['${col.field}']" label="${col.label}"> </input-date>`;
+                :readonlyAttr="readonlyFields['${col.field}']" label="${col.label}"
+                :fieldName="${col.field}">
+              </input-date>`;
               break;
             }
             case 'money': {
               // eslint-disable-next-line quotes
               inputs += `${spazio}    <input-money v-model="entity['${col.field}']"
-              :readonlyAttr="readonlyFields['${col.field}']" label="${col.label}"> </input-money>`;
+                :readonlyAttr="readonlyFields['${col.field}']" label="${col.label}"
+                :fieldName="${col.field}">
+              </input-money>`;
               break;
             }
             case 'number': {
               // eslint-disable-next-line quotes
               inputs += `${spazio}    <input-number v-model="entity['${col.field}']"
-              :readonlyAttr="readonlyFields['${col.field}']" label="${col.label}"> </input-number>`;
+                :readonlyAttr="readonlyFields['${col.field}']" label="${col.label}"
+                :fieldName="${col.field}">
+              </input-number>`;
               break;
             }
             case 'textarea': {
               // eslint-disable-next-line quotes
               inputs += `${spazio}    <input-textarea v-model="entity['${col.field}']"
-              :readonlyAttr="readonlyFields['${col.field}']" label="${col.label}"> </input-textarea>`;
+                :readonlyAttr="readonlyFields['${col.field}']" label="${col.label}"
+                :fieldName="${col.field}">
+              </input-textarea>`;
               break;
             }
             case 'checkbox': {
               // eslint-disable-next-line quotes
               inputs += `${spazio}    <input-checkbox v-model="entity['${col.field}']"
-              label="${col.label}"
-              :readonlyAttr="readonlyFields['${col.field}']" > </input-checkbox>`;
+                label="${col.label}"
+                :readonlyAttr="readonlyFields['${col.field}']"
+                :fieldName="${col.field}">
+              </input-checkbox>`;
               break;
             }
             default: {
               // eslint-disable-next-line quotes
               inputs += `${spazio}    <input-text v-model="entity['${col.field}']" label="${col.label}"
-                :readonlyAttr="readonlyFields['${col.field}']">
+                :readonlyAttr="readonlyFields['${col.field}']"
+                :fieldName="${col.field}">
             </input-text>\n`;
             }
           }

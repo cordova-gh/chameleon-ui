@@ -28,6 +28,10 @@ export default {
       type: String,
       default: '',
     },
+    fieldName: {
+      type: String,
+      default: '',
+    },
   },
   computed: {
     modelValue: {

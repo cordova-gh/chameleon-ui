@@ -1,12 +1,12 @@
 <template>
   <div class="input-box">
     <textarea
-      :placeholder="label"
       v-model="modelValue"
+      :placeholder="label"
       :class="classCss"
+      :readonly="readonlyAttr"
       cols="5"
       rows="5"
-      :readonly="readonlyAttr"
     ></textarea>
   </div>
 </template>
@@ -31,6 +31,10 @@ export default {
     readonlyAttr: {
       type: Boolean,
       default: false,
+    },
+    fieldName: {
+      type: String,
+      default: '',
     },
   },
   computed: {

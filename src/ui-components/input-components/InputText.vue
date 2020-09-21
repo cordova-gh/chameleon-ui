@@ -1,14 +1,14 @@
 <template>
   <div class="input-box">
     <input
-      type="input"
-      class="form-input"
-      :id="fieldName !== '' ? 'field_' + fieldName: ''"
-      :placeholder="label"
+      type="text"
       v-model="modelValue"
+      :id="'f_' + fieldName"
+      :placeholder="label"
       :readonly="readonlyAttr"
+      class="form-input"
     />
-    <label :for= "'label_' + fieldName"> {{ label}} </label>
+    <label :for="'f_' + fieldName">{{ label}}</label>
   </div>
 </template>
 <script>
@@ -43,14 +43,13 @@ export default {
 </script>
 <style lang="scss">
 $primary: #2c3e50;
-$secondary:#007bff8a;
+$secondary: #007bff8a;
 
-
-input {
+.input-box input {
   background: transparent;
   border: 0;
   border-bottom: 1px solid #ced4da;
-  color:#495057;
+  color: #495057;
   font-size: 1rem;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: lighter;
@@ -71,14 +70,14 @@ input {
   }
 }
 
-label {
+.input-box label {
   position: absolute;
   top: 0;
   display: block;
   transition: 0.2s;
   opacity: 0.9;
 }
-input:focus {
+.input-box input:focus {
   ~ label {
     position: absolute;
     top: 0;
@@ -93,7 +92,11 @@ input:focus {
   padding-bottom: 6px;
   font-weight: lighter;
   border-width: 1px;
-  border-image: linear-gradient(to right, rgba(0,123,255,.25),rgba(0, 174, 255, 0.514));
+  border-image: linear-gradient(
+    to right,
+    rgba(0, 123, 255, 0.25),
+    rgba(0, 174, 255, 0.514)
+  );
   border-image-slice: 1;
   color: $primary;
 }

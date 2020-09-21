@@ -46,6 +46,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    fieldName: {
+      type: String,
+      default: '',
+    },
   },
   computed: {
     modelValue: {

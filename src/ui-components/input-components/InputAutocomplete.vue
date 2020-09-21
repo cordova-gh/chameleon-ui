@@ -3,12 +3,13 @@
     <input type="hidden" v-model="modelValue"  />
     <input
       type="text"
-      @input="findDebounce"
       v-model="valueShown"
       :class="classCss"
-      @focus="enter"
       :readonly="readonlyAttr"
       :placeholder="label"
+      :id="'f_' + fieldName"
+      @input="findDebounce"
+      @focus="enter"
     />
     <ul id="autocomplete-results" v-show="isOpen" class="autocomplete-results">
       <li class="loading" v-if="isLoading">Loading results...</li>
@@ -47,6 +48,10 @@ export default {
     readonlyAttr: {
       type: Boolean,
       default: false,
+    },
+    fieldName: {
+      type: String,
+      default: '',
     },
   },
   data() {

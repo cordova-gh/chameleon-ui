@@ -1,13 +1,14 @@
 <template>
   <div class="input-box">
     <date-picker
-      :class="classCss"
       v-model="modelValue"
       :placeholder="label"
+      :id="'f_' + fieldName"
       valueType="date"
       format="DD/MM/YYYY"
     >
     </date-picker>
+    <label :for= "'f_' + fieldName"> {{ label}} </label>
   </div>
 </template>
 <script>
@@ -30,6 +31,10 @@ export default {
     readonlyAttr: {
       type: Boolean,
       default: false,
+    },
+    fieldName: {
+      type: String,
+      default: '',
     },
   },
   computed: {

@@ -1,6 +1,9 @@
 <template>
   <div class="input-box">
-    <currency-input v-model="value" currency="EUR" locale="de" />
+    <currency-input v-model="value"
+      :id="'f_' + fieldName" currency="EUR"
+      locale="de"
+    />
   </div>
 </template>
 
@@ -10,6 +13,10 @@ export default {
     readonlyAttr: {
       type: Boolean,
       default: false,
+    },
+    fieldName: {
+      type: String,
+      default: '',
     },
   },
   data: () => ({

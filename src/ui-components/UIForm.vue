@@ -34,6 +34,7 @@
                   <input-password
                     v-model="entity[colElement.field]"
                     :label="colElement.label"
+                    :fieldName="colElement.field"
                   >
                   </input-password>
                 </template>
@@ -42,6 +43,7 @@
                     v-model="entity[colElement.field]"
                     :config="colElement.configType"
                     :label="colElement.label"
+                    :fieldName="colElement.field"
                   ></input-autocomplete>
                 </template>
                 <template v-else-if="colElement.type === 'select'">
@@ -49,28 +51,37 @@
                     v-model="entity[colElement.field]"
                     :config="colElement.configType"
                     :label="colElement.label"
+                    :fieldName="colElement.field"
                   >
                   </input-select>
                 </template>
                 <template v-else-if="colElement.type === 'date' ">
                   <input-date v-model="entity[colElement.field]"
-                  :label="colElement.label"> </input-date>
+                    :label="colElement.label"
+                    :fieldName="colElement.field">
+                  </input-date>
                 </template>
                 <template v-else-if="colElement.type === 'money'">
                   <input-money v-model="entity[colElement.field]"
-                  :label="colElement.label"> </input-money>
+                  :label="colElement.label">
+                  </input-money>
                 </template>
                 <template v-else-if="colElement.type === 'number'">
                   <input-number v-model="entity[colElement.field]"
-                  :label="colElement.label"> </input-number>
+                  :label="colElement.label"
+                  :fieldName="colElement.field">
+                  </input-number>
                 </template>
                 <template v-else-if="colElement.type === 'textarea'">
                   <input-textarea v-model="entity[colElement.field]"
-                  :label="colElement.label"> </input-textarea>
+                    :label="colElement.label"
+                    :fieldName="colElement.field">
+                  </input-textarea>
                 </template>
                  <template v-else-if="colElement.type === 'checkbox'">
                   <input-checkbox v-model="entity[colElement.field]"
-                  :label="colElement.label"> </input-checkbox>
+                    :label="colElement.label" :fieldName="colElement.field">
+                  </input-checkbox>
                 </template>
               </div>
             </div>

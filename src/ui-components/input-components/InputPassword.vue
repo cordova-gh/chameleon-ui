@@ -1,7 +1,10 @@
 <template >
   <div class="input-box">
-    <input type="password" :placeholder="label" v-model="modelValue"
-      :class="classCss" :readonly="readonlyAttr"/>
+    <input type="password" v-model="modelValue"
+      :placeholder="label"
+      :id="'f_' + fieldName"
+      :class="classCss"
+      :readonly="readonlyAttr"/>
   </div>
 </template>
 <script>
@@ -20,6 +23,10 @@ export default {
     readonlyAttr: {
       type: Boolean,
       default: false,
+    },
+    fieldName: {
+      type: String,
+      default: '',
     },
   },
   computed: {
