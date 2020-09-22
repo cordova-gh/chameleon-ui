@@ -105,9 +105,11 @@
                   <router-link :to="'edit/' + entity._id"
                     ><i class="fas fa-edit"></i
                   ></router-link>
+                  <!-- CUSTOM -->
                   <a  @click="clickInventario(entity._id)">
                     <i class="fas fa-pallet" ></i>
                   </a>
+                   <!-- CUSTOM -->
                 </td>
               </tr>
             </tbody>
@@ -119,6 +121,7 @@
             @clickPage="clickPagePagination"
           >
           </ui-pagination>
+          <!-- CUSTOM -->
           <modal v-show="isModalVisible" @close="closeModal">
             <template v-slot:body>
               <inventario
@@ -126,6 +129,7 @@
               </inventario>
             </template>
           </modal>
+          <!-- CUSTOM -->
         </div>
       </div>
     </div>
@@ -250,10 +254,12 @@ export default {
       this.onFind();
       this.disableBtnResetFilters = true;
     },
+    /* CUSTOM */
     clickInventario(prodottoId) {
       this.currentProdottoId = prodottoId;
       this.showModal();
     },
+    /* CUSTOM */
     showModal() {
       this.isModalVisible = true;
     },
