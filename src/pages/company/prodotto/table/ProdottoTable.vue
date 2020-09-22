@@ -121,15 +121,15 @@
             @clickPage="clickPagePagination"
           >
           </ui-pagination>
-          <!-- CUSTOM -->
           <modal v-show="isModalVisible" @close="closeModal">
             <template v-slot:body>
+              <!-- CUSTOM -->
               <inventario
               :params="paramsInventario" :prodottoId="currentProdottoId">
               </inventario>
+              <!-- CUSTOM -->
             </template>
           </modal>
-          <!-- CUSTOM -->
         </div>
       </div>
     </div>
@@ -182,8 +182,10 @@ export default {
         descrizione: { bind: 'descrizione', type: 'contains' },
       },
       isModalVisible: false,
+      /* CUSTOM */
       paramsInventario: {},
       currentProdottoId: '',
+      /* CUSTOM */
     };
   },
   components: {
@@ -198,7 +200,9 @@ export default {
     'input-money': InputMoney,
     'input-textarea': InputTextArea,
     modal: Modal,
+    /* CUSTOM */
     inventario: Inventario,
+    /* CUSTOM */
   },
   created() {
     this.getEntities(1);

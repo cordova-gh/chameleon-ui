@@ -61,6 +61,7 @@ export default class UITableGenerator {
         <ui-pagination :pages="pages" v-bind:maxPages="5" :numOfResults="numOfResults"
           @clickPage="clickPagePagination">
         </ui-pagination>
+        ${this.modalHtml()}
       </div>
     </div>
   </div>
@@ -77,6 +78,7 @@ import HttpCall from '@/services/HttpCall';
 import { Utility } from '@/utilities/utility';
 import InputCheckBox from '@/ui-components/input-components/InputCheckBox';
 ${this.getImportFilterForm()}
+${this.importModal()}
 
 export default {
 data() {
@@ -87,12 +89,14 @@ data() {
     httpCall: new HttpCall(${this.config.urlApi}),
     propsColumns: ${this.propsColumns()},
     ${this.getPropsFilter()}
+    ${this.attributesModal()}
   };
 },
 components: {
   'input-checkbox': InputCheckBox,
   'ui-pagination': UIPagination,
   ${this.getComponentFilterForm()}
+  ${this.getComponentModal()}
 },
 created() {
   this.getEntities(1);
@@ -130,6 +134,7 @@ methods: {
   newEntity() {
     this.$emit('onCreate');
   },
+  ${this.getMethodsModal()}
   ${this.getMethodFilter()}
 },
 watch: {
@@ -256,6 +261,31 @@ watch: {
       this.onFind();
       this.disableBtnResetFilters = true;
     },` : '';
+  }
+
+  modalHtml() {
+    return this.hasModal ? `<modal v-show="isModalVisible" @close="closeModal">
+    <template v-slot:body>
+    </template>
+  </modal>` : '';
+  }
+  getMethodsModal() {
+    return this.hasModal ? `showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.currentProdottoId = '';
+      this.isModalVisible = false;
+    },` : '';
+  }
+  getComponentModal() {
+    return this.hasModal ? 'modal: Modal,' : '';
+  }
+  importModal() {
+    return this.hasModal ? 'import Modal from \'@/pages/shared/components/Modal\'' : '';
+  }
+  attributesModal() {
+    return this.hasModal ? 'isModalVisible: false,' : '';
   }
 }
 
