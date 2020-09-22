@@ -114,7 +114,7 @@ methods: {
         .map(keyFilter => ${this.backTickWord}${this.braceWord}keyFilter}.${this.braceWord}this.propsFilterEntity[keyFilter].type}=${this.braceWord}this.entity[keyFilter]}${this.backTickWord});
       filterString = filterArray.length > 0 ? ${this.backTickWord}&${this.braceWord}filterArray.join('&')}${this.backTickWord} : '';
     }
-    const params = ${this.backTickWord}?page=${this.braceWord}page}${this.braceWord}filterString}${this.backTickWord};
+    let params = ${this.backTickWord}?page=${this.braceWord}page}${this.braceWord}filterString}${this.backTickWord};
     if (rowsPerPage) params += ${this.backTickWord}&rowsPerPage=${this.braceWord}rowsPerPage}${this.backTickWord};
     this.httpCall.get(params).then((data) => {
       this.entities = Utility.createArrayByConfigV2(data.entities, this.propsColumns);
@@ -264,13 +264,13 @@ watch: {
   }
 
   modalHtml() {
-    return this.hasModal ? `<modal v-show="isModalVisible" @close="closeModal">
+    return this.config.hasModal ? `<modal v-show="isModalVisible" @close="closeModal">
     <template v-slot:body>
     </template>
   </modal>` : '';
   }
   getMethodsModal() {
-    return this.hasModal ? `showModal() {
+    return this.config.hasModal ? `showModal() {
       this.isModalVisible = true;
     },
     closeModal() {
@@ -279,13 +279,13 @@ watch: {
     },` : '';
   }
   getComponentModal() {
-    return this.hasModal ? 'modal: Modal,' : '';
+    return this.config.hasModal ? 'modal: Modal,' : '';
   }
   importModal() {
-    return this.hasModal ? 'import Modal from \'@/pages/shared/components/Modal\'' : '';
+    return this.config.hasModal ? 'import Modal from \'@/pages/shared/components/Modal\'' : '';
   }
   attributesModal() {
-    return this.hasModal ? 'isModalVisible: false,' : '';
+    return this.config.hasModal ? ', isModalVisible: false,' : '';
   }
 }
 

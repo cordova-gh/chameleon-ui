@@ -1,5 +1,6 @@
 {
   "urlApi": "API_PRODOTTO",
+  "hasModal": true,
   "cols": [
     {
       "field": "codice",
