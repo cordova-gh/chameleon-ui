@@ -105,7 +105,7 @@
                   <router-link :to="'edit/' + entity._id"
                     ><i class="fas fa-edit"></i
                   ></router-link>
-                  <a href="#"  @click="clickInventario(entity._id)">
+                  <a  @click="clickInventario(entity._id)">
                     <i class="fas fa-pallet" ></i>
                   </a>
                 </td>
@@ -258,6 +258,7 @@ export default {
       this.isModalVisible = true;
     },
     closeModal() {
+      this.currentProdottoId = '';
       this.isModalVisible = false;
     },
   },

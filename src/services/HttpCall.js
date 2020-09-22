@@ -42,10 +42,10 @@ export default class HttpCall {
       .catch(error => `An error occured..${error}`);
   }
 
-  create(data) {
+  create(data, additionalPath = '') {
     store.commit('showSpinner');
     return axios
-      .post(`${this.baseUrl + this.RESOURCE_NAME}`, data, {
+      .post(`${this.baseUrl + this.RESOURCE_NAME + additionalPath}`, data, {
         headers: {
           Accept: 'application/json',
           'Content-type': 'application/json',

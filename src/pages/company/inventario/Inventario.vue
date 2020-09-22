@@ -3,7 +3,6 @@
     <title-page v-bind:titolo="titolo"></title-page>
     <input type="button" value="New" @click="onNew"/>
     <div v-if="showForm">
-    {{baseObjectInventarioMov}}
       <inventario-movimento :baseObject="baseObjectInventarioMov"
       v-if="baseObjectInventarioMov['articolo']">
       </inventario-movimento>
@@ -73,7 +72,6 @@ export default {
     };
   },
   created() {
-    this.loadEntities();
     this.loadShops();
   },
   components: {
@@ -103,7 +101,9 @@ export default {
   watch: {
     prodottoId() {
       this.showForm = false;
-      this.loadEntities();
+      if (this.prodottoId !== '') {
+        this.loadEntities();
+      }
     },
   },
 };

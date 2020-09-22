@@ -271,7 +271,7 @@ export default {
           this.$emit('onSaveEntity');
         });
       } else {
-        this.httpCall.create(entityToSend).then(() => {
+        this.httpCall.create(entityToSend, '/save-carico').then(() => {
           this.entity = this.createEntityForm();
           this.$emit('onSaveEntity');
         });
