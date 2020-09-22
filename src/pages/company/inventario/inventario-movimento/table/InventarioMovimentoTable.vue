@@ -9,44 +9,49 @@
           </div>
           <div class="row">
             <div class="col-12 col-md-6 form-group" v-if="!invisibleFields['articolo']">
-              <input-text
-                v-model="entity['articolo']"
-                label="Articolo"
-                :readonlyAttr="readonlyFields['articolo']"
-                :fieldName="articolo"
-              ></input-text>
+              <template>
+                <input-autocomplete
+                  v-model="entity['articolo']"
+                  :config="configTypes['articolo']"
+                  :readonlyAttr="readonlyFields['articolo']"
+                  label="Articolo"
+                  :fieldName="articolo"
+                ></input-autocomplete>
+              </template>
             </div>
             <div class="col-12 col-md-6 form-group" v-if="!invisibleFields['dataRegistrazione']">
-              <input-date-range
+              <input-date
                 v-model="entity['dataRegistrazione']"
                 :readonlyAttr="readonlyFields['dataRegistrazione']"
                 label="Data registrazione"
                 :fieldName="dataRegistrazione"
-              ></input-date-range>
+              ></input-date>
             </div>
             <div class="col-12 col-md-6 form-group" v-if="!invisibleFields['segno']">
-              <input-text
+              <input-select
                 v-model="entity['segno']"
-                label="Segno"
+                :items="this.domini['SEGNO_MOVIMENTO_INVENTARIO']"
                 :readonlyAttr="readonlyFields['segno']"
+                label="Segno"
                 :fieldName="segno"
-              ></input-text>
+              ></input-select>
             </div>
             <div class="col-12 col-md-6 form-group" v-if="!invisibleFields['causale']">
-              <input-text
+              <input-select
                 v-model="entity['causale']"
-                label="Causale"
+                :items="this.domini['CAUSALE_MOVIMENTO_INVENTARIO']"
                 :readonlyAttr="readonlyFields['causale']"
+                label="Causale"
                 :fieldName="causale"
-              ></input-text>
+              ></input-select>
             </div>
             <div class="col-12 col-md-6 form-group" v-if="!invisibleFields['dataScadenza']">
-              <input-date-range
+              <input-date
                 v-model="entity['dataScadenza']"
                 :readonlyAttr="readonlyFields['dataScadenza']"
                 label="Data scadenza"
                 :fieldName="dataScadenza"
-              ></input-date-range>
+              ></input-date>
             </div>
           </div>
         </div>
@@ -136,7 +141,6 @@ import InputText from '@/ui-components/input-components/InputText';
 import InputPassword from '@/ui-components/input-components/InputPassword';
 import InputNumber from '@/ui-components/input-components/InputNumber';
 import InputDate from '@/ui-components/input-components/InputDate';
-import InputDateRange from '@/ui-components/input-components/InputDateRange';
 import InputMoney from '@/ui-components/input-components/InputMoney';
 import InputTextArea from '@/ui-components/input-components/InputTextArea';
 import Modal from '@/pages/shared/components/Modal';
@@ -149,10 +153,10 @@ export default {
       numOfResults: 0,
       httpCall: new HttpCall(API_INVENTARIO_MOVIMENTO),
       propsColumns: {
-        articolo: { bind: 'articolo.codice', type: 'text' },
+        articolo: { bind: 'articolo.codice', type: 'autocomplete' },
         dataRegistrazione: { bind: 'dataRegistrazione', type: 'date-range' },
-        segno: { bind: 'segno.descrizione', type: 'text' },
-        causale: { bind: 'causale.descrizione', type: 'text' },
+        segno: { bind: 'segno.descrizione', type: 'select' },
+        causale: { bind: 'causale.descrizione', type: 'select' },
         quantita: { bind: 'quantita', type: 'text' },
         dataScadenza: { bind: 'dataScadenza', type: 'date-range' },
       },
@@ -185,7 +189,6 @@ export default {
     'input-password': InputPassword,
     'input-number': InputNumber,
     'input-date': InputDate,
-    'input-date-range': InputDateRange,
     'input-money': InputMoney,
     'input-textarea': InputTextArea,
     modal: Modal,

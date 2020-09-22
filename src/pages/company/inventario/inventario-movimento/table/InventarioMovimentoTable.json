@@ -6,7 +6,13 @@
             "label": "Articolo",
             "field": "articolo",
             "bindField": "articolo.codice",
-            "type": "text",
+            "type": "autocomplete",
+            "configType": {
+              "isDominio": false,
+              "urlApi": "/api/prodottos/all",
+              "fieldId": "_id",
+              "showCodice": true
+            },
             "filter": {
               "type": "equals"
             }
@@ -24,7 +30,12 @@
             "label": "Segno",
             "field": "segno",
             "bindField": "segno.descrizione",
-            "type": "text",
+            "type": "select",
+            "configType": {
+              "isDominio": true,
+              "dominio": "SEGNO_MOVIMENTO_INVENTARIO",
+              "showDescrizione": true
+            },
             "filter": {
               "type": "equals"
             }
@@ -33,7 +44,12 @@
             "label": "Causale",
             "field": "causale",
             "bindField": "causale.descrizione",
-            "type": "text",
+            "type": "select",
+            "configType": {
+              "isDominio": true,
+              "dominio": "CAUSALE_MOVIMENTO_INVENTARIO",
+              "showDescrizione": true
+            },
             "filter": {
               "type": "equals"
             }

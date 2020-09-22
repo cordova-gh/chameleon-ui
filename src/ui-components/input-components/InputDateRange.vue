@@ -90,7 +90,6 @@ date-picker {
     opacity: 1;
   }
 }
-.mx-input:hover,
 .mx-input:focus {
   ~ label {
     position: absolute;

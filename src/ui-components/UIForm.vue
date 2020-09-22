@@ -130,6 +130,7 @@ import InputSelect from '@/ui-components/input-components/InputSelect';
 import InputPassword from '@/ui-components/input-components/InputPassword';
 import InputNumber from '@/ui-components/input-components/InputNumber';
 import InputDate from '@/ui-components/input-components/InputDate';
+import InputDateRange from '@/ui-components/input-components/InputDateRange';
 import InputMoney from '@/ui-components/input-components/InputMoney';
 import InputCheckbox from '@/ui-components/input-components/InputCheckBox';
 import HttpCall from '../services/HttpCall';
@@ -173,6 +174,7 @@ export default {
     'input-password': InputPassword,
     'input-number': InputNumber,
     'input-date': InputDate,
+    'input-date-range': InputDateRange,
     'input-money': InputMoney,
     'input-textarea': InputTextArea,
     'input-checkbox': InputCheckbox,
