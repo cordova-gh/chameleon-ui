@@ -3,9 +3,9 @@
     <title-page v-bind:titolo="titolo"></title-page>
     <input type="button" value="New" @click="onNew"/>
     <div v-if="showForm">
-      <inventario-movimento :baseObject="baseObjectInventarioMov"
+      <inventario-movimento-form :baseObject="baseObjectInventarioMov"
       v-if="baseObjectInventarioMov['articolo']">
-      </inventario-movimento>
+      </inventario-movimento-form>
     </div>
     <div class="container">
       <div class="accordion" id="accordionExample">
@@ -46,7 +46,7 @@
 </template>
 <script>
 import TitlePage from '@/pages/shared/components/TitlePage';
-import InventarioMovimento from '@/pages/company/inventario/inventario-movimento/form/InventarioMovimento';
+import InventarioMovimentoForm from '@/pages/company/inventario/inventario-movimento/form/InventarioMovimentoForm';
 import HttpCall from '@/services/HttpCall';
 import { API_INVENTARIO_MOVIMENTO, API_SHOP } from '@/services/constant-services';
 
@@ -76,7 +76,7 @@ export default {
   },
   components: {
     'title-page': TitlePage,
-    'inventario-movimento': InventarioMovimento,
+    'inventario-movimento-form': InventarioMovimentoForm,
   },
   methods: {
     onNew() {
