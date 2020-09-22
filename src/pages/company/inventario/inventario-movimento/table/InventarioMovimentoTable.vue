@@ -16,6 +16,14 @@
                 :fieldName="articolo"
               ></input-text>
             </div>
+            <div class="col-12 col-md-6 form-group" v-if="!invisibleFields['dataRegistrazione']">
+              <input-date-range
+                v-model="entity['dataRegistrazione']"
+                :readonlyAttr="readonlyFields['dataRegistrazione']"
+                label="Data registrazione"
+                :fieldName="dataRegistrazione"
+              ></input-date-range>
+            </div>
             <div class="col-12 col-md-6 form-group" v-if="!invisibleFields['segno']">
               <input-text
                 v-model="entity['segno']"
@@ -31,6 +39,14 @@
                 :readonlyAttr="readonlyFields['causale']"
                 :fieldName="causale"
               ></input-text>
+            </div>
+            <div class="col-12 col-md-6 form-group" v-if="!invisibleFields['dataScadenza']">
+              <input-date-range
+                v-model="entity['dataScadenza']"
+                :readonlyAttr="readonlyFields['dataScadenza']"
+                label="Data scadenza"
+                :fieldName="dataScadenza"
+              ></input-date-range>
             </div>
           </div>
         </div>
@@ -81,6 +97,9 @@
                     <input-checkbox v-model="entity[keyColumn]"
                     v-bind:isReadonly="true"></input-checkbox>
                   </template>
+                  <template
+                    v-if="propsColumns[keyColumn].type.includes('date')"
+                  >{{ entity[keyColumn] | formatDate('DD/MM/YYYY') }}</template>
                   <template v-else>{{ entity[keyColumn] }}</template>
                 </td>
                 <td>
@@ -117,6 +136,7 @@ import InputText from '@/ui-components/input-components/InputText';
 import InputPassword from '@/ui-components/input-components/InputPassword';
 import InputNumber from '@/ui-components/input-components/InputNumber';
 import InputDate from '@/ui-components/input-components/InputDate';
+import InputDateRange from '@/ui-components/input-components/InputDateRange';
 import InputMoney from '@/ui-components/input-components/InputMoney';
 import InputTextArea from '@/ui-components/input-components/InputTextArea';
 import Modal from '@/pages/shared/components/Modal';
@@ -130,20 +150,28 @@ export default {
       httpCall: new HttpCall(API_INVENTARIO_MOVIMENTO),
       propsColumns: {
         articolo: { bind: 'articolo.codice', type: 'text' },
-        dataRegistrazione: { bind: 'dataRegistrazione', type: 'text' },
+        dataRegistrazione: { bind: 'dataRegistrazione', type: 'date-range' },
         segno: { bind: 'segno.descrizione', type: 'text' },
         causale: { bind: 'causale.descrizione', type: 'text' },
         quantita: { bind: 'quantita', type: 'text' },
-        dataScadenza: { bind: 'dataScadenza', type: 'text' },
+        dataScadenza: { bind: 'dataScadenza', type: 'date-range' },
       },
       invisibleFields: {},
       readonlyFields: {},
       disableBtnResetFilters: true,
-      entity: { articolo: '', segno: '', causale: '' },
+      entity: {
+        articolo: '',
+        dataRegistrazione: '',
+        segno: '',
+        causale: '',
+        dataScadenza: '',
+      },
       propsFilterEntity: {
         articolo: { bind: 'articolo', type: 'equals' },
+        dataRegistrazione: { bind: 'dataRegistrazione', type: 'range' },
         segno: { bind: 'segno', type: 'equals' },
         causale: { bind: 'causale', type: 'equals' },
+        dataScadenza: { bind: 'dataScadenza', type: 'range' },
       },
       isModalVisible: false,
     };
@@ -157,6 +185,7 @@ export default {
     'input-password': InputPassword,
     'input-number': InputNumber,
     'input-date': InputDate,
+    'input-date-range': InputDateRange,
     'input-money': InputMoney,
     'input-textarea': InputTextArea,
     modal: Modal,
@@ -204,13 +233,6 @@ export default {
     newEntity() {
       this.$emit('onCreate');
     },
-    showModal() {
-      this.isModalVisible = true;
-    },
-    closeModal() {
-      this.currentProdottoId = '';
-      this.isModalVisible = false;
-    },
     onFind() {
       this.disableBtnResetFilters = false;
       this.getEntities(1);
@@ -221,6 +243,13 @@ export default {
       });
       this.onFind();
       this.disableBtnResetFilters = true;
+    },
+    showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.currentProdottoId = '';
+      this.isModalVisible = false;
     },
   },
   watch: {

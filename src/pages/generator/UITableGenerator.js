@@ -45,7 +45,7 @@ export default class UITableGenerator {
                   <input-checkbox v-model="entity[keyColumn]" v-bind:isReadonly="true">
                   </input-checkbox>
                 </template>
-                <template v-if="propsColumns[keyColumn].type.indexOf('date') >0">
+                <template v-if="propsColumns[keyColumn].type.includes('date')">
                   {{ entity[keyColumn] | formatDate('DD/MM/YYYY') }}
                 </template>
                 <template v-else>

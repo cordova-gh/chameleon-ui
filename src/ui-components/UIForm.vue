@@ -61,6 +61,12 @@
                     :fieldName="colElement.field">
                   </input-date>
                 </template>
+                <template v-else-if="colElement.type === 'date-range' ">
+                  <input-date-range v-model="entity[colElement.field]"
+                    :label="colElement.label"
+                    :fieldName="colElement.field">
+                  </input-date-range>
+                </template>
                 <template v-else-if="colElement.type === 'money'">
                   <input-money v-model="entity[colElement.field]"
                   :label="colElement.label">

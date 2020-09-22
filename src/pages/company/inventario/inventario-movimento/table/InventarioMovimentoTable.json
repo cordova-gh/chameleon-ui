@@ -15,7 +15,10 @@
             "label": "Data registrazione",
             "field": "dataRegistrazione",
             "bindField": "dataRegistrazione",
-            "type": "text"
+            "type": "date-range",
+            "filter": {
+                "type": "range"
+            }
           },
           {
             "label": "Segno",
@@ -45,7 +48,10 @@
             "label": "Data scadenza",
             "field": "dataScadenza",
             "bindField": "dataScadenza",
-            "type": "text"
+            "type": "date-range",
+            "filter": {
+                "type": "range"
+            }
           }
     ]
 }

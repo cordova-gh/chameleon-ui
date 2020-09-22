@@ -108,6 +108,14 @@ export default class UIFormGenerator {
               </input-date>`;
               break;
             }
+            case 'date-range': {
+              // eslint-disable-next-line quotes
+              inputs += `${spazio}    <input-date v-model="entity['${col.field}']"
+                :readonlyAttr="readonlyFields['${col.field}']" label="${col.label}"
+                :fieldName="${col.field}">
+              </input-date>`;
+              break;
+            }
             case 'money': {
               // eslint-disable-next-line quotes
               inputs += `${spazio}    <input-money v-model="entity['${col.field}']"
@@ -198,6 +206,7 @@ export default class UIFormGenerator {
           'input-password': InputPassword,
           'input-number': InputNumber,
           'input-date': InputDate,
+          'input-date-range': InputDateRange,
           'input-money': InputMoney,
           'input-textarea': InputTextArea,
           'input-checkbox': InputCheckbox,
@@ -350,6 +359,7 @@ export default class UIFormGenerator {
     import InputPassword from '@/ui-components/input-components/InputPassword';
     import InputNumber from '@/ui-components/input-components/InputNumber';
     import InputDate from '@/ui-components/input-components/InputDate';
+    import InputDateRange from '@/ui-components/input-components/InputDateRange';
     import InputMoney from '@/ui-components/input-components/InputMoney';
     import InputTextArea from '@/ui-components/input-components/InputTextArea';
     import InputCheckbox from '@/ui-components/input-components/InputCheckBox';
