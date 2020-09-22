@@ -47,6 +47,9 @@
               <router-link to="/company/inventario" class="dropdown-item">
               Inventario
               </router-link>
+              <router-link to="/company/inventario/movimenti" class="dropdown-item">
+              Movimenti
+              </router-link>
             </div>
           </li>
 

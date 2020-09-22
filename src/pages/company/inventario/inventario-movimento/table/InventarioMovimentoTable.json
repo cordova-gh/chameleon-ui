@@ -1,0 +1,51 @@
+{
+    "hasModal": true,
+    "urlApi": "API_INVENTARIO_MOVIMENTO",
+    "cols": [
+        {
+            "label": "Articolo",
+            "field": "articolo",
+            "bindField": "articolo.codice",
+            "type": "text",
+            "filter": {
+              "type": "equals"
+            }
+          },
+          {
+            "label": "Data registrazione",
+            "field": "dataRegistrazione",
+            "bindField": "dataRegistrazione",
+            "type": "text"
+          },
+          {
+            "label": "Segno",
+            "field": "segno",
+            "bindField": "segno.descrizione",
+            "type": "text",
+            "filter": {
+              "type": "equals"
+            }
+          },
+          {
+            "label": "Causale",
+            "field": "causale",
+            "bindField": "causale.descrizione",
+            "type": "text",
+            "filter": {
+              "type": "equals"
+            }
+          },
+          {
+            "label": "Quantità",
+            "field": "quantita",
+            "bindField": "quantita",
+            "type": "text"
+          },
+          {
+            "label": "Data scadenza",
+            "field": "dataScadenza",
+            "bindField": "dataScadenza",
+            "type": "text"
+          }
+    ]
+}

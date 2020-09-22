@@ -198,6 +198,18 @@ export default new Router({
             {
               path: 'inventario',
               component: () => import('@/pages/company/inventario/Inventario'),
+              children: [
+                {
+                  path: 'movimenti',
+                  component: () => import('@/pages/company/inventario/inventario-movimento/table/InventarioMovimentoTable'),
+                  children: [
+                    {
+                      path: 'list',
+                      component: () => import('@/pages/company/inventario/inventario-movimento/table/InventarioMovimentoTable'),
+                    },
+                  ],
+                },
+              ],
             },
           ],
         },

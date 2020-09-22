@@ -22,20 +22,26 @@
     },
     {
       "field": "categoriaProdotto",
-      "label": "Sotto Categoria",
-      "bindField": "Prodotto.categoria",
+      "label": "Categoria",
+      "bindField": "prodotto.categoria",
       "type": "text"
     },
     {
       "field": "provenienzaProdotto",
       "label": "Provenienza",
-      "bindField": "prodotto.provenienza.descrizione",
+      "bindField": "prodotto.provenienza.codice",
       "type": "text"
     },
     {
-      "field": "marcaProdotto",
-      "label": "Marca",
-      "bindField": "prodotto.marca.codice",
+      "field": "quantita",
+      "label": "Quantità",
+      "bindField": "prodotto.quantita",
+      "type": "text"
+    },
+    {
+      "field": "unitaMisura",
+      "label": "Unità di misura",
+      "bindField": "prodotto.unitaMisura.codice",
       "type": "text"
     }
   ]

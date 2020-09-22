@@ -8,20 +8,28 @@
             <p>Filtri Ricerca</p>
           </div>
           <div class="row">
-            <div class="col-12 col-md-6 form-group" v-if="!invisibleFields['codice']">
+            <div class="col-12 col-md-6 form-group" v-if="!invisibleFields['articolo']">
               <input-text
-                v-model="entity['codice']"
-                label="Codice"
-                :readonlyAttr="readonlyFields['codice']"
-                :fieldName="codice"
+                v-model="entity['articolo']"
+                label="Articolo"
+                :readonlyAttr="readonlyFields['articolo']"
+                :fieldName="articolo"
               ></input-text>
             </div>
-            <div class="col-12 col-md-6 form-group" v-if="!invisibleFields['descrizione']">
+            <div class="col-12 col-md-6 form-group" v-if="!invisibleFields['segno']">
               <input-text
-                v-model="entity['descrizione']"
-                label="Descrizione"
-                :readonlyAttr="readonlyFields['descrizione']"
-                :fieldName="descrizione"
+                v-model="entity['segno']"
+                label="Segno"
+                :readonlyAttr="readonlyFields['segno']"
+                :fieldName="segno"
+              ></input-text>
+            </div>
+            <div class="col-12 col-md-6 form-group" v-if="!invisibleFields['causale']">
+              <input-text
+                v-model="entity['causale']"
+                label="Causale"
+                :readonlyAttr="readonlyFields['causale']"
+                :fieldName="causale"
               ></input-text>
             </div>
           </div>
@@ -52,12 +60,12 @@
           <table class="table align-items-center">
             <thead class="thead-light">
               <th style="width: 5%"></th>
-              <th class="sort">Codice</th>
-              <th class="sort">Descrizione</th>
-              <th class="sort">Categoria</th>
-              <th class="sort">Provenienza</th>
+              <th class="sort">Articolo</th>
+              <th class="sort">Data registrazione</th>
+              <th class="sort">Segno</th>
+              <th class="sort">Causale</th>
               <th class="sort">Quantità</th>
-              <th class="sort">Unità di misura</th>
+              <th class="sort">Data scadenza</th>
               <th style="width: 5%"></th>
             </thead>
             <tbody>
@@ -79,11 +87,6 @@
                   <router-link :to="'edit/' + entity._id">
                     <i class="fas fa-edit"></i>
                   </router-link>
-                  <!-- CUSTOM -->
-                  <a  @click="clickInventario(entity._id)">
-                    <i class="fas fa-pallet" ></i>
-                  </a>
-                   <!-- CUSTOM -->
                 </td>
               </tr>
             </tbody>
@@ -95,13 +98,7 @@
             @clickPage="clickPagePagination"
           ></ui-pagination>
           <modal v-show="isModalVisible" @close="closeModal">
-            <template v-slot:body>
-              <!-- CUSTOM -->
-              <inventario
-              :params="paramsInventario" :prodottoId="currentProdottoId">
-              </inventario>
-              <!-- CUSTOM -->
-            </template>
+            <template v-slot:body></template>
           </modal>
         </div>
       </div>
@@ -110,7 +107,7 @@
 </template>
 <script>
 import UIPagination from '@/ui-components/shared/UIPagination';
-import { API_PRODOTTO } from '@/services/constant-services';
+import { API_INVENTARIO_MOVIMENTO } from '@/services/constant-services';
 import HttpCall from '@/services/HttpCall';
 import { Utility } from '@/utilities/utility';
 import InputCheckBox from '@/ui-components/input-components/InputCheckBox';
@@ -123,9 +120,6 @@ import InputDate from '@/ui-components/input-components/InputDate';
 import InputMoney from '@/ui-components/input-components/InputMoney';
 import InputTextArea from '@/ui-components/input-components/InputTextArea';
 import Modal from '@/pages/shared/components/Modal';
-/* CUSTOM */
-import Inventario from '@/pages/company/inventario/Inventario';
-/* CUSTOM */
 
 export default {
   data() {
@@ -133,31 +127,25 @@ export default {
       entities: [],
       pages: 0,
       numOfResults: 0,
-      httpCall: new HttpCall(API_PRODOTTO),
+      httpCall: new HttpCall(API_INVENTARIO_MOVIMENTO),
       propsColumns: {
-        codice: { bind: 'codice', type: 'text' },
-        descrizione: { bind: 'descrizione', type: 'text' },
-        categoriaProdotto: { bind: 'Prodotto.categoria', type: 'text' },
-        provenienzaProdotto: {
-          bind: 'prodotto.provenienza.codice',
-          type: 'text',
-        },
-        quantita: { bind: 'prodotto.quantita', type: 'text' },
-        unitaMisura: { bind: 'prodotto.unitaMisura.codice', type: 'text' },
+        articolo: { bind: 'articolo.codice', type: 'text' },
+        dataRegistrazione: { bind: 'dataRegistrazione', type: 'text' },
+        segno: { bind: 'segno.descrizione', type: 'text' },
+        causale: { bind: 'causale.descrizione', type: 'text' },
+        quantita: { bind: 'quantita', type: 'text' },
+        dataScadenza: { bind: 'dataScadenza', type: 'text' },
       },
       invisibleFields: {},
       readonlyFields: {},
       disableBtnResetFilters: true,
-      entity: { codice: '', descrizione: '' },
+      entity: { articolo: '', segno: '', causale: '' },
       propsFilterEntity: {
-        codice: { bind: 'codice', type: 'contains' },
-        descrizione: { bind: 'descrizione', type: 'contains' },
+        articolo: { bind: 'articolo', type: 'equals' },
+        segno: { bind: 'segno', type: 'equals' },
+        causale: { bind: 'causale', type: 'equals' },
       },
       isModalVisible: false,
-      /* CUSTOM */
-      paramsInventario: {},
-      currentProdottoId: '',
-      /* CUSTOM */
     };
   },
   components: {
@@ -172,9 +160,6 @@ export default {
     'input-money': InputMoney,
     'input-textarea': InputTextArea,
     modal: Modal,
-    /* CUSTOM */
-    inventario: Inventario,
-    /* CUSTOM */
   },
   created() {
     this.getEntities(1);
@@ -237,12 +222,6 @@ export default {
       this.onFind();
       this.disableBtnResetFilters = true;
     },
-    /* CUSTOM */
-    clickInventario(prodottoId) {
-      this.currentProdottoId = prodottoId;
-      this.showModal();
-    },
-    /* CUSTOM */
   },
   watch: {
     reload: {
