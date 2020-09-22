@@ -194,7 +194,8 @@ watch: {
         filterRows.push({ field: config.field,
           type: config.type,
           bindField: config.field,
-          label: config.label });
+          label: config.label,
+          configType: config.configType });
       });
       sectionFilter.rows = [];
       sectionFilter.rows[0] = filterRows;

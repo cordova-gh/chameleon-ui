@@ -65,6 +65,7 @@ export default class UIGridListGenerator {
         <ui-pagination :pages="pages" v-bind:maxPages="5" :numOfResults="numOfResults"
           @clickPage="clickPagePagination">
         </ui-pagination>
+        ${this.modalHtml()}
       </div>
     </div>
   </div>
@@ -79,6 +80,7 @@ export default class UIGridListGenerator {
     import { Utility } from '@/utilities/utility';
     import InputCheckBox from '@/ui-components/input-components/InputCheckBox';
     ${this.getImportFilterForm()}
+    ${this.importModal()}
 
     export default {
       data() {
@@ -89,12 +91,14 @@ export default class UIGridListGenerator {
           httpCall: new HttpCall(${this.config.urlApi}),
           propsColumns: ${this.propsColumns()},
           ${this.getPropsFilter()}
+          ${this.attributesModal()}
         };
       },
       components: {
         'ui-pagination': UIPagination,
         'input-checkbox': InputCheckBox,
         ${this.getComponentFilterForm()}
+        ${this.getComponentModal()}
       },
       created() {
         this.getEntities(1);
@@ -180,6 +184,7 @@ export default class UIGridListGenerator {
           this.reloadFormPaginationComponent = false;
         },
         ${this.getMethodFilter()}
+        ${this.getMethodsModal()}
       },
     };
     </${this.scriptWord}>`;
@@ -222,7 +227,8 @@ export default class UIGridListGenerator {
         filterRows.push({ field: config.field,
           type: config.type,
           bindField: config.field,
-          label: config.label });
+          label: config.label,
+          configType: config.configType });
       });
       sectionFilter.rows = [];
       sectionFilter.rows[0] = filterRows;
@@ -313,5 +319,29 @@ export default class UIGridListGenerator {
     'input-date': InputDate,
     'input-money': InputMoney,
     'input-textarea': InputTextArea,` : '';
+  }
+  modalHtml() {
+    return this.config.hasModal ? `<modal v-show="isModalVisible" @close="closeModal">
+    <template v-slot:body>
+    </template>
+  </modal>` : '';
+  }
+  getMethodsModal() {
+    return this.config.hasModal ? `showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.currentProdottoId = '';
+      this.isModalVisible = false;
+    },` : '';
+  }
+  getComponentModal() {
+    return this.config.hasModal ? 'modal: Modal,' : '';
+  }
+  importModal() {
+    return this.config.hasModal ? 'import Modal from \'@/pages/shared/components/Modal\'' : '';
+  }
+  attributesModal() {
+    return this.config.hasModal ? ', isModalVisible: false,' : '';
   }
 }
