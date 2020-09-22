@@ -1,12 +1,41 @@
 <template>
   <div>
     <title-page v-bind:titolo="titolo"></title-page>
-    <input type="button" value="New" @click="onNew"/>
-    <div v-if="showForm">
-      <inventario-movimento-form :baseObject="baseObjectInventarioMov"
-      v-if="baseObjectInventarioMov['articolo']">
-      </inventario-movimento-form>
-    </div>
+      <div class="row">
+        <div class="col">
+            <input-number
+              v-model="movimentoInventario['quantita']"
+              label="Quantita"
+            >
+            </input-number>
+        </div>
+        <div class="col">
+           <input-date
+              v-model="movimentoInventario['dataScadenza']"
+              label="Data scadenza"
+            >
+            </input-date>
+        </div>
+        <div class="col">
+          <template >
+              <input-autocomplete
+                v-model="movimentoInventario['fornitore']"
+                :config="configTypes['fornitore']"
+                label="Fornitore "
+              >
+              </input-autocomplete>
+            </template>
+        </div>
+        <div class="col">
+           <input-text
+              v-model="movimentoInventario['note']"
+              label="Note"
+              fieldName="note"
+            >
+            </input-text>
+        </div>
+
+      </div>
     <div class="container">
       <div class="accordion" id="accordionExample">
         <div v-for="(entity, index) of entities" :key="index">
@@ -46,9 +75,13 @@
 </template>
 <script>
 import TitlePage from '@/pages/shared/components/TitlePage';
-import InventarioMovimentoForm from '@/pages/company/inventario/inventario-movimento/form/InventarioMovimentoForm';
 import HttpCall from '@/services/HttpCall';
 import { API_INVENTARIO_MOVIMENTO, API_SHOP } from '@/services/constant-services';
+import InputAutocomplete from '@/ui-components/input-components/InputAutocomplete';
+import InputText from '@/ui-components/input-components/InputText';
+import InputNumber from '@/ui-components/input-components/InputNumber';
+import InputTextArea from '@/ui-components/input-components/InputTextArea';
+import InputDate from '@/ui-components/input-components/InputDate';
 
 export default {
   name: 'inventario',
@@ -69,6 +102,26 @@ export default {
       httpCallInventarioMov: new HttpCall(API_INVENTARIO_MOVIMENTO),
       httpCallShop: new HttpCall(API_SHOP),
       baseObjectInventarioMov: {},
+      movimentoInventario: {
+        quantita: '',
+        dataScadenza: '',
+        Fornitore: '',
+        note: '',
+      },
+      configTypes: {
+        articolo: {
+          isDominio: false,
+          urlApi: '/api/prodottos/all',
+          fieldId: '_id',
+          showCodice: true,
+        },
+        fornitore: {
+          isDominio: false,
+          urlApi: '/api/anagrafica-fornitore-clientes',
+          fieldId: '_id',
+          showCodice: true,
+        },
+      },
     };
   },
   created() {
@@ -76,7 +129,11 @@ export default {
   },
   components: {
     'title-page': TitlePage,
-    'inventario-movimento-form': InventarioMovimentoForm,
+    'input-autocomplete': InputAutocomplete,
+    'input-text': InputText,
+    'input-number': InputNumber,
+    'input-date': InputDate,
+    'input-textarea': InputTextArea,
   },
   methods: {
     onNew() {
