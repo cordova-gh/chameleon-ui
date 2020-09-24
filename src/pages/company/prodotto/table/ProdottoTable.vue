@@ -13,7 +13,7 @@
                 v-model="entity['codice']"
                 label="Codice"
                 :readonlyAttr="readonlyFields['codice']"
-                :fieldName="codice"
+                fieldName="codice"
               ></input-text>
             </div>
             <div class="col-12 col-md-6 form-group" v-if="!invisibleFields['descrizione']">
@@ -21,7 +21,7 @@
                 v-model="entity['descrizione']"
                 label="Descrizione"
                 :readonlyAttr="readonlyFields['descrizione']"
-                :fieldName="descrizione"
+                fieldName="descrizione"
               ></input-text>
             </div>
           </div>
@@ -97,9 +97,9 @@
           <modal v-show="isModalVisible" @close="closeModal">
             <template v-slot:body>
               <!-- CUSTOM -->
-              <inventario
+              <inventario-carico
               :params="paramsInventario" :prodottoId="currentProdottoId">
-              </inventario>
+              </inventario-carico>
               <!-- CUSTOM -->
             </template>
           </modal>
@@ -124,7 +124,7 @@ import InputMoney from '@/ui-components/input-components/InputMoney';
 import InputTextArea from '@/ui-components/input-components/InputTextArea';
 import Modal from '@/pages/shared/components/Modal';
 /* CUSTOM */
-import Inventario from '@/pages/company/inventario/Inventario';
+import InventarioCarico from '@/pages/company/inventario/inventario-movimento/inventario-carico/InventarioCarico';
 /* CUSTOM */
 
 export default {
@@ -173,7 +173,7 @@ export default {
     'input-textarea': InputTextArea,
     modal: Modal,
     /* CUSTOM */
-    inventario: Inventario,
+    'inventario-carico': InventarioCarico,
     /* CUSTOM */
   },
   created() {

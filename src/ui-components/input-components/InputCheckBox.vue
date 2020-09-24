@@ -45,18 +45,4 @@ export default {
   },
 };
 </script>
-<style>
-.mx-input {
-  height: 100% !important;
-  border: 1px solid #fff;
-  padding: 0px;
-  font-size: inherit;
-  -webkit-box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.075);
-  box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.075);
-}
 
-.mx-input:hover,
-.mx-input:focus {
-  border-color: #ffffff;
-}
-</style>

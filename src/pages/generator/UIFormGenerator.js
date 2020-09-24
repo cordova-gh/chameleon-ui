@@ -72,13 +72,15 @@ export default class UIFormGenerator {
         inputs += `${spazio}<div class="row">\n`;
         cols.forEach((col) => {
           const numCols = this.getNumColsForm(col.numCols, section.numCols);
-          inputs += `${spazio}  <div class="col-12 col-md-${numCols} form-group" v-if="!invisibleFields['${col.field}']">\n`;
+          inputs += `${spazio}  <div class="col-12 col-md-${numCols} form-group"
+            v-if="!invisibleFields['${col.field}']">\n`;
           switch (col.type) {
             case 'autocomplete': {
-              inputs += `${spazio}    <template v-if="loadEntity">
-              <input-autocomplete v-model="entity['${col.field}']" :config="configTypes['${col.field}']"
+              inputs += `${spazio}    <template ${this.config.isFilter ? '' : 'v-if="loadEntity"'}>
+              <input-autocomplete v-model="entity['${col.field}']"
+                :config="configTypes['${col.field}']"
                 :readonlyAttr="readonlyFields['${col.field}']" label="${col.label}"
-                :fieldName="${col.field}">
+                fieldName="${col.field}">
               </input-autocomplete>
             </template>\n`;
               break;
@@ -87,7 +89,7 @@ export default class UIFormGenerator {
               // eslint-disable-next-line quotes
               inputs += `${spazio}    <input-password v-model="entity['${col.field}']"
                 :readonlyAttr="readonlyFields['${col.field}']" label="${col.label}"
-                :fieldName="${col.field}">
+                fieldName="${col.field}">
             </input-password>\n`;
               break;
             }
@@ -96,7 +98,7 @@ export default class UIFormGenerator {
               inputs += `${spazio}    <input-select v-model="entity['${col.field}']"
                 :items="this.domini['${col.configType.dominio}']"
                 :readonlyAttr="readonlyFields['${col.field}']" label="${col.label}"
-                :fieldName="${col.field}">
+                fieldName="${col.field}">
             </input-select>\n`;
               break;
             }
@@ -104,23 +106,23 @@ export default class UIFormGenerator {
               // eslint-disable-next-line quotes
               inputs += `${spazio}    <input-date v-model="entity['${col.field}']"
                 :readonlyAttr="readonlyFields['${col.field}']" label="${col.label}"
-                :fieldName="${col.field}">
+                fieldName="${col.field}">
               </input-date>`;
               break;
             }
             case 'date-range': {
               // eslint-disable-next-line quotes
-              inputs += `${spazio}    <input-date v-model="entity['${col.field}']"
+              inputs += `${spazio}    <input-date-range v-model="entity['${col.field}']"
                 :readonlyAttr="readonlyFields['${col.field}']" label="${col.label}"
-                :fieldName="${col.field}">
-              </input-date>`;
+                fieldName="${col.field}">
+              </input-date-range>`;
               break;
             }
             case 'money': {
               // eslint-disable-next-line quotes
               inputs += `${spazio}    <input-money v-model="entity['${col.field}']"
                 :readonlyAttr="readonlyFields['${col.field}']" label="${col.label}"
-                :fieldName="${col.field}">
+                fieldName="${col.field}">
               </input-money>`;
               break;
             }
@@ -128,7 +130,7 @@ export default class UIFormGenerator {
               // eslint-disable-next-line quotes
               inputs += `${spazio}    <input-number v-model="entity['${col.field}']"
                 :readonlyAttr="readonlyFields['${col.field}']" label="${col.label}"
-                :fieldName="${col.field}">
+                fieldName="${col.field}">
               </input-number>`;
               break;
             }
@@ -136,7 +138,7 @@ export default class UIFormGenerator {
               // eslint-disable-next-line quotes
               inputs += `${spazio}    <input-textarea v-model="entity['${col.field}']"
                 :readonlyAttr="readonlyFields['${col.field}']" label="${col.label}"
-                :fieldName="${col.field}">
+                fieldName="${col.field}">
               </input-textarea>`;
               break;
             }
@@ -145,7 +147,7 @@ export default class UIFormGenerator {
               inputs += `${spazio}    <input-checkbox v-model="entity['${col.field}']"
                 label="${col.label}"
                 :readonlyAttr="readonlyFields['${col.field}']"
-                :fieldName="${col.field}">
+                fieldName="${col.field}">
               </input-checkbox>`;
               break;
             }
@@ -153,7 +155,7 @@ export default class UIFormGenerator {
               // eslint-disable-next-line quotes
               inputs += `${spazio}    <input-text v-model="entity['${col.field}']" label="${col.label}"
                 :readonlyAttr="readonlyFields['${col.field}']"
-                :fieldName="${col.field}">
+                fieldName="${col.field}">
             </input-text>\n`;
             }
           }
@@ -218,12 +220,9 @@ export default class UIFormGenerator {
           modePage: '',
           httpCall: new HttpCall(${this.config.urlApi}),
           loadEntity: false,
-          configTypes:
-              ${this.getConfigTypesAutocomplete()}
-          ,
+          ${this.dataConfigTypesForAutocomplete()}
           currentId: null,
-          dominiToLoad: ${this.dominiToLoad()},
-          domini: [],
+          ${this.dataDominiForSelect()}
           invisibleFields: {},
           readonlyFields: {},
           };
@@ -233,7 +232,7 @@ export default class UIFormGenerator {
           },
           methods: {
           onCreated() {
-          this.getDominios();
+          ${this.getColsSelect().length > 0 ? 'this.getDominios();' : ''}
           this.currentId = this.$route.params.id;
           if (this.currentId) {
               this.getEntity(this.currentId);
@@ -324,16 +323,7 @@ export default class UIFormGenerator {
                 }
               });
           },
-          getDominios() {
-            const keysObjectDominiToLoad = Object.keys(this.dominiToLoad);
-            if (keysObjectDominiToLoad.length > 0) {
-              const dominiIncludes = Object.keys(this.dominiToLoad).map(key => this.dominiToLoad[key]);
-              const httpCallDomini = new HttpCall(API_DOMINIO);
-                httpCallDomini.getCustom('/includes', ${this.backTickWord}?domini=${this.braceWord}dominiIncludes.join(',')}${this.backTickWord}).then((res) => {
-                this.domini = res;
-              });
-            }
-          },
+          ${this.methodDominiForSelect()}
           setModeFields() {
             const keysPropsFields = Object.keys(this.propsFields);
             const fieldsInvisible = keysPropsFields
@@ -365,7 +355,7 @@ export default class UIFormGenerator {
     import InputCheckbox from '@/ui-components/input-components/InputCheckBox';
     import HttpCall from '@/services/HttpCall';
     import { Utility } from '@/utilities/utility';
-    import { ${this.config.urlApi}, API_DOMINIO  } from '@/services/constant-services';`;
+    import { ${this.config.urlApi + (this.getColsSelect().length > 0 ? ', API_DOMINIO' : '')} } from '@/services/constant-services';`;
   }
   styleForm() {
     return `
@@ -412,7 +402,7 @@ export default class UIFormGenerator {
     // eslint-disable-next-line prefer-template
     return '{' + objString + '}';
   }
-  getConfigTypesAutocomplete() {
+  dataConfigTypesForAutocomplete() {
     const objString = {};
     this.config.sections.forEach((section) => {
       section.rows.forEach((cols) => {
@@ -423,20 +413,46 @@ export default class UIFormGenerator {
         });
       });
     });
-    return JSON.stringify(objString).replaceAll('\'', '').replaceAll('""', '\'');
+    return `configTypes:${JSON.stringify(objString).replaceAll('\'', '').replaceAll('""', '\'')},`;
   }
-  dominiToLoad() {
+  dataDominiForSelect() {
     const objString = {};
-    this.config.sections.forEach((section) => {
-      section.rows.forEach((cols) => {
-        cols.forEach((col) => {
-          if (col.configType && col.type === 'select') {
-            objString[col.field] = col.configType.dominio;
-          }
+    const manageSelect = (this.getColsSelect()).length > 0;
+    if (manageSelect) {
+      this.config.sections.forEach((section) => {
+        section.rows.forEach((cols) => {
+          cols.forEach((col) => {
+            if (col.configType && col.type === 'select') {
+              objString[col.field] = col.configType.dominio;
+            }
+          });
         });
       });
+    }
+    return manageSelect ? `dominiToLoad:${JSON.stringify(objString).replaceAll('\'', '').replaceAll('""', '\'')},
+    domini: [],` : '';
+  }
+  methodDominiForSelect() {
+    return (this.getColsSelect()).length > 0 ? `getDominios() {
+      const keysObjectDominiToLoad = Object.keys(this.dominiToLoad);
+      if (keysObjectDominiToLoad.length > 0) {
+        const dominiIncludes = Object.keys(this.dominiToLoad).map(key => this.dominiToLoad[key]);
+        const httpCallDomini = new HttpCall(API_DOMINIO);
+          httpCallDomini.getCustom('/includes', ${this.backTickWord}?domini=${this.braceWord}dominiIncludes.join(',')}${this.backTickWord}).then((res) => {
+          this.domini = res;
+        });
+      }
+    },` : '';
+  }
+
+  getColsSelect() {
+    let arraySelectCols = [];
+    this.config.sections.forEach((section) => {
+      section.rows.forEach((cols) => {
+        arraySelectCols = cols.filter(col => col.configType && col.type === 'select');
+      });
     });
-    return JSON.stringify(objString).replaceAll('\'', '').replaceAll('""', '\'');
+    return arraySelectCols;
   }
   getNumColsForm(numColsRow, numColsSection) {
     let numCols = 3;

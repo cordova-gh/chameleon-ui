@@ -89,6 +89,7 @@ export default {
 .modal-body {
   position: relative;
   padding: 20px 10px;
+   background-color: rgba(239, 242, 249, 0.58);
 }
 
 .btn-close {

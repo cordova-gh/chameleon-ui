@@ -6,6 +6,7 @@
       :readonly="readonlyAttr"
       @keypress="onlyNumber"
     />
+     <label :for="'f_' + fieldName">{{ label}}</label>
   </div>
 </template>
 <script>

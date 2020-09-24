@@ -8,12 +8,12 @@ export default class UITableGenerator {
   backTickWord = '`';
   configFilterForm = null;
   importFilter='';
-  fromFilterGenerator = null;
+  formFilterGenerator = null;
   constructor(config) {
     this.config = config;
     this.configFilterForm = this.setConfigFilterForm();
     if (this.configFilterForm) {
-      this.fromFilterGenerator = new UIFormGenerator(this.configFilterForm);
+      this.formFilterGenerator = new UIFormGenerator(this.configFilterForm);
     }
   }
   generate() {
@@ -35,25 +35,25 @@ export default class UITableGenerator {
             <th style="width: 5%"></th>
           </thead>
           <tbody>
-            <tr v-for="entity of entities" :key="entity.id">
+            <tr v-for="objectEntity of entities" :key="objectEntity.id">
               <td>
-                <i @click="deleteEntity(entity._id)" class="fa fa-minus-circle"
+                <i @click="deleteEntity(objectEntity._id)" class="fa fa-minus-circle"
                 ></i>
               </td>
               <td v-for="(keyColumn, indexColumn) in Object.keys(propsColumns)" :key="indexColumn">
                 <template v-if="propsColumns[keyColumn].type === 'checkbox'">
-                  <input-checkbox v-model="entity[keyColumn]" v-bind:isReadonly="true">
+                  <input-checkbox v-model="objectEntity[keyColumn]" v-bind:isReadonly="true">
                   </input-checkbox>
                 </template>
                 <template v-if="propsColumns[keyColumn].type.includes('date')">
-                  {{ entity[keyColumn] | formatDate('DD/MM/YYYY') }}
+                  {{ objectEntity[keyColumn] | formatDate('DD/MM/YYYY') }}
                 </template>
                 <template v-else>
-                  {{ entity[keyColumn] }}
+                  {{ objectEntity[keyColumn] }}
                 </template>
               </td>
               <td>
-                <router-link :to="'edit/' + entity._id">
+                <router-link :to="'edit/' + objectEntity._id">
                   <i class="fas fa-edit">
                   </i>
                 </router-link>
@@ -76,7 +76,7 @@ export default class UITableGenerator {
     return `
       <${this.scriptWord}>
 import UIPagination from '@/ui-components/shared/UIPagination';
-import {${this.config.urlApi}}from '@/services/constant-services';
+import {${this.config.urlApi + (this.formFilterGenerator.getColsSelect().length > 0 ? ', API_DOMINIO' : '')}}from '@/services/constant-services';
 import HttpCall from '@/services/HttpCall';
 import { Utility } from '@/utilities/utility';
 import InputCheckBox from '@/ui-components/input-components/InputCheckBox';
@@ -91,7 +91,7 @@ data() {
     numOfResults: 0,
     httpCall: new HttpCall(${this.config.urlApi}),
     propsColumns: ${this.propsColumns()},
-    ${this.getPropsFilter()}
+    ${this.dataForFiltersForm()}
     ${this.attributesModal()}
   };
 },
@@ -103,6 +103,7 @@ components: {
 },
 created() {
   this.getEntities(1);
+  ${this.formFilterGenerator.getColsSelect().length > 0 ? 'this.getDominios();' : ''}
 },
 methods: {
   clickPagePagination(page, rowsPerPage) {
@@ -111,11 +112,16 @@ methods: {
   getEntities(page, rowsPerPage) {
     let filterString = '';
     if (this.entity) {
-      let filterArray = [];
-      filterArray = Object.keys(this.entity)
-        .filter(keyFilter => this.entity[keyFilter])
+      let filterArray = Object.keys(this.entity)
+        .filter(keyFilter => this.entity[keyFilter] && this.propsFilterEntity[keyFilter].type !== 'range')
         .map(keyFilter => ${this.backTickWord}${this.braceWord}keyFilter}.${this.braceWord}this.propsFilterEntity[keyFilter].type}=${this.braceWord}this.entity[keyFilter]}${this.backTickWord});
-      filterString = filterArray.length > 0 ? ${this.backTickWord}&${this.braceWord}filterArray.join('&')}${this.backTickWord} : '';
+
+      const filterDateArray = Object.keys(this.entity)
+        .filter(keyFilter => this.entity[keyFilter] && this.propsFilterEntity[keyFilter].type === 'range')
+        .map(keyFilter => ${this.backTickWord}${this.braceWord}keyFilter}.greaterThanEqual=${this.braceWord}this.entity[keyFilter][0]}&${this.braceWord}keyFilter}.lessThanEqual=${this.braceWord}this.entity[keyFilter][1]}${this.backTickWord});
+
+      filterArray = filterArray.concat(filterDateArray);
+      filterString += filterArray.length > 0 ? ${this.backTickWord}&${this.braceWord}filterArray.join('&')}${this.backTickWord} : '';
     }
     let params = ${this.backTickWord}?page=${this.braceWord}page}${this.braceWord}filterString}${this.backTickWord};
     if (rowsPerPage) params += ${this.backTickWord}&rowsPerPage=${this.braceWord}rowsPerPage}${this.backTickWord};
@@ -137,7 +143,7 @@ methods: {
   newEntity() {
     this.$emit('onCreate');
   },
-  ${this.getMethodFilter()}
+  ${this.getMethodsFilter()}
   ${this.getMethodsModal()}
 },
 watch: {
@@ -209,43 +215,47 @@ watch: {
     return [];
   }
   getHtmlFilterForm() {
-    return this.fromFilterGenerator ? this.fromFilterGenerator.templateForm() : '';
+    return this.formFilterGenerator ? this.formFilterGenerator.templateForm() : '';
   }
   getImportFilterForm() {
-    return this.fromFilterGenerator ? `import InputAutocomplete from '@/ui-components/input-components/InputAutocomplete';
+    return this.formFilterGenerator ? `import InputAutocomplete from '@/ui-components/input-components/InputAutocomplete';
     import InputSelect from '@/ui-components/input-components/InputSelect';
     import InputText from '@/ui-components/input-components/InputText';
     import InputPassword from '@/ui-components/input-components/InputPassword';
     import InputNumber from '@/ui-components/input-components/InputNumber';
     import InputDate from '@/ui-components/input-components/InputDate';
+    import InputDateRange from '@/ui-components/input-components/InputDateRange';
     import InputMoney from '@/ui-components/input-components/InputMoney';
     import InputTextArea from '@/ui-components/input-components/InputTextArea';` : '';
   }
   getComponentFilterForm() {
-    return this.fromFilterGenerator ? `          'input-autocomplete': InputAutocomplete,
+    return this.formFilterGenerator ? `          'input-autocomplete': InputAutocomplete,
     'input-select': InputSelect,
     'input-text': InputText,
     'input-password': InputPassword,
     'input-number': InputNumber,
     'input-date': InputDate,
+    'input-date-range': InputDateRange,
     'input-money': InputMoney,
     'input-textarea': InputTextArea,` : '';
   }
-  getPropsFilter() {
+  dataForFiltersForm() {
     let entityFilter = '';
-    if (this.fromFilterGenerator) {
+    if (this.formFilterGenerator) {
       entityFilter += `invisibleFields: {},
-        readonlyFields: {}
-        , disableBtnResetFilters: true
-        , entity: ${this.fromFilterGenerator.getEntity()}`;
-      const propsFilterEntity = JSON.parse(this.fromFilterGenerator.getPropsFields(true));
+        readonlyFields: {},
+        disableBtnResetFilters: true,
+        entity: ${this.formFilterGenerator.getEntity()},
+        ${this.formFilterGenerator.dataConfigTypesForAutocomplete()}
+        ${this.formFilterGenerator.dataDominiForSelect()}`;
+      const propsFilterEntity = JSON.parse(this.formFilterGenerator.getPropsFields(true));
       this.config.cols
         .filter(col => col.filter)
         .forEach((col) => {
           propsFilterEntity[col.field].type = col.filter.type;
         });
 
-      entityFilter += `, propsFilterEntity: ${JSON.stringify(propsFilterEntity)
+      entityFilter += `propsFilterEntity: ${JSON.stringify(propsFilterEntity)
         .replaceAll('":', ':')
         .replaceAll('{"', '{')
         .replaceAll(',"', ',')
@@ -253,8 +263,8 @@ watch: {
     }
     return entityFilter;
   }
-  getMethodFilter() {
-    return this.fromFilterGenerator ? `onFind() {
+  getMethodsFilter() {
+    return this.formFilterGenerator ? `onFind() {
       this.disableBtnResetFilters = false;
       this.getEntities(1);
     },
@@ -264,7 +274,8 @@ watch: {
       );
       this.onFind();
       this.disableBtnResetFilters = true;
-    },` : '';
+    },
+    ${this.formFilterGenerator.methodDominiForSelect()}` : '';
   }
 
   modalHtml() {

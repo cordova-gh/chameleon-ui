@@ -8,13 +8,13 @@ export default class UIGridListGenerator {
   backTickWord = '`';
   configFilterForm = null;
   importFilter='';
-  fromFilterGenerator = null;
+  formFilterGenerator = null;
 
   constructor(config) {
     this.config = config;
     this.configFilterForm = this.setConfigFilterForm();
     if (this.configFilterForm) {
-      this.fromFilterGenerator = new UIFormGenerator(this.configFilterForm);
+      this.formFilterGenerator = new UIFormGenerator(this.configFilterForm);
     }
   }
   generate() {
@@ -34,15 +34,15 @@ export default class UIGridListGenerator {
             <th style="width: 5%"></th>
           </thead>
           <tbody>
-            <tr v-for="(entity, indexEntity) of entities" :key="indexEntity">
-              <${this.templateWord} v-if="entity._id !== undefined">
-                <input type="hidden" id="id" :value="entity._id" />
+            <tr v-for="(objectEntity, indexEntity) of entities" :key="indexEntity">
+              <${this.templateWord} v-if="objectEntity._id !== undefined">
+                <input type="hidden" id="id" :value="objectEntity._id" />
                 <td>
-                  <i @click="deleteEntity(entity._id)" class="fa fa-minus-circle"></i>
+                  <i @click="deleteEntity(objectEntity._id)" class="fa fa-minus-circle"></i>
                 </td>
                 <td v-for="(keyColumn, indexColumn) in Object.keys(propsColumns)"
                   :key="indexColumn">
-                  <input type="text" v-model="entity[keyColumn]" readonly="true"
+                  <input type="text" v-model="objectEntity[keyColumn]" readonly="true"
                     class="disableInput"
                     @dblclick="editableCell($event, 1, indexEntity)"
                     @focusout="editableCell($event, 0, indexEntity)"
@@ -53,7 +53,7 @@ export default class UIGridListGenerator {
                 <td></td>
                 <td v-for="(keyColumn, indexColumn) in Object.keys(propsColumns)"
                   :key="indexColumn">
-                  <input type="text" v-model="entity[keyColumn]" />
+                  <input type="text" v-model="objectEntity[keyColumn]" />
                 </td>
                 <td>
                   <i @click="saveEntity(indexEntity)" class="fa fa-check-circle"></i>
@@ -75,7 +75,7 @@ export default class UIGridListGenerator {
   scriptGridList() {
     return `<${this.scriptWord}>
     import UIPagination from '@/ui-components/shared/UIPagination';
-    import {${this.config.urlApi}}from '@/services/constant-services';
+    import {${this.config.urlApi + (this.formFilterGenerator.getColsSelect().length > 0 ? ', API_DOMINIO' : '')}}from '@/services/constant-services';
     import HttpCall from '@/services/HttpCall';
     import { Utility } from '@/utilities/utility';
     import InputCheckBox from '@/ui-components/input-components/InputCheckBox';
@@ -90,7 +90,7 @@ export default class UIGridListGenerator {
           numOfResults: 0,
           httpCall: new HttpCall(${this.config.urlApi}),
           propsColumns: ${this.propsColumns()},
-          ${this.getPropsFilter()}
+          ${this.dataForFiltersForm()}
           ${this.attributesModal()}
         };
       },
@@ -102,6 +102,7 @@ export default class UIGridListGenerator {
       },
       created() {
         this.getEntities(1);
+        ${this.formFilterGenerator.getColsSelect().length > 0 ? 'this.getDominios();' : ''}
       },
       methods: {
         clickPagePagination(page, rowsPerPage) {
@@ -110,11 +111,16 @@ export default class UIGridListGenerator {
         getEntities(page, rowsPerPage) {
           let filterString = '';
           if (this.entity) {
-            let filterArray = [];
-            filterArray = Object.keys(this.entity)
-              .filter(keyFilter => this.entity[keyFilter])
+            let filterArray = Object.keys(this.entity)
+              .filter(keyFilter => this.entity[keyFilter] && this.propsFilterEntity[keyFilter].type !== 'range')
               .map(keyFilter => ${this.backTickWord}${this.braceWord}keyFilter}.${this.braceWord}this.propsFilterEntity[keyFilter].type}=${this.braceWord}this.entity[keyFilter]}${this.backTickWord});
-            filterString = filterArray.length > 0 ? ${this.backTickWord}&${this.braceWord}filterArray.join('&')}${this.backTickWord} : '';
+
+            const filterDateArray = Object.keys(this.entity)
+              .filter(keyFilter => this.entity[keyFilter] && this.propsFilterEntity[keyFilter].type === 'range')
+              .map(keyFilter => ${this.backTickWord}${this.braceWord}keyFilter}.greaterThanEqual=${this.braceWord}this.entity[keyFilter][0]}&${this.braceWord}keyFilter}.lessThanEqual=${this.braceWord}this.entity[keyFilter][1]}${this.backTickWord});
+
+            filterArray = filterArray.concat(filterDateArray);
+            filterString += filterArray.length > 0 ? ${this.backTickWord}&${this.braceWord}filterArray.join('&')}${this.backTickWord} : '';
           }
           const params = ${this.backTickWord}?page=${this.braceWord}page}${this.braceWord}filterString}${this.backTickWord};
           if (rowsPerPage) params += ${this.backTickWord}&rowsPerPage=${this.braceWord}rowsPerPage}${this.backTickWord};
@@ -183,7 +189,7 @@ export default class UIGridListGenerator {
         onFinishReloadFormPagination() {
           this.reloadFormPaginationComponent = false;
         },
-        ${this.getMethodFilter()}
+        ${this.getMethodsFilter()}
         ${this.getMethodsModal()}
       },
     };
@@ -242,7 +248,7 @@ export default class UIGridListGenerator {
     return [];
   }
   getHtmlFilterForm() {
-    return this.fromFilterGenerator ? this.fromFilterGenerator.templateForm() : '';
+    return this.formFilterGenerator ? this.formFilterGenerator.templateForm() : '';
   }
   getTestata() {
     let testata = '';
@@ -258,12 +264,13 @@ export default class UIGridListGenerator {
     return testata;
   }
   getImportFilterForm() {
-    return this.fromFilterGenerator ? `import InputAutocomplete from '@/ui-components/input-components/InputAutocomplete';
+    return this.formFilterGenerator ? `import InputAutocomplete from '@/ui-components/input-components/InputAutocomplete';
     import InputSelect from '@/ui-components/input-components/InputSelect';
     import InputText from '@/ui-components/input-components/InputText';
     import InputPassword from '@/ui-components/input-components/InputPassword';
     import InputNumber from '@/ui-components/input-components/InputNumber';
     import InputDate from '@/ui-components/input-components/InputDate';
+    import InputDateRange from '@/ui-components/input-components/InputDateRange';
     import InputMoney from '@/ui-components/input-components/InputMoney';
     import InputTextArea from '@/ui-components/input-components/InputTextArea';` : '';
   }
@@ -275,21 +282,23 @@ export default class UIGridListGenerator {
     // eslint-disable-next-line prefer-template
     return objString + '}';
   }
-  getPropsFilter() {
+  dataForFiltersForm() {
     let entityFilter = '';
-    if (this.fromFilterGenerator) {
+    if (this.formFilterGenerator) {
       entityFilter += `invisibleFields: {},
         readonlyFields: {}
         , disableBtnResetFilters: true
-        , entity: ${this.fromFilterGenerator.getEntity()}`;
-      const propsFilterEntity = JSON.parse(this.fromFilterGenerator.getPropsFields(true));
+        , entity: ${this.formFilterGenerator.getEntity()},
+        ${this.formFilterGenerator.dataConfigTypesForAutocomplete()}
+        ${this.formFilterGenerator.dataDominiForSelect()}`;
+      const propsFilterEntity = JSON.parse(this.formFilterGenerator.getPropsFields(true));
       this.config.cols
         .filter(col => col.filter)
         .forEach((col) => {
           propsFilterEntity[col.field].type = col.filter.type;
         });
 
-      entityFilter += `, propsFilterEntity: ${JSON.stringify(propsFilterEntity)
+      entityFilter += `propsFilterEntity: ${JSON.stringify(propsFilterEntity)
         .replaceAll('":', ':')
         .replaceAll('{"', '{')
         .replaceAll(',"', ',')
@@ -297,8 +306,8 @@ export default class UIGridListGenerator {
     }
     return entityFilter;
   }
-  getMethodFilter() {
-    return this.fromFilterGenerator ? `onFind() {
+  getMethodsFilter() {
+    return this.formFilterGenerator ? `onFind() {
       this.disableBtnResetFilters = false;
       this.getEntities(1);
     },
@@ -308,10 +317,11 @@ export default class UIGridListGenerator {
       );
       this.onFind();
       this.disableBtnResetFilters = true;
-    },` : '';
+    },
+    ${this.formFilterGenerator.methodDominiForSelect()}` : '';
   }
   getComponentFilterForm() {
-    return this.fromFilterGenerator ? `          'input-autocomplete': InputAutocomplete,
+    return this.formFilterGenerator ? `          'input-autocomplete': InputAutocomplete,
     'input-select': InputSelect,
     'input-text': InputText,
     'input-password': InputPassword,

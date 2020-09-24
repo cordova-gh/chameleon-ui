@@ -4,7 +4,7 @@
       v-model="modelValue"
       :placeholder="label"
       :id="'f_' + fieldName"
-      valueType="date"
+      valueType="YYYY-MM-DD"
       format="DD/MM/YYYY"
       range
     >
@@ -77,7 +77,6 @@ date-picker {
     box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
 }
 .mx-input {
-  height: 100% !important;
   border: 1px solid #fff;
  // border-width: 0 !important;
   padding: 0px;

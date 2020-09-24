@@ -1,6 +1,6 @@
 <template>
   <div>
-    <title-page v-bind:titolo="titolo"></title-page>
+      <div class="container shadow p-2 mb-3 bg-white rounded">
       <div class="row">
         <div class="col">
             <input-number
@@ -34,7 +34,10 @@
             >
             </input-text>
         </div>
-
+        <div class="col-1">
+          <i @click="saveEntity(indexEntity)" class="fa fa-check-circle"></i>
+        </div>
+      </div>
       </div>
     <div class="container">
       <div class="accordion" id="accordionExample">
@@ -137,7 +140,7 @@ export default {
   },
   methods: {
     onNew() {
-      this.baseObjectInventarioMov.articolo = this.prodottoId;
+      this.movimentoInventario.articolo = this.prodottoId;
       this.showForm = true;
     },
     loadEntities() {
@@ -153,6 +156,26 @@ export default {
       this.httpCallShop.get().then((data) => {
         this.shops = data.entities;
       });
+    },
+    saveEntity() {
+      // if (this.modePage === 'U') {
+      //   this.httpCallInventarioMov.update(this.currentId, this.movimentoInventario).then(() => {
+      //     this.$emit('onSaveEntity');
+      //   });
+      // } else {
+      this.movimentoInventario.articolo = this.prodottoId;
+      this.httpCallInventarioMov.create(this.movimentoInventario, '/save-carico').then(() => {
+        this.movimentoInventario = this.createEntityForm();
+        this.loadEntities();
+      });
+      // }
+    },
+    createEntityForm() {
+      const obj = {};
+      Object.keys(obj).forEach((key) => {
+        obj[key] = '';
+      });
+      return obj;
     },
   },
   watch: {

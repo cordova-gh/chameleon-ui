@@ -54,7 +54,7 @@ $secondary: #007bff8a;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: lighter;
   outline: 0;
-  padding: 7px 0;
+  padding: 3px 0;
   transition: border-color 0.2s;
   text-transform: capitalize;
   width: 100% !important;
@@ -76,6 +76,7 @@ $secondary: #007bff8a;
   display: block;
   transition: 0.2s;
   opacity: 0.9;
+  color: gray;
 }
 .input-box input:focus {
   ~ label {
@@ -89,7 +90,7 @@ $secondary: #007bff8a;
   font-size: inherit;
   font-family: Helvetica, Arial, sans-serif;
   font-weight: 200;
-  padding-bottom: 6px;
+
   font-weight: lighter;
   border-width: 1px;
   border-image: linear-gradient(

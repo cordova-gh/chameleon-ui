@@ -63,8 +63,6 @@ export default {
   },
   methods: {
     changeRowPerPage() {
-      // eslint-disable-next-line no-console
-      console.log('skdnasdkjskdkasjkjdkjaskjd');
       this.$emit('clickPage', 1, this.rowsPerPage);
     },
     clickPage(page) {

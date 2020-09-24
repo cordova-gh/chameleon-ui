@@ -11,6 +11,7 @@
       @input="findDebounce"
       @focus="enter"
     />
+    <label :for="'f_' + fieldName">{{label}}</label>
     <ul id="autocomplete-results" v-show="isOpen" class="autocomplete-results">
       <li class="loading" v-if="isLoading">Loading results...</li>
       <li
