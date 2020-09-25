@@ -184,9 +184,6 @@ export default {
 };
 </script>
 <style>
-.autocomplete {
-  position: relative;
-}
 
 .autocomplete-results {
   padding: 0;
@@ -195,6 +192,10 @@ export default {
   height: 120px;
   overflow: auto;
   width: 100%;
+  position: absolute;
+  z-index: 99;
+  background: #fff;
+
 }
 
 .autocomplete-result {
