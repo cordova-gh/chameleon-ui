@@ -1,5 +1,5 @@
 <template>
-  <div class="input-box">
+  <div class="input-box-textarea">
     <textarea
       v-model="modelValue"
       :placeholder="label"
@@ -8,6 +8,7 @@
       cols="5"
       rows="5"
     ></textarea>
+    <label :for="'f_' + fieldName"> {{ label }} </label>
   </div>
 </template>
 <script>

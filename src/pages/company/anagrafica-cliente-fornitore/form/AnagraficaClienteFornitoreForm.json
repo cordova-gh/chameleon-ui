@@ -204,7 +204,7 @@
             "field": "capitaleSociale",
             "label": "Capitale Sociale",
             "bindField": "entitaGiuridica.capitaleSociale",
-            "type": "number"
+            "type": "money"
           }
         ],
         [

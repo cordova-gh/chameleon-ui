@@ -1,0 +1,56 @@
+$primary: #2c3e50;
+$secondary: #007bff8a;
+
+.input-box-date {
+  position: relative;
+  padding: 15px 0 0;
+  width: 100%;
+}
+.mx-datepicker {
+  width: 100% !important;
+}
+.mx-input {
+  height: 30px;
+  -webkit-box-shadow: inherit !important;
+     box-shadow: inherit !important;
+}
+.input-box-date input {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #ced4da;
+  outline: 0;
+  &::placeholder {
+    color: transparent;
+  }
+}
+.input-box-date label {
+  cursor: text;
+  color: gray;
+  position: absolute;
+  padding-left: 0.5rem;
+  top: 20px;
+  font-size: 1rem;
+  color: $primary;
+  margin-bottom: 1rem;
+  display: block;
+  transition: 0.2s;
+  opacity: 0.9;
+}
+.input-box-date .mx-datepicker:focus-within ~ label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.1s;
+  color: $secondary;
+  font-weight: normal;
+}
+.mx-datepicker input:focus {
+  border-width: 1px;
+  border-image: linear-gradient(
+    to right,
+    rgba(0, 123, 255, 0.25),
+    rgba(0, 174, 255, 0.514)
+  );
+  border-image-slice: 1;
+  color: $primary;
+}

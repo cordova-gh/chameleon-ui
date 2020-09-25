@@ -127,6 +127,7 @@
         <div class="row">
           <div class="col-12 col-md-4 form-group" v-if="!invisibleFields['note']">
             <input-textarea v-model="entity['note']"
+            label="Note"
             :readonlyAttr="readonlyFields['note']"></input-textarea>
           </div>
         </div>

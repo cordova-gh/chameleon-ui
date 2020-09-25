@@ -192,7 +192,7 @@
                 "field": "capitaleSociale",
                 "label": "Capitale Sociale",
                 "bindField": "anagrafica.entitaGiuridica.capitaleSociale",
-                "type": "text"
+                "type": "money"
               }
             ],
             [

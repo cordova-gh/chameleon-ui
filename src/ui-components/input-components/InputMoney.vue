@@ -3,7 +3,10 @@
     <currency-input v-model="value"
       :id="'f_' + fieldName" currency="EUR"
       locale="de"
+      class="form-input"
     />
+    <label :for="'f_' + fieldName">{{ label }}</label>
+
   </div>
 </template>
 
@@ -14,14 +17,17 @@ export default {
       type: Boolean,
       default: false,
     },
+    label: {
+      type: String,
+    },
     fieldName: {
       type: String,
       default: '',
     },
   },
-  data: () => ({
-    value: 1000,
-  }),
 };
 </script>
-<style scoped></style>
+<style lang="scss">
+$primary: #2c3e50;
+$secondary: #007bff8a;
+</style>
