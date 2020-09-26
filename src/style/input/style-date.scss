@@ -10,7 +10,8 @@ $secondary: #007bff8a;
   width: 100% !important;
 }
 .mx-input {
-  height: 30px;
+  border-radius: 4px;
+  height: 25px !important;
   -webkit-box-shadow: inherit !important;
      box-shadow: inherit !important;
 }
@@ -27,7 +28,7 @@ $secondary: #007bff8a;
   cursor: text;
   color: gray;
   position: absolute;
-  padding-left: 0.5rem;
+
   top: 20px;
   font-size: 1rem;
   color: $primary;
@@ -40,7 +41,7 @@ $secondary: #007bff8a;
   position: absolute;
   top: 0;
   display: block;
-  transition: 0.1s;
+  transition: 0.2s;
   color: $secondary;
   font-weight: normal;
 }

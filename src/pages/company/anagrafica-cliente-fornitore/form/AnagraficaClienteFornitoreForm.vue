@@ -230,7 +230,7 @@
             <input-date
               v-model="entity['dataCostituzione']"
               :readonlyAttr="readonlyFields['dataCostituzione']"
-              label="data Costituzione"
+              label="Data Costituzione"
               fieldName="dataCostituzione"
             ></input-date>
           </div>

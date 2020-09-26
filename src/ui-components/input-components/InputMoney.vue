@@ -1,5 +1,5 @@
 <template>
-  <div class="input-box">
+  <div class="input-box-money">
     <currency-input v-model="value"
       :id="'f_' + fieldName" currency="EUR"
       locale="de"

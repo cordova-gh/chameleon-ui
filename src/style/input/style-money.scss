@@ -1,13 +1,13 @@
 $primary: #2c3e50;
 $secondary: #007bff8a;
 
-.input-box-select {
+.input-box-money {
     position: relative;
     padding: 15px 0 0;
     width: 100%;
   }
 
-.input-box-select select {
+.input-box-money input {
   background: transparent;
   border: 0;
   border-radius: 4px;
@@ -30,7 +30,7 @@ $secondary: #007bff8a;
   }
 }
 
-.input-box-select label {
+.input-box-money label {
   cursor: text;
   color: gray;
   position: absolute;
@@ -43,7 +43,7 @@ $secondary: #007bff8a;
   transition: 0.2s;
   opacity: 0.9;
 }
-.input-box-select select:focus {
+.input-box-money input:focus {
   ~ label {
     position: absolute;
     top: 0;
@@ -66,6 +66,6 @@ $secondary: #007bff8a;
   border-image-slice: 1;
   color: $primary;
 }
-select:hover, select:focus {
+input:hover, input:focus {
   border-color: #409aff;
 }

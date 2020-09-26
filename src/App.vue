@@ -73,4 +73,5 @@ html {
 @import "./style/input/style-date.scss";
 @import "./style/input/style-select.scss";
 @import "./style/input/style-textarea.scss";
+@import "./style/input/style-money.scss";
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="input-box-select">
-    <select v-model="modelValue" :class="classCss" :readonly="readonlyAttr">
-     <!-- <option value="" disabled selected hidden>{{label}}</option> -->
+    <select v-model="modelValue" :readonly="readonlyAttr">
+      <!-- <option value="" disabled selected hidden>{{label}}</option> -->
       <option v-for="item in items" :key="item.id" :value="item._id">
         <template v-if="showCodice">
           {{ item.codice }}
@@ -15,7 +15,6 @@
   </div>
 </template>
 <script>
-
 export default {
   props: {
     config: {
@@ -27,10 +26,6 @@ export default {
     },
     label: {
       type: String,
-    },
-    classCss: {
-      type: String,
-      default: 'form-control form-control form-control-alternative',
     },
     showCodice: {
       type: Boolean,
@@ -63,15 +58,20 @@ export default {
     },
   },
   data() {
-    return {
-    };
+    return {};
   },
   created() {
     if (this.config.fieldId) this.fieldId = this.config.fieldId;
-    if (this.config.fieldCodice) { this.fieldCodice = this.config.fieldCodice; }
-    if (this.config.fieldDescrizione) { this.fieldCodice = this.config.fieldDescrizione; }
+    if (this.config.fieldCodice) {
+      this.fieldCodice = this.config.fieldCodice;
+    }
+    if (this.config.fieldDescrizione) {
+      this.fieldCodice = this.config.fieldDescrizione;
+    }
     if (this.config.showCodice) this.showCodice = this.config.showCodice;
-    if (this.config.showDescrizione) { this.showDescrizione = this.config.showDescrizione; }
+    if (this.config.showDescrizione) {
+      this.showDescrizione = this.config.showDescrizione;
+    }
   },
   methods: {
     enter() {
