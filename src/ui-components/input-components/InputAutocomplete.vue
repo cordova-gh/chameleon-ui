@@ -4,7 +4,6 @@
     <input
       type="text"
       v-model="valueShown"
-      :class="classCss"
       :readonly="readonlyAttr"
       :placeholder="label"
       :id="'f_' + fieldName"
@@ -41,10 +40,6 @@ export default {
     },
     label: {
       type: String,
-    },
-    classCss: {
-      type: String,
-      default: 'form-control form-control form-control-alternative',
     },
     readonlyAttr: {
       type: Boolean,
@@ -188,7 +183,8 @@ export default {
 .autocomplete-results {
   padding: 0;
   margin: 0;
-  border: 1px solid #eeeeee;
+  border: 1px solid #409aff;
+  border-radius: 4px;
   height: 120px;
   overflow: auto;
   width: 100%;
@@ -207,7 +203,7 @@ export default {
 
 .autocomplete-result.is-active,
 .autocomplete-result:hover {
-  background-color: #4aae9b;
-  color: white;
+  background-color: #409aff;
+  color: #fff;
 }
 </style>
