@@ -1,0 +1,71 @@
+{
+  "hasModal": true,
+  "title": "Movimento Inventario Shop",
+  "urlApi": "API_INVENTARIO_SHOP_MOVIMENTO",
+  "cols": [
+    {
+      "label": "Shop",
+      "field": "shop",
+      "bindField": "shop.codice",
+      "type": "autocomplete",
+      "configType": {
+        "isDominio": false,
+        "urlApi": "/api/shops/all",
+        "fieldId": "_id",
+        "showCodice": true
+      },
+      "filter": {
+        "type": "equals"
+      }
+    },
+    {
+      "label": "Data Registrazione",
+      "field": "dataRegistrazione",
+      "bindField": "dataRegistrazione",
+      "type": "date-range",
+      "filter": {
+        "type": "range"
+      }
+    },
+    {
+      "label": "Movimento Inventario",
+      "field": "movimentoInventario",
+      "bindField": "movimentoInventario.articolo.prodotto.codice",
+      "type": "text"
+    },
+    {
+      "label": "Quantita",
+      "field": "quantita",
+      "bindField": "quantita",
+      "type": "number"
+    },
+    {
+      "label": "Segno",
+      "field": "segno",
+      "bindField": "segno.descrizione",
+      "type": "select",
+      "configType": {
+        "isDominio": true,
+        "dominio": "SEGNO_MOVIMENTO_INVENTARIO",
+        "showDescrizione": true
+      },
+      "filter": {
+        "type": "equals"
+      }
+    },
+    {
+      "label": "Causale",
+      "field": "causale",
+      "bindField": "causale.descrizione",
+      "type": "select",
+      "configType": {
+        "isDominio": true,
+        "dominio": "CAUSALE_MOVIMENTO_INVENTARIO",
+        "showDescrizione": true
+      },
+      "filter": {
+        "type": "equals"
+      }
+    }
+  ]
+}

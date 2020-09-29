@@ -50,6 +50,9 @@
               <router-link to="/company/inventario/movimenti" class="dropdown-item">
               Movimenti
               </router-link>
+              <router-link to="/company/inventario/shop" class="dropdown-item">
+              Movimenti Shop
+              </router-link>
             </div>
           </li>
 

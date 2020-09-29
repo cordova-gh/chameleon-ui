@@ -209,6 +209,10 @@ export default new Router({
                     },
                   ],
                 },
+                {
+                  path: 'shop',
+                  component: () => import('@/pages/company/inventario/inventario-movimento/shop/InventarioMovimentoShop'),
+                },
               ],
             },
           ],
