@@ -185,7 +185,7 @@ export default {
               this.shops.forEach((shop) => {
                 const inventarioShopMovimentoFound = inventarioShopMovimentos
                   // eslint-disable-next-line no-underscore-dangle
-                  .filter(inventarioShopMovimento => inventarioShopMovimento.shop === shop._id);
+                  .filter(inventarioShopMovimento => inventarioShopMovimento.shop._id === shop._id);
                 if (inventarioShopMovimentoFound.length > 0) {
                   inventarioShopMovimentosToSend.push(inventarioShopMovimentoFound);
                 } else {
@@ -235,7 +235,6 @@ export default {
       this.httpCallInventarioMov.create(body, '/split-in-shops').then(() => {
 
       });
-
     },
     createEntityForm() {
       const obj = {};
