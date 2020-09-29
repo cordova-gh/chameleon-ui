@@ -180,6 +180,8 @@ export default {
           // eslint-disable-next-line no-underscore-dangle
           this.httpCallInventarioShopMov.getCustom(`/inventario-movimento/${inventarioMovimento._id}`)
             .then((inventarioShopMovimentos) => {
+              // eslint-disable-next-line no-console
+              console.log('sjdhsjdhasjdhj');
               this.shops.forEach((shop) => {
                 const inventarioShopMovimentoFound = inventarioShopMovimentos
                   // eslint-disable-next-line no-underscore-dangle
