@@ -9,8 +9,8 @@ $secondary: #007bff8a;
 
 .input-box-select select {
   background: transparent;
-  border: 0;
   border-radius: 4px;
+  border: 0;
   border-bottom: 1px solid #ced4da;
   color: #495057;
   font-size: 1rem;
@@ -18,7 +18,6 @@ $secondary: #007bff8a;
   font-weight: lighter;
   outline: 0;
   padding: 3px 0;
-  height: 25px !important;
   transition: border-color 0.2s;
   text-transform: capitalize;
   width: 100% !important;
@@ -28,20 +27,21 @@ $secondary: #007bff8a;
   &::placeholder {
     color: transparent;
   }
+  &:placeholder-shown ~ label {
+    top: 20px;
+    cursor: text;
+    font-size: 1rem;
+    color: $primary;
+  }
 }
 
 .input-box-select label {
-  cursor: text;
-  color: gray;
   position: absolute;
-
-  top: 20px;
-  font-size: 1rem;
-  color: $primary;
-  margin-bottom: 1rem;
+  top: 0;
   display: block;
   transition: 0.2s;
   opacity: 0.9;
+  color: gray;
 }
 .input-box-select select:focus {
   ~ label {

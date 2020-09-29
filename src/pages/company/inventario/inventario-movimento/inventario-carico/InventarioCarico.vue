@@ -63,11 +63,15 @@
           <div :id="'collapse'+index" class="collapse" aria-labelledby="headingTwo"
           data-parent="#accordionExample">
             <div class="card-body">
-              <ul>
-                <li v-for="(shop, indexShop) of shops" :key="indexShop">
-                  {{shop.codice}}
-                </li>
-              </ul>
+              <div class="row" v-for="(shop, indexShop) of shops" :key="indexShop">
+                <div class="col"> {{shop.codice}}</div>
+                <div class="col"> <input-number label="Quantita">
+                  </input-number>
+                </div>
+                 <div class="col">
+                   <input type="button" value="invia">
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -184,6 +188,10 @@ export default {
       if (this.prodottoId !== '') {
         this.loadEntities();
       }
+    },
+    entities() {
+      // eslint-disable-next-line no-console
+      console.log('cao');
     },
   },
 };

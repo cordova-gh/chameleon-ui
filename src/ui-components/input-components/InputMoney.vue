@@ -1,9 +1,8 @@
 <template>
   <div class="input-box-money">
-    <currency-input v-model="value"
+    <currency-input v-model="modelValue"
       :id="'f_' + fieldName" currency="EUR"
       locale="de"
-      class="form-input"
     />
     <label :for="'f_' + fieldName">{{ label }}</label>
 
@@ -20,9 +19,24 @@ export default {
     label: {
       type: String,
     },
+    value: {
+      type: String,
+    },
     fieldName: {
       type: String,
       default: '',
+    },
+  },
+  computed: {
+    modelValue: {
+      get() {
+        // eslint-disable-next-line no-console
+        console.log('dsjhasjhd');
+        return this.value === '' ? 0 : this.value;
+      },
+      set(val) {
+        this.$emit('input', val);
+      },
     },
   },
 };
