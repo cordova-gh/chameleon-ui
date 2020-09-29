@@ -3,7 +3,7 @@
     <date-picker
       v-model="modelValue"
       :placeholder="label"
-      :id="'f_' + fieldName"
+      :input-attr="{id:'f_' + fieldName}"
       valueType="date"
       format="DD/MM/YYYY"
     >

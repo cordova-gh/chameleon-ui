@@ -41,7 +41,7 @@
       </div>
     <div class="container">
       <div class="accordion" id="accordionExample">
-        <div v-for="(entity, index) of entities" :key="index">
+        <div v-for="(inventarioMovimento, index) of inventarioMovimentos" :key="index">
         <div class="card">
           <div class="card-header" id="headingTwo">
             <div class="d-flex justify-content-between align-items-center">
@@ -54,24 +54,33 @@
                   aria-expanded="false"
                   :aria-controls="'collapse'+index"
                 >
-                 {{entity.dataRegistrazione | formatDate('DD/MM/YYYY')}} / {{entity.note}}
+                 {{inventarioMovimento.dataRegistrazione | formatDate('DD/MM/YYYY')}}
+                 / {{movimentoInventario.note}}
                 </button>
               </h2>
-              <span class="badge badge-primary badge-pill">{{entity.quantita}}</span>
+              <span class="badge badge-primary badge-pill">
+                Disponibile {{quantitas[inventarioMovimento._id].valore}}
+                / {{inventarioMovimento.quantita}}</span>
             </div>
           </div>
           <div :id="'collapse'+index" class="collapse" aria-labelledby="headingTwo"
           data-parent="#accordionExample">
             <div class="card-body">
-              <div class="row" v-for="(shop, indexShop) of shops" :key="indexShop">
-                <div class="col"> {{shop.codice}}</div>
-                <div class="col"> <input-number label="Quantita">
+              <div class="row"
+              v-for="(inventarioShopMovimento, idx) of inventarioMovimento.inventarioShopMovimentos"
+              :key="idx">
+                <div class="col"> {{inventarioShopMovimento.shop.codice}}</div>
+                <div class="col"> <input-number label="Quantita"
+                  v-model="inventarioShopMovimento.quantita"
+                @blur="calcolaDisponibilita(inventarioMovimento._id
+                , inventarioMovimento)">
                   </input-number>
                 </div>
-                 <div class="col">
-                   <input type="button" value="invia">
-                </div>
               </div>
+               <div class="col">
+                   <input type="button" value="invia"
+                    @click="salvaMovimentiShops(inventarioMovimento)">
+                </div>
             </div>
           </div>
         </div>
@@ -83,7 +92,7 @@
 <script>
 import TitlePage from '@/pages/shared/components/TitlePage';
 import HttpCall from '@/services/HttpCall';
-import { API_INVENTARIO_MOVIMENTO, API_SHOP } from '@/services/constant-services';
+import { API_INVENTARIO_MOVIMENTO, API_INVENTARIO_SHOP_MOVIMENTO, API_SHOP } from '@/services/constant-services';
 import InputAutocomplete from '@/ui-components/input-components/InputAutocomplete';
 import InputText from '@/ui-components/input-components/InputText';
 import InputNumber from '@/ui-components/input-components/InputNumber';
@@ -104,10 +113,11 @@ export default {
     return {
       titolo: 'Inventario ',
       showForm: false,
-      entities: [],
+      inventarioMovimentos: [],
       shops: [],
       httpCallInventarioMov: new HttpCall(API_INVENTARIO_MOVIMENTO),
       httpCallShop: new HttpCall(API_SHOP),
+      httpCallInventarioShopMov: new HttpCall(API_INVENTARIO_SHOP_MOVIMENTO),
       baseObjectInventarioMov: {},
       movimentoInventario: {
         quantita: '',
@@ -129,6 +139,7 @@ export default {
           showCodice: true,
         },
       },
+      quantitas: [],
     };
   },
   created() {
@@ -147,11 +158,48 @@ export default {
       this.movimentoInventario.articolo = this.prodottoId;
       this.showForm = true;
     },
+    calcolaDisponibilita(id, inventarioMovimento) {
+      const sum = inventarioMovimento.inventarioShopMovimentos
+        .map(corrente => corrente.quantita)
+        .reduce((somma, current) => Number(somma) + Number(current), 0);
+      this.quantitas[id].valore = inventarioMovimento.quantita - sum;
+      this.$forceUpdate();
+    },
     loadEntities() {
       let params = '';
       if (this.prodottoId !== '') params += `?articolo.equals=${this.prodottoId}`;
       this.httpCallInventarioMov.get(params).then((data) => {
-        this.entities = data.entities;
+        const retInventarioMovimentos = data.entities;
+        retInventarioMovimentos.forEach((inventarioMovimento) => {
+          // eslint-disable-next-line no-console
+          console.log(' da verificare');
+          const inventarioShopMovimentosToSend = [];
+
+          // eslint-disable-next-line no-underscore-dangle
+          this.quantitas[inventarioMovimento._id] = { valore: inventarioMovimento.quantita };
+          // eslint-disable-next-line no-underscore-dangle
+          this.httpCallInventarioShopMov.getCustom(`/inventario-movimento/${inventarioMovimento._id}`)
+            .then((inventarioShopMovimentos) => {
+              this.shops.forEach((shop) => {
+                const inventarioShopMovimentoFound = inventarioShopMovimentos
+                  // eslint-disable-next-line no-underscore-dangle
+                  .filter(inventarioShopMovimento => inventarioShopMovimento.shop === shop._id);
+                if (inventarioShopMovimentoFound.length > 0) {
+                  inventarioShopMovimentosToSend.push(inventarioShopMovimentoFound);
+                } else {
+                  const inventioShopMovimentoTemp = {
+                    quantita: 0,
+                    shop,
+                  };
+                  inventarioShopMovimentosToSend.push(inventioShopMovimentoTemp);
+                }
+              });
+              // eslint-disable-next-line no-param-reassign
+              inventarioMovimento.inventarioShopMovimentos = inventarioShopMovimentosToSend;
+              this.inventarioMovimentos.push(inventarioMovimento);
+            });
+        });
+        // this.inventarioMovimentos = retInventarioMovimentos;
         this.pages = data.pages;
         this.numOfResults = data.numOfResults;
       });
@@ -174,6 +222,19 @@ export default {
       });
       // }
     },
+    salvaMovimentiShops(inventarioMovimento) {
+      const body = {
+        // eslint-disable-next-line no-underscore-dangle
+        movimentoInventario: inventarioMovimento._id,
+        articolo: inventarioMovimento.articolo,
+        inventarioShopMovimentos: inventarioMovimento.inventarioShopMovimentos,
+      };
+
+      this.httpCallInventarioMov.create(body, '/split-in-shops').then(() => {
+
+      });
+
+    },
     createEntityForm() {
       const obj = {};
       Object.keys(obj).forEach((key) => {
@@ -181,6 +242,7 @@ export default {
       });
       return obj;
     },
+
   },
   watch: {
     prodottoId() {
@@ -189,7 +251,7 @@ export default {
         this.loadEntities();
       }
     },
-    entities() {
+    quantitas() {
       // eslint-disable-next-line no-console
       console.log('cao');
     },

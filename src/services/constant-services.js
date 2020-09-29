@@ -15,3 +15,4 @@ export const API_INVENTARIO = '/api/inventarios';
 export const API_PROVINCE = '/api/provinces';
 export const API_COMUNE = '/api/comunes';
 export const API_INVENTARIO_MOVIMENTO = '/api/inventario-movimentos';
+export const API_INVENTARIO_SHOP_MOVIMENTO = '/api/inventario-shop-movimentos';

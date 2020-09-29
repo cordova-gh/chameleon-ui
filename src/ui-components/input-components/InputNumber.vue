@@ -5,6 +5,7 @@
       :class="classCss"
       :readonly="readonlyAttr"
       @keypress="onlyNumber"
+      @blur="blurField"
     />
      <label :for="'f_' + fieldName">{{ label}}</label>
   </div>
@@ -48,6 +49,9 @@ export default {
       if (keyCode < 48 || keyCode > 57) {
         $event.preventDefault();
       }
+    },
+    blurField() {
+      this.$emit('blur');
     },
   },
 };

@@ -10,10 +10,11 @@ $secondary: #007bff8a;
   width: 100% !important;
 }
 .mx-input {
+  padding-left: 0px !important;
   border-radius: 4px;
   height: 25px !important;
   -webkit-box-shadow: inherit !important;
-     box-shadow: inherit !important;
+  box-shadow: inherit !important;
 }
 .input-box-date input {
   background: transparent;
@@ -45,7 +46,7 @@ $secondary: #007bff8a;
   color: $secondary;
   font-weight: normal;
 }
-.mx-datepicker input:focus {
+.input-box-date .mx-datepicker input:focus {
   border-width: 1px;
   border-image: linear-gradient(
     to right,
