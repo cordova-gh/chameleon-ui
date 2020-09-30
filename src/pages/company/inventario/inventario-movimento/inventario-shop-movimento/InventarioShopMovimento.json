@@ -28,8 +28,8 @@
       }
     },
     {
-      "label": "Movimento Inventario",
-      "field": "movimentoInventario",
+      "label": "Prodotto",
+      "field": "prodotto",
       "bindField": "inventarioMovimentoOrig.articolo.codice",
       "type": "text"
     },

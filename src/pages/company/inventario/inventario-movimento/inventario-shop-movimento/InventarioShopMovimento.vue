@@ -99,7 +99,7 @@
                 Data Registrazione
               </th>
               <th class="sort">
-                Movimento Inventario
+                Prodotto
               </th>
               <th class="sort">
                 Quantita
