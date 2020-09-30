@@ -37,6 +37,12 @@
                 Fornitori/Clienti
               </router-link>
               <router-link to="/company/prodotto/list" class="dropdown-item">Prodotto</router-link>
+              <router-link to="/company/inventario/movimenti" class="dropdown-item">
+              Movimenti
+              </router-link>
+              <router-link to="/company/inventario/shop-movimenti" class="dropdown-item">
+              Movimenti Shop
+              </router-link>
               <router-link to="/company/categoria-prodotto/list" class="dropdown-item" >
               Categorie Prodotti
               </router-link>
@@ -44,15 +50,6 @@
               Unità di Misura
               </router-link>
               <router-link to="/company/marca/list" class="dropdown-item">Marche</router-link>
-              <router-link to="/company/inventario" class="dropdown-item">
-              Inventario
-              </router-link>
-              <router-link to="/company/inventario/movimenti" class="dropdown-item">
-              Movimenti
-              </router-link>
-              <router-link to="/company/inventario/shop" class="dropdown-item">
-              Movimenti Shop
-              </router-link>
             </div>
           </li>
 

@@ -210,8 +210,8 @@ export default new Router({
                   ],
                 },
                 {
-                  path: 'shop',
-                  component: () => import('@/pages/company/inventario/inventario-movimento/shop/InventarioMovimentoShop'),
+                  path: 'shop-movimenti',
+                  component: () => import('@/pages/company/inventario/inventario-movimento/inventario-shop-movimento/InventarioShopMovimento'),
                 },
               ],
             },

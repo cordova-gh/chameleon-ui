@@ -194,7 +194,7 @@ export default {
         shop: { bind: 'shop.codice', type: 'autocomplete' },
         dataRegistrazione: { bind: 'dataRegistrazione', type: 'date-range' },
         movimentoInventario: {
-          bind: 'movimentoInventario.articolo.prodotto.codice',
+          bind: 'inventarioMovimentoOrig.articolo.codice',
           type: 'text',
         },
         quantita: { bind: 'quantita', type: 'number' },

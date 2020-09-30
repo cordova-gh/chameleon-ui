@@ -30,7 +30,7 @@
     {
       "label": "Movimento Inventario",
       "field": "movimentoInventario",
-      "bindField": "movimentoInventario.articolo.prodotto.codice",
+      "bindField": "inventarioMovimentoOrig.articolo.codice",
       "type": "text"
     },
     {
