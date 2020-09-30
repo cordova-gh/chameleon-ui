@@ -14,7 +14,7 @@
 export default {
   props: {
     value: {
-      type: String,
+      type: Number,
     },
     label: {
       type: String,
