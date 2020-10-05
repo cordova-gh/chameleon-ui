@@ -1,6 +1,6 @@
 <template>
   <transition name="modal-fade">
-    <div class="modal-backdrop">
+    <div class="modal-backdrop" draggable="true">
       <div class="modal">
         <header class="modal-header">
           <slot name="header">
@@ -90,6 +90,7 @@ export default {
   position: relative;
   padding: 20px 10px;
    background-color: rgba(239, 242, 249, 0.58);
+   overflow-y: scroll;
 }
 
 .btn-close {

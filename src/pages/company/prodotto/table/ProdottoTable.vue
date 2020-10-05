@@ -1,14 +1,16 @@
-
 <template>
   <div>
-    <div class="container shadow p-2 mb-3 bg-white rounded">
+    <div class="container shadow p-2 mb-3  mt-3 bg-white rounded">
       <form @submit.prevent="saveEntity">
         <div class="card-body">
           <div class="title-form">
             <p>Filtri Ricerca</p>
           </div>
           <div class="row">
-            <div class="col-12 col-md-6 form-group" v-if="!invisibleFields['codice']">
+            <div
+              class="col-12 col-md-6 form-group"
+              v-if="!invisibleFields['codice']"
+            >
               <input-text
                 v-model="entity['codice']"
                 label="Codice"
@@ -16,7 +18,10 @@
                 fieldName="codice"
               ></input-text>
             </div>
-            <div class="col-12 col-md-6 form-group" v-if="!invisibleFields['descrizione']">
+            <div
+              class="col-12 col-md-6 form-group"
+              v-if="!invisibleFields['descrizione']"
+            >
               <input-text
                 v-model="entity['descrizione']"
                 label="Descrizione"
@@ -38,8 +43,12 @@
               />
             </div>
             <div class="col-6 col-md-3">
-              <input type="button" class="btn btn-primary btn-block"
-              value="Cerca" @click="onFind" />
+              <input
+                type="button"
+                class="btn btn-primary btn-block"
+                value="Cerca"
+                @click="onFind"
+              />
             </div>
           </div>
         </div>
@@ -63,15 +72,20 @@
             <tbody>
               <tr v-for="entity of entities" :key="entity.id">
                 <td>
-                  <i @click="deleteEntity(entity._id)" class="fa fa-minus-circle"></i>
+                  <i
+                    @click="deleteEntity(entity._id)"
+                    class="fa fa-minus-circle"
+                  ></i>
                 </td>
                 <td
                   v-for="(keyColumn, indexColumn) in Object.keys(propsColumns)"
                   :key="indexColumn"
                 >
                   <template v-if="propsColumns[keyColumn].type === 'checkbox'">
-                    <input-checkbox v-model="entity[keyColumn]"
-                    v-bind:isReadonly="true"></input-checkbox>
+                    <input-checkbox
+                      v-model="entity[keyColumn]"
+                      v-bind:isReadonly="true"
+                    ></input-checkbox>
                   </template>
                   <template v-else>{{ entity[keyColumn] }}</template>
                 </td>
@@ -80,10 +94,10 @@
                     <i class="fas fa-edit"></i>
                   </router-link>
                   <!-- CUSTOM -->
-                  <a  @click="clickInventario(entity._id)">
-                    <i class="fas fa-pallet" ></i>
+                  <a @click="clickInventario(entity._id)">
+                    <i class="fas fa-pallet"></i>
                   </a>
-                   <!-- CUSTOM -->
+                  <!-- CUSTOM -->
                 </td>
               </tr>
             </tbody>
@@ -98,7 +112,10 @@
             <template v-slot:body>
               <!-- CUSTOM -->
               <inventario-carico
-              :params="paramsInventario" :prodottoId="currentProdottoId">
+                :params="paramsInventario"
+                :prodottoId="currentProdottoId"
+
+              >
               </inventario-carico>
               <!-- CUSTOM -->
             </template>
@@ -244,18 +261,9 @@ export default {
     },
     /* CUSTOM */
   },
-  watch: {
-    reload: {
-      immediate: true,
-      deep: true,
-      handler() {
-        this.getEntities(1);
-        this.$emit('endLoadPagination');
-      },
-    },
-  },
 };
-</script>   <style>
+</script>
+<style>
 .fa {
   cursor: pointer;
 }

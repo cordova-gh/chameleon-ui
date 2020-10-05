@@ -146,16 +146,6 @@ methods: {
   ${this.getMethodsFilter()}
   ${this.getMethodsModal()}
 },
-watch: {
-  reload: {
-    immediate: true,
-    deep: true,
-    handler() {
-      this.getEntities(1);
-      this.$emit('endLoadPagination');
-    },
-  },
-},
 };
       </${this.scriptWord}>   `;
   }

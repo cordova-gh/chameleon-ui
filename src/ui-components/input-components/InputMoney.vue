@@ -30,8 +30,6 @@ export default {
   computed: {
     modelValue: {
       get() {
-        // eslint-disable-next-line no-console
-        console.log('dsjhasjhd');
         return this.value === '' ? 0 : this.value;
       },
       set(val) {

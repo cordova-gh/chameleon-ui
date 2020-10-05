@@ -61,7 +61,7 @@
                       inventarioMovimento.dataRegistrazione
                         | formatDate("DD/MM/YYYY")
                     }}
-                    / {{ movimentoInventario.note }}
+                    / {{ inventarioMovimento.note }}
                   </button>
                 </h2>
                 <span class="badge badge-primary badge-pill">
@@ -204,8 +204,6 @@ export default {
       this.httpCallInventarioMov.get(params).then((data) => {
         const retInventarioMovimentos = data.entities;
         retInventarioMovimentos.forEach((inventarioMovimento) => {
-          // eslint-disable-next-line no-console
-          console.log(' da verificare');
           const inventarioShopMovimentosToSend = [];
           // eslint-disable-next-line no-underscore-dangle
           const idInventarioMovimento = inventarioMovimento._id;
@@ -284,10 +282,6 @@ export default {
       if (this.prodottoId !== '') {
         this.loadEntities();
       }
-    },
-    quantitas() {
-      // eslint-disable-next-line no-console
-      console.log('cao');
     },
   },
 };
